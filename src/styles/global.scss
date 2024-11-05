@@ -1,0 +1,47 @@
+body {
+  font-family: 'OtherText', serif;
+  overflow: hidden;
+
+  background: url(../../public/asset/splash-dark.png) no-repeat center
+    center/cover;
+}
+
+.title {
+  font-family: 'FancyText', sans-serif;
+  letter-spacing: 1px;
+}
+
+.card:not(.card-untextured) {
+  background: url('../../public/asset/texture-bg.png'),
+    linear-gradient(
+      to bottom,
+      oklch(var(--n) / var(--tw-bg-opacity)),
+      oklch(var(--n) / var(--tw-bg-opacity))
+    ) !important;
+}
+
+.btn:not(.btn-untextured) {
+  background: url('../../public/asset/texture-button.png'),
+    linear-gradient(
+      to bottom,
+      oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)),
+      oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1))
+    ) !important;
+
+  &:hover {
+    background: url('../../public/asset/texture-button.png'),
+      linear-gradient(
+        to bottom,
+        color-mix(
+          in oklab,
+          oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+          black
+        ),
+        color-mix(
+          in oklab,
+          oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+          black
+        )
+      ) !important;
+  }
+}
