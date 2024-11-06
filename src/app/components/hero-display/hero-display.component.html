@@ -1,0 +1,22 @@
+@let heroData = hero();
+
+<div class="card card-side foreground shadow-xl" [class.hover:ring-2]="clickable()"
+  [class.hover:cursor-pointer]="clickable()">
+  <figure class="max-w-[96px] pl-2">
+    <img src="./hero/temp/heroface.png" alt="test face" />
+  </figure>
+
+  <div class="card-body p-2">
+    <div class="flex-1 flex flex-col">
+      <div class="font-semibold">{{ heroData.name }}</div>
+      <div class="italic">
+        Level {{ heroData.level }} / {{ heroData.maxLevel }}
+        [{{ heroData.xp / heroData.maxXp | percent }}]
+      </div>
+
+      <div class="text-sm">
+        {{ heroData.stats.force | number }} <app-content-name [id]="heroData.damageTypeId"></app-content-name> Damage
+      </div>
+    </div>
+  </div>
+</div>

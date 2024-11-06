@@ -1,0 +1,8 @@
+- id: d57a3127-6b98-47d9-8798-89d68311ac1f
+  name: Taxes
+  researchRequired: 100
+
+  requiresResearchIds:
+    - Financial Knowledge
+
+  unlocksTaskId: Tax Collection

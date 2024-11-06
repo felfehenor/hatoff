@@ -1,5 +1,18 @@
 <div class="navbar bg-base-100">
   <a class="btn btn-untextured btn-ghost text-xl" [routerLink]="['/game']">Heroic Ascension</a>
+
+  @if(isSetup()) {
+  <div class="navbar-center">
+    <ul class="menu menu-horizontal px-1">
+      <li class="mr-1"><a [routerLink]="['/game/town']" [routerLinkActive]="'text-primary'">Town of {{ townName() }}</a>
+      </li>
+      <li class="mr-1"><a [routerLink]="['/game/heroes']" [routerLinkActive]="'text-primary'">Heroes</a></li>
+      <li class="mr-1"><a [routerLink]="['/game/research']" [routerLinkActive]="'text-primary'">Research</a></li>
+    </ul>
+  </div>
+  }
 </div>
 
-<router-outlet></router-outlet>
+<div class="page-container">
+  <router-outlet></router-outlet>
+</div>

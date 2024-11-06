@@ -1,5 +1,7 @@
-import { execSync } from 'child_process';
-import chokidar from 'chokidar';
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const { execSync } = require('child_process');
+const chokidar = require('chokidar');
 
 const runCommand = (command: string) => {
   try {
@@ -10,7 +12,9 @@ const runCommand = (command: string) => {
 };
 
 const startWatch = async () => {
-  chokidar.watch('gamedata').on('change', (name) => {
+  console.info(`[helpers] Watching gamedata changes...`);
+
+  chokidar.watch('gamedata').on('change', (name: string) => {
     console.info(`[helpers] ${name} changed. Rebuilding gamedata...`);
 
     runCommand('npm run gamedata:build');

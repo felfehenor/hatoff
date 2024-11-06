@@ -1,0 +1,17 @@
+- id: d24c6580-988a-4982-b334-a4f554d81c67
+  name: Physical Knowledge
+  researchRequired: 0
+
+  unlocksDamageTypeId: Physical
+
+- id: 431a8d5c-da70-47e9-9b62-5f2b296ed60c
+  name: Emotional Knowledge
+  researchRequired: 0
+
+  unlocksDamageTypeId: Emotional
+
+- id: f6b2b5fc-cf41-4150-a008-faf7477be9c6
+  name: Intellectual Knowledge
+  researchRequired: 0
+
+  unlocksDamageTypeId: Intellectual

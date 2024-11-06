@@ -1,0 +1,37 @@
+<div class="flex justify-center items-center page-size">
+
+  <div class="card card-side bg-neutral shadow-xl min-h-[300px] max-h-[500px] w-1/2">
+
+    <div class="card-body items-center justify-between">
+      <div class="card-title text-center flex flex-col">
+        Set Up Your Town
+      </div>
+
+      <div class="w-3/4 text-center mt-5">
+        <div class="font-bold">
+          Name Your Town
+        </div>
+
+        <div>
+          <input [(ngModel)]="townName" type="text" placeholder="Town name..." maxlength="25" (keydown.enter)="play()"
+            class="input input-bordered w-full max-w-sm" />
+        </div>
+
+        <div class="font-bold mt-3">
+          Name Your Hero
+        </div>
+
+        <div>
+          <input [(ngModel)]="heroName" type="text" placeholder="Hero name..." maxlength="25" (keydown.enter)="play()"
+            class="input input-bordered w-full max-w-sm" />
+        </div>
+      </div>
+
+      <div class="card-actions pt-3">
+        <button class="btn btn-primary btn-wide" (click)="play()" [disabled]="!canSubmit()">Play</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

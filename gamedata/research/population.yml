@@ -1,0 +1,13 @@
+- id: 417858fb-2192-4386-838b-f46bb646bea7
+  name: Huts
+  researchRequired: 10
+
+  unlocksPopulation: 2
+
+- id: 8e16d493-0a0d-49ea-9965-a51cb8ad37c0
+  name: Houses
+  researchRequired: 100
+  requiresResearchIds:
+    - Huts
+
+  unlocksPopulation: 3

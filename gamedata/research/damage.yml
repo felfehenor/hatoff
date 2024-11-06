@@ -1,0 +1,5 @@
+- id: 9f595aa6-f055-4133-b4ce-dab7451bbd85
+  name: Financial Knowledge
+  researchRequired: 50
+
+  unlocksDamageTypeId: Financial

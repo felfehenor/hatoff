@@ -1,0 +1,34 @@
+- id: b5657aac-b5f3-4100-9897-3d25573d5cc7
+  name: Recruitment
+  damageTypeId: Intellectual
+  maxHeroesAllocable: 0
+
+- id: 12ead923-71c1-465b-afbb-d4cc84b6a242
+  name: Tax Collection
+  damageTypeId: Financial
+  maxHeroesAllocable: 5
+
+- id: 4a11631e-b5b4-4673-8715-460fe6725ed3
+  name: Wood Harvesting
+  damageTypeId: Physical
+  maxHeroesAllocable: 5
+
+- id: 39e534ec-8ec0-4735-aff6-2674051f40fa
+  name: Stone Gathering
+  damageTypeId: Physical
+  maxHeroesAllocable: 5
+
+- id: a5e60559-ad21-4df9-bb5f-d1e392a74c8d
+  name: Food Hunting
+  damageTypeId: Physical
+  maxHeroesAllocable: 5
+
+- id: 6a620f52-5946-4990-a081-b7d9afcd0856
+  name: Town Defense
+  damageTypeId: Physical
+  maxHeroesAllocable: -1
+
+- id: 50bd99b9-3239-4937-8e38-0f7c716832e0
+  name: Research
+  damageTypeId: Intellectual
+  maxHeroesAllocable: 5

@@ -1,0 +1,56 @@
+@let activeHero = selectedHero();
+
+<div class="flex flex-row">
+  <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+    @for(hero of allHeroes(); track $index) {
+    <div class="hero-container" [ngClass]="cardClasses()">
+      <app-hero-display [hero]="hero" (click)="selectedHero.set(hero)" [clickable]="true"></app-hero-display>
+    </div>
+    }
+  </div>
+
+  @if(activeHero) {
+  <div class="flex flex-1 pl-3">
+    <div class="card foreground shadow-xl flex-1">
+      <div class="card-body">
+        <div class="card-title">
+          {{ activeHero.name }}
+        </div>
+
+        <div>
+          Level {{ activeHero.level | number }} / {{ activeHero.maxLevel | number }}
+          [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
+        </div>
+
+        <div>
+          {{ activeHero.stats.force | number }} <app-content-name [id]="activeHero.damageTypeId"></app-content-name>
+          Damage
+        </div>
+
+        <div>
+          @for(arch of activeHero.archetypeIds; track $index) {
+          <div class="badge badge-primary">
+            <app-content-name [id]="arch"></app-content-name>
+          </div>
+          }
+        </div>
+
+        <div class="flex">
+          <table class="table flex-1">
+            <tbody>
+              @for(stat of gameStats; track $index) {
+              <tr>
+                <td class="pl-0">{{ stat | titlecase }}</td>
+                <td class="text-right">{{ activeHero.stats[stat] | number }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+
+          <div class="flex-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

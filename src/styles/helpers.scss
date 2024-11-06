@@ -1,0 +1,20 @@
+.page-container {
+  max-height: calc(100vh - 64px);
+
+  @apply overflow-y-auto overflow-x-hidden;
+}
+
+.page-size {
+  height: calc(100vh - 64px);
+}
+
+.page-card {
+  height: calc(100vh - 64px - 36px);
+
+  @apply overflow-hidden;
+
+  .card-content {
+    height: calc(100vh - 64px - 36px - 32px - 64px);
+    @apply overflow-x-hidden overflow-y-auto;
+  }
+}

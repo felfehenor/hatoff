@@ -19,6 +19,10 @@ body {
       oklch(var(--n) / var(--tw-bg-opacity)),
       oklch(var(--n) / var(--tw-bg-opacity))
     ) !important;
+
+  &.foreground {
+    --n: var(--b2);
+  }
 }
 
 .btn:not(.btn-untextured) {

@@ -1,0 +1,15 @@
+- id: e2c08b96-d875-432f-b5d3-d17c0c536bfd
+  name: Theoretical
+  subTypes:
+    - damageTypeId: Intellectual
+      percent: 100
+
+- id: 13384a21-6e6d-4481-8a1d-e381dafd6ee9
+  name: Legal
+  subTypes:
+    - damageTypeId: Financial
+      percent: 50
+    - damageTypeId: Emotional
+      percent: 30
+    - damageTypeId: Physical
+      percent: 20
