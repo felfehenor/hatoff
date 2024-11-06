@@ -24,8 +24,8 @@
         </div>
 
         <div>
-          {{ activeHero.stats.force | number }} <app-content-name [id]="activeHero.damageTypeId"></app-content-name>
-          Damage
+          <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId"
+            [editable]="canEditHeroStats()" (idChange)="changeMainCharacterType($event)"></app-damage-type>
         </div>
 
         <div>

@@ -1,5 +1,5 @@
 import { signal, Signal, WritableSignal } from '@angular/core';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, sortBy } from 'lodash';
 import {
   Content,
   ContentType,
@@ -57,9 +57,12 @@ export function allUnlockedArchetypes(): GameArchetype[] {
     (r) => (r as GameResearch).unlocksArchetypeId,
   ) as GameResearch[];
 
-  return validResearch
-    .map((r) => getEntry<GameArchetype>(r.unlocksArchetypeId!))
-    .filter(Boolean) as GameArchetype[];
+  return sortBy(
+    validResearch
+      .map((r) => getEntry<GameArchetype>(r.unlocksArchetypeId!))
+      .filter(Boolean),
+    'name',
+  ) as GameArchetype[];
 }
 
 export function allUnlockedDamageTypes(): GameDamageType[] {
@@ -67,9 +70,12 @@ export function allUnlockedDamageTypes(): GameDamageType[] {
     (r) => (r as GameResearch).unlocksDamageTypeId,
   ) as GameResearch[];
 
-  return validResearch
-    .map((r) => getEntry<GameDamageType>(r.unlocksDamageTypeId!))
-    .filter(Boolean) as GameDamageType[];
+  return sortBy(
+    validResearch
+      .map((r) => getEntry<GameDamageType>(r.unlocksDamageTypeId!))
+      .filter(Boolean),
+    'name',
+  ) as GameDamageType[];
 }
 
 export function allUnlockedTasks(): GameTask[] {
@@ -77,7 +83,10 @@ export function allUnlockedTasks(): GameTask[] {
     (r) => (r as GameResearch).unlocksTaskId,
   ) as GameResearch[];
 
-  return validResearch
-    .map((r) => getEntry<GameTask>(r.unlocksArchetypeId!))
-    .filter(Boolean) as GameTask[];
+  return sortBy(
+    validResearch
+      .map((r) => getEntry<GameTask>(r.unlocksArchetypeId!))
+      .filter(Boolean),
+    'name',
+  ) as GameTask[];
 }

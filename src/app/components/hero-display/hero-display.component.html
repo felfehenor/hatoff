@@ -15,7 +15,7 @@
       </div>
 
       <div class="text-sm">
-        {{ heroData.stats.force | number }} <app-content-name [id]="heroData.damageTypeId"></app-content-name> Damage
+        <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
       </div>
     </div>
   </div>

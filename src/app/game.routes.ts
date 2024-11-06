@@ -5,6 +5,7 @@ import { GameRecruitComponent } from './pages/game-recruit/game-recruit.componen
 import { GameResearchComponent } from './pages/game-research/game-research.component';
 import { GameSetupComponent } from './pages/game-setup/game-setup.component';
 import { GameTownComponent } from './pages/game-town/game-town.component';
+import { OptionsComponent } from './pages/options/options.component';
 
 export const gameRoutes: Routes = [
   {
@@ -29,6 +30,11 @@ export const gameRoutes: Routes = [
   {
     component: GameResearchComponent,
     path: 'research',
+    canActivate: [requireSetupGuard],
+  },
+  {
+    component: OptionsComponent,
+    path: 'options',
     canActivate: [requireSetupGuard],
   },
   {

@@ -1,12 +1,13 @@
-import { DecimalPipe, PercentPipe } from '@angular/common';
+import { PercentPipe } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { GameHero } from '../../interfaces';
 import { ContentNameComponent } from '../content-name/content-name.component';
+import { DamageTypeComponent } from '../damage-type/damage-type.component';
 
 @Component({
   selector: 'app-hero-display',
   standalone: true,
-  imports: [ContentNameComponent, DecimalPipe, PercentPipe],
+  imports: [ContentNameComponent, DamageTypeComponent, PercentPipe],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',
 })

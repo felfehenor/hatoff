@@ -64,3 +64,9 @@ export function removeHero(hero: GameHero): void {
 
   setGameState(state);
 }
+
+export function setHeroDamageType(hero: GameHero, damageTypeId: string): void {
+  const state = gamestate();
+  state.heroes[hero.id].damageTypeId = damageTypeId;
+  setGameState(state);
+}
