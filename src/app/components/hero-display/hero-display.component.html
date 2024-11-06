@@ -1,7 +1,7 @@
 @let heroData = hero();
 
 <div class="card card-side foreground shadow-xl" [class.hover:ring-2]="clickable()"
-  [class.hover:cursor-pointer]="clickable()">
+  [class.hover:cursor-pointer]="clickable()" [class.ring-2]="active()">
   <figure class="max-w-[96px] pl-2">
     <img src="./hero/temp/heroface.png" alt="test face" />
   </figure>

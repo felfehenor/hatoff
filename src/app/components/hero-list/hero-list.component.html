@@ -4,7 +4,8 @@
   <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
     @for(hero of allHeroes(); track $index) {
     <div class="hero-container" [ngClass]="cardClasses()">
-      <app-hero-display [hero]="hero" (click)="selectedHero.set(hero)" [clickable]="true"></app-hero-display>
+      <app-hero-display [hero]="hero" (click)="selectedHero.set(hero)" [clickable]="true"
+        [active]="selectedHero() === hero"></app-hero-display>
     </div>
     }
   </div>
@@ -29,7 +30,7 @@
 
         <div>
           @for(arch of activeHero.archetypeIds; track $index) {
-          <div class="badge badge-primary">
+          <div class="badge badge-accent">
             <app-content-name [id]="arch"></app-content-name>
           </div>
           }

@@ -13,4 +13,5 @@ import { ContentNameComponent } from '../content-name/content-name.component';
 export class HeroDisplayComponent {
   public hero = input.required<GameHero>();
   public clickable = input<boolean>(false);
+  public active = input<boolean>(false);
 }

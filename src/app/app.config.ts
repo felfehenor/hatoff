@@ -13,6 +13,7 @@ import {
   withNgxWebstorageConfig,
 } from 'ngx-webstorage';
 import { routes } from './app.routes';
+import { APIService } from './services/api.service';
 import { ContentService } from './services/content.service';
 import { GamestateService } from './services/gamestate.service';
 
@@ -22,6 +23,11 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideNgxWebstorage(withNgxWebstorageConfig({}), withLocalStorage()),
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      multi: true,
+      useValue: () => inject(APIService).init(),
+    },
     {
       provide: ENVIRONMENT_INITIALIZER,
       multi: true,

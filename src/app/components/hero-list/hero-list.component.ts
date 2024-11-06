@@ -19,36 +19,7 @@ import { HeroDisplayComponent } from '../hero-display/hero-display.component';
   styleUrl: './hero-list.component.scss',
 })
 export class HeroListComponent {
-  public allHeroes = computed(() =>
-    allHeroes()
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes()),
-  );
+  public allHeroes = computed(() => allHeroes());
 
   public selectedHero = signal<GameHero | undefined>(undefined);
 
