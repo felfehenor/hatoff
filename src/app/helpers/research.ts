@@ -79,3 +79,11 @@ export function allUnlockedTasks(): GameTask[] {
     'name',
   ) as GameTask[];
 }
+
+export function allUnlockedPopulationResearch(): GameResearch[] {
+  const validResearch = allCompletedResearch().filter(
+    (r) => (r as GameResearch).unlocksPopulation,
+  ) as GameResearch[];
+
+  return sortBy(validResearch, 'name') as GameResearch[];
+}

@@ -1,7 +1,7 @@
 import { GameResearch } from '../interfaces';
 import { getEntriesByType } from './content';
 import { gamestate, setGameState } from './gamestate';
-import { addHero, allHeroes, createHero } from './hero';
+import { addHero, createHero, totalHeroes } from './hero';
 
 export function migrateState() {
   const state = gamestate();
@@ -45,7 +45,7 @@ export function unlockBasicTasks() {
 }
 
 export function ensureFirstHero() {
-  if (allHeroes().length > 0) return;
+  if (totalHeroes() > 0) return;
 
   const state = gamestate();
   const firstHero = createHero();
