@@ -1,20 +1,22 @@
 @let activeTask = task();
 
 <div class="card foreground shadow-xl flex-1">
-  <div class="card-body">
-    <div class="card-title">
-      {{ activeTask.name }}
+  <div class="card-body overflow-hidden">
+    <div class="h-[128px]">
+      <div class="card-title">
+        {{ activeTask.name }}
+      </div>
+
+      <div class="min-h-[72px]">
+        {{ activeTask.description }}
+      </div>
+
+      <div class="card-title">
+        <div class="font-light">Heroes ({{ heroes().length }}/{{ activeTask.maxHeroesAllocable }})</div>
+      </div>
     </div>
 
-    <div class="min-h-[72px]">
-      {{ activeTask.description }}
-    </div>
-
-    <div class="card-title">
-      <div class="font-light">Heroes ({{ heroes().length }}/{{ activeTask.maxHeroesAllocable }})</div>
-    </div>
-
-    <div class="hero-container p-1">
+    <div class=" overflow-y-auto p-1">
       @for(hero of allHeroes(); track $index) {
       <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 cursor-pointer" (click)="selectHero(hero)"
         (keydown.enter)="selectHero(hero)" tabindex="1" [class.ring-2]="isHeroSelected(hero)">
