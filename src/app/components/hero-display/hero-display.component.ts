@@ -3,11 +3,17 @@ import { Component, input } from '@angular/core';
 import { GameHero } from '../../interfaces';
 import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
+import { HeroArtComponent } from '../hero-art/hero-art.component';
 
 @Component({
   selector: 'app-hero-display',
   standalone: true,
-  imports: [ContentNameComponent, DamageTypeComponent, PercentPipe],
+  imports: [
+    ContentNameComponent,
+    DamageTypeComponent,
+    PercentPipe,
+    HeroArtComponent,
+  ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',
 })

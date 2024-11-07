@@ -1,34 +1,21 @@
-import { DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
-import { allHeroes, gamestate, setHeroDamageType } from '../../helpers';
-import { AllGameHeroStats, GameHero, GameHeroStat } from '../../interfaces';
-import { ContentNameComponent } from '../content-name/content-name.component';
-import { DamageTypeComponent } from '../damage-type/damage-type.component';
+import { allHeroes } from '../../helpers';
+import { GameHero } from '../../interfaces';
+import { HeroDisplayTallComponent } from '../hero-display-tall/hero-display-tall.component';
 import { HeroDisplayComponent } from '../hero-display/hero-display.component';
 
 @Component({
   selector: 'app-hero-list',
   standalone: true,
-  imports: [
-    HeroDisplayComponent,
-    NgClass,
-    ContentNameComponent,
-    TitleCasePipe,
-    DecimalPipe,
-    DamageTypeComponent,
-  ],
+  imports: [HeroDisplayComponent, NgClass, HeroDisplayTallComponent],
   templateUrl: './hero-list.component.html',
   styleUrl: './hero-list.component.scss',
 })
 export class HeroListComponent {
-  public allHeroes = computed(() => allHeroes());
-  public canEditHeroStats = computed(
-    () => this.selectedHero()?.id === gamestate().townSetup.heroId,
-  );
-
   public selectedHero = signal<GameHero | undefined>(undefined);
 
-  public readonly gameStats: GameHeroStat[] = AllGameHeroStats;
+  public allHeroes = computed(() => allHeroes());
 
   public cardClasses = computed(() => {
     if (this.selectedHero()) {
@@ -51,11 +38,4 @@ export class HeroListComponent {
       'xl:max-w-[23%]',
     ];
   });
-
-  public changeMainCharacterType(newType: string) {
-    const hero = this.selectedHero();
-    if (!hero) return;
-
-    setHeroDamageType(hero, newType);
-  }
 }

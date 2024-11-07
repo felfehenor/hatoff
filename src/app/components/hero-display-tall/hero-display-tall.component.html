@@ -1,0 +1,46 @@
+@let activeHero = hero();
+
+<div class="card foreground shadow-xl flex-1">
+  <div class="card-body">
+    <div class="absolute top-5 right-5">
+      <app-hero-art [id]="activeHero.id"></app-hero-art>
+    </div>
+
+    <div class="card-title">
+      {{ activeHero.name }}
+    </div>
+
+    <div>
+      Level {{ activeHero.level | number }} / {{ activeHero.maxLevel | number }}
+      [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
+    </div>
+
+    <div>
+      <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
+        (idChange)="changeMainCharacterType($event)"></app-damage-type>
+    </div>
+
+    <div>
+      @for(arch of activeHero.archetypeIds; track $index) {
+      <div class="badge badge-accent">
+        <app-content-name [id]="arch"></app-content-name>
+      </div>
+      }
+    </div>
+
+    <div class="flex">
+      <table class="table flex-1">
+        <tbody>
+          @for(stat of gameStats; track $index) {
+          <tr>
+            <td class="pl-0">{{ stat | titlecase }}</td>
+            <td class="text-right">{{ activeHero.stats[stat] | number }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="flex-1"></div>
+    </div>
+  </div>
+</div>
