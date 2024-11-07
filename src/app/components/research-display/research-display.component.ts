@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { gamestate } from '../../helpers';
+import { getResearchFor } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 
 @Component({
@@ -15,8 +15,7 @@ export class ResearchDisplayComponent {
 
   public completion = computed(
     () =>
-      ((gamestate().researchProgress[this.research().id] ?? 0) /
-        this.research().researchRequired) *
+      (getResearchFor(this.research().id) / this.research().researchRequired) *
       100,
   );
 }

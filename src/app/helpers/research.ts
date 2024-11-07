@@ -14,6 +14,17 @@ export function setActiveResearch(research: GameResearch): void {
   setGameState(state);
 }
 
+export function getResearchFor(id: string): number {
+  return gamestate().researchProgress[id] ?? 0;
+}
+
+export function isResearchComplete(id: string): boolean {
+  const entry = getEntry<GameResearch>(id);
+  if (!entry) return false;
+
+  return getResearchFor(id) >= entry.researchRequired;
+}
+
 export function allAvailableIncompleteResearch(): GameResearch[] {
   const state = gamestate();
   return getEntriesByType<GameResearch>('research').filter(
