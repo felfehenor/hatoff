@@ -14,6 +14,13 @@ export function numHeroesAllocatedToTask(task: GameTask): number {
   return heroesAllocatedToTask(task).length;
 }
 
+export function numIdleHeroes(): number {
+  const state = gamestate();
+  return (
+    Object.keys(state.heroes).length - Object.keys(state.taskAssignments).length
+  );
+}
+
 export function isHeroAllocatedToTask(task: GameTask, hero: GameHero): boolean {
   return gamestate().taskAssignments[hero.id] === task.id;
 }

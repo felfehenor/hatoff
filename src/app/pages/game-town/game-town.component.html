@@ -1,5 +1,11 @@
 <app-page-card>
-  <span header>Town Tasks</span>
+  <span header>
+    Town Tasks
+
+    @if(numIdle() > 0) {
+    <span class="ml-2 badge badge-warning">You have {{ numIdle() }} idle heroe(s)!</span>
+    }
+  </span>
 
   <app-task-list></app-task-list>
 </app-page-card>
