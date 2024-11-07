@@ -1,4 +1,6 @@
 export * from './content';
+export * from './gameloop';
+export * from './gameloop-hero';
 export * from './gamestate';
 export * from './hero';
 export * from './migrate';

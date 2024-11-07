@@ -12,6 +12,9 @@ export interface GameState {
   heroes: Record<string, GameHero>;
   researchProgress: Record<string, number>;
   resources: Record<string, number>;
+
+  heroCurrentTaskSpeed: Record<string, number>;
+  taskProgress: Record<string, number>;
   taskAssignments: Record<string, string>;
   activeResearch: string;
   townSetup: GameStateTownSetup;

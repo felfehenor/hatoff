@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { TippyDirective } from '@ngneat/helipopper';
-import { heroesAllocatedToTask } from '../../helpers';
+import { getTaskProgress, heroesAllocatedToTask } from '../../helpers';
 import { GameTask } from '../../interfaces';
 import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.component';
 
@@ -15,4 +15,9 @@ export class TaskDisplayComponent {
   public task = input.required<GameTask>();
   public active = input<boolean>(false);
   public heroes = computed(() => heroesAllocatedToTask(this.task()));
+
+  public completion = computed(
+    () =>
+      (getTaskProgress(this.task()) / this.task().damageRequiredPerCycle) * 100,
+  );
 }

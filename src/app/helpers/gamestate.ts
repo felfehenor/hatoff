@@ -6,6 +6,8 @@ export function blankGameState(): GameState {
   return {
     heroes: {},
     researchProgress: {},
+    heroCurrentTaskSpeed: {},
+    taskProgress: {},
     taskAssignments: {},
     resources: {},
     activeResearch: '',

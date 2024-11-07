@@ -29,14 +29,20 @@ export function currentHeroTask(hero: GameHero): GameTask | undefined {
   return getEntry<GameTask>(gamestate().taskAssignments[hero.id]);
 }
 
+export function getTaskProgress(task: GameTask): number {
+  return gamestate().taskProgress[task.id] ?? 0;
+}
+
 export function assignHeroToTask(task: GameTask, hero: GameHero): void {
   const state = gamestate();
   state.taskAssignments[hero.id] = task.id;
+  state.heroCurrentTaskSpeed[hero.id] = 0;
   setGameState(state);
 }
 
 export function unassignHeroTask(hero: GameHero): void {
   const state = gamestate();
   delete state.taskAssignments[hero.id];
+  delete state.heroCurrentTaskSpeed[hero.id];
   setGameState(state);
 }

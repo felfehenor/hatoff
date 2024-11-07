@@ -24,6 +24,7 @@ export function defaultHero(): GameHero {
     maxLevel: 20,
     xp: 0,
     maxXp: 100,
+    taskXp: {},
     taskLevels: {},
     stats: {
       health: 100,

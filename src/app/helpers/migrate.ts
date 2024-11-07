@@ -1,6 +1,7 @@
+import { merge } from 'lodash';
 import { GameResearch } from '../interfaces';
 import { getEntriesByType } from './content';
-import { gamestate, setGameState } from './gamestate';
+import { blankGameState, gamestate, setGameState } from './gamestate';
 import { addHero, createHero, totalHeroes } from './hero';
 
 export function migrateState() {
@@ -8,19 +9,9 @@ export function migrateState() {
 
   if (!state.townSetup.hasDoneSetup) return;
 
-  state.version ??= 1;
-  state.heroes ??= {};
-  state.researchProgress ??= {};
-  state.resources ??= {};
-  state.taskAssignments ??= {};
-  state.townSetup ??= {
-    hasDoneSetup: false,
-    heroId: '',
-    heroName: '',
-    townName: '',
-  };
+  const newState = merge(blankGameState(), state);
 
-  setGameState(state);
+  setGameState(newState);
 
   initializeTown();
 }

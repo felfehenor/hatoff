@@ -4,11 +4,23 @@
   damageTypeId: Intellectual
   maxHeroesAllocable: 0
 
+  speedPerCycle: 1
+  damageRequiredPerCycle: 1000
+  xpRequiredPerLevel: 1000
+  maxLevel: 0
+
 - id: 12ead923-71c1-465b-afbb-d4cc84b6a242
   name: Tax Collection
   description: Collect taxes from your town, gaining Gold.
   damageTypeId: Financial
   maxHeroesAllocable: 5
+
+  speedPerCycle: 3
+  damageRequiredPerCycle: 1000
+  xpRequiredPerLevel: 500
+  resourceIdPerCycle: Gold
+  resourceRewardPerCycle: 10
+  maxLevel: 2
 
 - id: 4a11631e-b5b4-4673-8715-460fe6725ed3
   name: Wood Harvesting
@@ -16,11 +28,25 @@
   damageTypeId: Physical
   maxHeroesAllocable: 5
 
+  speedPerCycle: 3
+  damageRequiredPerCycle: 50
+  xpRequiredPerLevel: 500
+  resourceIdPerCycle: Wood
+  resourceRewardPerCycle: 1
+  maxLevel: 1
+
 - id: 39e534ec-8ec0-4735-aff6-2674051f40fa
   name: Stone Gathering
   description: Gather from the quarry near your town, gaining Stone.
   damageTypeId: Physical
   maxHeroesAllocable: 5
+
+  speedPerCycle: 3
+  damageRequiredPerCycle: 50
+  xpRequiredPerLevel: 500
+  resourceIdPerCycle: Stone
+  resourceRewardPerCycle: 1
+  maxLevel: 1
 
 - id: a5e60559-ad21-4df9-bb5f-d1e392a74c8d
   name: Food Hunting
@@ -28,14 +54,31 @@
   damageTypeId: Physical
   maxHeroesAllocable: 5
 
+  speedPerCycle: 3
+  damageRequiredPerCycle: 50
+  xpRequiredPerLevel: 500
+  resourceIdPerCycle: Food
+  resourceRewardPerCycle: 1
+  maxLevel: 1
+
 - id: 6a620f52-5946-4990-a081-b7d9afcd0856
   name: Town Defense
   description: Defend your town from the woodland threats.
   damageTypeId: Physical
   maxHeroesAllocable: 20
 
+  speedPerCycle: 3
+  damageRequiredPerCycle: 50
+  xpRequiredPerLevel: 500
+  maxLevel: 1
+
 - id: 50bd99b9-3239-4937-8e38-0f7c716832e0
   name: Research
   description: Research new Archetypes, Damage Types, and Town Tasks.
   damageTypeId: Intellectual
   maxHeroesAllocable: 5
+
+  speedPerCycle: 10
+  damageRequiredPerCycle: 50
+  xpRequiredPerLevel: 500
+  maxLevel: 1

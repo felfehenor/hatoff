@@ -1,6 +1,7 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
-import { gamestate, migrateState, setGameState } from '../helpers';
+import { interval } from 'rxjs';
+import { doGameloop, gamestate, migrateState, setGameState } from '../helpers';
 import { GameState } from '../interfaces';
 import { ContentService } from './content.service';
 
@@ -38,6 +39,7 @@ export class GamestateService {
 
   async init() {
     this.load();
+    this.runGameloop();
   }
 
   load() {
@@ -49,5 +51,9 @@ export class GamestateService {
 
   saveGamestate(saveState: GameState) {
     this.localStorage.store('gamestate', saveState);
+  }
+
+  private runGameloop(): void {
+    interval(1000).subscribe(() => doGameloop());
   }
 }

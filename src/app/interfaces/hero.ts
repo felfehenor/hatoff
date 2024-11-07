@@ -28,6 +28,7 @@ export interface GameHero extends Identifiable {
   xp: number;
   maxXp: number;
 
+  taskXp: Record<string, number>;
   taskLevels: Record<string, number>;
 
   stats: Record<GameHeroStat, number>;
