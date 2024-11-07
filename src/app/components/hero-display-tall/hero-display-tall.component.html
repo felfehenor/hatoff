@@ -22,9 +22,7 @@
 
     <div>
       @for(arch of activeHero.archetypeIds; track $index) {
-      <div class="badge badge-accent">
-        <app-content-name [id]="arch"></app-content-name>
-      </div>
+      <app-archetype-display [id]="arch"></app-archetype-display>
       }
     </div>
 
