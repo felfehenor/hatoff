@@ -1,11 +1,15 @@
 - id: 2b164de4-ee95-46d6-ae6f-b2c4a7a55974
   name: Gold
+  description: Used to purchase upgrades.
 
 - id: f3978a5d-96ae-4032-872a-dda9f082aee3
   name: Wood
+  description: Used to purchase upgrades.
 
 - id: 4c05a087-e2ed-40b9-a96f-5d9d2683e060
   name: Stone
+  description: Used to purchase upgrades.
 
 - id: 5ec1c49e-430d-4f35-8918-805a573d050a
   name: Food
+  description: Used to recruit heroes.

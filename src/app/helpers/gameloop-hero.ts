@@ -74,12 +74,6 @@ export function doHeroGameloop(): void {
     finalizeTask(state, task);
     resetTask(state, task);
     rewardTaskDoers(state, task);
-
-    console.log(
-      state.taskProgress[task.id],
-      task.damageRequiredPerCycle,
-      state.resources,
-    );
   });
 
   setGameState(state);
