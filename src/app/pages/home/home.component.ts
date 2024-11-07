@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { isSetup } from '../../helpers';
 
 @Component({
   selector: 'app-home',
@@ -8,4 +9,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  public hasStartedGame = computed(() => isSetup());
+}
