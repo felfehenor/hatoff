@@ -1,34 +1,41 @@
 - id: b5657aac-b5f3-4100-9897-3d25573d5cc7
   name: Recruitment
+  description: Push forward in the recruitment of more heroes!
   damageTypeId: Intellectual
   maxHeroesAllocable: 0
 
 - id: 12ead923-71c1-465b-afbb-d4cc84b6a242
   name: Tax Collection
+  description: Collect taxes from your town, gaining Gold.
   damageTypeId: Financial
   maxHeroesAllocable: 5
 
 - id: 4a11631e-b5b4-4673-8715-460fe6725ed3
   name: Wood Harvesting
+  description: Chop trees near your town, gaining Wood.
   damageTypeId: Physical
   maxHeroesAllocable: 5
 
 - id: 39e534ec-8ec0-4735-aff6-2674051f40fa
   name: Stone Gathering
+  description: Gather from the quarry near your town, gaining Stone.
   damageTypeId: Physical
   maxHeroesAllocable: 5
 
 - id: a5e60559-ad21-4df9-bb5f-d1e392a74c8d
   name: Food Hunting
+  description: Hunt and set traps near your town, gaining Food.
   damageTypeId: Physical
   maxHeroesAllocable: 5
 
 - id: 6a620f52-5946-4990-a081-b7d9afcd0856
   name: Town Defense
+  description: Defend your town from the woodland threats.
   damageTypeId: Physical
-  maxHeroesAllocable: -1
+  maxHeroesAllocable: 20
 
 - id: 50bd99b9-3239-4937-8e38-0f7c716832e0
   name: Research
+  description: Research new Archetypes, Damage Types, and Town Tasks.
   damageTypeId: Intellectual
   maxHeroesAllocable: 5

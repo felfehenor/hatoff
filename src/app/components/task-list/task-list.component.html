@@ -1,0 +1,16 @@
+@let activeTask = selectedTask();
+
+<div class="flex flex-row">
+  <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+    @for(task of allTasks(); track $index) {
+    <div class="hero-container" [ngClass]="cardClasses()">
+      <app-task-display [task]="task" (click)="selectedTask.set(task)"
+        [active]="selectedTask() === task"></app-task-display>
+    </div>
+    }
+  </div>
+
+  @if(activeTask) {
+  <app-task-hero-selector class="pl-3 flex-1 flex" [task]="activeTask"></app-task-hero-selector>
+  }
+</div>

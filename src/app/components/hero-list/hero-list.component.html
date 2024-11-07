@@ -11,8 +11,6 @@
   </div>
 
   @if(activeHero) {
-  <div class="flex flex-1 pl-3">
-    <app-hero-display-tall [hero]="activeHero"></app-hero-display-tall>
-  </div>
+  <app-hero-display-tall class="flex-1 flex pl-3" [hero]="activeHero"></app-hero-display-tall>
   }
 </div>

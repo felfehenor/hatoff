@@ -74,7 +74,7 @@ export function allUnlockedTasks(): GameTask[] {
 
   return sortBy(
     validResearch
-      .map((r) => getEntry<GameTask>(r.unlocksArchetypeId!))
+      .map((r) => getEntry<GameTask>(r.unlocksTaskId!))
       .filter(Boolean),
     'name',
   ) as GameTask[];

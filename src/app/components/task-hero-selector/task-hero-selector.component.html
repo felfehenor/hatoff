@@ -1,0 +1,52 @@
+@let activeTask = task();
+
+<div class="card foreground shadow-xl flex-1">
+  <div class="card-body">
+    <div class="card-title">
+      {{ activeTask.name }}
+    </div>
+
+    <div class="min-h-[72px]">
+      {{ activeTask.description }}
+    </div>
+
+    <div class="card-title">
+      <div class="font-light">Heroes ({{ heroes().length }}/{{ activeTask.maxHeroesAllocable }})</div>
+    </div>
+
+    <div class="hero-container p-1">
+      @for(hero of allHeroes(); track $index) {
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 cursor-pointer" (click)="selectHero(hero)"
+        (keydown.enter)="selectHero(hero)" tabindex="1" [class.ring-2]="isHeroSelected(hero)">
+        <figure class="max-w-[64px] pl-2 flex items-center">
+          <app-hero-art class="max-h-[64px]" [id]="hero.id"></app-hero-art>
+        </figure>
+
+        <div class="card-body p-1 pl-3">
+          <div class="card-title">
+            {{ hero.name }} Lv. {{ hero.level }}
+          </div>
+
+          <div>
+            <app-damage-type [id]="hero.damageTypeId" [damage]="hero.stats.force"></app-damage-type>
+          </div>
+
+          <div class="italic">
+            @if(currentTaskNameForHero(hero); as taskName) {
+            Currently assigned to {{ taskName }}.
+            }
+
+            @else {
+            Currently idle.
+            }
+          </div>
+
+          <div class="absolute right-[32px] top-0 bottom-0 flex content-center items-center">
+            <input type="checkbox" class="checkbox checkbox-primary" [checked]="isHeroSelected(hero)" />
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+@let heroData = hero();
+
+<div class="w-[32px]" [tp]="herotip">
+  <app-hero-art [id]="heroData.id"></app-hero-art>
+</div>
+
+<ng-template #herotip>
+  <h6 class="text-sm font-semibold">{{ heroData.name }} Lv. {{ heroData.level }}</h6>
+
+  <div>
+    <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+  </div>
+</ng-template>

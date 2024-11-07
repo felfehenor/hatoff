@@ -21,7 +21,11 @@ body {
     ) !important;
 
   &.foreground {
-    --n: var(--b2);
+    --n: var(--b1);
+  }
+
+  &.foreground-2 {
+    --n: var(--b3);
   }
 }
 
