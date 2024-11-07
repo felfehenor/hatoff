@@ -21,25 +21,7 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 export class TaskHeroSelectorComponent {
   public task = input.required<GameTask>();
   public heroes = computed(() => heroesAllocatedToTask(this.task()));
-  public allHeroes = computed(() =>
-    allHeroes()
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes())
-      .concat(allHeroes()),
-  );
+  public allHeroes = computed(() => allHeroes());
 
   public selectHero(hero: GameHero): void {
     if (isHeroAllocatedToTask(this.task(), hero)) {
