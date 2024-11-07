@@ -1,17 +1,27 @@
 - id: c7736670-9f8d-4427-871d-a3e77e59e1e1
   name: Lumberjack
+  description: This will boost your Wood income for this hero.
+
+- id: f1fb57b2-376e-41b5-9da7-c390731b1c8c
+  name: Scavenger
+  description: This will boost your Food income for this hero.
 
 - id: 350496e9-9a0a-4e09-9e4f-51b7ff3043d6
   name: Fighter
+  description: This will boost your offensive power for this hero.
 
 - id: 5f45c692-edbe-4e6b-a9a3-5329813a2b5e
   name: Thinker
+  description: This will boost your research progress for this hero.
 
 - id: f4fb305c-d817-4a57-9f89-f60cf3ebda2e
   name: Quarrier
+  description: This will boost your Stone income for this hero.
 
 - id: ce83d445-373f-4ec0-9183-ae1c1f973ee6
   name: Hunter
+  description: This will boost your Food income for this hero.
 
 - id: 49e83d8b-2e62-4087-8568-6c149e925a16
   name: Defender
+  description: This will boost your defensive power for this hero.

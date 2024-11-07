@@ -1,0 +1,8 @@
+<div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+  @for(research of allResearch(); track $index) {
+  <div class="hero-container" [ngClass]="cardClasses()">
+    <app-research-display [research]="research" (click)="selectResearch(research)"
+      [active]="activeResearch() === research.id"></app-research-display>
+  </div>
+  }
+</div>

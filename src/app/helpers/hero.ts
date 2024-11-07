@@ -3,8 +3,8 @@ import { GameHero } from '../interfaces';
 import { v4 as uuid } from 'uuid';
 
 import { species } from 'fantastical';
-import { allUnlockedArchetypes, allUnlockedDamageTypes } from './content';
 import { gamestate, setGameState } from './gamestate';
+import { allUnlockedArchetypes, allUnlockedDamageTypes } from './research';
 import { randomIdentifiableChoice } from './rng';
 
 export function defaultHero(): GameHero {

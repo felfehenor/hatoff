@@ -1,1 +1,15 @@
-<p>research-display works!</p>
+@let researchData = research();
+
+<div class="card card-side foreground shadow-xl cursor-pointer min-h-[250px] overflow-hidden" [class.ring-2]="active()">
+  <div class="card-body">
+    <div class="card-title">
+      <div class="font-semibold">{{ researchData.name }}</div>
+    </div>
+
+    <p>{{ researchData.description }}</p>
+  </div>
+
+  <div class="absolute bottom-[-7px] left-0 right-0">
+    <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
+  </div>
+</div>

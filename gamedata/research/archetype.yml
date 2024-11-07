@@ -1,22 +1,33 @@
 - id: 50b941ce-8420-412b-a3ca-d86deaad58e5
   name: Lumberjack Knowledge
+  description: Unlock the archetype "Lumberjack". This will boost your Wood income for heroes with this archetype.
   researchRequired: 50
 
   unlocksArchetypeId: Lumberjack
 
 - id: 3012ecb2-5560-4b91-90c6-635f032067d1
+  description: Unlock the archetype "Quarrier". This will boost your Stone income for heroes with this archetype.
   name: Quarrier Knowledge
   researchRequired: 50
 
   unlocksArchetypeId: Quarrier
 
+- id: 97cd9d10-37d7-43c5-8eae-c6d9751cfe0a
+  description: Unlock the archetype "Scavenger". This will boost your Food income for heroes with this archetype.
+  name: Scavenger Knowledge
+  researchRequired: 50
+
+  unlocksArchetypeId: Scavenger
+
 - id: 48cf1cc9-eda4-42d6-81fa-b967c1367c50
+  description: Unlock the archetype "Hunter". This will boost your Food income for heroes with this archetype.
   name: Hunter Knowledge
   researchRequired: 50
 
   unlocksArchetypeId: Hunter
 
 - id: 97a1028b-ce6d-41a9-b0e2-3f24b8dc1346
+  description: Unlock the archetype "Thinker". This will increase progress when doing research.
   name: Thinker Knowledge
   researchRequired: 50
 

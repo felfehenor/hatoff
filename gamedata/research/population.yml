@@ -1,11 +1,13 @@
 - id: 417858fb-2192-4386-838b-f46bb646bea7
   name: Huts
+  description: Increase the population cap by 2.
   researchRequired: 10
 
   unlocksPopulation: 2
 
 - id: 8e16d493-0a0d-49ea-9965-a51cb8ad37c0
   name: Houses
+  description: Increase the population cap by 3.
   researchRequired: 100
   requiresResearchIds:
     - Huts

@@ -8,6 +8,7 @@ export function blankGameState(): GameState {
     researchProgress: {},
     taskAssignments: {},
     resources: {},
+    activeResearch: '',
     townSetup: {
       hasDoneSetup: false,
       heroId: '',
