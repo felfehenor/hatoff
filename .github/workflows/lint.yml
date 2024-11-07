@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [18.15.x]
+        node-version: [20]
 
     steps:
       - uses: actions/checkout@v2
