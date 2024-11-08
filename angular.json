@@ -52,6 +52,7 @@
               }
             ],
             "styles": [
+              "./node_modules/@ngxpert/hot-toast/src/styles/styles.scss",
               "./node_modules/tippy.js/dist/tippy.css",
               "./node_modules/tippy.js/themes/translucent.css",
               "./node_modules/tippy.js/animations/scale.css",

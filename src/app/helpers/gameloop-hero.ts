@@ -1,6 +1,7 @@
-import { GameHero, GameState, GameTask } from '../interfaces';
+import { GameHero, GameResource, GameState, GameTask } from '../interfaces';
 import { getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
+import { notify } from './notify';
 
 function applyHeroSpeed(state: GameState, hero: GameHero): void {
   state.heroCurrentTaskSpeed[hero.id] ??= 0;
@@ -38,9 +39,13 @@ function isTaskFinished(state: GameState, task: GameTask): boolean {
 
 function finalizeTask(state: GameState, task: GameTask): void {
   if (task.resourceIdPerCycle && task.resourceRewardPerCycle) {
+    const res = getEntry<GameResource>(task.resourceIdPerCycle);
+
+    const gained = task.resourceRewardPerCycle * numTaskRewards(state, task);
     state.resources[task.resourceIdPerCycle] ??= 0;
-    state.resources[task.resourceIdPerCycle] +=
-      task.resourceRewardPerCycle * numTaskRewards(state, task);
+    state.resources[task.resourceIdPerCycle] += gained;
+
+    notify(`+${gained} ${res?.name ?? '???'}`);
   }
 }
 
