@@ -35,7 +35,8 @@ export const gameRoutes: Routes = [
   {
     component: OptionsComponent,
     path: 'options',
-    canActivate: [requireSetupGuard],
+    loadChildren: () =>
+      import('./options.routes').then((routes) => routes.optionsRoutes),
   },
   {
     path: '**',

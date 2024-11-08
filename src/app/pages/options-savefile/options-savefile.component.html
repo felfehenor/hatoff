@@ -1,0 +1,30 @@
+<div class="flex flex-row">
+
+  <div class="flex-1"></div>
+  <div class="flex-1"></div>
+
+  <div class="flex-1 flex flex-col">
+    <div class="card bg-neutral foreground shadow-xl">
+      <div class="card-body">
+        <div class="card-title">
+          Delete Savefile
+        </div>
+
+        <p class="mb-3">Deleting your savefile is permanent, irreversible, and most certainly should be done with
+          caution!
+        </p>
+
+        <div class="card-actions">
+          <button class="btn btn-error" [swal]="deleteSwal">Delete</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<swal #deleteSwal title="Delete Savefile?"
+  text="This cannot be undone. You really want to make sure you want to do this. You will not be able to get this back!"
+  icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="deleteSavefile()">
+</swal>

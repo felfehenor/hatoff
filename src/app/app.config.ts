@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   ENVIRONMENT_INITIALIZER,
+  importProvidersFrom,
   inject,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -20,6 +21,7 @@ import {
   withNgxWebstorageConfig,
 } from 'ngx-webstorage';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { routes } from './app.routes';
 import { APIService } from './services/api.service';
 import { ContentService } from './services/content.service';
@@ -32,6 +34,11 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideNgxWebstorage(withNgxWebstorageConfig({}), withLocalStorage()),
+    importProvidersFrom(
+      SweetAlert2Module.forRoot({
+        provideSwal: () => import('sweetalert2/dist/sweetalert2.js'),
+      }),
+    ),
     provideHotToastConfig({
       position: 'bottom-right',
       stacking: 'depth',

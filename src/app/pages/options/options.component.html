@@ -4,4 +4,16 @@
   <div pageactions>
   </div>
 
+  <div role="tablist" class="tabs tabs-boxed">
+    @for(tab of tabs; track $index) {
+    <a role="tab" class="tab" [routerLinkActive]="'tab-active'" [routerLink]="['/game/options', tab.link]">
+      {{ tab.name }}
+    </a>
+    }
+  </div>
+
+  <div class="p-3">
+    <router-outlet></router-outlet>
+  </div>
+
 </app-page-card>
