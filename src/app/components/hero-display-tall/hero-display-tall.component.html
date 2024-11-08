@@ -21,6 +21,16 @@
         (idChange)="changeMainCharacterType($event)"></app-damage-type>
     </div>
 
+    <div class="italic">
+      @if(currentHeroTask(); as taskName) {
+      Currently assigned to {{ taskName }}.
+      }
+
+      @else {
+      Currently idle.
+      }
+    </div>
+
     <div>
       @for(arch of activeHero.archetypeIds; track $index) {
       <app-archetype-display [id]="arch"></app-archetype-display>
