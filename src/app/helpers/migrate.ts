@@ -1,8 +1,9 @@
 import { merge } from 'lodash';
 import { GameResearch } from '../interfaces';
-import { getEntriesByType } from './content';
+import { getEntriesByType, getEntry } from './content';
 import { blankGameState, gamestate, setGameState } from './gamestate';
 import { addHero, createHero, totalHeroes } from './hero';
+import { gainResource } from './resource';
 
 export function migrateState() {
   const state = gamestate();
@@ -18,6 +19,7 @@ export function migrateState() {
 
 export function initializeTown() {
   unlockBasicTasks();
+  ensureSomeResources();
   ensureFirstHero();
 }
 
@@ -47,4 +49,15 @@ export function ensureFirstHero() {
   setGameState(state);
 
   addHero(firstHero);
+}
+
+export function ensureSomeResources() {
+  if (totalHeroes() > 0) return;
+
+  ['Gold', 'Wood', 'Stone', 'Food'].forEach((res) => {
+    const resource = getEntry<GameResearch>(res);
+    if (!resource) return;
+
+    gainResource(resource, 10);
+  });
 }
