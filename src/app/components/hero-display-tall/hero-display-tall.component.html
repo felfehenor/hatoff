@@ -27,6 +27,17 @@
     </div>
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
+
+    @if(canDismissHero()) {
+    <div class="card-actions">
+      <button class="btn btn-error" [swal]="deleteSwal">Dismiss Hero</button>
+    </div>
+    }
   </div>
 </div>
 }
+
+<swal #deleteSwal title="Dismiss Hero?"
+  text="This cannot be undone. Are you sure you want to dismiss this hero? You will not be able to get this hero back, ever! Probably."
+  icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="dismissHero()">
+</swal>

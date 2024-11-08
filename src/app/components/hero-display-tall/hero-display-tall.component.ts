@@ -1,6 +1,12 @@
 import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import { gamestate, getHero, setHeroDamageType } from '../../helpers';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {
+  gamestate,
+  getHero,
+  removeHero,
+  setHeroDamageType,
+} from '../../helpers';
 import { GameHero } from '../../interfaces';
 import { ArchetypeDisplayComponent } from '../archetype-display/archetype-display.component';
 import { ContentNameComponent } from '../content-name/content-name.component';
@@ -29,6 +35,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     HeroAssignmentComponent,
     HeroLevelTaglineComponent,
     HeroTaskLevelListComponent,
+    SweetAlert2Module,
   ],
   templateUrl: './hero-display-tall.component.html',
   styleUrl: './hero-display-tall.component.scss',
@@ -42,10 +49,18 @@ export class HeroDisplayTallComponent {
     () => this.hero()?.id === gamestate().townSetup.heroId,
   );
 
+  public canDismissHero = computed(
+    () => this.hero().id !== gamestate().townSetup.heroId,
+  );
+
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();
     if (!hero) return;
 
     setHeroDamageType(hero, newType);
+  }
+
+  public dismissHero() {
+    removeHero(this.hero());
   }
 }

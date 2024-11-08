@@ -86,6 +86,8 @@ export function removeHero(hero: GameHero): void {
   const state = gamestate();
 
   delete state.heroes[hero.id];
+  delete state.taskAssignments[hero.id];
+  delete state.heroCurrentTaskSpeed[hero.id];
 
   setGameState(state);
 }
