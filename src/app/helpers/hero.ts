@@ -30,8 +30,8 @@ export function defaultHero(): GameHero {
       health: 100,
       force: 5,
       resistance: 1,
-      piety: 0,
-      progress: 5,
+      piety: 1,
+      progress: 1,
       speed: 1,
     },
   };

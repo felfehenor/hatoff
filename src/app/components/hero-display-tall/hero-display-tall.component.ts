@@ -11,6 +11,7 @@ import { ArchetypeDisplayComponent } from '../archetype-display/archetype-displa
 import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
+import { HeroTaskLevelDisplayComponent } from '../hero-task-level-display/hero-task-level-display.component';
 
 @Component({
   selector: 'app-hero-display-tall',
@@ -22,6 +23,7 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
     TitleCasePipe,
     HeroArtComponent,
     ArchetypeDisplayComponent,
+    HeroTaskLevelDisplayComponent,
   ],
   templateUrl: './hero-display-tall.component.html',
   styleUrl: './hero-display-tall.component.scss',
@@ -36,6 +38,10 @@ export class HeroDisplayTallComponent {
   );
 
   public currentHeroTask = computed(() => currentHeroTask(this.hero())?.name);
+
+  public allHeroTaskLevels = computed(() =>
+    Object.keys(this.hero().taskLevels),
+  );
 
   public readonly gameStats: GameHeroStat[] = AllGameHeroStats;
 

@@ -1,0 +1,6 @@
+@if(shouldDisplay()) {
+<div class="badge badge-info" [tp]="description()">
+  <app-content-name [id]="id()"></app-content-name>
+  <span class="ml-1">{{ text() }}</span>
+</div>
+}

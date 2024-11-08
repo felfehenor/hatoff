@@ -88,7 +88,7 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
 
   heroesAllocatedToTask(task).forEach((hero) => {
     gainTaskXp(state, hero, task, xpGained * hero.stats.progress);
-    gainXp(state, hero, xpGained);
+    gainXp(state, hero, xpGained * (1 + taskBonusForHero(hero, task)));
     updateHero(state, hero);
   });
 }
@@ -109,8 +109,8 @@ function levelup(state: GameState, hero: GameHero): void {
     return Math.round(rng() * val);
   }
 
-  gainStat(state, hero, 'health', statBoost(10));
-  gainStat(state, hero, 'force', statBoost(3));
+  gainStat(state, hero, 'health', statBoost(5));
+  gainStat(state, hero, 'force', statBoost(1));
   gainStat(state, hero, 'piety', statBoost(1));
   gainStat(state, hero, 'progress', statBoost(1));
   gainStat(state, hero, 'resistance', statBoost(1));
