@@ -11,6 +11,11 @@ export function blankGameState(): GameState {
     taskAssignments: {},
     resources: {},
     activeResearch: '',
+    recruitment: {
+      recruitableHeroes: [],
+      nextResetTime: 0,
+      numRerolls: 0,
+    },
     townSetup: {
       hasDoneSetup: false,
       heroId: '',

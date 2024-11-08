@@ -9,9 +9,18 @@ export function getResourceValue(idOrName: string): number {
   return gamestate().resources[id] ?? 0;
 }
 
+export function hasResource(resource: GameResource, value = 1): boolean {
+  const state = gamestate();
+  return (state.resources[resource.id] ?? 0) >= value;
+}
+
 export function gainResource(resource: GameResource, value = 1): void {
   const state = gamestate();
   state.resources[resource.id] ??= 0;
   state.resources[resource.id] += value;
   setGameState(state);
+}
+
+export function loseResource(resource: GameResource, value = 1): void {
+  gainResource(resource, -value);
 }

@@ -11,52 +11,22 @@
       {{ activeHero.name }}
     </div>
 
-    <div>
-      Level {{ activeHero.level | number }} / {{ activeHero.maxLevel | number }}
-      [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
-    </div>
+    <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
 
-    <div>
-      <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
-        (idChange)="changeMainCharacterType($event)"></app-damage-type>
-    </div>
+    <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
+      (idChange)="changeMainCharacterType($event)"></app-damage-type>
 
-    <div class="italic">
-      @if(currentHeroTask(); as taskName) {
-      Currently assigned to {{ taskName }}.
-      }
+    <app-hero-assignment [hero]="activeHero"></app-hero-assignment>
 
-      @else {
-      Currently idle.
-      }
-    </div>
-
-    <div>
-      @for(arch of activeHero.archetypeIds; track $index) {
-      <app-archetype-display class="mr-1" [id]="arch"></app-archetype-display>
-      }
-    </div>
+    <app-hero-archetype-list [hero]="activeHero"></app-hero-archetype-list>
 
     <div class="flex">
-      <table class="table flex-1">
-        <tbody>
-          @for(stat of gameStats; track $index) {
-          <tr>
-            <td class="pl-0">{{ stat | titlecase }}</td>
-            <td class="text-right">{{ activeHero.stats[stat] | number }}</td>
-          </tr>
-          }
-        </tbody>
-      </table>
+      <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
 
       <div class="flex-1"></div>
     </div>
 
-    <div>
-      @for(task of allHeroTaskLevels(); track $index) {
-      <app-hero-task-level-display class="mr-1" [id]="task" [hero]="activeHero"></app-hero-task-level-display>
-      }
-    </div>
+    <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
   </div>
 </div>
 }

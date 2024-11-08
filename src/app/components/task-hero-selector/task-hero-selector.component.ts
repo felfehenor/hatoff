@@ -10,11 +10,12 @@ import {
 import { GameHero, GameTask } from '../../interfaces';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
+import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 
 @Component({
   selector: 'app-task-hero-selector',
   standalone: true,
-  imports: [HeroArtComponent, DamageTypeComponent],
+  imports: [HeroArtComponent, DamageTypeComponent, HeroAssignmentComponent],
   templateUrl: './task-hero-selector.component.html',
   styleUrl: './task-hero-selector.component.scss',
 })

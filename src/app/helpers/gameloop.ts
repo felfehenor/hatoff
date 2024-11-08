@@ -1,4 +1,5 @@
 import { doHeroGameloop } from './gameloop-hero';
+import { doRecruitGameloop } from './gameloop-recruit';
 import { isSetup } from './setup';
 
 export function isPlayingGame(): boolean {
@@ -10,4 +11,5 @@ export function doGameloop(): void {
   if (!isPlayingGame()) return;
 
   doHeroGameloop();
+  doRecruitGameloop();
 }

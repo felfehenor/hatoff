@@ -1,3 +1,68 @@
 <app-page-card>
-  test
+  <span header>
+    Recruit New Heroes ({{ currentHeroCount() }}/{{ currentHeroCap() }})
+
+    <span class="ml-1">
+      <span class="badge badge-warning">
+        <span>Reset in</span>
+
+        <span class="ml-1 countdown">
+          <span [style.--value]="minutesUntilReset()"></span>
+          m
+          <span class="ml-1" [style.--value]="secondsUntilReset()"></span>
+          s
+        </span>
+      </span>
+    </span>
+  </span>
+
+  <div pageactions>
+    <app-resource-display class="mr-2" [id]="'Food'"></app-resource-display>
+    <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()">
+      Reroll for {{ rerollCost() | number }} Food
+    </button>
+  </div>
+
+  <div class="flex flex-wrap gap-2">
+    @for(hero of currentHeroPool(); track $index) {
+    <div class="flex-1 min-w-[30%]">
+      <div class="card foreground shadow-xl" [class.recruited-already]="hasRecruitedHero(hero)">
+        <div class="card-body">
+          <div class="absolute top-5 right-5">
+            <app-hero-art [id]="hero.id"></app-hero-art>
+          </div>
+
+          <div class="card-title">
+            {{ hero.name }}
+          </div>
+
+          <app-hero-level-tagline [hero]="hero" [showXp]="false"></app-hero-level-tagline>
+
+          <app-damage-type [damage]="hero.stats.force" [id]="hero.damageTypeId"></app-damage-type>
+
+          <app-hero-archetype-list [hero]="hero"></app-hero-archetype-list>
+
+          <div class="flex">
+            <app-hero-stats-table class="flex-1" [hero]="hero"></app-hero-stats-table>
+
+            <div class="flex-1"></div>
+          </div>
+
+          <app-hero-task-level-list [hero]="hero"></app-hero-task-level-list>
+
+          <div class="card-actions">
+            <button class="btn btn-primary" [disabled]="!canRecruit() || hasRecruitedHero(hero)"
+              (click)="selectedHero.set(hero); recruitSwal.fire();">
+              Recruit for {{ recruitCost() | number }} Food
+            </button>
+
+            <swal #recruitSwal [title]="'Recruit ' + hero.name" [text]="recruitDesc(hero)" icon="question"
+              [showCancelButton]="true" [focusCancel]="true" (confirm)="recruitHero(hero)">
+            </swal>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
 </app-page-card>

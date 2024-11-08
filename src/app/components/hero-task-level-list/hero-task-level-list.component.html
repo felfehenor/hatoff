@@ -1,0 +1,5 @@
+<div>
+  @for(task of allHeroTaskLevels(); track $index) {
+  <app-hero-task-level-display class="mr-1" [id]="task" [hero]="hero()"></app-hero-task-level-display>
+  }
+</div>

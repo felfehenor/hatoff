@@ -33,15 +33,7 @@
             <app-damage-type [id]="hero.damageTypeId" [damage]="hero.stats.force"></app-damage-type>
           </div>
 
-          <div class="italic">
-            @if(currentTaskNameForHero(hero); as taskName) {
-            Currently assigned to {{ taskName }}.
-            }
-
-            @else {
-            Currently idle.
-            }
-          </div>
+          <app-hero-assignment [hero]="hero"></app-hero-assignment>
 
           <div class="absolute right-[32px] top-0 bottom-0 flex content-center items-center">
             <input type="checkbox" class="checkbox checkbox-primary" [checked]="isHeroSelected(hero)" />

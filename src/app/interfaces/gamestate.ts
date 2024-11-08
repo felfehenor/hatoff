@@ -7,6 +7,12 @@ export interface GameStateTownSetup {
   heroId: string;
 }
 
+export interface GameStateRecruitment {
+  recruitableHeroes: GameHero[];
+  nextResetTime: number;
+  numRerolls: number;
+}
+
 export interface GameState {
   version: number;
   heroes: Record<string, GameHero>;
@@ -18,4 +24,6 @@ export interface GameState {
   taskAssignments: Record<string, string>;
   activeResearch: string;
   townSetup: GameStateTownSetup;
+
+  recruitment: GameStateRecruitment;
 }

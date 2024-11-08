@@ -1,0 +1,12 @@
+@let activeHero = hero();
+<div>
+  <span>
+    Level {{ activeHero.level | number }} / {{ activeHero.maxLevel | number }}
+  </span>
+
+  @if(showXp()) {
+  <span>
+    [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
+  </span>
+  }
+</div>
