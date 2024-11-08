@@ -29,8 +29,9 @@ export function allAvailableIncompleteResearch(): GameResearch[] {
   const state = gamestate();
   return getEntriesByType<GameResearch>('research').filter(
     (entry) =>
-      isUndefined(state.researchProgress[entry.id]) ||
-      state.researchProgress[entry.id] < entry.researchRequired,
+      (isUndefined(state.researchProgress[entry.id]) ||
+        state.researchProgress[entry.id] < entry.researchRequired) &&
+      (entry.requiresResearchIds ?? []).every((req) => isResearchComplete(req)),
   );
 }
 
