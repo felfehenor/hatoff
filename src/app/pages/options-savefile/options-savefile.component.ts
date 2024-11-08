@@ -1,7 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { blankGameState, gamestate, notify, setGameState } from '../../helpers';
+import {
+  blankGameState,
+  gamestate,
+  notifySuccess,
+  setGameState,
+} from '../../helpers';
 import { GameState } from '../../interfaces';
 
 @Component({
@@ -49,7 +54,7 @@ export class OptionsSavefileComponent {
 
       finish();
 
-      notify(`Successfully imported ${charFile.townSetup.heroName}!`);
+      notifySuccess(`Successfully imported ${charFile.townSetup.heroName}!`);
     };
 
     reader.readAsText(file);

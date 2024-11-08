@@ -82,3 +82,6 @@
   damageRequiredPerCycle: 50
   xpRequiredPerLevel: 500
   maxLevel: 1
+
+  resourceRewardPerCycle: 1
+  applyResultsToResearch: true

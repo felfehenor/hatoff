@@ -2,13 +2,14 @@ import { sum } from 'lodash';
 import {
   GameHero,
   GameHeroStat,
+  GameResearch,
   GameResource,
   GameState,
   GameTask,
 } from '../interfaces';
 import { getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
-import { notify } from './notify';
+import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { seededrng } from './rng';
 import { heroesAllocatedToTask } from './task';
@@ -64,12 +65,12 @@ function isTaskFinished(state: GameState, task: GameTask): boolean {
 }
 
 function finalizeTask(state: GameState, task: GameTask): void {
+  const heroBonusSum = sum(
+    heroesAllocatedToTask(task).map((h) => taskBonusForHero(h, task)),
+  );
+
   if (task.resourceIdPerCycle && task.resourceRewardPerCycle) {
     const res = getEntry<GameResource>(task.resourceIdPerCycle);
-
-    const heroBonusSum = sum(
-      heroesAllocatedToTask(task).map((h) => taskBonusForHero(h, task)),
-    );
 
     const gained =
       (heroBonusSum + task.resourceRewardPerCycle) *
@@ -79,6 +80,29 @@ function finalizeTask(state: GameState, task: GameTask): void {
     state.resources[task.resourceIdPerCycle] += gained;
 
     notify(`+${gained} ${res?.name ?? '???'}`);
+  }
+
+  if (task.applyResultsToResearch) {
+    const researchGained =
+      (heroBonusSum + task.resourceRewardPerCycle) *
+      numTaskRewards(state, task) *
+      getOption('rewardMultiplier');
+    const activeResearch = state.activeResearch;
+    const activeResearchEntry = getEntry<GameResearch>(activeResearch);
+    if (
+      !activeResearchEntry ||
+      state.researchProgress[activeResearch] >=
+        activeResearchEntry.researchRequired
+    ) {
+      notifyError('Gained research, but not researching anything!');
+      return;
+    }
+
+    state.researchProgress[activeResearch] ??= 0;
+    state.researchProgress[activeResearch] = Math.min(
+      state.researchProgress[activeResearch] + researchGained,
+      activeResearchEntry.researchRequired,
+    );
   }
 }
 
