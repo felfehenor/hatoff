@@ -70,6 +70,10 @@ export function allHeroes(): GameHero[] {
   return Object.values(gamestate().heroes ?? {});
 }
 
+export function getHero(id: string): GameHero | undefined {
+  return gamestate().heroes[id];
+}
+
 export function addHero(hero: GameHero): void {
   const state = gamestate();
 

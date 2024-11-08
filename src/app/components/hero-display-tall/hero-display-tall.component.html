@@ -1,5 +1,6 @@
-@let activeHero = hero();
+@let activeHero = liveHeroData();
 
+@if(activeHero) {
 <div class="card foreground shadow-xl flex-1">
   <div class="card-body">
     <div class="absolute top-5 right-5">
@@ -42,3 +43,4 @@
     </div>
   </div>
 </div>
+}

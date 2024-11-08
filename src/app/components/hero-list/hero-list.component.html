@@ -1,5 +1,3 @@
-@let activeHero = selectedHero();
-
 <div class="flex flex-row">
   <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
     @for(hero of allHeroes(); track $index) {
@@ -10,7 +8,7 @@
     }
   </div>
 
-  @if(activeHero) {
+  @if(selectedHero(); as activeHero) {
   <app-hero-display-tall class="flex-1 flex pl-3" [hero]="activeHero"></app-hero-display-tall>
   }
 </div>

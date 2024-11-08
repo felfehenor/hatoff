@@ -1,6 +1,6 @@
 import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import { gamestate, setHeroDamageType } from '../../helpers';
+import { gamestate, getHero, setHeroDamageType } from '../../helpers';
 import { AllGameHeroStats, GameHero, GameHeroStat } from '../../interfaces';
 import { ArchetypeDisplayComponent } from '../archetype-display/archetype-display.component';
 import { ContentNameComponent } from '../content-name/content-name.component';
@@ -23,6 +23,8 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 })
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();
+
+  public liveHeroData = computed(() => getHero(this.hero().id));
 
   public canEditHeroStats = computed(
     () => this.hero()?.id === gamestate().townSetup.heroId,

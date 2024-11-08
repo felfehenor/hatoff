@@ -99,18 +99,22 @@ function gainStat(
   stat: GameHeroStat,
   val = 1,
 ): void {
-  hero.stats[stat] += Math.round(val);
+  hero.stats[stat] += Math.floor(val);
 }
 
 function levelup(state: GameState, hero: GameHero): void {
   const rng = seededrng(hero.id + ' ' + hero.level);
 
-  gainStat(state, hero, 'health', rng() * 10);
-  gainStat(state, hero, 'force', rng() * 5);
-  gainStat(state, hero, 'piety', rng() * 1);
-  gainStat(state, hero, 'progress', rng() * 3);
-  gainStat(state, hero, 'resistance', rng() * 1);
-  gainStat(state, hero, 'speed', rng() * 3);
+  function statBoost(val = 1) {
+    return Math.round(rng() * val);
+  }
+
+  gainStat(state, hero, 'health', statBoost(10));
+  gainStat(state, hero, 'force', statBoost(3));
+  gainStat(state, hero, 'piety', statBoost(1));
+  gainStat(state, hero, 'progress', statBoost(1));
+  gainStat(state, hero, 'resistance', statBoost(1));
+  gainStat(state, hero, 'speed', statBoost(1));
 }
 
 function gainTaskXp(
@@ -140,9 +144,9 @@ function gainXp(state: GameState, hero: GameHero, xp = 1): void {
   hero.xp += xp;
 
   if (hero.xp >= hero.maxXp) {
-    hero.level += 1;
-    hero.xp = 0;
     hero.maxXp = maxXpForLevel(hero.level + 1);
+    hero.xp = 0;
+    hero.level += 1;
 
     levelup(state, hero);
   }
@@ -170,6 +174,8 @@ export function doHeroGameloop(): void {
     applyHeroForce(state, hero, task);
 
     if (!isTaskFinished(state, task)) return;
+
+    // finish the task, reset it, give the task doers a reward
     finalizeTask(state, task);
     rewardTaskDoers(state, task);
     resetTask(state, task);
