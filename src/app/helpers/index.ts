@@ -5,6 +5,7 @@ export * from './gamestate';
 export * from './hero';
 export * from './migrate';
 export * from './notify';
+export * from './options';
 export * from './research';
 export * from './resource';
 export * from './rng';

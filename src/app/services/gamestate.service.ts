@@ -1,8 +1,17 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { interval } from 'rxjs';
-import { doGameloop, gamestate, migrateState, setGameState } from '../helpers';
-import { GameState } from '../interfaces';
+import {
+  doGameloop,
+  gamestate,
+  getOption,
+  migrateGameState,
+  migrateOptionsState,
+  options,
+  setGameState,
+  setOptions,
+} from '../helpers';
+import { GameOptions, GameState } from '../interfaces';
 import { ContentService } from './content.service';
 
 @Injectable({
@@ -20,7 +29,8 @@ export class GamestateService {
         if (!this.contentService.hasLoaded() || this.hasLoaded()) return;
         console.log('[Gamestate] Migrating gamestate...');
 
-        migrateState();
+        migrateGameState();
+        migrateOptionsState();
 
         console.log('[Gamestate] Gamestate migrated & loaded.');
         this.hasLoaded.set(true);
@@ -32,8 +42,19 @@ export class GamestateService {
       if (!this.hasLoaded()) return;
 
       const state = gamestate();
-      console.info('[State Update]', state);
+
+      if (getOption('debugConsoleLogStateUpdates')) {
+        console.info('[State Update]', state);
+      }
+
       this.saveGamestate(state);
+    });
+
+    effect(() => {
+      if (!this.hasLoaded()) return;
+
+      const optionsState = options();
+      this.saveOptions(optionsState);
     });
   }
 
@@ -47,10 +68,19 @@ export class GamestateService {
     if (state) {
       setGameState(state);
     }
+
+    const options = this.localStorage.retrieve('options');
+    if (options) {
+      setOptions(options);
+    }
   }
 
   saveGamestate(saveState: GameState) {
     this.localStorage.store('gamestate', saveState);
+  }
+
+  saveOptions(optionsState: GameOptions) {
+    this.localStorage.store('options', optionsState);
   }
 
   private runGameloop(): void {

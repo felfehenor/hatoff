@@ -1,0 +1,81 @@
+<div class="flex flex-row gap-2">
+
+  <div class="flex-1 flex flex-col">
+
+    <div class="card bg-neutral foreground shadow-xl">
+      <div class="card-body">
+        <div class="card-title">
+          Console Options
+        </div>
+
+        <div class="form-control">
+          <label class="label cursor-pointer label-checkbox">
+            <input type="checkbox" [checked]="currentValueForOption('debugConsoleLogStateUpdates') === true"
+              class="checkbox checkbox-secondary"
+              (click)="setValueForOption('debugConsoleLogStateUpdates', !currentValueForOption('debugConsoleLogStateUpdates'))" />
+            <span class="label-text">Log state updates</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="flex-1 flex flex-col">
+
+    <div class="card bg-neutral foreground shadow-xl">
+      <div class="card-body">
+        <div class="card-title">
+          Game Speed Options
+        </div>
+
+        <div class="form-control">
+          @let smult = currentValueForOption('heroSpeedMultiplier');
+          <h3 class="mb-1 text-lg">Hero Speed Multiplier ({{ smult }}x)</h3>
+          <input type="range" min="1" max="20" [value]="smult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('heroSpeedMultiplier', $event)" />
+        </div>
+
+        <div class="form-control">
+          @let fmult = currentValueForOption('heroForceMultiplier');
+          <h3 class="mb-1 text-lg">Hero Force Multiplier ({{ fmult }}x)</h3>
+          <input type="range" min="1" max="20" [value]="fmult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('heroForceMultiplier', $event)" />
+        </div>
+
+        <div class="form-control">
+          @let xmult = currentValueForOption('heroXpMultiplier');
+          <h3 class="mb-1 text-lg">Hero XP Gain Multiplier ({{ xmult }}x)</h3>
+          <input type="range" min="1" max="20" [value]="xmult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('heroXpMultiplier', $event)" />
+        </div>
+
+        <div class="form-control">
+          @let tmult = currentValueForOption('heroTaskXpMultiplier');
+          <h3 class="mb-1 text-lg">Hero Task XP Gain Multiplier ({{ tmult }}x)</h3>
+          <input type="range" min="1" max="20" [value]="tmult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('heroTaskXpMultiplier', $event)" />
+        </div>
+
+        <div class="form-control">
+          @let lmult = currentValueForOption('heroLevelUpStatGainMultiplier');
+          <h3 class="mb-1 text-lg">Level Up Stat Gain Multiplier ({{ lmult }}x)</h3>
+          <input type="range" min="1" max="20" [value]="lmult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('heroLevelUpStatGainMultiplier', $event)" />
+        </div>
+
+        <div class="form-control">
+          @let rmult = currentValueForOption('rewardMultiplier');
+          <h3 class="mb-1 text-lg">Task Reward Gain Multiplier ({{ rmult }}x)</h3>
+          <input type="range" min="1" max="20" [value]="rmult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('rewardMultiplier', $event)" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="flex-1"></div>
+
+</div>

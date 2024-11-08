@@ -54,3 +54,11 @@ body {
       ) !important;
   }
 }
+
+.label-checkbox {
+  justify-content: left;
+
+  .label-text {
+    @apply ml-3;
+  }
+}

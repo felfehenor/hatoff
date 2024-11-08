@@ -9,6 +9,7 @@ import {
 import { getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
 import { notify } from './notify';
+import { getOption } from './options';
 import { seededrng } from './rng';
 import { heroesAllocatedToTask } from './task';
 
@@ -19,7 +20,8 @@ function applyHeroSpeed(
 ): void {
   state.heroCurrentTaskSpeed[hero.id] ??= 0;
   state.heroCurrentTaskSpeed[hero.id] +=
-    hero.stats.speed + taskBonusForHero(hero, task);
+    (hero.stats.speed + taskBonusForHero(hero, task)) *
+    getOption('heroSpeedMultiplier');
 }
 
 function resetHeroSpeed(state: GameState, hero: GameHero): void {
@@ -41,7 +43,8 @@ function applyHeroForce(
 ): void {
   state.taskProgress[task.id] ??= 0;
   state.taskProgress[task.id] +=
-    hero.stats.force + taskBonusForHero(hero, task);
+    (hero.stats.force + taskBonusForHero(hero, task)) *
+    getOption('heroForceMultiplier');
 }
 
 function updateHero(state: GameState, hero: GameHero): void {
@@ -70,7 +73,8 @@ function finalizeTask(state: GameState, task: GameTask): void {
 
     const gained =
       (heroBonusSum + task.resourceRewardPerCycle) *
-      numTaskRewards(state, task);
+      numTaskRewards(state, task) *
+      getOption('rewardMultiplier');
     state.resources[task.resourceIdPerCycle] ??= 0;
     state.resources[task.resourceIdPerCycle] += gained;
 
@@ -106,15 +110,33 @@ function levelup(state: GameState, hero: GameHero): void {
   const rng = seededrng(hero.id + ' ' + hero.level);
 
   function statBoost(val = 1) {
-    return Math.round(rng() * val);
+    return Math.round(rng() * val * getOption('heroLevelUpStatGainMultiplier'));
   }
 
-  gainStat(state, hero, 'health', statBoost(5));
-  gainStat(state, hero, 'force', statBoost(1));
-  gainStat(state, hero, 'piety', statBoost(1));
-  gainStat(state, hero, 'progress', statBoost(1));
-  gainStat(state, hero, 'resistance', statBoost(1));
-  gainStat(state, hero, 'speed', statBoost(1));
+  const hpBoost = statBoost(5);
+  const forceBoost = statBoost(1);
+  const pietyBoost = statBoost(1);
+  const progressBoost = statBoost(1);
+  const resistanceBoost = statBoost(1);
+  const speedBoost = statBoost(1);
+
+  gainStat(state, hero, 'health', hpBoost);
+  gainStat(state, hero, 'force', forceBoost);
+  gainStat(state, hero, 'piety', pietyBoost);
+  gainStat(state, hero, 'progress', progressBoost);
+  gainStat(state, hero, 'resistance', resistanceBoost);
+  gainStat(state, hero, 'speed', speedBoost);
+
+  const stats = [
+    hpBoost > 0 ? `+${hpBoost} HP` : '',
+    forceBoost > 0 ? `+${forceBoost} FRC` : '',
+    pietyBoost > 0 ? `+${pietyBoost} PIE` : '',
+    progressBoost > 0 ? `+${progressBoost} PRG` : '',
+    resistanceBoost > 0 ? `+${resistanceBoost} RES` : '',
+    speedBoost > 0 ? `+${speedBoost} SPD` : '',
+  ].filter(Boolean);
+
+  notify(`Level up: ${hero.name} Lv.${hero.level}! ${stats.join(', ')}`);
 }
 
 function gainTaskXp(
@@ -130,7 +152,7 @@ function gainTaskXp(
   hero.taskLevels[task.id] ??= 0;
   hero.taskXp[task.id] ??= 0;
 
-  hero.taskXp[task.id] += xp;
+  hero.taskXp[task.id] += xp * getOption('heroTaskXpMultiplier');
 
   if (hero.taskXp[task.id] >= task.xpRequiredPerLevel) {
     hero.taskXp[task.id] = 0;
@@ -141,7 +163,7 @@ function gainTaskXp(
 function gainXp(state: GameState, hero: GameHero, xp = 1): void {
   if (hero.level >= hero.maxLevel) return;
 
-  hero.xp += xp;
+  hero.xp += xp * getOption('heroXpMultiplier');
 
   if (hero.xp >= hero.maxXp) {
     hero.maxXp = maxXpForLevel(hero.level + 1);

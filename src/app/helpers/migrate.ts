@@ -3,9 +3,10 @@ import { GameResearch } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
 import { blankGameState, gamestate, setGameState } from './gamestate';
 import { addHero, createHero, totalHeroes } from './hero';
+import { defaultOptions, options, setOptions } from './options';
 import { gainResource } from './resource';
 
-export function migrateState() {
+export function migrateGameState() {
   const state = gamestate();
 
   if (!state.townSetup.hasDoneSetup) return;
@@ -15,6 +16,12 @@ export function migrateState() {
   setGameState(newState);
 
   initializeTown();
+}
+
+export function migrateOptionsState() {
+  const state = options();
+  const newState = merge(defaultOptions(), state);
+  setOptions(newState);
 }
 
 export function initializeTown() {

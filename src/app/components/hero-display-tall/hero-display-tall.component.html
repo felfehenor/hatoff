@@ -33,7 +33,7 @@
 
     <div>
       @for(arch of activeHero.archetypeIds; track $index) {
-      <app-archetype-display [id]="arch"></app-archetype-display>
+      <app-archetype-display class="mr-1" [id]="arch"></app-archetype-display>
       }
     </div>
 
@@ -54,7 +54,7 @@
 
     <div>
       @for(task of allHeroTaskLevels(); track $index) {
-      <app-hero-task-level-display [id]="task" [hero]="activeHero"></app-hero-task-level-display>
+      <app-hero-task-level-display class="mr-1" [id]="task" [hero]="activeHero"></app-hero-task-level-display>
       }
     </div>
   </div>

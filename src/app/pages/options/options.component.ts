@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
+import { options } from '../../helpers';
 
 @Component({
   selector: 'app-options',
@@ -11,7 +12,21 @@ import { PageCardComponent } from '../../components/page-card/page-card.componen
 })
 export class OptionsComponent {
   public readonly tabs = [
-    { name: 'Savefile', link: 'savefile' },
-    { name: 'Notiifcations', link: 'notifications' },
+    {
+      name: 'UI',
+      link: 'ui',
+      showIf: computed(() => true),
+    },
+    { name: 'Savefile', link: 'savefile', showIf: computed(() => true) },
+    {
+      name: 'Notifications',
+      link: 'notifications',
+      showIf: computed(() => true),
+    },
+    {
+      name: 'Debug',
+      link: 'debug',
+      showIf: computed(() => options().showDebug),
+    },
   ];
 }
