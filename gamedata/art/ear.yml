@@ -1,10 +1,10 @@
-ear_elf_a:
+elf_a:
   pieces:
     - name: b_ear0
       layer: 40
     - name: f_ear0
 
-ear_elf_b:
+elf_b:
   pieces:
     - name: b_ear0
       layer: 40
@@ -16,7 +16,7 @@ ear_elf_b:
     - name: f_earring0
     - name: f_earring1
 
-ear_fox_a_hairlink:
+fox_a_hairlink:
   pieces:
     - name: b_ear0
       layer: 40
@@ -25,7 +25,7 @@ ear_fox_a_hairlink:
     - name: f_ear0
     - name: f_ear1
 
-ear_fox_b_hairlink:
+fox_b_hairlink:
   pieces:
     - name: b_ear0
       layer: 40
@@ -36,13 +36,13 @@ ear_fox_b_hairlink:
     - name: f_earring0
     - name: f_earring1
 
-ear_gnome_a:
+gnome_a:
   pieces:
     - name: b_ear0
       layer: 40
     - name: f_ear0
 
-ear_gnome_b:
+gnome_b:
   pieces:
     - name: b_ear0
       layer: 40
@@ -54,11 +54,11 @@ ear_gnome_b:
     - name: f_earring0
     - name: f_earring1
 
-ear_pointy_a:
+pointy_a:
   pieces:
     - name: f_ear0
 
-ear_pointy_b:
+pointy_b:
   pieces:
     - name: b_earring0
       layer: 40
@@ -68,11 +68,11 @@ ear_pointy_b:
     - name: f_earring0
     - name: f_earring1
 
-ear_regular_a:
+regular_a:
   pieces:
     - name: f_ear0
 
-ear_regular_b:
+regular_b:
   pieces:
     - name: b_earring0
       layer: 40

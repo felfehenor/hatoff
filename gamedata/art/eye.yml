@@ -1,4 +1,4 @@
-eye_angled_a:
+angled_a:
   happy:
     pieces:
       - name: eyebrows
@@ -54,205 +54,7 @@ eye_angled_a:
       - name: mouth0
       - name: r_iris
 
-eye_angled_b:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-
-eye_closed_a:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-
-eye_closed_b:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-
-eye_droopy_a:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-
-eye_droopy_b:
+angled_b:
   happy:
     pieces:
       - name: eyebrows
@@ -310,7 +112,91 @@ eye_droopy_b:
       - name: mouth0
       - name: r_iris
 
-eye_narrow_a:
+closed_a:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+
+closed_b:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+
+droopy_a:
   happy:
     pieces:
       - name: eyebrows
@@ -366,161 +252,7 @@ eye_narrow_a:
       - name: mouth0
       - name: r_iris
 
-eye_narrow_b:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-      - name: r_iris
-
-eye_narrow_c:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-
-eye_round_a:
-  happy:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: mouth0
-  neutral:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  sad:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  smile:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  smug:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  stern:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  surprise:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-  thinking:
-    pieces:
-      - name: eyebrows
-      - name: eyeshape
-      - name: l_iris
-      - name: mouth0
-      - name: r_iris
-
-eye_round_b:
+droopy_b:
   happy:
     pieces:
       - name: eyebrows
@@ -578,7 +310,7 @@ eye_round_b:
       - name: mouth0
       - name: r_iris
 
-eye_sharp_a:
+narrow_a:
   happy:
     pieces:
       - name: eyebrows
@@ -634,7 +366,161 @@ eye_sharp_a:
       - name: mouth0
       - name: r_iris
 
-eye_sharp_b:
+narrow_b:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+      - name: r_iris
+
+narrow_c:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+
+round_a:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+
+round_b:
   happy:
     pieces:
       - name: eyebrows
@@ -692,7 +578,121 @@ eye_sharp_b:
       - name: mouth0
       - name: r_iris
 
-eye_slanted_a:
+sharp_a:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: mouth0
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+
+sharp_b:
+  happy:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  neutral:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  sad:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  smile:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  smug:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  stern:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  surprise:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+  thinking:
+    pieces:
+      - name: eyebrows
+      - name: eyeshape
+      - name: l_iris
+      - name: mouth0
+      - name: r_iris
+
+slanted_a:
   happy:
     pieces:
       - name: eyebrows
@@ -747,7 +747,7 @@ eye_slanted_a:
       - name: mouth0
       - name: r_iris
 
-eye_slanted_b:
+slanted_b:
   happy:
     pieces:
       - name: eyebrows

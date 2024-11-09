@@ -4,10 +4,11 @@
   "scripts": {
     "start": "concurrently \"npm run start:app\" \"npm run gamedata:watch\"",
     "start:app": "ng serve --open --port 9866",
-    "lint": "ng lint",
+    "lint": "ng lint && npm run gamedata:art:validate",
     "build": "npm run gamedata:build && ng build --configuration production",
     "gamedata:watch": "ts-node scripts/gamedata-watch",
     "gamedata:build": "ts-node scripts/gamedata-build",
+    "gamedata:art:validate": "ts-node scripts/gamedata-art-validate",
     "bump:major": "npm version major -m \"chore(release): Major %s\"",
     "bump:minor": "npm version minor -m \"chore(release): Minor %s\"",
     "bump:patch": "npm version patch -m \"chore(release): Patch %s\"",

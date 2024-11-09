@@ -15,13 +15,15 @@ export interface HeroIndividualArtPiece {
   layer?: number;
 }
 
-export type HeroArtNonMood = Record<
-  string,
-  { pieces: HeroIndividualArtPiece[] }
->;
+export interface HeroArtPieceContainer {
+  pieces: HeroIndividualArtPiece[];
+  noBody?: number[];
+}
+
+export type HeroArtNonMood = Record<string, HeroArtPieceContainer>;
 export type HeroArtWithMood = Record<
   string,
-  Record<HeroMood, { pieces: HeroIndividualArtPiece[] }>
+  Record<HeroMood, HeroArtPieceContainer>
 >;
 
 export interface HeroArt {

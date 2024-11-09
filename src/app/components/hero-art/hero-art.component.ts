@@ -12,7 +12,7 @@ import { sortBy } from 'lodash';
 import { PRNG } from 'seedrandom';
 
 import { allArt, seededrng } from '../../helpers';
-import { HeroMood } from '../../interfaces';
+import { HeroArtPieceContainer, HeroMood } from '../../interfaces';
 
 type ColorDataTuple = [number, number, number];
 
@@ -213,6 +213,12 @@ export class HeroArtComponent {
     );
   }
 
+  private filterValidOptions(hash: Record<string, HeroArtPieceContainer>) {
+    return Object.keys(hash).filter((o) =>
+      hash[o].noBody ? !hash[o].noBody.includes(this.bodyNum()) : true,
+    );
+  }
+
   private drawEyes() {
     const optionsHash = allArt().eye;
     const allOptions = Object.keys(optionsHash);
@@ -221,7 +227,7 @@ export class HeroArtComponent {
 
     for (const piece of moodPieces.pieces) {
       this.queuePieceToDraw(
-        `hero/eye/${this.bodyString()}_${chosenOption}/${this.mood()}/${
+        `hero/eye/${this.bodyString()}_eye_${chosenOption}/${this.mood()}/${
           piece.name
         }.png`,
         piece.layer ?? 60,
@@ -232,14 +238,14 @@ export class HeroArtComponent {
 
   private drawEars() {
     const optionsHash = allArt().ear;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
 
     const color = this.getHSLRotation();
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/ear/${this.bodyString()}_${chosenOption}/${piece.name}.png`,
+        `hero/ear/${this.bodyString()}_ear_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 60,
         color,
       );
@@ -250,14 +256,14 @@ export class HeroArtComponent {
     if (!this.drawingFlags.hair) return;
 
     const optionsHash = allArt().hair;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
 
     const color = this.getHSLRotation();
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/hair/${this.bodyString()}_${chosenOption}/${piece.name}.png`,
+        `hero/hair/${this.bodyString()}_hair_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 70,
         color,
       );
@@ -269,7 +275,7 @@ export class HeroArtComponent {
     if (!this.drawingFlags.facialhair) return;
 
     const optionsHash = allArt().facialhair;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
     const color = this.getHSLRotation();
 
@@ -288,7 +294,7 @@ export class HeroArtComponent {
     if (!this.drawingFlags.horn) return;
 
     const optionsHash = allArt().horn;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
     const color = this.getHSLRotation();
 
@@ -305,7 +311,7 @@ export class HeroArtComponent {
     if (!this.drawingFlags.makeup) return;
 
     const optionsHash = allArt().makeup;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
     const color = this.getHSLRotation();
 
@@ -322,7 +328,7 @@ export class HeroArtComponent {
     if (!this.drawingFlags.mask) return;
 
     const optionsHash = allArt().mask;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
     const color = this.getHSLRotation();
 
@@ -339,7 +345,7 @@ export class HeroArtComponent {
     if (!this.drawingFlags.outfit) return;
 
     const optionsHash = allArt().outfit;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
     const color = this.getHSLRotation();
 
@@ -356,7 +362,7 @@ export class HeroArtComponent {
     if (!this.drawingFlags.wings) return;
 
     const optionsHash = allArt().wing;
-    const allOptions = Object.keys(optionsHash);
+    const allOptions = this.filterValidOptions(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
     const color = this.getHSLRotation();
 
