@@ -177,6 +177,7 @@ export class HeroArtComponent {
 
   private async drawCharacter() {
     // reset the base
+    this.loaded.set(false);
     this.allPiecesToDraw = [];
     this.drawingFlags = defaultDrawingFlags();
     this.context()?.clearRect(0, 0, this.size(), this.size());
