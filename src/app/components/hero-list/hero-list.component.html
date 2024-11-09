@@ -3,7 +3,7 @@
     @for(hero of allHeroes(); track $index) {
     <div class="hero-container" [ngClass]="cardClasses()">
       <app-hero-display [hero]="hero" (click)="selectedHero.set(hero)" [clickable]="true"
-        [active]="selectedHero() === hero"></app-hero-display>
+        [active]="selectedHero()?.id === hero.id"></app-hero-display>
     </div>
     }
   </div>
