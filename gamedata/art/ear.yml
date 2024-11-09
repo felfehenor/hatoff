@@ -1,0 +1,83 @@
+ear_elf_a:
+  pieces:
+    - name: b_ear0
+      layer: 40
+    - name: f_ear0
+
+ear_elf_b:
+  pieces:
+    - name: b_ear0
+      layer: 40
+    - name: b_earring0
+      layer: 40
+    - name: b_earring1
+      layer: 40
+    - name: f_ear0
+    - name: f_earring0
+    - name: f_earring1
+
+ear_fox_a_hairlink:
+  pieces:
+    - name: b_ear0
+      layer: 40
+    - name: b_ear1
+      layer: 40
+    - name: f_ear0
+    - name: f_ear1
+
+ear_fox_b_hairlink:
+  pieces:
+    - name: b_ear0
+      layer: 40
+    - name: b_ear1
+      layer: 40
+    - name: f_ear0
+    - name: f_ear1
+    - name: f_earring0
+    - name: f_earring1
+
+ear_gnome_a:
+  pieces:
+    - name: b_ear0
+      layer: 40
+    - name: f_ear0
+
+ear_gnome_b:
+  pieces:
+    - name: b_ear0
+      layer: 40
+    - name: b_earring0
+      layer: 40
+    - name: b_earring1
+      layer: 40
+    - name: f_ear0
+    - name: f_earring0
+    - name: f_earring1
+
+ear_pointy_a:
+  pieces:
+    - name: f_ear0
+
+ear_pointy_b:
+  pieces:
+    - name: b_earring0
+      layer: 40
+    - name: b_earring1
+      layer: 40
+    - name: f_ear0
+    - name: f_earring0
+    - name: f_earring1
+
+ear_regular_a:
+  pieces:
+    - name: f_ear0
+
+ear_regular_b:
+  pieces:
+    - name: b_earring0
+      layer: 40
+    - name: b_earring1
+      layer: 40
+    - name: f_ear0
+    - name: f_earring0
+    - name: f_earring1

@@ -40,7 +40,7 @@ export function defaultHero(): GameHero {
 export function createHero(): GameHero {
   const hero = defaultHero();
 
-  hero.name = species.human();
+  hero.name = species.human({ allowMultipleNames: true });
 
   const availableArchetypes = allUnlockedArchetypes();
   const availableDamageTypes = allUnlockedDamageTypes();

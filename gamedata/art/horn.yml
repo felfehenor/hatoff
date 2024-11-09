@@ -1,0 +1,11 @@
+angelic_a:
+  pieces:
+    - name: b_horn0
+      layer: 5
+    - name: t_horn0
+
+demon_a:
+  pieces:
+    - name: b_horn0
+      layer: 5
+    - name: t_horn0

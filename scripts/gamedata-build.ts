@@ -12,10 +12,24 @@ const allData: Record<string, any[]> = {};
 const trackedIds: Record<string, boolean> = {};
 const idToName: Record<string, string> = {};
 
+const art: Record<string, any> = {};
+
 // preload
 const processFiles = () => {
   fs.readdirSync('gamedata').forEach((folder: string) => {
     fs.readdirSync(`gamedata/${folder}`).forEach((file: string) => {
+      if (folder === 'art') {
+        const filename = path.basename(file, '.yml');
+        const doc = yaml.load(
+          fs.readFileSync(`gamedata/${folder}/${filename}.yml`),
+        );
+
+        art[filename] = doc;
+
+        console.log(`Loaded ${folder}/${file}...`);
+        return;
+      }
+
       try {
         const filename = path.basename(file, '.yml');
         const doc = yaml.load(
@@ -110,6 +124,8 @@ const rewriteDataIds = () => {
   allIds.forEach((key) => {
     fs.writeJsonSync(`./public/json/${key}.json`, allData[key]);
   });
+
+  fs.writeJsonSync('./public/json/art.json', art);
 };
 
 processFiles();

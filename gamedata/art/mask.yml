@@ -1,0 +1,29 @@
+eye_a:
+  pieces:
+    - name: mask0
+    - name: mask1
+    - name: mask2
+
+eyepatch_a:
+  pieces:
+    - name: mask0
+    - name: mask1
+    - name: mask2
+
+eyepatch_b:
+  pieces:
+    - name: mask0
+    - name: mask1
+    - name: mask2
+
+facecover_a:
+  pieces:
+    - name: mask0
+    - name: mask1
+    - name: mask2
+
+full_a:
+  pieces:
+    - name: mask0
+    - name: mask1
+    - name: mask2

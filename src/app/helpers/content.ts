@@ -1,6 +1,19 @@
 import { signal, Signal, WritableSignal } from '@angular/core';
 import { cloneDeep } from 'lodash';
-import { Content, ContentType } from '../interfaces';
+import { Content, ContentType, HeroArt } from '../interfaces';
+
+const _art: WritableSignal<HeroArt> = signal({
+  ear: {},
+  eye: {},
+  hair: {},
+  facialhair: {},
+  horn: {},
+  makeup: {},
+  mask: {},
+  outfit: {},
+  wing: {},
+});
+export const allArt: Signal<HeroArt> = _art.asReadonly();
 
 const _allIdsByName: WritableSignal<Record<string, string>> = signal({});
 export const allIdsByName: Signal<Record<string, string>> =
@@ -9,6 +22,10 @@ export const allIdsByName: Signal<Record<string, string>> =
 const _allContentById: WritableSignal<Record<string, Content>> = signal({});
 export const allContentById: Signal<Record<string, Content>> =
   _allContentById.asReadonly();
+
+export function setArt(art: HeroArt): void {
+  _art.set(art);
+}
 
 export function setAllIdsByName(state: Record<string, string>): void {
   _allIdsByName.set(cloneDeep(state));

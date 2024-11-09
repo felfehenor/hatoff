@@ -1,4 +1,5 @@
 export * from './archetype';
+export * from './art';
 export * from './damage';
 export * from './gamestate';
 export * from './hero';

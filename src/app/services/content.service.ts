@@ -6,8 +6,9 @@ import {
   allIdsByName,
   setAllContentById,
   setAllIdsByName,
+  setArt,
 } from '../helpers';
-import { Content, ContentType } from '../interfaces';
+import { Content, ContentType, HeroArt } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class ContentService {
       resource: this.http.get('./json/resource.json'),
       task: this.http.get('./json/task.json'),
       research: this.http.get('./json/research.json'),
+      art: this.http.get('./json/art.json'),
     }).subscribe((assets) => {
       this.unfurlAssets(assets as unknown as Record<string, Content[]>);
 
@@ -37,6 +39,11 @@ export class ContentService {
     const allEntriesByIdAssets: Record<string, Content> = allContentById();
 
     Object.keys(assets).forEach((subtype) => {
+      if (subtype === 'art') {
+        setArt(assets[subtype] as unknown as HeroArt);
+        return;
+      }
+
       Object.values(assets[subtype]).forEach((entry) => {
         entry.__type = subtype as ContentType;
 

@@ -1,0 +1,41 @@
+avian_a:
+  pieces:
+    - name: l_wing0
+    - name: r_wing0
+
+avian_b:
+  pieces:
+    - name: l_wing0
+    - name: r_wing0
+
+draconic_a:
+  pieces:
+    - name: l_wing0
+    - name: l_wing1
+    - name: l_wing2
+    - name: r_wing0
+    - name: r_wing1
+    - name: r_wing2
+
+draconic_b:
+  pieces:
+    - name: l_wing0
+    - name: l_wing1
+    - name: l_wing2
+    - name: r_wing0
+    - name: r_wing1
+    - name: r_wing2
+
+dual_a:
+  pieces:
+    - name: l_wing0
+    - name: l_wing1
+    - name: l_wing2
+    - name: r_wing0
+
+dual_b:
+  pieces:
+    - name: l_wing0
+    - name: r_wing0
+    - name: r_wing1
+    - name: r_wing2

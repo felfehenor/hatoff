@@ -2,7 +2,7 @@
   <span header>Heroes {{ currentHeroCount() }}/{{ currentHeroCap() }}</span>
 
   <div pageactions>
-    <button class="btn btn-sm btn-primary" [routerLink]="['/game/recruit']" [disabled]="!canRecruit()">Recruit</button>
+    <button class="btn btn-sm btn-primary" [routerLink]="['/game/recruit']">View Recruits</button>
   </div>
 
   <app-hero-list></app-hero-list>

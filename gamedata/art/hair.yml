@@ -1,0 +1,576 @@
+hair_bun1_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+
+hair_bun1_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun1_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun1_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun1_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun1_a6:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun1_a7:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun1_a8:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+
+hair_bun2_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a6:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a7:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun2_a8:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun3_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+
+hair_bun3_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun3_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun3_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: hairtie1
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun4_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: m_hair1
+
+hair_bun4_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun4_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun4_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_bun4_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: hairtie0
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_buzz_a:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+
+hair_extrashort_a1:
+  pieces:
+    - name: m_hair0
+
+hair_extrashort_a2:
+  pieces:
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_extrashort_a3:
+  pieces:
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+
+hair_long_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+
+hair_long_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a6:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a7:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a8:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a9:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_long_a10:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: b_hair1
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+
+hair_medium_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a6:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a7:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_medium_a8:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_pixie_a1:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+
+hair_pixie_a2:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_pixie_a3:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_pixie_a4:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_pixie_a5:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_short_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+
+hair_short_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_short_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_short_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_short_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_short_a6:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_short_a7:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: t_hair0
+    - name: t_hair1
+
+hair_spiky_a1:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+
+hair_spiky_a2:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_spiky_a3:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_spiky_a4:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_spiky_a5:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_spiky_a6:
+  pieces:
+    - name: b_hair0
+      layer: 5
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1
+
+hair_styled_a:
+  pieces:
+    - name: m_hair0
+    - name: m_hair1
+    - name: t_hair0
+    - name: t_hair1

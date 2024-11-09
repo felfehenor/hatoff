@@ -1,0 +1,13 @@
+brawler_a:
+  pieces:
+    - name: outfit0
+    - name: outfit1
+    - name: outfit3
+    - name: outfit5
+
+brawler_b:
+  pieces:
+    - name: outfit0
+    - name: outfit3
+    - name: outfit4
+    - name: outfit5
