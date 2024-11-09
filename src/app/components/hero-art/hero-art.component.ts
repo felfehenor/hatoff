@@ -40,6 +40,8 @@ export class HeroArtComponent {
   public mood = input<HeroMood>('neutral');
   public size = input<number>(64);
 
+  public loaded = signal<boolean>(false);
+
   private bodyNum = signal<number>(0);
 
   private rng!: PRNG;
@@ -380,5 +382,7 @@ export class HeroArtComponent {
     for (const piece of sortedPieces) {
       await this.applyImageToCanvas(piece.url, piece.imgManipulation);
     }
+
+    this.loaded.set(true);
   }
 }
