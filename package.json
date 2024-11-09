@@ -24,6 +24,8 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@ng-icons/core": "^29.6.1",
+    "@ng-icons/heroicons": "^29.6.1",
     "@ngneat/helipopper": "^9.2.1",
     "@ngxpert/hot-toast": "^3.0.2",
     "@sweetalert2/ngx-sweetalert2": "^12.4.0",

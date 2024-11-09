@@ -9,6 +9,7 @@
   </div>
 
   @if(selectedHero(); as activeHero) {
-  <app-hero-display-tall class="flex-1 flex pl-3" [hero]="activeHero"></app-hero-display-tall>
+  <app-hero-display-tall class="flex-1 flex pl-3" [hero]="activeHero"
+    (close)="selectedHero.set(undefined)"></app-hero-display-tall>
   }
 </div>

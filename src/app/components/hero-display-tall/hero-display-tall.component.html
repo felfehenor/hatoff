@@ -3,6 +3,10 @@
 @if(activeHero) {
 <div class="card foreground shadow-xl flex-1">
   <div class="card-body">
+    <div class="absolute top-2 right-2 z-50">
+      <app-button-close (click)="close.emit()"></app-button-close>
+    </div>
+
     <div class="absolute top-5 right-5">
       <app-hero-art [id]="activeHero.id"></app-hero-art>
     </div>
