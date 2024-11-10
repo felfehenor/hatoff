@@ -8,7 +8,7 @@ const validate = () => {
     .map((_, i) => `body${i}`);
 
   bodies.forEach((body) => {
-    if (fs.existsSync(`public/hero/body/${body}`)) return;
+    if (fs.existsSync(`gameassets/hero/body/${body}`)) return;
 
     console.error(`Body folder ${body} does not exist.`);
     process.exit(1);
@@ -19,7 +19,7 @@ const validate = () => {
     Object.keys(ear).forEach((folder) => {
       ear[folder].pieces.forEach((piece: any) => {
         bodies.forEach((body) => {
-          const path = `public/hero/ear/${body}_ear_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/ear/${body}_ear_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Ear file "${path}" does not exist.`);
@@ -36,7 +36,7 @@ const validate = () => {
       Object.keys(eye[folder]).forEach((mood: any) => {
         eye[folder][mood].pieces.forEach((piece: any) => {
           bodies.forEach((body) => {
-            const path = `public/hero/eye/${body}_eye_${folder}/${mood}/${piece.name}.png`;
+            const path = `gameassets/hero/eye/${body}_eye_${folder}/${mood}/${piece.name}.png`;
             if (fs.existsSync(path)) return;
 
             console.error(`Eye file "${path}" does not exist.`);
@@ -55,7 +55,7 @@ const validate = () => {
         bodies.forEach((body) => {
           if (!['body5', 'body6', 'body7'].includes(body)) return;
 
-          const path = `public/hero/facialhair/${body}_facialhair_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/facialhair/${body}_facialhair_${folder}/${piece.name}.png`;
 
           if (fs.existsSync(path)) return;
 
@@ -75,7 +75,7 @@ const validate = () => {
         if (exclusions.some((idx: number) => `body${idx}` === body)) return;
 
         data[folder].pieces.forEach((piece: any) => {
-          const path = `public/hero/hair/${body}_hair_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/hair/${body}_hair_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Hair file "${path}" does not exist.`);
@@ -94,7 +94,7 @@ const validate = () => {
         if (exclusions.some((idx: number) => `body${idx}` === body)) return;
 
         data[folder].pieces.forEach((piece: any) => {
-          const path = `public/hero/horn/${body}_horn_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/horn/${body}_horn_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Horn file "${path}" does not exist.`);
@@ -113,7 +113,7 @@ const validate = () => {
         if (exclusions.some((idx: number) => `body${idx}` === body)) return;
 
         data[folder].pieces.forEach((piece: any) => {
-          const path = `public/hero/makeup/${body}_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/makeup/${body}_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Makeup file "${path}" does not exist.`);
@@ -132,7 +132,7 @@ const validate = () => {
         if (exclusions.some((idx: number) => `body${idx}` === body)) return;
 
         data[folder].pieces.forEach((piece: any) => {
-          const path = `public/hero/mask/${body}_mask_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/mask/${body}_mask_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Mask file "${path}" does not exist.`);
@@ -151,7 +151,7 @@ const validate = () => {
         if (exclusions.some((idx: number) => `body${idx}` === body)) return;
 
         data[folder].pieces.forEach((piece: any) => {
-          const path = `public/hero/outfit/${body}_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/outfit/${body}_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Outfit file "${path}" does not exist.`);
@@ -170,7 +170,7 @@ const validate = () => {
         if (exclusions.some((idx: number) => `body${idx}` === body)) return;
 
         data[folder].pieces.forEach((piece: any) => {
-          const path = `public/hero/wing/${body}_wing_${folder}/${piece.name}.png`;
+          const path = `gameassets/hero/wing/${body}_wing_${folder}/${piece.name}.png`;
           if (fs.existsSync(path)) return;
 
           console.error(`Wing file "${path}" does not exist.`);
