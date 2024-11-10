@@ -5,15 +5,17 @@
     "start": "concurrently \"npm run start:app\" \"npm run gamedata:watch\"",
     "start:app": "ng serve --open --port 9866",
     "lint": "ng lint && npm run gamedata:art:validate",
-    "build": "npm run gamedata:build && ng build --configuration production",
+    "build": "npm run gamedata:build && npm run gamedata:art:spritesheets && ng build --configuration production",
     "gamedata:watch": "ts-node scripts/gamedata-watch",
     "gamedata:build": "ts-node scripts/gamedata-build",
     "gamedata:art:validate": "ts-node scripts/gamedata-art-validate",
+    "gamedata:art:spritesheets": "ts-node scripts/gamedata-art-spritesheets",
     "bump:major": "npm version major -m \"chore(release): Major %s\"",
     "bump:minor": "npm version minor -m \"chore(release): Minor %s\"",
     "bump:patch": "npm version patch -m \"chore(release): Patch %s\"",
     "changelog:generate": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "changelog:generate:current": "conventional-changelog -p angular -o CHANGELOG-current.md -r 2"
+    "changelog:generate:current": "conventional-changelog -p angular -o CHANGELOG-current.md -r 2",
+    "postinstall": "npm run gamedata:art:spritesheets"
   },
   "private": true,
   "dependencies": {
@@ -65,6 +67,7 @@
     "js-yaml": "^4.1.0",
     "postcss": "^8.4.47",
     "recursive-readdir": "^2.2.3",
+    "spritesmith": "^3.5.1",
     "tailwindcss": "^3.4.14",
     "ts-node": "^10.9.2",
     "typescript": "~5.5.2"

@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 public/json
+public/spritesheets

@@ -3,6 +3,7 @@ import {
   computed,
   effect,
   ElementRef,
+  inject,
   input,
   signal,
   viewChild,
@@ -13,6 +14,7 @@ import { PRNG } from 'seedrandom';
 
 import { allArt, seededrng } from '../../helpers';
 import { HeroArtPieceContainer, HeroMood } from '../../interfaces';
+import { ContentService } from '../../services/content.service';
 
 type ColorDataTuple = [number, number, number];
 
@@ -36,6 +38,8 @@ const defaultDrawingFlags = () => ({
   styleUrl: './hero-art.component.scss',
 })
 export class HeroArtComponent {
+  private contentService = inject(ContentService);
+
   public id = input.required<string>();
   public mood = input<HeroMood>('neutral');
   public size = input<number>(64);
@@ -70,6 +74,7 @@ export class HeroArtComponent {
   }
 
   private allPiecesToDraw: Array<{
+    type: string;
     url: string;
     layer: number;
     imgManipulation: ColorDataTuple;
@@ -89,11 +94,12 @@ export class HeroArtComponent {
   }
 
   private queuePieceToDraw(
+    type: string,
     url: string,
     layer: number,
     imgManipulation: ColorDataTuple,
   ) {
-    this.allPiecesToDraw.push({ url, layer, imgManipulation });
+    this.allPiecesToDraw.push({ url, type, layer, imgManipulation });
   }
 
   private getHSLRotation(): ColorDataTuple {
@@ -121,45 +127,59 @@ export class HeroArtComponent {
     return [res.r, res.g, res.b];
   }
 
-  private async applyImageToCanvas(image: string, imgRotation: ColorDataTuple) {
+  private async applyImageToCanvas(
+    type: string,
+    image: string,
+    imgRotation: ColorDataTuple,
+  ) {
     const imageSize = this.size();
 
     return new Promise<void>((res) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.height = imageSize;
-        canvas.width = imageSize;
+      // get the part image
+      const atlas = this.contentService.artAtlases()[type];
+      const wholeCtx = this.contentService.artImages()[type];
+      const atlasPath = `gameassets\\hero\\${type}\\${image}`.replaceAll(
+        '/',
+        '\\',
+      );
+      const coordinates = atlas[atlasPath];
+      const refImageData = wholeCtx?.getImageData(
+        coordinates.x,
+        coordinates.y,
+        coordinates.width,
+        coordinates.height,
+      );
 
-        const ctx = canvas.getContext('2d');
-        ctx?.drawImage(img, 0, 0, imageSize, imageSize);
+      // copy it to a temporary canvas
+      const partCanvas = document.createElement('canvas');
+      partCanvas.width = coordinates.width;
+      partCanvas.height = coordinates.height;
+      const partCtx = partCanvas.getContext('2d');
+      partCtx?.putImageData(refImageData!, 0, 0);
 
-        const imageData = ctx?.getImageData(0, 0, imageSize, imageSize);
-        const imageDataBits = imageData?.data ?? [];
+      // manipulate the temporary canvas
+      const partImageData = partCtx?.getImageData(0, 0, imageSize, imageSize);
+      const partImageDataBits = partImageData?.data ?? [];
 
-        for (let i = 0; i < imageDataBits.length; i += 4) {
-          // if (imageDataBits[i + 3] === 0) return;
+      for (let i = 0; i < partImageDataBits.length; i += 4) {
+        const rgb = [
+          partImageDataBits[i + 0],
+          partImageDataBits[i + 1],
+          partImageDataBits[i + 2],
+        ] as ColorDataTuple;
 
-          const rgb = [
-            imageDataBits[i + 0],
-            imageDataBits[i + 1],
-            imageDataBits[i + 2],
-          ] as ColorDataTuple;
+        const newRGB = this.transformRGBTupleByHSLValues(rgb, imgRotation);
 
-          const newRGB = this.transformRGBTupleByHSLValues(rgb, imgRotation);
+        partImageDataBits[i + 0] = newRGB[0];
+        partImageDataBits[i + 1] = newRGB[1];
+        partImageDataBits[i + 2] = newRGB[2];
+      }
 
-          imageDataBits[i + 0] = newRGB[0];
-          imageDataBits[i + 1] = newRGB[1];
-          imageDataBits[i + 2] = newRGB[2];
-        }
+      // apply it to the result
+      partCtx?.putImageData(partImageData!, 0, 0);
+      this.context()?.drawImage(partCanvas!, 0, 0, imageSize, imageSize);
 
-        ctx?.putImageData(imageData!, 0, 0);
-
-        this.context()?.drawImage(canvas, 0, 0, imageSize, imageSize);
-        res();
-      };
-
-      img.src = image;
+      res();
     });
   }
 
@@ -203,12 +223,14 @@ export class HeroArtComponent {
 
   private drawBase() {
     this.queuePieceToDraw(
-      `hero/body/${this.bodyString()}/body.png`,
+      'body',
+      `${this.bodyString()}/body.png`,
       10,
       [0, 0, 0],
     );
     this.queuePieceToDraw(
-      `hero/body/${this.bodyString()}/head.png`,
+      'body',
+      `${this.bodyString()}/head.png`,
       50,
       [0, 0, 0],
     );
@@ -228,7 +250,8 @@ export class HeroArtComponent {
 
     for (const piece of moodPieces.pieces) {
       this.queuePieceToDraw(
-        `hero/eye/${this.bodyString()}_eye_${chosenOption}/${this.mood()}/${
+        'eye',
+        `${this.bodyString()}_eye_${chosenOption}/${this.mood()}/${
           piece.name
         }.png`,
         piece.layer ?? 60,
@@ -246,7 +269,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/ear/${this.bodyString()}_ear_${chosenOption}/${piece.name}.png`,
+        'ear',
+        `${this.bodyString()}_ear_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 60,
         color,
       );
@@ -264,7 +288,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/hair/${this.bodyString()}_hair_${chosenOption}/${piece.name}.png`,
+        'hair',
+        `${this.bodyString()}_hair_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 70,
         color,
       );
@@ -282,9 +307,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/facialhair/${this.bodyString()}_facialhair_${chosenOption}/${
-          piece.name
-        }.png`,
+        'facialhair',
+        `${this.bodyString()}_facialhair_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 55,
         color,
       );
@@ -301,7 +325,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/horn/${this.bodyString()}_horn_${chosenOption}/${piece.name}.png`,
+        'horn',
+        `${this.bodyString()}_horn_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 55,
         color,
       );
@@ -318,7 +343,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/makeup/${this.bodyString()}_${chosenOption}/${piece.name}.png`,
+        'makeup',
+        `${this.bodyString()}_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 55,
         color,
       );
@@ -335,7 +361,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/mask/${this.bodyString()}_mask_${chosenOption}/${piece.name}.png`,
+        'mask',
+        `${this.bodyString()}_mask_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 57,
         color,
       );
@@ -352,7 +379,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/outfit/${this.bodyString()}_${chosenOption}/${piece.name}.png`,
+        'outfit',
+        `${this.bodyString()}_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 15,
         color,
       );
@@ -369,7 +397,8 @@ export class HeroArtComponent {
 
     for (const piece of optionsHash[chosenOption].pieces) {
       this.queuePieceToDraw(
-        `hero/wing/${this.bodyString()}_wing_${chosenOption}/${piece.name}.png`,
+        'wing',
+        `${this.bodyString()}_wing_${chosenOption}/${piece.name}.png`,
         piece.layer ?? 1,
         color,
       );
@@ -387,7 +416,11 @@ export class HeroArtComponent {
     const sortedPieces = sortBy(filteredPieces, (p) => p.layer);
 
     for (const piece of sortedPieces) {
-      await this.applyImageToCanvas(piece.url, piece.imgManipulation);
+      await this.applyImageToCanvas(
+        piece.type,
+        piece.url,
+        piece.imgManipulation,
+      );
     }
 
     this.loaded.set(true);
