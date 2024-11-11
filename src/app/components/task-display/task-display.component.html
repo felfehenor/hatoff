@@ -17,7 +17,7 @@
     </div>
 
     <div class="h-[72px] flex flex-wrap">
-      @for(hero of heroes(); track $index) {
+      @for(hero of heroes(); track hero.id) {
       <app-task-hero-small [hero]="hero"></app-task-hero-small>
       }
     </div>

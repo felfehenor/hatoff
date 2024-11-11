@@ -3,7 +3,9 @@
   icon: tablerCoins
   color: '#e4a700'
   subTypes:
-    - damageTypeId: Physical
-      percent: 50
     - damageTypeId: Emotional
       percent: 50
+    - damageTypeId: Physical
+      percent: 30
+    - damageTypeId: Intellectual
+      percent: 20

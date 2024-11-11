@@ -28,6 +28,7 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@ng-icons/core": "^29.6.1",
+    "@ng-icons/game-icons": "^29.9.0",
     "@ng-icons/heroicons": "^29.6.1",
     "@ng-icons/tabler-icons": "^29.8.0",
     "@ngneat/helipopper": "^9.2.1",
@@ -40,7 +41,7 @@
     "ngx-webstorage": "^18.0.0",
     "rxjs": "~7.8.0",
     "seedrandom": "^3.0.5",
-    "sweetalert2": "^11.14.5",
+    "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
     "uuid": "^11.0.2",
     "zone.js": "~0.14.10"

@@ -1,5 +1,6 @@
-import { GameHero, GameTask } from '../interfaces';
+import { GameDamageType, GameHero, GameTask } from '../interfaces';
 import { getEntry } from './content';
+import { canUseDamageTypeForRequirement } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
 
 export function heroesAllocatedToTask(task: GameTask): GameHero[] {
@@ -11,6 +12,14 @@ export function heroesAllocatedToTask(task: GameTask): GameHero[] {
 }
 
 export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
+  const heroDamageType = getEntry<GameDamageType>(hero.damageTypeId);
+  const taskDamageType = getEntry<GameDamageType>(task.damageTypeId);
+
+  if (!heroDamageType || !taskDamageType) return false;
+
+  if (!canUseDamageTypeForRequirement(heroDamageType, taskDamageType))
+    return false;
+
   return heroesAllocatedToTask(task).length < task.maxHeroesAllocable;
 }
 

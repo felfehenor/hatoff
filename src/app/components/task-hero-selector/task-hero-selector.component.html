@@ -21,7 +21,7 @@
     </div>
 
     <div class=" overflow-y-auto p-1">
-      @for(hero of allHeroes(); track $index) {
+      @for(hero of allHeroes(); track hero.id) {
       <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 cursor-pointer"
         [class.no-assign]="!canAssignHeroToTask(hero)" (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)"
         tabindex="1" [class.ring-2]="isHeroSelected(hero)">
@@ -30,8 +30,8 @@
         </figure>
 
         <div class="card-body p-1 pl-3">
-          <div class="card-title">
-            {{ hero.name }} Lv. {{ hero.level }}
+          <div class="card-title flex items-center">
+            {{ hero.name }} Lv. {{ hero.level }} <app-hero-archetype-list [hero]="hero"></app-hero-archetype-list>
           </div>
 
           <div>

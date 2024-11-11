@@ -1,5 +1,6 @@
 export * from './archetype';
 export * from './content';
+export * from './damagetype';
 export * from './gameloop';
 export * from './gameloop-hero';
 export * from './gameloop-recruit';
