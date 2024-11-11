@@ -1,4 +1,11 @@
 <div class="badge badge-accent" [tp]="description()">
+  @if(icon(); as icon) {
+  <ng-icon [name]="icon" class="mr-1"></ng-icon>
+  }
+
   <span class="mr-1">{{ value() | number }}</span>
+
+  @if(!icon()) {
   <app-content-name [id]="id()"></app-content-name>
+  }
 </div>

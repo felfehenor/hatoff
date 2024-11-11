@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { GameResearch } from '../interfaces';
+import { GameResearch, GameResource } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
 import { blankGameState, gamestate, setGameState } from './gamestate';
 import { addHero, createHero, totalHeroes } from './hero';
@@ -62,7 +62,7 @@ export function ensureSomeResources() {
   if (totalHeroes() > 0) return;
 
   ['Gold', 'Wood', 'Stone', 'Food'].forEach((res) => {
-    const resource = getEntry<GameResearch>(res);
+    const resource = getEntry<GameResource>(res);
     if (!resource) return;
 
     gainResource(resource, 10);
