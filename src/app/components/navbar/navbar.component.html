@@ -16,7 +16,11 @@
   @if(isSetup()) {
   <div class="navbar-end">
     <ul class="menu menu-horizontal px-1">
-      <li class="mr-1"><a [routerLink]="['/game/options']" [routerLinkActive]="'text-primary'">Options</a></li>
+      <li class="mr-1">
+        <a [routerLink]="['/game/options']" [routerLinkActive]="'text-primary'">
+          <ng-icon name="heroCog6Tooth"></ng-icon>
+        </a>
+      </li>
     </ul>
   </div>
   }
