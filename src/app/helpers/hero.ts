@@ -28,7 +28,7 @@ export function defaultHero(): GameHero {
     taskLevels: {},
     stats: {
       health: 100,
-      force: 5,
+      force: 3,
       resistance: 1,
       piety: 1,
       progress: 1,

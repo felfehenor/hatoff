@@ -7,6 +7,10 @@ import {
   GameState,
   GameTask,
 } from '../interfaces';
+import {
+  getArchetypeResourceBonusForHero,
+  getArchetypeTaskBonusForHero,
+} from './archetype';
 import { getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
 import { notify, notifyError } from './notify';
@@ -53,7 +57,18 @@ function updateHero(state: GameState, hero: GameHero): void {
 }
 
 function taskBonusForHero(hero: GameHero, task: GameTask): number {
-  return hero.taskLevels[task.id] ?? 0;
+  let rewardBoost = hero.taskLevels[task.id] ?? 0;
+
+  if (task.resourceIdPerCycle) {
+    const resourceGained = getEntry<GameResource>(task.resourceIdPerCycle);
+    if (resourceGained) {
+      rewardBoost += getArchetypeResourceBonusForHero(hero, resourceGained);
+    }
+  }
+
+  rewardBoost += getArchetypeTaskBonusForHero(hero, task);
+
+  return rewardBoost;
 }
 
 function numTaskRewards(state: GameState, task: GameTask): number {
