@@ -1,6 +1,7 @@
 - id: d8535975-3f06-4c71-8502-850ae0b5bd9d
   name: Financial
   icon: tablerCoins
+  color: '#e4a700'
   subTypes:
     - damageTypeId: Physical
       percent: 50

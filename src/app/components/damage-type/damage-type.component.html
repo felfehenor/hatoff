@@ -5,7 +5,7 @@
   </span>
 
   @if(icon(); as icon) {
-  <ng-icon [name]="icon" class="mx-1 text-sm"></ng-icon>
+  <ng-icon [name]="icon" class="mx-1 text-sm" [style.color]="color()"></ng-icon>
   }
 
   @if(isEditing()) {
@@ -31,7 +31,7 @@
   <span>{{ damage() | number }}</span>
 
   @if(icon(); as icon) {
-  <ng-icon [name]="icon" class="mx-1 text-sm"></ng-icon>
+  <ng-icon [name]="icon" class="mx-1 text-sm" [style.color]="color()"></ng-icon>
   }
 
   <app-content-name [id]="id()"></app-content-name>

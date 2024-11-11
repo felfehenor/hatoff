@@ -40,4 +40,7 @@ export class DamageTypeComponent {
   public unlockedDamageTypes = computed(() => allUnlockedDamageTypes());
 
   public icon = computed(() => getEntry<GameDamageType>(this.id())?.icon);
+  public color = computed(
+    () => getEntry<GameDamageType>(this.id())?.color ?? '',
+  );
 }

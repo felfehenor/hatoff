@@ -1,14 +1,17 @@
 - id: 0821727a-6813-4b72-ac1c-a19fea90126a
   name: Physical
   icon: tablerSword
+  color: '#a00'
   subTypes: []
 
 - id: 5f6a9eca-2496-4c31-8999-9a3b82be2cba
   name: Emotional
   icon: tablerHeartBroken
+  color: '#fd88e2'
   subTypes: []
 
 - id: 1dab4090-31e1-4578-9f6e-31fa76f8573b
   name: Intellectual
   icon: tablerBrain
+  color: '#e501b0'
   subTypes: []
