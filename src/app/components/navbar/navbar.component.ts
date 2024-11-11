@@ -1,18 +1,38 @@
 import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroCog6Tooth } from '@ng-icons/heroicons/outline';
-import { gamestate, isSetup } from '../../helpers';
+import {
+  heroBeaker,
+  heroBuildingOffice2,
+  heroCog6Tooth,
+  heroSparkles,
+  heroUserGroup,
+} from '@ng-icons/heroicons/outline';
+import { gamestate, isResearchComplete, isSetup } from '../../helpers';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIconComponent],
-  providers: [provideIcons({ heroCog6Tooth })],
+  providers: [
+    provideIcons({
+      heroCog6Tooth,
+      heroBuildingOffice2,
+      heroBeaker,
+      heroUserGroup,
+      heroSparkles,
+    }),
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   isSetup = computed(() => isSetup());
   townName = computed(() => gamestate().townSetup.townName);
+
+  isResearching = computed(
+    () =>
+      gamestate().activeResearch &&
+      !isResearchComplete(gamestate().activeResearch),
+  );
 }

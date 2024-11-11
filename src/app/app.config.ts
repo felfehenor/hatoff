@@ -21,6 +21,7 @@ import {
   withNgxWebstorageConfig,
 } from 'ngx-webstorage';
 
+import { provideNgIconsConfig } from '@ng-icons/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { routes } from './app.routes';
 import { APIService } from './services/api.service';
@@ -34,6 +35,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideNgxWebstorage(withNgxWebstorageConfig({}), withLocalStorage()),
+    provideNgIconsConfig({
+      size: '1.5em',
+    }),
     importProvidersFrom(
       SweetAlert2Module.forRoot({
         provideSwal: () => import('sweetalert2/dist/sweetalert2.js'),
