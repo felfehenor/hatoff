@@ -26,7 +26,7 @@
         [class.no-assign]="!canAssignHeroToTask(hero)" (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)"
         tabindex="1" [class.ring-2]="isHeroSelected(hero)">
         <figure class="max-w-[96px] pl-2 flex items-center">
-          <app-hero-art class="max-h-[96px]" [id]="hero.id" [size]="96"></app-hero-art>
+          <app-hero-art class="max-h-[96px]" [id]="hero.id" [size]="96" [mood]="heroMood(hero)"></app-hero-art>
         </figure>
 
         <div class="card-body p-1 pl-3">

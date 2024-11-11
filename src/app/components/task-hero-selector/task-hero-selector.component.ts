@@ -5,11 +5,13 @@ import {
   assignHeroToTask,
   canAllocateHeroToTask,
   currentHeroTask,
+  getDamageForcePercentage,
+  getEntry,
   heroesAllocatedToTask,
   isHeroAllocatedToTask,
   unassignHeroTask,
 } from '../../helpers';
-import { GameHero, GameTask } from '../../interfaces';
+import { GameDamageType, GameHero, GameTask, HeroMood } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
@@ -65,5 +67,20 @@ export class TaskHeroSelectorComponent {
       canAllocateHeroToTask(hero, this.task()) ||
       isHeroAllocatedToTask(this.task(), hero)
     );
+  }
+
+  public heroMood(hero: GameHero): HeroMood {
+    const damageType = getEntry<GameDamageType>(hero.damageTypeId);
+    const taskDamageType = getEntry<GameDamageType>(this.task().damageTypeId);
+
+    if (!damageType || !taskDamageType) return 'surprise';
+
+    const percentDamageApplied = getDamageForcePercentage(
+      damageType,
+      taskDamageType,
+    );
+    if (percentDamageApplied === 100) return 'happy';
+    if (percentDamageApplied === 0) return 'sad';
+    return 'neutral';
   }
 }
