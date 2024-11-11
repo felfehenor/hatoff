@@ -6,5 +6,6 @@ export interface GameDamageSubtype {
 }
 
 export interface GameDamageType extends Content {
+  icon: string;
   subTypes: GameDamageSubtype[];
 }

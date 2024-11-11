@@ -1,8 +1,12 @@
 @if(editable()) {
-<div>
+<div class="flex align-center">
   <span>
     {{ damage() | number }}
   </span>
+
+  @if(icon(); as icon) {
+  <ng-icon [name]="icon" class="mx-1 text-sm"></ng-icon>
+  }
 
   @if(isEditing()) {
   <select class="select select-bordered select-xs mx-1" [(ngModel)]="id" (ngModelChange)="isEditing.set(false)">
@@ -23,7 +27,16 @@
 }
 
 @else {
-<div>
-  {{ damage() | number }} <app-content-name [id]="id()"></app-content-name> Damage
+<div class="flex align-center">
+  <span>{{ damage() | number }}</span>
+
+  @if(icon(); as icon) {
+  <ng-icon [name]="icon" class="mx-1 text-sm"></ng-icon>
+  }
+
+  <app-content-name [id]="id()"></app-content-name>
+
+  <span class="ml-1">Damage</span>
+
 </div>
 }
