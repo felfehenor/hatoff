@@ -5,12 +5,13 @@ import {
   ElementRef,
   inject,
   input,
+  OnDestroy,
   signal,
   viewChild,
 } from '@angular/core';
-import { colord } from 'colord';
 import { sortBy } from 'lodash';
 import { PRNG } from 'seedrandom';
+import { v4 as uuid } from 'uuid';
 
 import { allArt, seededrng } from '../../helpers';
 import { HeroArtPieceContainer, HeroMood } from '../../interfaces';
@@ -37,7 +38,7 @@ const defaultDrawingFlags = () => ({
   templateUrl: './hero-art.component.html',
   styleUrl: './hero-art.component.scss',
 })
-export class HeroArtComponent {
+export class HeroArtComponent implements OnDestroy {
   private contentService = inject(ContentService);
 
   public id = input.required<string>();
@@ -52,9 +53,8 @@ export class HeroArtComponent {
   public bodyString = computed(() => `body${this.bodyNum()}`);
 
   public canvas = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
-  public context = computed(() =>
-    this.canvas()?.nativeElement?.getContext('2d'),
-  );
+  private offscreen!: OffscreenCanvas;
+  private canvasId!: string;
 
   private rngNum(num: number): number {
     return Math.floor(this.rng() * num);
@@ -93,6 +93,10 @@ export class HeroArtComponent {
     );
   }
 
+  ngOnDestroy() {
+    this.contentService.sendWorkerMessage('destroy', { id: this.id() }, []);
+  }
+
   private queuePieceToDraw(
     type: string,
     url: string,
@@ -110,23 +114,6 @@ export class HeroArtComponent {
     ];
   }
 
-  private transformRGBTupleByHSLValues(
-    rgbData: ColorDataTuple,
-    mod: ColorDataTuple,
-  ): ColorDataTuple {
-    const hsl = colord({ r: rgbData[0], g: rgbData[1], b: rgbData[2] }).toHsl();
-
-    const converted = colord({
-      h: hsl.h + mod[0],
-      s: hsl.s + mod[1],
-      l: hsl.l + mod[2],
-    });
-
-    const res = converted.toRgb();
-
-    return [res.r, res.g, res.b];
-  }
-
   private async applyImageToCanvas(
     type: string,
     image: string,
@@ -137,47 +124,31 @@ export class HeroArtComponent {
     return new Promise<void>((res) => {
       // get the part image
       const atlas = this.contentService.artAtlases()[type];
-      const wholeCtx = this.contentService.artImages()[type];
       const atlasPath = `gameassets\\hero\\${type}\\${image}`.replaceAll(
         '/',
         '\\',
       );
       const coordinates = atlas[atlasPath];
-      const refImageData = wholeCtx?.getImageData(
-        coordinates.x,
-        coordinates.y,
-        coordinates.width,
-        coordinates.height,
-      );
 
       // copy it to a temporary canvas
       const partCanvas = document.createElement('canvas');
       partCanvas.width = coordinates.width;
       partCanvas.height = coordinates.height;
-      const partCtx = partCanvas.getContext('2d');
-      partCtx?.putImageData(refImageData!, 0, 0);
 
-      // manipulate the temporary canvas
-      const partImageData = partCtx?.getImageData(0, 0, imageSize, imageSize);
-      const partImageDataBits = partImageData?.data ?? [];
+      const partOffscreen = partCanvas.transferControlToOffscreen();
 
-      for (let i = 0; i < partImageDataBits.length; i += 4) {
-        const rgb = [
-          partImageDataBits[i + 0],
-          partImageDataBits[i + 1],
-          partImageDataBits[i + 2],
-        ] as ColorDataTuple;
-
-        const newRGB = this.transformRGBTupleByHSLValues(rgb, imgRotation);
-
-        partImageDataBits[i + 0] = newRGB[0];
-        partImageDataBits[i + 1] = newRGB[1];
-        partImageDataBits[i + 2] = newRGB[2];
-      }
-
-      // apply it to the result
-      partCtx?.putImageData(partImageData!, 0, 0);
-      this.context()?.drawImage(partCanvas!, 0, 0, imageSize, imageSize);
+      this.contentService.sendWorkerMessage(
+        'renderpartontowhole',
+        {
+          id: this.canvasId,
+          key: type,
+          coordinates,
+          imageSize,
+          imgRotation,
+          partCanvas: partOffscreen,
+        },
+        [partOffscreen],
+      );
 
       res();
     });
@@ -196,11 +167,23 @@ export class HeroArtComponent {
   }
 
   private async drawCharacter() {
+    if (!this.offscreen) {
+      this.canvasId = uuid();
+      this.offscreen =
+        this.canvas()?.nativeElement.transferControlToOffscreen() as OffscreenCanvas;
+
+      this.contentService.sendWorkerMessage(
+        'transferspritecanvas',
+        { id: this.canvasId, canvas: this.offscreen },
+        [this.offscreen],
+      );
+    }
+
     // reset the base
     this.loaded.set(false);
     this.allPiecesToDraw = [];
     this.drawingFlags = defaultDrawingFlags();
-    this.context()?.clearRect(0, 0, this.size(), this.size());
+    this.contentService.sendWorkerMessage('clear', { id: this.canvasId }, []);
 
     // start drawing the character
     this.rng = seededrng(this.id());
@@ -415,6 +398,12 @@ export class HeroArtComponent {
 
     const sortedPieces = sortBy(filteredPieces, (p) => p.layer);
 
+    this.contentService.registerComponentIdForLoading(
+      this.canvasId,
+      sortedPieces.length,
+      () => this.loaded.set(true),
+    );
+
     for (const piece of sortedPieces) {
       await this.applyImageToCanvas(
         piece.type,
@@ -422,7 +411,5 @@ export class HeroArtComponent {
         piece.imgManipulation,
       );
     }
-
-    this.loaded.set(true);
   }
 }

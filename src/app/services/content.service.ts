@@ -16,6 +16,11 @@ import {
 } from '../helpers';
 import { Content, ContentType, HeroArt } from '../interfaces';
 
+interface SharedCanvas {
+  canvas: HTMLCanvasElement;
+  offscreen: OffscreenCanvas;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,7 +38,7 @@ export class ContentService {
   private artSignals: Array<WritableSignal<boolean>> = [];
   private hasLoadedArt = computed(() => this.artSignals.every((s) => s()));
 
-  public artImages = signal<Record<string, CanvasRenderingContext2D>>({});
+  public artImages = signal<Record<string, SharedCanvas>>({});
   public artAtlases = signal<
     Record<
       string,
@@ -41,9 +46,44 @@ export class ContentService {
     >
   >({});
 
+  private worker!: Worker;
+  private workerCallbacks: Record<
+    string,
+    { numPieces: number; curPieces: number; callback: () => void }
+  > = {};
+
   async init() {
     this.loadJSON();
     this.loadArt();
+    this.initWorker();
+  }
+
+  private initWorker() {
+    const worker = new Worker('atlascanvas.js');
+    this.worker = worker;
+
+    this.worker.addEventListener('message', (event) => {
+      if (event.data.action === 'piece') {
+        const { id } = event.data;
+        this.workerCallbacks[id].curPieces++;
+
+        if (
+          this.workerCallbacks[id].curPieces >=
+          this.workerCallbacks[id].numPieces
+        ) {
+          this.workerCallbacks[id].callback();
+          delete this.workerCallbacks[id];
+        }
+      }
+    });
+  }
+
+  public registerComponentIdForLoading(
+    id: string,
+    numPieces: number,
+    callback: () => void,
+  ) {
+    this.workerCallbacks[id] = { numPieces, curPieces: 0, callback };
   }
 
   private loadArt() {
@@ -77,22 +117,30 @@ export class ContentService {
 
     this.artSignals = spritesheetsToLoad.map(() => signal<boolean>(false));
 
-    const artImageHash: Record<string, CanvasRenderingContext2D> = {};
+    const artImageHash: Record<string, SharedCanvas> = {};
 
     spritesheetsToLoad.forEach((sheet, idx) => {
       const img = new Image();
       img.src = `spritesheets/${sheet}.png`;
       this.artSignals[idx].set(false);
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.height = img.height;
-        canvas.width = img.width;
+      img.onload = async () => {
+        // create an image for the canvas
+        const bitmap = await createImageBitmap(img);
 
-        const ctx = canvas.getContext('2d', {
-          willReadFrequently: true,
-        });
-        ctx?.drawImage(img, 0, 0, img.width, img.height);
-        artImageHash[sheet] = ctx as CanvasRenderingContext2D;
+        // get a proper offscreen renderer
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const offscreen = canvas.transferControlToOffscreen();
+
+        // start rendering the atlas offscreen
+        this.sendWorkerMessage(
+          'initatlas',
+          { key: sheet, canvas: offscreen, image: bitmap },
+          [offscreen, bitmap],
+        );
+
+        artImageHash[sheet] = { canvas, offscreen };
 
         this.artImages.set(artImageHash);
         this.artSignals[idx].set(true);
@@ -114,6 +162,11 @@ export class ContentService {
       console.log('[Content] Content loaded.');
       this.hasLoadedData.set(true);
     });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public sendWorkerMessage(action: string, data: any, transfer: any[]) {
+    this.worker.postMessage({ action, ...data }, transfer);
   }
 
   private unfurlAssets(assets: Record<string, Content[]>) {
