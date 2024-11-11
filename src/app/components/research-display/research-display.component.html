@@ -2,6 +2,11 @@
 
 <div class="card card-side foreground shadow-xl cursor-pointer min-h-[250px] overflow-hidden" [class.ring-2]="active()">
   <div class="card-body">
+
+    @if(active()) {
+    <ng-icon name="heroStar" class="absolute top-5 right-5 text-primary"></ng-icon>
+    }
+
     <div class="card-title">
       <div class="font-semibold">{{ researchData.name }}</div>
     </div>
