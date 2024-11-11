@@ -14,6 +14,11 @@ export function defaultOptions(): GameOptions {
     heroLevelUpStatGainMultiplier: 1,
 
     rewardMultiplier: 1,
+
+    notificationError: true,
+    notificationLevelUp: true,
+    notificationResourceGain: true,
+    notificationSuccess: true,
   };
 }
 

@@ -79,7 +79,7 @@ function finalizeTask(state: GameState, task: GameTask): void {
     state.resources[task.resourceIdPerCycle] ??= 0;
     state.resources[task.resourceIdPerCycle] += gained;
 
-    notify(`+${gained} ${res?.name ?? '???'}`);
+    notify(`+${gained} ${res?.name ?? '???'}`, 'ResourceGain');
   }
 
   if (task.applyResultsToResearch) {
@@ -160,7 +160,10 @@ function levelup(state: GameState, hero: GameHero): void {
     speedBoost > 0 ? `+${speedBoost} SPD` : '',
   ].filter(Boolean);
 
-  notify(`Level up: ${hero.name} Lv.${hero.level}! ${stats.join(', ')}`);
+  notify(
+    `Level up: ${hero.name} Lv.${hero.level}! ${stats.join(', ')}`,
+    'LevelUp',
+  );
 }
 
 function gainTaskXp(

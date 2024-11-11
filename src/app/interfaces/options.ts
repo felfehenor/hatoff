@@ -9,4 +9,9 @@ export interface GameOptions {
   heroLevelUpStatGainMultiplier: number;
 
   rewardMultiplier: number;
+
+  notificationLevelUp: boolean;
+  notificationResourceGain: boolean;
+  notificationError: boolean;
+  notificationSuccess: boolean;
 }
