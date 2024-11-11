@@ -10,6 +10,10 @@ export function heroesAllocatedToTask(task: GameTask): GameHero[] {
     .map((h) => state.heroes[h]);
 }
 
+export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
+  return heroesAllocatedToTask(task).length < task.maxHeroesAllocable;
+}
+
 export function numHeroesAllocatedToTask(task: GameTask): number {
   return heroesAllocatedToTask(task).length;
 }

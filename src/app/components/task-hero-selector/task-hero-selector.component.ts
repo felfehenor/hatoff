@@ -2,6 +2,7 @@ import { Component, computed, input, output } from '@angular/core';
 import {
   allHeroes,
   assignHeroToTask,
+  canAllocateHeroToTask,
   currentHeroTask,
   heroesAllocatedToTask,
   isHeroAllocatedToTask,
@@ -33,6 +34,8 @@ export class TaskHeroSelectorComponent {
   public allHeroes = computed(() => allHeroes());
 
   public selectHero(hero: GameHero): void {
+    if (!this.canAssignHeroToTask(hero)) return;
+
     if (isHeroAllocatedToTask(this.task(), hero)) {
       unassignHeroTask(hero);
       return;
@@ -47,5 +50,12 @@ export class TaskHeroSelectorComponent {
 
   public currentTaskNameForHero(hero: GameHero): string | undefined {
     return currentHeroTask(hero)?.name;
+  }
+
+  public canAssignHeroToTask(hero: GameHero): boolean {
+    return (
+      canAllocateHeroToTask(hero, this.task()) ||
+      isHeroAllocatedToTask(this.task(), hero)
+    );
   }
 }

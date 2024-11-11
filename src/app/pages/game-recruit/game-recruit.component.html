@@ -16,7 +16,7 @@
     </span>
   </span>
 
-  <div pageactions>
+  <div pageactions class="flex items-center">
     <app-resource-display class="mr-2" [id]="'Food'"></app-resource-display>
     <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()">
       Reroll for {{ rerollCost() | number }} Food
