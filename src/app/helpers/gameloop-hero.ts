@@ -1,5 +1,6 @@
 import { sum } from 'lodash';
 import {
+  GameDamageType,
   GameHero,
   GameHeroStat,
   GameResearch,
@@ -12,6 +13,7 @@ import {
   getArchetypeTaskBonusForHero,
 } from './archetype';
 import { getEntry } from './content';
+import { getDamageForcePercentage } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
@@ -46,10 +48,24 @@ function applyHeroForce(
   hero: GameHero,
   task: GameTask,
 ): void {
+  const heroDamage = getEntry<GameDamageType>(hero.damageTypeId);
+  const taskDamage = getEntry<GameDamageType>(task.damageTypeId);
+  if (!heroDamage || !taskDamage) return;
+
+  const percentApplied = getDamageForcePercentage(heroDamage, taskDamage);
+  if (percentApplied === 0) return;
+
+  const damageApplied = Math.max(
+    1,
+    Math.floor(
+      (percentApplied / 100) *
+        (hero.stats.force + taskBonusForHero(hero, task)),
+    ),
+  );
+
   state.taskProgress[task.id] ??= 0;
   state.taskProgress[task.id] +=
-    (hero.stats.force + taskBonusForHero(hero, task)) *
-    getOption('heroForceMultiplier');
+    damageApplied * getOption('heroForceMultiplier');
 }
 
 function updateHero(state: GameState, hero: GameHero): void {
