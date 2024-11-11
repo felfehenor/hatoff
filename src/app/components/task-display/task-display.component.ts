@@ -1,13 +1,13 @@
 import { Component, computed, input } from '@angular/core';
-import { TippyDirective } from '@ngneat/helipopper';
 import { getTaskProgress, heroesAllocatedToTask } from '../../helpers';
 import { GameTask } from '../../interfaces';
+import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.component';
 
 @Component({
   selector: 'app-task-display',
   standalone: true,
-  imports: [TippyDirective, TaskHeroSmallComponent],
+  imports: [TaskHeroSmallComponent, DamageTypeBreakdownComponent],
   templateUrl: './task-display.component.html',
   styleUrl: './task-display.component.scss',
 })

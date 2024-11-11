@@ -13,6 +13,7 @@ import {
 } from '../../helpers';
 import { GameDamageType, GameHero, GameTask, HeroMood } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
+import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
@@ -27,6 +28,7 @@ import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.comp
     HeroAssignmentComponent,
     ButtonCloseComponent,
     HeroArchetypeListComponent,
+    DamageTypeBreakdownComponent,
   ],
   templateUrl: './task-hero-selector.component.html',
   styleUrl: './task-hero-selector.component.scss',

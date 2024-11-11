@@ -13,7 +13,7 @@
   name: Tax Collection
   description: Collect taxes from your town, gaining Gold.
   damageTypeId: Financial
-  maxHeroesAllocable: 5
+  maxHeroesAllocable: 2
 
   speedPerCycle: 3
   damageRequiredPerCycle: 1000
@@ -26,7 +26,7 @@
   name: Wood Harvesting
   description: Chop trees near your town, gaining Wood.
   damageTypeId: Physical
-  maxHeroesAllocable: 5
+  maxHeroesAllocable: 2
 
   speedPerCycle: 3
   damageRequiredPerCycle: 200
@@ -39,7 +39,7 @@
   name: Stone Gathering
   description: Gather from the quarry near your town, gaining Stone.
   damageTypeId: Physical
-  maxHeroesAllocable: 5
+  maxHeroesAllocable: 2
 
   speedPerCycle: 3
   damageRequiredPerCycle: 200
@@ -52,7 +52,7 @@
   name: Food Hunting
   description: Hunt and set traps near your town, gaining Food.
   damageTypeId: Physical
-  maxHeroesAllocable: 5
+  maxHeroesAllocable: 2
 
   speedPerCycle: 3
   damageRequiredPerCycle: 200
@@ -65,7 +65,7 @@
   name: Town Defense
   description: Defend your town from the woodland threats.
   damageTypeId: Physical
-  maxHeroesAllocable: 20
+  maxHeroesAllocable: 5
 
   speedPerCycle: 3
   damageRequiredPerCycle: 3000
@@ -76,7 +76,7 @@
   name: Research
   description: Research new Archetypes, Damage Types, and Town Tasks.
   damageTypeId: Intellectual
-  maxHeroesAllocable: 5
+  maxHeroesAllocable: 2
 
   speedPerCycle: 10
   damageRequiredPerCycle: 500

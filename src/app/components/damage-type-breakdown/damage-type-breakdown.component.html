@@ -1,0 +1,17 @@
+@if(icon(); as icon) {
+<ng-icon [name]="icon" class="mx-1 text-sm" [style.color]="color()" [tp]="breakdown"></ng-icon>
+
+<ng-template #breakdown>
+  <div class="font-bold flex items-center" [class.mb-3]="subtypeInfo().length > 0">
+    <ng-icon [name]="icon" class="mx-1 text-sm" [style.color]="color()"></ng-icon>
+    {{ typeInfo()?.name }}: 100%
+  </div>
+
+  @for(type of subtypeInfo(); track $index) {
+  <div class="flex items-center">
+    <ng-icon [name]="type.icon" class="mx-1 text-sm" [style.color]="type.color"></ng-icon>
+    {{ type.name }}: {{ type.percent }}%
+  </div>
+  }
+</ng-template>
+}
