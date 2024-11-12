@@ -9,6 +9,7 @@ import {
   GameTask,
 } from '../interfaces';
 import {
+  getArchetypeLevelUpStatBonusForHero,
   getArchetypeResourceBonusForHero,
   getArchetypeTaskBonusForHero,
 } from './archetype';
@@ -168,12 +169,18 @@ function levelup(state: GameState, hero: GameHero): void {
     return Math.round(rng() * val * getOption('heroLevelUpStatGainMultiplier'));
   }
 
-  const hpBoost = statBoost(5);
-  const forceBoost = statBoost(1);
-  const pietyBoost = statBoost(1);
-  const progressBoost = statBoost(1);
-  const resistanceBoost = statBoost(1);
-  const speedBoost = statBoost(1);
+  const hpBoost =
+    statBoost(5) + getArchetypeLevelUpStatBonusForHero(hero, 'health');
+  const forceBoost =
+    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
+  const pietyBoost =
+    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
+  const progressBoost =
+    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'progress');
+  const resistanceBoost =
+    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
+  const speedBoost =
+    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
 
   gainStat(state, hero, 'health', hpBoost);
   gainStat(state, hero, 'force', forceBoost);

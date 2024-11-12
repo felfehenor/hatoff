@@ -1,0 +1,99 @@
+# progress
+- id: 1af1afea-1aa0-4b97-8734-41cb0d42b0ea
+  name: Detailed Knowledge
+  description: Unlock the archetype "Detailed". This will increase Progress (PRG) by +1 when leveling up.
+  researchRequired: 500
+
+  unlocksArchetypeId: Detailed
+
+  requiresResearchIds:
+    - Lumberjack Knowledge
+
+- id: bd1cc99e-af77-4c31-a83a-13bc1e10840b
+  name: Comprehensive Knowledge
+  description: Unlock the archetype "Comprehensive". This will increase Progress (PRG) by +2 when leveling up.
+  researchRequired: 5000
+
+  unlocksArchetypeId: Comprehensive
+  requiresResearchIds:
+    - Detailed Knowledge
+
+# force
+- id: fec8a55c-e19b-48e8-8400-29476080ded2
+  name: Strong Knowledge
+  description: Unlock the archetype "Strong". This will increase Force (FRC) by +1 when leveling up.
+  researchRequired: 500
+
+  unlocksArchetypeId: Strong
+
+  requiresResearchIds:
+    - Quarrier Knowledge
+
+- id: 7167f83f-a4c8-4b4b-84a7-b786f3249ce5
+  name: Powerful Knowledge
+  description: Unlock the archetype "Powerful". This will increase Force (FRC) by +2 when leveling up.
+  researchRequired: 5000
+
+  unlocksArchetypeId: Powerful
+  requiresResearchIds:
+    - Strong Knowledge
+
+# resistance
+- id: 4e171ac3-52a6-4575-83eb-702f341d1dd8
+  name: Adaptable Knowledge
+  description: Unlock the archetype "Adaptable". This will increase Resistance (RES) by +1 when leveling up.
+  researchRequired: 500
+
+  unlocksArchetypeId: Adaptable
+
+  requiresResearchIds:
+    - Scavenger Knowledge
+
+- id: 0d6657ee-0232-4334-9d5f-d328f0cebb46
+  name: Versatile Knowledge
+  description: Unlock the archetype "Versatile". This will increase Resistance (RES) by +2 when leveling up.
+  researchRequired: 5000
+
+  unlocksArchetypeId: Versatile
+  requiresResearchIds:
+    - Adaptable Knowledge
+
+# piety
+- id: 791edba4-161c-4ef4-87ac-18e1cd14ac6c
+  name: Reverent Knowledge
+  description: Unlock the archetype "Reverent". This will increase Piety (PIE) by +1 when leveling up.
+  researchRequired: 500
+
+  unlocksArchetypeId: Reverent
+
+  requiresResearchIds:
+    - Thinker Knowledge
+
+- id: 0317f5aa-cd45-423a-b6a9-d6da9e74a7ca
+  name: Pious Knowledge
+  description: Unlock the archetype "Pious". This will increase Piety (PIE) by +2 when leveling up.
+  researchRequired: 5000
+
+  unlocksArchetypeId: Pious
+  requiresResearchIds:
+    - Reverent Knowledge
+
+# speed
+- id: a1c5e1c7-e555-4148-8c34-40e57cad10ff
+  name: Quick Knowledge
+  description: Unlock the archetype "Quick". This will increase Speed (SPD) by +1 when leveling up.
+  researchRequired: 500
+
+  unlocksArchetypeId: Quick
+
+  requiresResearchIds:
+    - Hunter Knowledge
+
+- id: 3692dd7c-0802-4b6f-b04e-d613dee1036e
+  name: Swift Knowledge
+  description: Unlock the archetype "Swift". This will increase Speed (SPD) by +2 when leveling up.
+  researchRequired: 5000
+
+  unlocksArchetypeId: Swift
+  requiresResearchIds:
+    - Quick Knowledge
