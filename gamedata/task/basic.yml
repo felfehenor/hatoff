@@ -16,7 +16,7 @@
   maxHeroesAllocable: 2
 
   speedPerCycle: 3
-  damageRequiredPerCycle: 1000
+  damageRequiredPerCycle: 250
   xpRequiredPerLevel: 500
   resourceIdPerCycle: Gold
   resourceRewardPerCycle: 10
@@ -29,7 +29,7 @@
   maxHeroesAllocable: 2
 
   speedPerCycle: 3
-  damageRequiredPerCycle: 200
+  damageRequiredPerCycle: 150
   xpRequiredPerLevel: 500
   resourceIdPerCycle: Wood
   resourceRewardPerCycle: 1
@@ -42,7 +42,7 @@
   maxHeroesAllocable: 2
 
   speedPerCycle: 3
-  damageRequiredPerCycle: 200
+  damageRequiredPerCycle: 150
   xpRequiredPerLevel: 500
   resourceIdPerCycle: Stone
   resourceRewardPerCycle: 1
@@ -55,7 +55,7 @@
   maxHeroesAllocable: 2
 
   speedPerCycle: 3
-  damageRequiredPerCycle: 200
+  damageRequiredPerCycle: 150
   xpRequiredPerLevel: 500
   resourceIdPerCycle: Food
   resourceRewardPerCycle: 1
@@ -68,7 +68,7 @@
   maxHeroesAllocable: 5
 
   speedPerCycle: 3
-  damageRequiredPerCycle: 3000
+  damageRequiredPerCycle: 1000
   xpRequiredPerLevel: 500
   maxLevel: 1
 
@@ -79,7 +79,7 @@
   maxHeroesAllocable: 2
 
   speedPerCycle: 10
-  damageRequiredPerCycle: 500
+  damageRequiredPerCycle: 150
   xpRequiredPerLevel: 500
   maxLevel: 1
 
