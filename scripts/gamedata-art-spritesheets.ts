@@ -23,7 +23,12 @@ const build = async () => {
     const files = await rec(`./gameassets/hero/${sheet}`);
 
     spritesmith.run({ src: files }, (e: any, res: any) => {
-      fs.writeJsonSync(`public/spritesheets/${sheet}.json`, res.coordinates);
+      const newCoords: Record<string, any> = {};
+      Object.keys(res.coordinates).forEach((key: string) => {
+        newCoords[key.replaceAll('\\', '/')] = res.coordinates[key];
+      });
+
+      fs.writeJsonSync(`public/spritesheets/${sheet}.json`, newCoords);
       fs.writeFileSync(`public/spritesheets/${sheet}.png`, res.image);
     });
   }

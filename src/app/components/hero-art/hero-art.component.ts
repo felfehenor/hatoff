@@ -124,10 +124,7 @@ export class HeroArtComponent implements OnDestroy {
     return new Promise<void>((res) => {
       // get the part image
       const atlas = this.contentService.artAtlases()[type];
-      const atlasPath = `gameassets\\hero\\${type}\\${image}`.replaceAll(
-        '/',
-        '\\',
-      );
+      const atlasPath = `gameassets/hero/${type}/${image}`;
       const coordinates = atlas[atlasPath];
 
       // copy it to a temporary canvas
