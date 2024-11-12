@@ -40,8 +40,8 @@ export function recruitHero(hero: GameHero): void {
     return;
   }
 
-  addHero(hero);
   loseResource(resource, recruitCost());
+  addHero(hero);
 }
 
 export function doReroll(): void {
