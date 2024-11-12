@@ -18,6 +18,8 @@
 
       <div class="card-title">
         <div class="font-light">Heroes ({{ heroes().length }}/{{ activeTask.maxHeroesAllocable }})</div>
+
+        <app-task-synergy [task]="activeTask"></app-task-synergy>
       </div>
     </div>
 

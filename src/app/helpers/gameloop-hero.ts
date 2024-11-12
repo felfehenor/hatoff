@@ -19,7 +19,7 @@ import { gamestate, setGameState } from './gamestate';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { seededrng } from './rng';
-import { heroesAllocatedToTask } from './task';
+import { heroesAllocatedToTask, synergyBonus } from './task';
 
 function applyHeroSpeed(
   state: GameState,
@@ -56,10 +56,12 @@ function applyHeroForce(
   const percentApplied = getDamageForcePercentage(heroDamage, taskDamage);
   if (percentApplied === 0) return;
 
+  const percentBonus = synergyBonus(task);
+
   const damageApplied = Math.max(
     1,
     Math.floor(
-      (percentApplied / 100) *
+      ((percentApplied + percentBonus) / 100) *
         (hero.stats.force + taskBonusForHero(hero, task)),
     ),
   );

@@ -1,0 +1,19 @@
+@let synergy = bonus();
+
+@if(synergy > 0) {
+<ng-icon name="gameGooeyMolecule" [tp]="synergyBonus" [color]="color()"></ng-icon>
+
+<ng-template #synergyBonus>
+  <div class="font-bold">
+    Synergy Bonus!
+  </div>
+
+  <div class="mt-2">
+    +{{ bonus() }}% Force Applied
+  </div>
+
+  <div class="mt-2 italic">
+    {{ bonus() / 10 }} matching hero damage types
+  </div>
+</ng-template>
+}

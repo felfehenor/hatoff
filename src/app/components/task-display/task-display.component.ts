@@ -3,11 +3,16 @@ import { getTaskProgress, heroesAllocatedToTask } from '../../helpers';
 import { GameTask } from '../../interfaces';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.component';
+import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
   selector: 'app-task-display',
   standalone: true,
-  imports: [TaskHeroSmallComponent, DamageTypeBreakdownComponent],
+  imports: [
+    TaskHeroSmallComponent,
+    DamageTypeBreakdownComponent,
+    TaskSynergyComponent,
+  ],
   templateUrl: './task-display.component.html',
   styleUrl: './task-display.component.scss',
 })

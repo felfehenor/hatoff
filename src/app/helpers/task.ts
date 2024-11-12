@@ -59,3 +59,15 @@ export function unassignHeroTask(hero: GameHero): void {
   delete state.heroCurrentTaskSpeed[hero.id];
   setGameState(state);
 }
+
+export function synergyBonus(task: GameTask): number {
+  const allHeroes = heroesAllocatedToTask(task);
+  if (allHeroes.length <= 1) return 0;
+
+  const damageType = allHeroes[0].damageTypeId;
+
+  const doAllMatch = allHeroes.every((h) => h.damageTypeId === damageType);
+  if (!doAllMatch) return 0;
+
+  return Math.min(5, allHeroes.length) * 10;
+}
