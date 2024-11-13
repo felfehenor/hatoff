@@ -27,6 +27,7 @@ import { routes } from './app.routes';
 import { APIService } from './services/api.service';
 import { ContentService } from './services/content.service';
 import { GamestateService } from './services/gamestate.service';
+import { MetaService } from './services/meta.service';
 import { NotifyService } from './services/notify.service';
 
 export const appConfig: ApplicationConfig = {
@@ -56,6 +57,11 @@ export const appConfig: ApplicationConfig = {
         contextMenu: withContextMenuVariation(popperVariation),
       },
     }),
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      multi: true,
+      useValue: () => inject(MetaService).init(),
+    },
     {
       provide: ENVIRONMENT_INITIALIZER,
       multi: true,

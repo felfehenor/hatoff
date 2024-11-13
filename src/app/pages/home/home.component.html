@@ -6,7 +6,7 @@
       <img src="favicon/android-chrome-512x512.png" alt="HATOFF Logo" />
     </figure>
 
-    <div class="card-body items-center justify-between">
+    <div class="card-body items-center justify-between relative">
       <div class="card-title text-center flex flex-col">
         <span class="title">Heroic Ascension</span>
 
@@ -17,7 +17,7 @@
 
       <p class="mt-3 flex items-center">A simple game about collecting heroes!</p>
 
-      <div class="card-actions">
+      <div class="card-actions pb-5">
         @if(hasStartedGame()) {
         <button class="btn btn-primary" [routerLink]="['/game']">Play</button>
         }
@@ -26,8 +26,39 @@
         <button class="btn btn-primary" [routerLink]="['/game/setup']">Get Started</button>
         }
       </div>
+
+      <div class="card-actions absolute bottom-0 left-0 right-0 p-2">
+        @for(ext of externalLinks; track $index) {
+        <a class="btn btn-ghost btn-untextured social-icon" [href]="ext.link" target="_blank" rel="nofollow"
+          [style.--social-color]="ext.color" (mouseenter)="ext.currentColor = ext.color"
+          (mouseleave)="ext.currentColor = '#ccc'">
+          <ng-icon [name]="ext.icon" [color]="ext.currentColor || '#ccc'"></ng-icon>
+        </a>
+
+        <!--
+        <div class="col-2" [style.--social-color]="ext.color">
+          <div class="d-grid gap-2">
+            <a class="btn btn-block btn-link" (mouseenter)="ext.currentColor = ext.color"
+              (mouseleave)="ext.currentColor = '#ccc'" [href]="ext.link" target="_blank">
+              <sw-icon category="external" [name]="ext.icon" [color]="ext.currentColor || '#ccc'"></sw-icon>
+            </a>
+          </div>
+        </div>
+      -->
+        }
+      </div>
     </div>
 
   </div>
 
+</div>
+
+<div class="fixed bottom-0 left-0 right-0 bg-neutral h-11 flex justify-center items-center text-sm">
+  <span>
+    Version {{ meta.versionString }}
+  </span>
+
+  @if(meta.hasVersionMismatch) {
+  <span class="badge badge-info ms-3">Update Available ({{ meta.latestLiveVersion }})</span>
+  }
 </div>

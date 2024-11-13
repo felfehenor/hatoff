@@ -5,3 +5,7 @@
 .title {
   @apply text-4xl;
 }
+
+.social-icon:hover {
+  --icon-color: var(--social-color);
+}

@@ -43,3 +43,5 @@ Thumbs.db
 
 public/json
 public/spritesheets
+
+public/version.json
