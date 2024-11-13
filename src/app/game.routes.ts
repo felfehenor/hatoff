@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { requireSetupGuard } from './guards/require-setup.guard';
+import { GameFusionComponent } from './pages/game-fusion/game-fusion.component';
 import { GameHeroesComponent } from './pages/game-heroes/game-heroes.component';
 import { GameRecruitComponent } from './pages/game-recruit/game-recruit.component';
 import { GameResearchComponent } from './pages/game-research/game-research.component';
@@ -25,6 +26,11 @@ export const gameRoutes: Routes = [
   {
     component: GameRecruitComponent,
     path: 'recruit',
+    canActivate: [requireSetupGuard],
+  },
+  {
+    component: GameFusionComponent,
+    path: 'fuse',
     canActivate: [requireSetupGuard],
   },
   {

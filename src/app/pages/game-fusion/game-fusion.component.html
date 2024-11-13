@@ -1,0 +1,128 @@
+@let primary = mainHero();
+@let secondary = subHero();
+
+<app-page-card>
+  <span header>Hero Fusion</span>
+
+  <div class="flex gap-2 h-full">
+
+    @if(primary) {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div>
+          <button class="btn btn-primary btn-block" (click)="rechoosePrimary()">Re-choose Primary Hero</button>
+        </div>
+
+        @if(viableMainHeroes().length === 0) {
+        <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
+          No viable primary heroes. Come back later!
+        </div>
+        }
+
+        <app-fusion-hero-display-tall [hero]="primary"></app-fusion-hero-display-tall>
+      </div>
+    </div>
+    }
+
+    <!---->
+    @else {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div class="text-3xl text-center pt-3">
+          Primary Hero
+        </div>
+
+        <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
+          @for(hero of viableMainHeroes(); track $index) {
+          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="mainHero.set(hero)"></app-fusion-hero-display>
+          }
+        </div>
+      </div>
+    </div>
+    }
+
+    @if(!primary) {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div class="text-3xl text-center pt-3">
+          Secondary Hero
+        </div>
+
+        <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
+          Choose a primary hero, first!
+        </div>
+      </div>
+    </div>
+
+    }
+
+    <!---->
+    @else if(primary && !secondary) {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div class="text-3xl text-center pt-3">
+          Secondary Hero
+        </div>
+
+        @if(viableSubHeroes().length === 0) {
+        <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
+          No viable secondary heroes. Come back later!
+        </div>
+        }
+
+        <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
+          @for(hero of viableSubHeroes(); track $index) {
+          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="subHero.set(hero)"></app-fusion-hero-display>
+          }
+        </div>
+      </div>
+    </div>
+    }
+
+    <!---->
+    @else if(primary && secondary) {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div>
+          <button class="btn btn-primary btn-block" (click)="rechooseSecondary()">Re-choose Secondary Hero</button>
+        </div>
+
+        <app-fusion-hero-display-tall [hero]="secondary"></app-fusion-hero-display-tall>
+      </div>
+    </div>
+    }
+
+    @if(resultingHero(); as result) {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div>
+          <button class="btn btn-success btn-block" [swal]="fuseSwal">Fuse!</button>
+        </div>
+
+        <app-fusion-hero-display-tall [hero]="result"></app-fusion-hero-display-tall>
+      </div>
+    </div>
+    }
+
+    <!---->
+    @else {
+    <div class="flex-1 flex flex-col h-full">
+      <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
+        <div class="text-3xl text-center pt-3">
+          Fusion Result
+        </div>
+
+        <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
+          Choose a primary and secondary hero, first!
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+</app-page-card>
+
+<swal #fuseSwal title="Fuse Heroes?"
+  text="This cannot be undone. Are you sure you want to fuse these heroes together? You will permanently LOSE your chosen secondary hero."
+  icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="fuse()">
+</swal>

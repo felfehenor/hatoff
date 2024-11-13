@@ -51,6 +51,10 @@ export function createHero(): GameHero {
   return hero;
 }
 
+export function maxXpForLevel(level: number, fusionLevel: number): number {
+  return level * (100 + fusionLevel * 25);
+}
+
 export function populationCap(): number {
   return sumBy(
     allUnlockedPopulationResearch(),

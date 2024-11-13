@@ -1,0 +1,27 @@
+@let activeHero = hero();
+
+<div class="card foreground-2 shadow-xl flex-1">
+  <div class="card-body">
+    <div class="absolute top-0 right-5">
+      <app-hero-art [id]="activeHero.id" [size]="240"></app-hero-art>
+    </div>
+
+    <div class="card-title">
+      {{ activeHero.name }}
+    </div>
+
+    <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
+
+    <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId"></app-damage-type>
+
+    <div class="flex">
+      <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
+
+      <div class="flex-1"></div>
+    </div>
+
+    <app-hero-archetype-list [hero]="activeHero"></app-hero-archetype-list>
+
+    <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
+  </div>
+</div>

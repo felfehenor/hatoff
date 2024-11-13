@@ -1,4 +1,3 @@
-import { DecimalPipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {
@@ -8,29 +7,21 @@ import {
   setHeroDamageType,
 } from '../../helpers';
 import { GameHero } from '../../interfaces';
-import { ArchetypeDisplayComponent } from '../archetype-display/archetype-display.component';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
-import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
-import { HeroTaskLevelDisplayComponent } from '../hero-task-level-display/hero-task-level-display.component';
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
 
 @Component({
   selector: 'app-hero-display-tall',
   standalone: true,
   imports: [
-    DecimalPipe,
     DamageTypeComponent,
-    ContentNameComponent,
-    TitleCasePipe,
     HeroArtComponent,
-    ArchetypeDisplayComponent,
-    HeroTaskLevelDisplayComponent,
     HeroArchetypeListComponent,
     HeroStatsTableComponent,
     HeroAssignmentComponent,

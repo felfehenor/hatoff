@@ -16,6 +16,7 @@ import {
 import { getEntry } from './content';
 import { getDamageForcePercentage } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
+import { maxXpForLevel } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { seededrng } from './rng';
@@ -233,16 +234,12 @@ function gainXp(state: GameState, hero: GameHero, xp = 1): void {
   hero.xp += xp * getOption('heroXpMultiplier');
 
   if (hero.xp >= hero.maxXp) {
-    hero.maxXp = maxXpForLevel(hero.level + 1);
+    hero.maxXp = maxXpForLevel(hero.level + 1, hero.fusionLevel);
     hero.xp = 0;
     hero.level += 1;
 
     levelup(state, hero);
   }
-}
-
-function maxXpForLevel(level: number): number {
-  return level * 100;
 }
 
 export function doHeroGameloop(): void {

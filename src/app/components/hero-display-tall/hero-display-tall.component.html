@@ -22,13 +22,13 @@
 
     <app-hero-assignment [hero]="activeHero"></app-hero-assignment>
 
-    <app-hero-archetype-list [hero]="activeHero"></app-hero-archetype-list>
-
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
 
       <div class="flex-1"></div>
     </div>
+
+    <app-hero-archetype-list [hero]="activeHero"></app-hero-archetype-list>
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
