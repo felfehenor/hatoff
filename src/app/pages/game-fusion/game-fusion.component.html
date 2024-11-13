@@ -13,12 +13,6 @@
           <button class="btn btn-primary btn-block" (click)="rechoosePrimary()">Re-choose Primary Hero</button>
         </div>
 
-        @if(viableMainHeroes().length === 0) {
-        <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
-          No viable primary heroes. Come back later!
-        </div>
-        }
-
         <app-fusion-hero-display-tall [hero]="primary"></app-fusion-hero-display-tall>
       </div>
     </div>
@@ -32,11 +26,21 @@
           Primary Hero
         </div>
 
+        @let viableMains = viableMainHeroes();
+
+        @if(viableMains.length === 0) {
+        <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
+          No viable primary heroes. Come back later!
+        </div>
+        }
+
+        @else {
         <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
           @for(hero of viableMainHeroes(); track $index) {
           <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="mainHero.set(hero)"></app-fusion-hero-display>
           }
         </div>
+        }
       </div>
     </div>
     }
@@ -64,17 +68,21 @@
           Secondary Hero
         </div>
 
-        @if(viableSubHeroes().length === 0) {
+        @let viableSubs = viableSubHeroes();
+
+        @if(viableSubs.length === 0) {
         <div class="flex-1 flex justify-center items-center text-2xl opacity-80 p-10 text-center">
           No viable secondary heroes. Come back later!
         </div>
         }
 
+        @else {
         <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
           @for(hero of viableSubHeroes(); track $index) {
           <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="subHero.set(hero)"></app-fusion-hero-display>
           }
         </div>
+        }
       </div>
     </div>
     }

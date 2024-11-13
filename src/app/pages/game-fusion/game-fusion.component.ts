@@ -59,5 +59,8 @@ export class GameFusionComponent {
     if (!main || !sub) return;
 
     doFusion(main, sub);
+
+    this.mainHero.set(undefined);
+    this.subHero.set(undefined);
   }
 }
