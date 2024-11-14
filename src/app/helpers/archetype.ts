@@ -43,3 +43,11 @@ export function getArchetypeLevelUpStatBonusForHero(
       .map((arch) => arch?.boostLevelupStatValue ?? 0),
   );
 }
+
+export function getArchetypeXpBonusForHero(hero: GameHero): number {
+  return sum(
+    hero.archetypeIds
+      .map((arch) => getEntry<GameArchetype>(arch))
+      .map((arch) => arch?.boostXpGain ?? 0),
+  );
+}

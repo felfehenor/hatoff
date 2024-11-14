@@ -1,0 +1,4 @@
+- id: ca876d49-76ea-4cd9-8eb1-088baf9b49ff
+  name: Experiential
+  description: This will boost your XP gain for this hero.
+  boostXpGain: 1

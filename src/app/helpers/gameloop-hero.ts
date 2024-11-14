@@ -12,6 +12,7 @@ import {
   getArchetypeLevelUpStatBonusForHero,
   getArchetypeResourceBonusForHero,
   getArchetypeTaskBonusForHero,
+  getArchetypeXpBonusForHero,
 } from './archetype';
 import { getEntry } from './content';
 import { getDamageForcePercentage } from './damagetype';
@@ -179,12 +180,19 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
   }
 
   heroesAllocatedToTask(task).forEach((hero) => {
-    gainTaskXp(state, hero, task, xpGained + hero.stats.progress);
+    const archXpBonus = getArchetypeXpBonusForHero(hero);
+    console.log(hero.name, { archXpBonus });
+
+    gainTaskXp(state, hero, task, xpGained + archXpBonus + hero.stats.progress);
     gainXp(
       state,
       hero,
       xpGained *
-        (1 + bonusConversionXp + heroXpBonus + taskBonusForHero(hero, task)),
+        (1 +
+          bonusConversionXp +
+          archXpBonus +
+          heroXpBonus +
+          taskBonusForHero(hero, task)),
     );
     updateHero(state, hero);
   });

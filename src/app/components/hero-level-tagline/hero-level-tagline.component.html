@@ -5,7 +5,7 @@
   </span>
 
   @if(activeHero.fusionLevel > 0) {
-  <span class="mx-2 inline-flex items-center"
+  <span class="ml-2 inline-flex items-center"
     [tp]="'This hero has been through the fusion process ' + activeHero.fusionLevel + ' time(s).'">
     <ng-icon name="gameOvermind" color="#a0a"></ng-icon>
     <span class="ml-1">{{ activeHero.fusionLevel }} </span>
@@ -13,7 +13,7 @@
   }
 
   @if(showXp() && activeHero.level !== activeHero.maxLevel) {
-  <span>
+  <span class="ml-2">
     [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
   </span>
   }

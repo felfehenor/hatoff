@@ -12,4 +12,6 @@ export interface GameArchetype extends Content {
 
   boostLevelupStat?: GameHeroStat;
   boostLevelupStatValue?: number;
+
+  boostXpGain?: number;
 }
