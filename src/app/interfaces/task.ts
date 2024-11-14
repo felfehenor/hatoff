@@ -1,3 +1,4 @@
+import { GameHeroStat } from './hero';
 import { Content } from './identifiable';
 
 export interface GameTask extends Content {
@@ -13,6 +14,9 @@ export interface GameTask extends Content {
   maxLevel: number;
 
   convertResourceIdIntoXp?: string;
+  convertResourceIdToStat?: string;
+  convertResourceStat?: GameHeroStat;
+
   resourceRewardPerCycle: number;
   resourceIdPerCycle?: string;
 

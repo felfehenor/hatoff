@@ -1,4 +1,9 @@
 - id: 41b8caec-af16-4f93-b8ff-a67c165bbdf4
   name: Knowledge
   icon: tablerBubble
-  description: Used to gain XP from Instruction tasks.
+  description: Used to gain XP from School tasks.
+
+- id: 8c29d402-e214-4435-bd14-ebaff12fc045
+  name: Holiness
+  icon: tablerBible
+  description: Used to gain Piety from Church tasks.

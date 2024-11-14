@@ -179,9 +179,18 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
     bonusConversionXp += resourceValue;
   }
 
+  let statValueGained = 0;
+  if (task.convertResourceIdToStat && task.convertResourceStat) {
+    const resourceRef = getEntry<GameResource>(task.convertResourceIdToStat);
+    if (!resourceRef) return;
+
+    const resourceValue = getResourceValue(resourceRef.id);
+    loseResource(resourceRef, resourceValue);
+    statValueGained += resourceValue;
+  }
+
   heroesAllocatedToTask(task).forEach((hero) => {
     const archXpBonus = getArchetypeXpBonusForHero(hero);
-    console.log(hero.name, { archXpBonus });
 
     gainTaskXp(state, hero, task, xpGained + archXpBonus + hero.stats.progress);
     gainXp(
@@ -194,16 +203,16 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
           heroXpBonus +
           taskBonusForHero(hero, task)),
     );
+
+    if (statValueGained > 0 && task.convertResourceStat) {
+      gainStat(hero, task.convertResourceStat, statValueGained);
+    }
+
     updateHero(state, hero);
   });
 }
 
-function gainStat(
-  state: GameState,
-  hero: GameHero,
-  stat: GameHeroStat,
-  val = 1,
-): void {
+function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
   hero.stats[stat] += Math.floor(val);
 }
 
@@ -227,12 +236,12 @@ function levelup(state: GameState, hero: GameHero): void {
   const speedBoost =
     statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
 
-  gainStat(state, hero, 'health', hpBoost);
-  gainStat(state, hero, 'force', forceBoost);
-  gainStat(state, hero, 'piety', pietyBoost);
-  gainStat(state, hero, 'progress', progressBoost);
-  gainStat(state, hero, 'resistance', resistanceBoost);
-  gainStat(state, hero, 'speed', speedBoost);
+  gainStat(hero, 'health', hpBoost);
+  gainStat(hero, 'force', forceBoost);
+  gainStat(hero, 'piety', pietyBoost);
+  gainStat(hero, 'progress', progressBoost);
+  gainStat(hero, 'resistance', resistanceBoost);
+  gainStat(hero, 'speed', speedBoost);
 
   const stats = [
     hpBoost > 0 ? `+${hpBoost} HP` : '',

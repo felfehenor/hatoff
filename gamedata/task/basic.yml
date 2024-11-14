@@ -104,7 +104,7 @@
 
   speedPerCycle: 10
   damageRequiredPerCycle: 150
-  xpRequiredPerLevel: 500
+  xpRequiredPerLevel: 2500
   maxLevel: 1
 
   resourceRewardPerCycle: 1

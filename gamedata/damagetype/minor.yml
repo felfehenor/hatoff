@@ -5,3 +5,15 @@
   subTypes:
     - damageTypeId: Intellectual
       percent: 100
+
+- id: 9d62e231-ea21-4306-8c07-9f6c221997b2
+  name: Spiritual
+  icon: tablerBible
+  color: '#87ceeb'
+  subTypes:
+    - damageTypeId: Theoretical
+      percent: 50
+    - damageTypeId: Emotional
+      percent: 50
+    - damageTypeId: Intellectual
+      percent: 25

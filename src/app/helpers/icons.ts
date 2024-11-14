@@ -1,4 +1,5 @@
 import {
+  tablerBible,
   tablerBlob,
   tablerBrain,
   tablerBubble,
@@ -21,5 +22,6 @@ export function usedContentIcons(): Record<string, string> {
     tablerWood,
     tablerBlob,
     tablerCarrot,
+    tablerBible,
   };
 }
