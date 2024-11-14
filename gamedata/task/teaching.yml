@@ -34,6 +34,8 @@
   convertResourceIdIntoXp: Knowledge
 
   possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
     - More XP I
     - More XP II
     - Higher Level Cap I
