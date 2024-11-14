@@ -1,6 +1,7 @@
 export interface GameOptions {
   showDebug: boolean;
   debugConsoleLogStateUpdates: boolean;
+  debugShowAllResources: boolean;
 
   heroSpeedMultiplier: number;
   heroForceMultiplier: number;

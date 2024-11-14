@@ -10,11 +10,12 @@ import { forkJoin } from 'rxjs';
 import {
   allContentById,
   allIdsByName,
+  getEntriesByType,
   setAllContentById,
   setAllIdsByName,
   setArt,
 } from '../helpers';
-import { Content, ContentType, HeroArt } from '../interfaces';
+import { Content, ContentType, GameDamageType, HeroArt } from '../interfaces';
 
 interface SharedCanvas {
   canvas: HTMLCanvasElement;
@@ -162,6 +163,8 @@ export class ContentService {
     }).subscribe((assets) => {
       this.unfurlAssets(assets as unknown as Record<string, Content[]>);
 
+      this.postprocessContent();
+
       console.log('[Content] Content loaded.');
       this.hasLoadedData.set(true);
     });
@@ -209,5 +212,16 @@ export class ContentService {
 
     setAllIdsByName(allIdsByNameAssets);
     setAllContentById(allEntriesByIdAssets);
+  }
+
+  private postprocessContent() {
+    const allDamageTypes = getEntriesByType<GameDamageType>('damagetype');
+    const wilds = allDamageTypes.filter((f) => f.isAny);
+
+    wilds.forEach((wild) => {
+      wild.subTypes = allDamageTypes
+        .filter((f) => !f.isAny)
+        .map((dt) => ({ damageTypeId: dt.id, percent: 100 }));
+    });
   }
 }

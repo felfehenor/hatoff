@@ -33,3 +33,7 @@ export const gamestate: Signal<GameState> = _gamestate.asReadonly();
 export function setGameState(state: GameState): void {
   _gamestate.set(cloneDeep(state));
 }
+
+export function updateGamestate(func: (state: GameState) => GameState): void {
+  _gamestate.update(func);
+}

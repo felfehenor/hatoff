@@ -12,9 +12,11 @@ export interface GameTask extends Content {
   xpRequiredPerLevel: number;
   maxLevel: number;
 
+  convertResourceIdIntoXp?: string;
   resourceRewardPerCycle: number;
-
   resourceIdPerCycle?: string;
+
+  siblingTaskIdRequiringHeroesAllocated?: string;
   applyResultsToResearch?: boolean;
 
   possibleUpgradeIds?: string[];

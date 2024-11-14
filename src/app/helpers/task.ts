@@ -18,6 +18,9 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
 
   if (!heroDamageType || !taskDamageType) return false;
 
+  if (task.requireExactType && taskDamageType.id !== heroDamageType.id)
+    return false;
+
   if (!canUseDamageTypeForRequirement(heroDamageType, taskDamageType))
     return false;
 

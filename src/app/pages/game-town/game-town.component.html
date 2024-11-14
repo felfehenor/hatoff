@@ -8,7 +8,7 @@
   </span>
 
   <div pageactions>
-    @for(res of ['Gold', 'Wood', 'Stone', 'Food']; track $index) {
+    @for(res of resources(); track $index) {
     <app-resource-display class="mr-1" [id]="res"></app-resource-display>
     }
   </div>

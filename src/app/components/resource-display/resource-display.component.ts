@@ -3,6 +3,7 @@ import { Component, computed, input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   tablerBlob,
+  tablerBubble,
   tablerCarrot,
   tablerCoins,
   tablerWood,
@@ -22,6 +23,7 @@ import { ContentNameComponent } from '../content-name/content-name.component';
       tablerCoins,
       tablerBlob,
       tablerWood,
+      tablerBubble,
     }),
   ],
   templateUrl: './resource-display.component.html',

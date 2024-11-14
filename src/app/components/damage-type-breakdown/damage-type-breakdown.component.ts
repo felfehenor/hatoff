@@ -1,13 +1,6 @@
 import { Component, computed, model } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  tablerBrain,
-  tablerBubble,
-  tablerCoins,
-  tablerGavel,
-  tablerHeartBroken,
-  tablerSword,
-} from '@ng-icons/tabler-icons';
+import * as tablerIcons from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { getEntry } from '../../helpers';
 import { GameDamageType } from '../../interfaces';
@@ -16,16 +9,7 @@ import { GameDamageType } from '../../interfaces';
   selector: 'app-damage-type-breakdown',
   standalone: true,
   imports: [NgIconComponent, TippyDirective],
-  providers: [
-    provideIcons({
-      tablerCoins,
-      tablerSword,
-      tablerBubble,
-      tablerGavel,
-      tablerHeartBroken,
-      tablerBrain,
-    }),
-  ],
+  providers: [provideIcons(tablerIcons)],
   templateUrl: './damage-type-breakdown.component.html',
   styleUrl: './damage-type-breakdown.component.scss',
 })

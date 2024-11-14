@@ -1,0 +1,6 @@
+- id: 7e1c663e-d251-4716-97a3-3a51b2486051
+  name: Any
+  isAny: true
+  icon: tablerHelpHexagon
+  color: '#fff'
+  subTypes: []

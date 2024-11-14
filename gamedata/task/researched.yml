@@ -1,0 +1,22 @@
+- id: 12ead923-71c1-465b-afbb-d4cc84b6a242
+  name: Tax Collection
+  description: Collect taxes from your town, gaining Gold.
+  damageTypeId: Financial
+  maxHeroesAllocable: 2
+
+  speedPerCycle: 3
+  damageRequiredPerCycle: 250
+  xpRequiredPerLevel: 500
+  resourceIdPerCycle: Gold
+  resourceRewardPerCycle: 10
+  maxLevel: 2
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - More Resources I
+    - More Resources II
+    - Higher Level Cap I
+    - Higher Level Cap II

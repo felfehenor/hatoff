@@ -6,4 +6,4 @@
   requiresResearchIds:
     - Financial Knowledge
 
-  unlocksTaskId: Tax Collection
+  unlocksTaskIds: [Tax Collection]

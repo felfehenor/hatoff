@@ -2,14 +2,9 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
-import {
-  tablerBrain,
-  tablerBubble,
-  tablerCoins,
-  tablerGavel,
-  tablerHeartBroken,
-  tablerSword,
-} from '@ng-icons/tabler-icons';
+
+import * as tablerIcons from '@ng-icons/tabler-icons';
+
 import { allUnlockedDamageTypes } from '../../helpers';
 import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
@@ -23,16 +18,7 @@ import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-ty
     FormsModule,
     DamageTypeBreakdownComponent,
   ],
-  providers: [
-    provideIcons({
-      tablerCoins,
-      tablerSword,
-      tablerBubble,
-      tablerGavel,
-      tablerHeartBroken,
-      tablerBrain,
-    }),
-  ],
+  providers: [provideIcons(tablerIcons)],
   templateUrl: './damage-type.component.html',
   styleUrl: './damage-type.component.scss',
 })

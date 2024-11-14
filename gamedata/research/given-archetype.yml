@@ -3,11 +3,11 @@
 #  description: Unlock the archetype "Fighter".
 #  researchRequired: 0
 #
-#  unlocksArchetypeId: Fighter
+#  unlocksArchetypeIds: Fighter
 
 - id: 498d15d8-8b56-4073-aec2-61b15ce414f9
   name: Defender Knowledge
   description: Unlock the archetype "Defender".
   researchRequired: 0
 
-  unlocksArchetypeId: Defender
+  unlocksArchetypeIds: [Defender]

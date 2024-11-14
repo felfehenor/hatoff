@@ -1,0 +1,14 @@
+- id: 97cecb51-f788-4e81-b13a-368e271ad5bb
+  name: Tutelage
+  description: 'Unlock the tasks "Instruction: Professor" and "Instruction: Student". Unlocks the damage type "Theoretical".'
+  researchRequired: 1000
+
+  requiresResearchIds:
+    - Adaptable Knowledge
+
+  unlocksDamageTypeIds:
+    - Theoretical
+
+  unlocksTaskIds:
+    - 'School: Professor'
+    - 'School: Student'

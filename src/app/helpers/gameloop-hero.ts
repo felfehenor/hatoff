@@ -19,6 +19,7 @@ import { gamestate, setGameState } from './gamestate';
 import { maxXpForLevel } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
+import { getResourceValue, loseResource } from './resource';
 import { seededrng } from './rng';
 import {
   heroesAllocatedToTask,
@@ -106,6 +107,16 @@ function isTaskFinished(state: GameState, task: GameTask): boolean {
 }
 
 function finalizeTask(state: GameState, task: GameTask): void {
+  if (task.siblingTaskIdRequiringHeroesAllocated) {
+    const sibling = getEntry<GameTask>(
+      task.siblingTaskIdRequiringHeroesAllocated,
+    );
+    if (sibling && heroesAllocatedToTask(sibling).length === 0) {
+      notifyError(`Task "${task.name}" requires heroes on "${sibling.name}"!`);
+      return;
+    }
+  }
+
   const heroBonusSum = sum(
     heroesAllocatedToTask(task).map((h) => taskBonusForHero(h, task)),
   );
@@ -157,12 +168,23 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
   const xpGained = numTaskRewards(state, task);
   const heroXpBonus = xpBonusForTask(task);
 
+  let bonusConversionXp = 0;
+  if (task.convertResourceIdIntoXp) {
+    const resourceRef = getEntry<GameResource>(task.convertResourceIdIntoXp);
+    if (!resourceRef) return;
+
+    const resourceValue = getResourceValue(resourceRef.id);
+    loseResource(resourceRef, resourceValue);
+    bonusConversionXp += resourceValue;
+  }
+
   heroesAllocatedToTask(task).forEach((hero) => {
     gainTaskXp(state, hero, task, xpGained + hero.stats.progress);
     gainXp(
       state,
       hero,
-      xpGained * (1 + heroXpBonus + taskBonusForHero(hero, task)),
+      xpGained *
+        (1 + bonusConversionXp + heroXpBonus + taskBonusForHero(hero, task)),
     );
     updateHero(state, hero);
   });

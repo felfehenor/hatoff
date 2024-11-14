@@ -17,8 +17,25 @@
           </label>
         </div>
       </div>
-
     </div>
+
+    <div class="card bg-neutral foreground shadow-xl mt-3">
+      <div class="card-body">
+        <div class="card-title">
+          Game Options
+        </div>
+
+        <div class="form-control">
+          <label class="label cursor-pointer label-checkbox">
+            <input type="checkbox" [checked]="currentValueForOption('debugShowAllResources') === true"
+              class="checkbox checkbox-secondary"
+              (click)="setValueForOption('debugShowAllResources', !currentValueForOption('debugShowAllResources'))" />
+            <span class="label-text">Show All Resources In Town</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 

@@ -44,12 +44,14 @@ export function allCompletedResearch(): GameResearch[] {
 
 export function allUnlockedArchetypes(): GameArchetype[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksArchetypeId,
+    (r) => (r as GameResearch).unlocksArchetypeIds,
   ) as GameResearch[];
 
   return sortBy(
     validResearch
-      .map((r) => getEntry<GameArchetype>(r.unlocksArchetypeId!))
+      .map((r) => r.unlocksArchetypeIds ?? [])
+      .flat()
+      .map((aId) => getEntry<GameArchetype>(aId))
       .filter(Boolean),
     'name',
   ) as GameArchetype[];
@@ -57,12 +59,14 @@ export function allUnlockedArchetypes(): GameArchetype[] {
 
 export function allUnlockedDamageTypes(): GameDamageType[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksDamageTypeId,
+    (r) => (r as GameResearch).unlocksDamageTypeIds,
   ) as GameResearch[];
 
   return sortBy(
     validResearch
-      .map((r) => getEntry<GameDamageType>(r.unlocksDamageTypeId!))
+      .map((r) => r.unlocksDamageTypeIds ?? [])
+      .flat()
+      .map((dId) => getEntry<GameDamageType>(dId))
       .filter(Boolean),
     'name',
   ) as GameDamageType[];
@@ -70,12 +74,14 @@ export function allUnlockedDamageTypes(): GameDamageType[] {
 
 export function allUnlockedTasks(): GameTask[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksTaskId,
+    (r) => (r as GameResearch).unlocksTaskIds,
   ) as GameResearch[];
 
   return sortBy(
     validResearch
-      .map((r) => getEntry<GameTask>(r.unlocksTaskId!))
+      .map((r) => r.unlocksTaskIds ?? [])
+      .flat()
+      .map((tId) => getEntry<GameTask>(tId))
       .filter(Boolean),
     'name',
   ) as GameTask[];

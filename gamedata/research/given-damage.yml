@@ -3,18 +3,18 @@
   description: Unlock the damage type "Physical".
   researchRequired: 0
 
-  unlocksDamageTypeId: Physical
+  unlocksDamageTypeIds: [Physical]
 
 - id: 431a8d5c-da70-47e9-9b62-5f2b296ed60c
   name: Emotional Knowledge
   description: Unlock the damage type "Emotional".
   researchRequired: 0
 
-  unlocksDamageTypeId: Emotional
+  unlocksDamageTypeIds: [Emotional]
 
 - id: f6b2b5fc-cf41-4150-a008-faf7477be9c6
   name: Intellectual Knowledge
   description: Unlock the damage type "Intellectual".
   researchRequired: 0
 
-  unlocksDamageTypeId: Intellectual
+  unlocksDamageTypeIds: [Intellectual]

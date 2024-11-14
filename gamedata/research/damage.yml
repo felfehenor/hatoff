@@ -3,4 +3,4 @@
   description: Unlock the damage type "Financial". This unlocks tasks involving money.
   researchRequired: 50
 
-  unlocksDamageTypeId: Financial
+  unlocksDamageTypeIds: [Financial]

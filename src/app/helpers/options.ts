@@ -6,6 +6,7 @@ export function defaultOptions(): GameOptions {
   return {
     showDebug: !environment.production,
     debugConsoleLogStateUpdates: false,
+    debugShowAllResources: false,
 
     heroForceMultiplier: 1,
     heroSpeedMultiplier: 1,

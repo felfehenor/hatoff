@@ -5,8 +5,8 @@ export interface GameResearch extends Content {
   researchRequired: number;
   requiresResearchIds?: string[];
 
-  unlocksTaskId?: string;
-  unlocksDamageTypeId?: string;
-  unlocksArchetypeId?: string;
+  unlocksTaskIds?: string[];
+  unlocksDamageTypeIds?: string[];
+  unlocksArchetypeIds?: string[];
   unlocksPopulation?: number;
 }

@@ -8,5 +8,6 @@ export interface GameDamageSubtype {
 export interface GameDamageType extends Content {
   icon: string;
   color: string;
+  isAny?: boolean;
   subTypes: GameDamageSubtype[];
 }
