@@ -1,7 +1,7 @@
 - id: 97cecb51-f788-4e81-b13a-368e271ad5bb
   name: Tutelage
   description: 'Unlock the tasks "School: Professor" and "School: Student". Unlocks the damage type "Theoretical".'
-  researchRequired: 2500
+  researchRequired: 250
 
   requiresResearchIds:
     - Adaptable Knowledge
@@ -16,7 +16,7 @@
 - id: 3524349f-5969-4da4-90a5-6f618d99f998
   name: Spirituality
   description: 'Unlock the tasks "Church: Priest" and "Church: Confessor". Unlocks the damage type "Spiritual".'
-  researchRequired: 4000
+  researchRequired: 500
 
   requiresResearchIds:
     - Reverent Knowledge

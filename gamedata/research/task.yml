@@ -1,7 +1,7 @@
 - id: d57a3127-6b98-47d9-8798-89d68311ac1f
   name: Taxes
   description: Unlock the task "Tax Collection". Allows you to gain Gold by collecting taxes from your town.
-  researchRequired: 100
+  researchRequired: 15
 
   requiresResearchIds:
     - Financial Knowledge

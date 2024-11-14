@@ -219,22 +219,25 @@ function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
 function levelup(state: GameState, hero: GameHero): void {
   const rng = seededrng(hero.id + ' ' + hero.level);
 
-  function statBoost(val = 1) {
-    return Math.round(rng() * val * getOption('heroLevelUpStatGainMultiplier'));
+  function statBoost(val = 1, chance = 50) {
+    const shouldGain = rng() * 100 <= chance;
+    if (!shouldGain) return 0;
+
+    return val * getOption('heroLevelUpStatGainMultiplier');
   }
 
   const hpBoost =
     statBoost(5) + getArchetypeLevelUpStatBonusForHero(hero, 'health');
   const forceBoost =
-    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
+    statBoost(1, 65) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
   const pietyBoost =
-    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
+    statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
   const progressBoost =
-    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'progress');
+    statBoost(1, 50) + getArchetypeLevelUpStatBonusForHero(hero, 'progress');
   const resistanceBoost =
-    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
+    statBoost(1, 15) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
   const speedBoost =
-    statBoost(1) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
+    statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
 
   gainStat(hero, 'health', hpBoost);
   gainStat(hero, 'force', forceBoost);

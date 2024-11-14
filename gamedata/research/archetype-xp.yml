@@ -1,6 +1,6 @@
 - id: 0b11014b-d2a2-48f2-b5d0-a288017d7c4c
   description: Unlock the archetype "Experiential". This will increase the XP gained by this hero.
   name: Experiential Knowledge
-  researchRequired: 200
+  researchRequired: 50
 
   unlocksArchetypeIds: [Experiential]

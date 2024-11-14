@@ -5,7 +5,7 @@
   requireExactType: true
   maxHeroesAllocable: 1
 
-  speedPerCycle: 25
+  speedPerCycle: 15
   damageRequiredPerCycle: 150
   xpRequiredPerLevel: 500
   resourceIdPerCycle: Knowledge
@@ -27,7 +27,7 @@
   damageTypeId: Any
   maxHeroesAllocable: 1
 
-  speedPerCycle: 40
+  speedPerCycle: 5
   damageRequiredPerCycle: 150
   xpRequiredPerLevel: 500
   maxLevel: 1

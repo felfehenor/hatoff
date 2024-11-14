@@ -61,10 +61,10 @@ export function ensureFirstHero() {
 export function ensureSomeResources() {
   if (totalHeroes() > 0) return;
 
-  ['Gold', 'Wood', 'Stone', 'Food'].forEach((res) => {
+  ['Food'].forEach((res) => {
     const resource = getEntry<GameResource>(res);
     if (!resource) return;
 
-    gainResource(resource, 10);
+    gainResource(resource, 50);
   });
 }

@@ -23,7 +23,7 @@ export function defaultHero(): GameHero {
     level: 1,
     maxLevel: 20,
     xp: 0,
-    maxXp: 100,
+    maxXp: maxXpForLevel(1, 0),
     taskXp: {},
     taskLevels: {},
     stats: {
@@ -52,7 +52,7 @@ export function createHero(): GameHero {
 }
 
 export function maxXpForLevel(level: number, fusionLevel: number): number {
-  return level * (100 + fusionLevel * 25);
+  return level * (25 + fusionLevel * 100);
 }
 
 export function populationCap(): number {

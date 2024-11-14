@@ -6,7 +6,7 @@
   maxHeroesAllocable: 1
 
   speedPerCycle: 20
-  damageRequiredPerCycle: 5000
+  damageRequiredPerCycle: 250
   xpRequiredPerLevel: 5000
   resourceIdPerCycle: Holiness
   resourceRewardPerCycle: 1
@@ -28,7 +28,7 @@
   maxHeroesAllocable: 1
 
   speedPerCycle: 100
-  damageRequiredPerCycle: 2500
+  damageRequiredPerCycle: 250
   xpRequiredPerLevel: 10000
   maxLevel: 1
   convertResourceIdToStat: Holiness

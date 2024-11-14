@@ -5,7 +5,7 @@
   maxHeroesAllocable: 2
 
   speedPerCycle: 3
-  damageRequiredPerCycle: 250
+  damageRequiredPerCycle: 35
   xpRequiredPerLevel: 2500
   resourceIdPerCycle: Gold
   resourceRewardPerCycle: 10
