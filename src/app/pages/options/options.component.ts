@@ -1,12 +1,19 @@
 import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ConnectButtonsComponent } from '../../components/connect-buttons/connect-buttons.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { options } from '../../helpers';
 
 @Component({
   selector: 'app-options',
   standalone: true,
-  imports: [PageCardComponent, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [
+    PageCardComponent,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    ConnectButtonsComponent,
+  ],
   templateUrl: './options.component.html',
   styleUrl: './options.component.scss',
 })
