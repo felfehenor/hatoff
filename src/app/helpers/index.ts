@@ -7,6 +7,7 @@ export * from './gameloop-hero';
 export * from './gameloop-recruit';
 export * from './gamestate';
 export * from './hero';
+export * from './icons';
 export * from './migrate';
 export * from './notify';
 export * from './options';

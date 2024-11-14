@@ -1,15 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  tablerBlob,
-  tablerBubble,
-  tablerCarrot,
-  tablerCoins,
-  tablerWood,
-} from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
-import { getEntry, getResourceValue } from '../../helpers';
+import { getEntry, getResourceValue, usedContentIcons } from '../../helpers';
 import { GameResource } from '../../interfaces';
 import { ContentNameComponent } from '../content-name/content-name.component';
 
@@ -17,15 +10,7 @@ import { ContentNameComponent } from '../content-name/content-name.component';
   selector: 'app-resource-display',
   standalone: true,
   imports: [TippyDirective, ContentNameComponent, DecimalPipe, NgIconComponent],
-  providers: [
-    provideIcons({
-      tablerCarrot,
-      tablerCoins,
-      tablerBlob,
-      tablerWood,
-      tablerBubble,
-    }),
-  ],
+  providers: [provideIcons(usedContentIcons())],
   templateUrl: './resource-display.component.html',
   styleUrl: './resource-display.component.scss',
 })

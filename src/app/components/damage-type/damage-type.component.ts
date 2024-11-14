@@ -3,9 +3,7 @@ import { Component, computed, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 
-import * as tablerIcons from '@ng-icons/tabler-icons';
-
-import { allUnlockedDamageTypes } from '../../helpers';
+import { allUnlockedDamageTypes, usedContentIcons } from '../../helpers';
 import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 
@@ -18,7 +16,7 @@ import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-ty
     FormsModule,
     DamageTypeBreakdownComponent,
   ],
-  providers: [provideIcons(tablerIcons)],
+  providers: [provideIcons(usedContentIcons())],
   templateUrl: './damage-type.component.html',
   styleUrl: './damage-type.component.scss',
 })
