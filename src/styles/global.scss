@@ -62,3 +62,7 @@ body {
     @apply ml-3;
   }
 }
+
+progress::-webkit-progress-value {
+  transition: 250ms width;
+}
