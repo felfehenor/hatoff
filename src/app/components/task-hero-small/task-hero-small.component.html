@@ -5,7 +5,8 @@
 </div>
 
 <ng-template #herotip>
-  <h6 class="text-sm font-semibold">{{ heroData.name }} Lv. {{ heroData.level }}</h6>
+  <h6 class="text-sm font-semibold">{{ heroData.name }} <app-level-display
+      [currentLevel]="heroData.level"></app-level-display></h6>
 
   <div>
     <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>

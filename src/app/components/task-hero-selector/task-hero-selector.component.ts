@@ -1,23 +1,38 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { sortBy } from 'lodash';
 import {
   allHeroes,
   assignHeroToTask,
+  buyUpgrade,
   canAllocateHeroToTask,
+  canBuyUpgrade,
   currentHeroTask,
   getDamageForcePercentage,
   getEntry,
   heroesAllocatedToTask,
   isHeroAllocatedToTask,
+  maxHeroesForTask,
+  maxTaskLevel,
+  purchasedUpgradesForTask,
+  taskLevel,
   unassignHeroTask,
+  upgradesAvailableForTask,
 } from '../../helpers';
-import { GameDamageType, GameHero, GameTask, HeroMood } from '../../interfaces';
+import {
+  GameDamageType,
+  GameHero,
+  GameTask,
+  GameUpgrade,
+  HeroMood,
+} from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
+import { LevelDisplayComponent } from '../level-display/level-display.component';
+import { ResourceDisplayComponent } from '../resource-display/resource-display.component';
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
@@ -31,6 +46,8 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     HeroArchetypeListComponent,
     DamageTypeBreakdownComponent,
     TaskSynergyComponent,
+    LevelDisplayComponent,
+    ResourceDisplayComponent,
   ],
   templateUrl: './task-hero-selector.component.html',
   styleUrl: './task-hero-selector.component.scss',
@@ -45,6 +62,20 @@ export class TaskHeroSelectorComponent {
       (hero) => !this.heroes().includes(hero),
       (hero) => !canAllocateHeroToTask(hero, this.task()),
     ]),
+  );
+  public maxHeroes = computed(() => maxHeroesForTask(this.task()));
+  public taskLevel = computed(() => taskLevel(this.task()));
+  public maxTasklevel = computed(() => maxTaskLevel(this.task()));
+
+  public currentMode = signal<'heroes' | 'upgrades'>('heroes');
+  public canChangeModes = computed(
+    () => this.unpurchasedUpgrades().length > 0 || this.taskLevel() > 0,
+  );
+  public unpurchasedUpgrades = computed(() =>
+    upgradesAvailableForTask(this.task()),
+  );
+  public purchasedUpgrades = computed(() =>
+    purchasedUpgradesForTask(this.task()),
   );
 
   public selectHero(hero: GameHero): void {
@@ -86,5 +117,13 @@ export class TaskHeroSelectorComponent {
     if (percentDamageApplied === 100) return 'happy';
     if (percentDamageApplied === 0) return 'sad';
     return 'neutral';
+  }
+
+  public canBuyUpgrade(upgrade: GameUpgrade): boolean {
+    return canBuyUpgrade(upgrade);
+  }
+
+  public buyUpgrade(upgrade: GameUpgrade): void {
+    buyUpgrade(upgrade, this.task());
   }
 }

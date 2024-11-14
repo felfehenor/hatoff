@@ -4,11 +4,17 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { gameOvermind } from '@ng-icons/game-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { GameHero } from '../../interfaces';
+import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
   selector: 'app-hero-level-tagline',
   standalone: true,
-  imports: [DecimalPipe, NgIconComponent, TippyDirective],
+  imports: [
+    DecimalPipe,
+    NgIconComponent,
+    TippyDirective,
+    LevelDisplayComponent,
+  ],
   providers: [
     provideIcons({
       gameOvermind,

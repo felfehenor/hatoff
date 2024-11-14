@@ -1,0 +1,5 @@
+<span>Lv. {{ currentLevel() | number }}</span>
+@if(maxLevel() > 0) {
+<span class="mx-1">/</span>
+<span>{{ maxLevel() | number }}</span>
+}

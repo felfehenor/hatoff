@@ -22,6 +22,16 @@
   resourceRewardPerCycle: 10
   maxLevel: 2
 
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - More Resources I
+    - More Resources II
+    - Higher Level Cap I
+    - Higher Level Cap II
+
 - id: 4a11631e-b5b4-4673-8715-460fe6725ed3
   name: Wood Harvesting
   description: Chop trees near your town, gaining Wood.
@@ -34,6 +44,16 @@
   resourceIdPerCycle: Wood
   resourceRewardPerCycle: 1
   maxLevel: 1
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - More Resources I
+    - More Resources II
+    - Higher Level Cap I
+    - Higher Level Cap II
 
 - id: 39e534ec-8ec0-4735-aff6-2674051f40fa
   name: Stone Gathering
@@ -48,10 +68,20 @@
   resourceRewardPerCycle: 1
   maxLevel: 1
 
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - More Resources I
+    - More Resources II
+    - Higher Level Cap I
+    - Higher Level Cap II
+
 - id: a5e60559-ad21-4df9-bb5f-d1e392a74c8d
   name: Food Hunting
   description: Hunt and set traps near your town, gaining Food.
-  damageTypeId: Physical
+  damageTypeId: Emotional
   maxHeroesAllocable: 2
 
   speedPerCycle: 3
@@ -60,6 +90,16 @@
   resourceIdPerCycle: Food
   resourceRewardPerCycle: 1
   maxLevel: 1
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - More Resources I
+    - More Resources II
+    - Higher Level Cap I
+    - Higher Level Cap II
 
 - id: 6a620f52-5946-4990-a081-b7d9afcd0856
   name: Town Defense
@@ -71,6 +111,12 @@
   damageRequiredPerCycle: 1000
   xpRequiredPerLevel: 500
   maxLevel: 1
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
 
 - id: 50bd99b9-3239-4937-8e38-0f7c716832e0
   name: Research
@@ -85,3 +131,11 @@
 
   resourceRewardPerCycle: 1
   applyResultsToResearch: true
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - Higher Level Cap I
+    - Higher Level Cap II

@@ -2,6 +2,7 @@ import { GameDamageType, GameHero, GameTask } from '../interfaces';
 import { getEntry } from './content';
 import { canUseDamageTypeForRequirement } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
+import { allocationBonusForTask, maxLevelBonusForTask } from './upgrade';
 
 export function heroesAllocatedToTask(task: GameTask): GameHero[] {
   const state = gamestate();
@@ -20,7 +21,7 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
   if (!canUseDamageTypeForRequirement(heroDamageType, taskDamageType))
     return false;
 
-  return heroesAllocatedToTask(task).length < task.maxHeroesAllocable;
+  return heroesAllocatedToTask(task).length < maxHeroesForTask(task);
 }
 
 export function numHeroesAllocatedToTask(task: GameTask): number {
@@ -70,4 +71,16 @@ export function synergyBonus(task: GameTask): number {
   if (!doAllMatch) return 0;
 
   return Math.min(5, allHeroes.length) * 10;
+}
+
+export function maxHeroesForTask(task: GameTask): number {
+  return task.maxHeroesAllocable + allocationBonusForTask(task);
+}
+
+export function maxLevelForTask(task: GameTask): number {
+  return task.maxLevel + maxLevelBonusForTask(task);
+}
+
+export function xpRequiredForTaskLevel(task: GameTask, level: number): number {
+  return task.xpRequiredPerLevel * level;
 }

@@ -9,6 +9,7 @@ export function blankGameState(): GameState {
     heroCurrentTaskSpeed: {},
     taskProgress: {},
     taskAssignments: {},
+    taskUpgrades: {},
     resources: {},
     activeResearch: '',
     recruitment: {

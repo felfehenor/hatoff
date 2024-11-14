@@ -1,0 +1,69 @@
+- id: 105f2dc2-0ab7-492a-9103-8ffa37583830
+  name: More Heroes I
+  description: Add +1 to the hero cap for this task.
+
+  costs:
+    - resourceId: Gold
+      value: 200
+
+    - resourceId: Stone
+      value: 100
+
+  requiresResearchIds:
+    - Task Heroes I
+
+  boostHeroCap: 1
+
+- id: 379bbd0b-96c6-41f9-9e32-876dd8504ee3
+  name: More Heroes II
+  description: Add +1 to the hero cap for this task.
+
+  costs:
+    - resourceId: Gold
+      value: 400
+
+    - resourceId: Stone
+      value: 200
+
+  requiresUpgradeIds:
+    - More Heroes I
+
+  requiresResearchIds:
+    - Task Heroes II
+
+  boostHeroCap: 1
+
+- id: 99f85a5b-7be5-4f5c-9aaf-64cc13ccf786
+  name: More XP I
+  description: Gain an additional +1 XP for completing a cycle of this task.
+
+  costs:
+    - resourceId: Stone
+      value: 150
+
+    - resourceId: Wood
+      value: 300
+
+  requiresResearchIds:
+    - Task XP I
+
+  boostXpGain: 1
+
+- id: d3cd389c-b641-4aae-af96-ea97d9ec0fe2
+  name: More XP II
+  description: Gain an additional +1 XP for completing a cycle of this task.
+
+  costs:
+    - resourceId: Stone
+      value: 300
+
+    - resourceId: Wood
+      value: 600
+
+  requiresUpgradeIds:
+    - More XP I
+
+  requiresResearchIds:
+    - Task XP II
+
+  boostXpGain: 1

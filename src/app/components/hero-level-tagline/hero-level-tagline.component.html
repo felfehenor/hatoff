@@ -1,7 +1,7 @@
 @let activeHero = hero();
 <div class="flex items-center">
   <span>
-    Level {{ activeHero.level | number }} / {{ activeHero.maxLevel | number }}
+    <app-level-display [currentLevel]="activeHero.level" [maxLevel]="activeHero.maxLevel"></app-level-display>
   </span>
 
   @if(activeHero.fusionLevel > 0) {

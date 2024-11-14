@@ -10,7 +10,7 @@ fs.ensureDirSync('./public/json');
 
 const allData: Record<string, any[]> = {};
 const trackedIds: Record<string, boolean> = {};
-const idToName: Record<string, string> = {};
+const idToName: Record<string, Record<string, string>> = {};
 
 const art: Record<string, any> = {};
 
@@ -36,6 +36,7 @@ const processFiles = () => {
           fs.readFileSync(`gamedata/${folder}/${filename}.yml`),
         );
 
+        idToName[folder] ??= {};
         allData[folder] ??= [];
         allData[folder].push(...doc);
 
@@ -45,7 +46,7 @@ const processFiles = () => {
             return;
           }
 
-          if (idToName[entry.name]) {
+          if (idToName[folder][entry.name]) {
             console.error(
               `Name "${entry.name}" already exists somewhere in the content.`,
             );
@@ -60,7 +61,7 @@ const processFiles = () => {
           }
 
           trackedIds[entry.id] = true;
-          idToName[entry.name] = entry.id;
+          idToName[folder][entry.name] = entry.id;
         });
 
         console.log(`Loaded ${folder}/${file} - ${doc.length} entries...`);
@@ -74,10 +75,10 @@ const processFiles = () => {
 const rewriteDataIds = () => {
   const allIds = Object.keys(allData);
 
-  const getIdForName = (name: string) => {
-    const res = idToName[name];
+  const getIdForName = (name: string, type: string) => {
+    const res = idToName[type][name];
     if (!res) {
-      console.error(`Name ${name} has no corresponding id.`);
+      console.error(`Name ${name} (${type}) has no corresponding id.`);
       process.exit(1);
     }
 
@@ -88,7 +89,8 @@ const rewriteDataIds = () => {
   const iterateObject = (entry: any) => {
     Object.keys(entry).forEach((entryKey) => {
       // no match, skip
-      if (!allIds.some((id) => entryKey.toLowerCase().includes(id))) {
+      const keyMatch = allIds.find((id) => entryKey.toLowerCase().includes(id));
+      if (!keyMatch) {
         // check deeper, if it's an array we want to check our sub objects
         if (isArray(entry[entryKey])) {
           entry[entryKey].forEach((subObj: any) => {
@@ -104,12 +106,14 @@ const rewriteDataIds = () => {
       // match
       // our match key is an array of strings, so we rewrite them all to be ids
       if (isArray(entry[entryKey])) {
-        entry[entryKey] = entry[entryKey].map((i: string) => getIdForName(i));
+        entry[entryKey] = entry[entryKey].map((i: string) =>
+          getIdForName(i, keyMatch),
+        );
       }
 
       // our match key is a simple string, so we rewrite it to be an id
       else {
-        entry[entryKey] = getIdForName(entry[entryKey]);
+        entry[entryKey] = getIdForName(entry[entryKey], keyMatch);
       }
     });
   };

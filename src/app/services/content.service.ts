@@ -65,6 +65,8 @@ export class ContentService {
     this.worker.addEventListener('message', (event) => {
       if (event.data.action === 'piece') {
         const { id } = event.data;
+        if (!this.workerCallbacks[id]) return;
+
         this.workerCallbacks[id].curPieces++;
 
         if (
@@ -155,6 +157,7 @@ export class ContentService {
       resource: this.http.get('./json/resource.json'),
       task: this.http.get('./json/task.json'),
       research: this.http.get('./json/research.json'),
+      upgrade: this.http.get('./json/upgrade.json'),
       art: this.http.get('./json/art.json'),
     }).subscribe((assets) => {
       this.unfurlAssets(assets as unknown as Record<string, Content[]>);

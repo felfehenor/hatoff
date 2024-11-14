@@ -4,9 +4,17 @@
   class="card card-side foreground shadow-xl cursor-pointer min-h-[300px] flex flex-col justify-between hover:ring-2 overflow-hidden"
   [class.ring-2]="active()">
   <div class="card-body">
+
+    @if(maxTasklevel() > 0) {
+    <app-level-display class="absolute top-2 right-3" [currentLevel]="taskLevel()"
+      [maxLevel]="maxTasklevel()"></app-level-display>
+    }
+
     <div class="card-title flex items-center">
       <app-damage-type-breakdown [id]="taskData.damageTypeId"></app-damage-type-breakdown>
-      <div class="font-semibold">{{ taskData.name }}</div>
+      <div class="font-semibold">
+        {{ taskData.name }}
+      </div>
     </div>
 
     <p>{{ taskData.description }}</p>
@@ -14,7 +22,7 @@
 
   <div class="card-body">
     <div class="card-title flex items-center">
-      <div class="font-light">Heroes ({{ heroes().length }}/{{ taskData.maxHeroesAllocable }})</div>
+      <div class="font-light">Heroes ({{ heroes().length }}/{{ maxHeroes() }})</div>
       <app-task-synergy [task]="taskData"></app-task-synergy>
     </div>
 

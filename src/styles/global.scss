@@ -29,7 +29,7 @@ body {
   }
 }
 
-.btn:not(.btn-untextured) {
+.btn:not(.btn-untextured):not(.btn-outline) {
   background: url('../../public/asset/texture-button.png'),
     linear-gradient(
       to bottom,

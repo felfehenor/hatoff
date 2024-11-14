@@ -20,7 +20,13 @@ import { maxXpForLevel } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { seededrng } from './rng';
-import { heroesAllocatedToTask, synergyBonus } from './task';
+import {
+  heroesAllocatedToTask,
+  maxLevelForTask,
+  synergyBonus,
+  xpRequiredForTaskLevel,
+} from './task';
+import { resourceBonusForTask, xpBonusForTask } from './upgrade';
 
 function applyHeroSpeed(
   state: GameState,
@@ -106,9 +112,10 @@ function finalizeTask(state: GameState, task: GameTask): void {
 
   if (task.resourceIdPerCycle && task.resourceRewardPerCycle) {
     const res = getEntry<GameResource>(task.resourceIdPerCycle);
+    const bonusResources = resourceBonusForTask(task);
 
     const gained =
-      (heroBonusSum + task.resourceRewardPerCycle) *
+      (heroBonusSum + bonusResources + task.resourceRewardPerCycle) *
       numTaskRewards(state, task) *
       getOption('rewardMultiplier');
     state.resources[task.resourceIdPerCycle] ??= 0;
@@ -148,10 +155,15 @@ function resetTask(state: GameState, task: GameTask): void {
 
 function rewardTaskDoers(state: GameState, task: GameTask): void {
   const xpGained = numTaskRewards(state, task);
+  const heroXpBonus = xpBonusForTask(task);
 
   heroesAllocatedToTask(task).forEach((hero) => {
-    gainTaskXp(state, hero, task, xpGained * hero.stats.progress);
-    gainXp(state, hero, xpGained * (1 + taskBonusForHero(hero, task)));
+    gainTaskXp(state, hero, task, xpGained + hero.stats.progress);
+    gainXp(
+      state,
+      hero,
+      xpGained * (1 + heroXpBonus + taskBonusForHero(hero, task)),
+    );
     updateHero(state, hero);
   });
 }
@@ -213,7 +225,7 @@ function gainTaskXp(
   task: GameTask,
   xp = 1,
 ): void {
-  if (hero.taskLevels[task.id] >= task.maxLevel) return;
+  if (hero.taskLevels[task.id] >= maxLevelForTask(task)) return;
 
   hero.taskXp ??= {};
 
@@ -222,7 +234,10 @@ function gainTaskXp(
 
   hero.taskXp[task.id] += xp * getOption('heroTaskXpMultiplier');
 
-  if (hero.taskXp[task.id] >= task.xpRequiredPerLevel) {
+  if (
+    hero.taskXp[task.id] >=
+    xpRequiredForTaskLevel(task, hero.taskLevels[task.id] + 1)
+  ) {
     hero.taskXp[task.id] = 0;
     hero.taskLevels[task.id] += 1;
   }

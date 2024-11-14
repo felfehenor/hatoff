@@ -29,6 +29,7 @@ import { ContentNameComponent } from '../content-name/content-name.component';
 })
 export class ResourceDisplayComponent {
   public id = input.required<string>();
+  public value = input<number>(0);
 
   private resource = computed(() => getEntry<GameResource>(this.id()));
 
@@ -37,5 +38,7 @@ export class ResourceDisplayComponent {
   );
   public icon = computed(() => this.resource()?.icon);
 
-  public value = computed(() => getResourceValue(this.id()));
+  public displayValue = computed(
+    () => this.value() || getResourceValue(this.id()),
+  );
 }

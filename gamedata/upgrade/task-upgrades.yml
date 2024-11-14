@@ -1,0 +1,81 @@
+- id: 883d55b6-99cb-43c7-b242-8e55798b141f
+  name: More Resources I
+  description: Gain an additional +1 resource for completing a cycle of this task.
+
+  costs:
+    - resourceId: Food
+      value: 300
+
+    - resourceId: Stone
+      value: 100
+
+    - resourceId: Wood
+      value: 200
+
+    - resourceId: Gold
+      value: 600
+
+  requiresResearchIds:
+    - Task Resource Gain I
+
+  boostResourceGain: 1
+
+- id: 185a98e0-31a9-4137-b5bb-a31c2adfa5e0
+  name: More Resources II
+  description: Gain an additional +1 resource for completing a cycle of this task.
+
+  costs:
+    - resourceId: Food
+      value: 600
+
+    - resourceId: Stone
+      value: 200
+
+    - resourceId: Wood
+      value: 400
+
+    - resourceId: Gold
+      value: 1200
+
+  requiresUpgradeIds:
+    - More Resources I
+
+  requiresResearchIds:
+    - Task Resource Gain II
+
+  boostResourceGain: 1
+
+- id: b20f70a7-a73f-4fa5-8a54-c555fd72c544
+  name: Higher Level Cap I
+  description: Heroes gain an additional +1 max task level for this task.
+
+  costs:
+    - resourceId: Stone
+      value: 600
+
+    - resourceId: Food
+      value: 1200
+
+  requiresResearchIds:
+    - Task Level Cap I
+
+  boostLevelCap: 1
+
+- id: e76058b5-423e-4f47-b445-e808dc90fff4
+  name: Higher Level Cap II
+  description: Heroes gain an additional +1 max task level for this task.
+
+  costs:
+    - resourceId: Stone
+      value: 2400
+
+    - resourceId: Food
+      value: 4800
+
+  requiresUpgradeIds:
+    - Higher Level Cap I
+
+  requiresResearchIds:
+    - Task Level Cap II
+
+  boostLevelCap: 1

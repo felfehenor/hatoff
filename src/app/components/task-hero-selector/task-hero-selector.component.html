@@ -10,20 +10,39 @@
       <div class="card-title flex items-center">
         <app-damage-type-breakdown [id]="activeTask.damageTypeId"></app-damage-type-breakdown>
         {{ activeTask.name }}
+
+        @if(maxTasklevel() > 0) {
+        <app-level-display [currentLevel]="taskLevel()" [maxLevel]="maxTasklevel()"></app-level-display>
+        }
       </div>
 
       <div class="min-h-[72px]">
         {{ activeTask.description }}
       </div>
 
-      <div class="card-title">
-        <div class="font-light">Heroes ({{ heroes().length }}/{{ activeTask.maxHeroesAllocable }})</div>
+      <div class="card-title flex justify-between items-center">
+        <div class="ml-2 flex items-center">
+          @if(canChangeModes()) {
+          <button class="btn btn-secondary btn-xs mr-4" [class.btn-outline]="currentMode() !== 'heroes'"
+            (click)="currentMode.set('heroes')">
+            Heroes ({{ heroes().length }}/{{ maxHeroes() }})
+          </button>
+          } @else {
+          <div class="font-light">Heroes ({{ heroes().length }}/{{ maxHeroes() }})</div>
+          }
 
-        <app-task-synergy [task]="activeTask"></app-task-synergy>
+          <app-task-synergy class="ml-2" [task]="activeTask"></app-task-synergy>
+        </div>
+
+        @if(canChangeModes()) {
+        <button class="btn btn-secondary btn-xs mr-4" [class.btn-outline]="currentMode() !== 'upgrades'"
+          (click)="currentMode.set('upgrades')">Upgrades</button>
+        }
       </div>
     </div>
 
-    <div class=" overflow-y-auto p-1">
+    @if(currentMode() === 'heroes') {
+    <div class="overflow-y-auto p-1">
       @for(hero of allHeroes(); track hero.id) {
       <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 cursor-pointer"
         [class.no-assign]="!canAssignHeroToTask(hero)" (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)"
@@ -34,7 +53,8 @@
 
         <div class="card-body p-1 pl-3">
           <div class="card-title flex items-center">
-            {{ hero.name }} Lv. {{ hero.level }} <app-hero-archetype-list [hero]="hero"></app-hero-archetype-list>
+            {{ hero.name }} <app-level-display [currentLevel]="hero.level"></app-level-display> <app-hero-archetype-list
+              [hero]="hero"></app-hero-archetype-list>
           </div>
 
           <div>
@@ -50,5 +70,50 @@
       </div>
       }
     </div>
+    }
+
+    @if(currentMode() === 'upgrades') {
+    <div class="overflow-y-auto p-1">
+      @for(upgrade of unpurchasedUpgrades(); track upgrade.id) {
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 p-3">
+        <div class="card-body p-1 pl-3">
+          <div class="card-title flex items-center">
+            {{ upgrade.name }}
+          </div>
+
+          <div>
+            {{ upgrade.description }}
+          </div>
+
+          <div class="flex gap-2">
+            @for(resCost of upgrade.costs; track $index) {
+            <app-resource-display [id]="resCost.resourceId" [value]="resCost.value"></app-resource-display>
+            }
+          </div>
+
+          <div class="absolute right-[32px] top-0 bottom-0 flex content-center items-center">
+            <button class="btn btn-primary btn-sm" [disabled]="!canBuyUpgrade(upgrade)"
+              (click)="buyUpgrade(upgrade)">Buy</button>
+          </div>
+        </div>
+      </div>
+      }
+
+
+      @for(upgrade of purchasedUpgrades(); track upgrade.id) {
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 p-3 opacity-70">
+        <div class="card-body p-1 pl-3">
+          <div class="card-title flex items-center">
+            {{ upgrade.name }}
+          </div>
+
+          <div>
+            {{ upgrade.description }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
   </div>
 </div>

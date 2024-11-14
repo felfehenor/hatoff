@@ -3,7 +3,8 @@ export type ContentType =
   | 'archetype'
   | 'resource'
   | 'task'
-  | 'research';
+  | 'research'
+  | 'upgrade';
 
 export interface Identifiable {
   id: string;

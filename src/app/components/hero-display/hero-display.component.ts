@@ -4,6 +4,7 @@ import { GameHero } from '../../interfaces';
 import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
+import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
   selector: 'app-hero-display',
@@ -13,6 +14,7 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
     DamageTypeComponent,
     PercentPipe,
     HeroArtComponent,
+    LevelDisplayComponent,
   ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',

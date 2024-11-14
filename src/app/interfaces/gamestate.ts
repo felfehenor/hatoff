@@ -50,6 +50,11 @@ export interface GameState {
   taskAssignments: Record<string, string>;
 
   /**
+   * Task id -> Upgrade id -> true
+   */
+  taskUpgrades: Record<string, Record<string, boolean>>;
+
+  /**
    * Current research id
    */
   activeResearch: string;

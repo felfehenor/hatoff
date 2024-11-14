@@ -8,3 +8,4 @@ export * from './options';
 export * from './research';
 export * from './resource';
 export * from './task';
+export * from './upgrade';

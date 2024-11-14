@@ -16,4 +16,6 @@ export interface GameTask extends Content {
 
   resourceIdPerCycle?: string;
   applyResultsToResearch?: boolean;
+
+  possibleUpgradeIds?: string[];
 }

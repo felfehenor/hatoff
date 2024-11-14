@@ -16,3 +16,4 @@ export * from './resource';
 export * from './rng';
 export * from './setup';
 export * from './task';
+export * from './upgrade';

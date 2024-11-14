@@ -1,4 +1,11 @@
 {
   "scss.lint.unknownAtRules": "ignore",
-  "exportall.config.folderListener": ["/src/app/interfaces", "/src/app/helpers"]
+  "exportall.config.folderListener": [
+    "/src/app/interfaces",
+    "/src/app/helpers"
+  ],
+  "files.exclude": {
+    "dist\\hatoff": true,
+    "dist": true
+  }
 }
