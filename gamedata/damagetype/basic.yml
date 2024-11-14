@@ -14,4 +14,6 @@
   name: Intellectual
   icon: tablerBrain
   color: '#e501b0'
-  subTypes: []
+  subTypes:
+    - damageTypeId: Theoretical
+      percent: 80

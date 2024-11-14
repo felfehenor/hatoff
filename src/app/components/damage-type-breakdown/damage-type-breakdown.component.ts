@@ -2,7 +2,7 @@ import { Component, computed, model } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import * as tablerIcons from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
-import { getEntry } from '../../helpers';
+import { allUnlockedDamageTypes, getEntry } from '../../helpers';
 import { GameDamageType } from '../../interfaces';
 
 @Component({
@@ -19,10 +19,19 @@ export class DamageTypeBreakdownComponent {
   public typeInfo = computed(() => getEntry<GameDamageType>(this.id()));
   public subtypeInfo = computed(
     () =>
-      this.typeInfo()?.subTypes?.map((t) => ({
-        ...getEntry<GameDamageType>(t.damageTypeId),
-        percent: t.percent,
-      })) ?? [],
+      this.typeInfo()?.subTypes?.map((t) => {
+        const entry = getEntry<GameDamageType>(t.damageTypeId);
+        if (!entry) return { name: '???', percent: 0 };
+
+        const hasDamageType = allUnlockedDamageTypes().includes(entry);
+
+        return {
+          name: hasDamageType ? entry.name : '???',
+          icon: entry.icon,
+          color: entry.color,
+          percent: t.percent,
+        };
+      }) ?? [],
   );
 
   public icon = computed(() => this.typeInfo()?.icon);
