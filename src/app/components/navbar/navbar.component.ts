@@ -1,5 +1,5 @@
-import { Component, computed } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   heroBeaker,
@@ -9,11 +9,12 @@ import {
   heroUserGroup,
 } from '@ng-icons/heroicons/outline';
 import { gamestate, isResearchComplete, isSetup } from '../../helpers';
+import { MetaService } from '../../services/meta.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIconComponent],
+  imports: [RouterLink, RouterLinkActive, NgIconComponent],
   providers: [
     provideIcons({
       heroCog6Tooth,
@@ -27,6 +28,8 @@ import { gamestate, isResearchComplete, isSetup } from '../../helpers';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  public meta = inject(MetaService);
+
   isSetup = computed(() => isSetup());
   townName = computed(() => gamestate().townSetup.townName);
 

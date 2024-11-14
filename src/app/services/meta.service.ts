@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
+import { timer } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface VersionInfo {
   dirty: boolean;
@@ -15,14 +17,7 @@ interface VersionInfo {
   providedIn: 'root',
 })
 export class MetaService {
-  private currentVersion = 'v.local';
-  private versionMismatch = false;
-  private newVersion = '';
-
-  private changelogCurrent = '';
-  private changelogAll = '';
-
-  private versionInfo = {
+  private versionInfo = signal<VersionInfo>({
     dirty: false,
     raw: 'v.local',
     hash: 'v.local',
@@ -31,20 +26,34 @@ export class MetaService {
     semver: '',
     suffix: '',
     semverString: '',
-  };
+  });
 
-  public get versionString() {
-    return this.currentVersion;
-  }
+  private liveVersionInfo = signal<VersionInfo | undefined>(undefined);
 
-  public get hasVersionMismatch() {
-    return this.versionMismatch;
-  }
+  public versionString = computed(() => {
+    return this.versionInfoToSemver(this.versionInfo());
+  });
 
-  public get latestLiveVersion() {
-    return this.newVersion;
-  }
+  public liveVersionString = computed(() => {
+    const live = this.liveVersionInfo();
+    if (!live) return '';
 
+    return this.versionInfoToSemver(live);
+  });
+
+  public versionMismatch = computed(
+    () =>
+      environment.production &&
+      this.liveVersionString() &&
+      this.versionString() !== this.liveVersionString(),
+  );
+
+  /*
+  private changelogCurrent = '';
+  private changelogAll = '';
+  */
+
+  /*
   public get hasChangelogs() {
     return !!this.changelogCurrent && !!this.changelogAll;
   }
@@ -52,14 +61,13 @@ export class MetaService {
   public get changelogAllText() {
     return this.changelogAll;
   }
+    */
 
   async init() {
     try {
       const response = await fetch('version.json');
       const versionInfo = await response.json();
-      this.versionInfo = versionInfo;
-
-      this.currentVersion = this.versionInfoToSemver(versionInfo);
+      this.versionInfo.set(versionInfo);
     } catch (e) {
       console.error('Failed to load version info', e);
     }
@@ -82,10 +90,13 @@ export class MetaService {
     }
     */
 
-    this.checkVersionAgainstLiveVersion();
+    timer(3600 * 60 * 1000).subscribe(() => {
+      this.checkVersionAgainstLiveVersion();
+    });
   }
 
   private async checkVersionAgainstLiveVersion() {
+    console.log('update check');
     /*
     if (!isInElectron()) {
       return;
@@ -97,11 +108,7 @@ export class MetaService {
         'https://heroes.felfhenor.com/version.json',
       );
       const liveVersionData = await liveVersionFile.json();
-
-      if (this.versionInfo.hash !== liveVersionData.hash) {
-        this.versionMismatch = true;
-        this.newVersion = this.versionInfoToSemver(liveVersionData);
-      }
+      this.liveVersionInfo.set(liveVersionData);
     } catch {
       console.error(
         'Could not load live version data. Probably not a big deal.',
@@ -120,6 +127,10 @@ export class MetaService {
       versionInfo.raw ||
       versionInfo.hash
     );
+  }
+
+  public update() {
+    window.location.reload();
   }
 
   /*

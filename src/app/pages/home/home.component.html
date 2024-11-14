@@ -55,10 +55,12 @@
 
 <div class="fixed bottom-0 left-0 right-0 bg-neutral h-11 flex justify-center items-center text-sm">
   <span>
-    Version {{ meta.versionString }}
+    Version {{ meta.versionString() }}
   </span>
 
-  @if(meta.hasVersionMismatch) {
-  <span class="badge badge-info ms-3">Update Available ({{ meta.latestLiveVersion }})</span>
+  @if(meta.versionMismatch()) {
+  <button class="btn btn-info btn-xs ms-3" (click)="meta.update()">
+    Update Available ({{ meta.liveVersionString() }})
+  </button>
   }
 </div>
