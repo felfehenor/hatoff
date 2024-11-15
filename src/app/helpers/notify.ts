@@ -1,5 +1,8 @@
+import { signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { getOption } from './options';
+
+export const canSendNotifications = signal<boolean>(false);
 
 type NotificationCategory = 'ResourceGain' | 'LevelUp' | 'Error' | 'Success';
 
@@ -12,13 +15,16 @@ export const notification$ = notification.asObservable();
 
 export function notify(message: string, category: NotificationCategory): void {
   if (!getOption(`notification${category}`)) return;
+  if (!canSendNotifications()) return;
   notification.next({ message, type: 'show', category });
 }
 
 export function notifyError(message: string): void {
+  if (!canSendNotifications()) return;
   notification.next({ message, type: 'error', category: 'Error' });
 }
 
 export function notifySuccess(message: string): void {
+  if (!canSendNotifications()) return;
   notification.next({ message, type: 'success', category: 'Success' });
 }

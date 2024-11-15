@@ -2,6 +2,7 @@ import { effect, inject, Injectable, signal } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { interval } from 'rxjs';
 import {
+  canSendNotifications,
   doGameloop,
   gamestate,
   getOption,
@@ -97,9 +98,16 @@ export class GamestateService {
       if (lastRunTime <= 0) return;
 
       const secondsElapsed = Math.round((Date.now() - lastRunTime) / 1000);
+
+      if (secondsElapsed > 5) {
+        canSendNotifications.set(false);
+      }
+
       for (let i = 0; i < secondsElapsed; i++) {
         runLoop();
       }
+
+      canSendNotifications.set(true);
     });
   }
 }
