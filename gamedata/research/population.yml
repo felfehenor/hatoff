@@ -1,15 +1,60 @@
 - id: 417858fb-2192-4386-838b-f46bb646bea7
   name: Huts
-  description: Increase the population cap by 2.
+  description: Increase the population cap by 1.
   researchRequired: 5
 
-  unlocksPopulation: 2
+  unlocksPopulation: 1
 
 - id: 8e16d493-0a0d-49ea-9965-a51cb8ad37c0
-  name: Houses
-  description: Increase the population cap by 3.
-  researchRequired: 25
+  name: Houses I
+  description: Increase the population cap by 1.
+  researchRequired: 10
   requiresResearchIds:
     - Huts
 
-  unlocksPopulation: 3
+  unlocksPopulation: 1
+
+- id: 45ed0b8f-7f58-43d3-b768-1efa548c5120
+  name: Houses II
+  description: Increase the population cap by 1.
+  researchRequired: 20
+  requiresResearchIds:
+    - Houses I
+
+  unlocksPopulation: 1
+
+- id: 5ed1cd61-bf8c-48c1-a2c4-bb1422873cee
+  name: Houses III
+  description: Increase the population cap by 1.
+  researchRequired: 50
+  requiresResearchIds:
+    - Houses II
+
+  unlocksPopulation: 1
+
+- id: 3b987fc5-de98-4bc8-86d8-9231d4a8bf55
+  name: Apartments I
+  description: Increase the population cap by 1.
+  researchRequired: 100
+  requiresResearchIds:
+    - Houses III
+
+  unlocksPopulation: 1
+
+- id: 92174887-c6d6-4504-b521-a6aa85947f1a
+  name: Apartments II
+  description: Increase the population cap by 1.
+  researchRequired: 200
+  requiresResearchIds:
+    - Apartments I
+
+  unlocksPopulation: 1
+
+- id: 626c6700-ccb1-435f-9431-4bd573b60049
+  name: Apartments III
+  description: Increase the population cap by 1.
+  researchRequired: 500
+  requiresResearchIds:
+    - Apartments II
+
+  unlocksPopulation: 1

@@ -1,6 +1,6 @@
 - id: 522636cc-9c25-4261-98c6-284573e3fd9f
   name: Town
-  description: Increase the population cap by 5.
+  description: Increase the population cap by 3.
   researchRequired: 0
 
-  unlocksPopulation: 5
+  unlocksPopulation: 3
