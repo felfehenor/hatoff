@@ -95,7 +95,6 @@ export class GamestateService {
 
     interval(1000).subscribe(() => {
       const secondsElapsed = Math.round((Date.now() - lastRunTime) / 1000);
-      console.log({ secondsElapsed });
       for (let i = 0; i < secondsElapsed; i++) {
         runLoop();
       }
