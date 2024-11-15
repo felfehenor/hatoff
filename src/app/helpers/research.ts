@@ -1,7 +1,8 @@
-import { isUndefined, sortBy } from 'lodash';
+import { isUndefined, sortBy, sum } from 'lodash';
 import {
   GameArchetype,
   GameDamageType,
+  GameHeroStat,
   GameResearch,
   GameTask,
 } from '../interfaces';
@@ -101,4 +102,12 @@ export function allUnlockedClickXpResearch(): GameResearch[] {
   ) as GameResearch[];
 
   return sortBy(validResearch, 'name') as GameResearch[];
+}
+
+export function allUnlockedStatBoostResearchValue(stat: GameHeroStat): number {
+  const validResearch = allCompletedResearch().filter(
+    (r) => (r as GameResearch).unlockRecruitStatBonus === stat,
+  ) as GameResearch[];
+
+  return sum(validResearch.map((r) => r.unlockRecruitStatBonusValue ?? 0));
 }

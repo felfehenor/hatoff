@@ -1,11 +1,17 @@
-import { GameHero, GameResource } from '../interfaces';
+import { GameHero, GameHeroStat, GameResource } from '../interfaces';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { gamestate, setGameState } from './gamestate';
 import { addHero, canRecruitHero, createHero, totalHeroes } from './hero';
 import { notifyError } from './notify';
-import { isResearchComplete } from './research';
+import {
+  allUnlockedStatBoostResearchValue,
+  isResearchComplete,
+} from './research';
 import { hasResource, loseResource } from './resource';
+import { seededrng } from './rng';
+
+import { v4 as uuid } from 'uuid';
 
 export function setResetTime(): void {
   const state = gamestate();
@@ -22,9 +28,24 @@ export function resetRerolls(): void {
 export function generateHeroesToRecruit() {
   const state = gamestate();
 
+  const rng = seededrng(uuid());
+
+  function statBonusForRecruit(stat: GameHeroStat): number {
+    const maxBoost = allUnlockedStatBoostResearchValue(stat);
+    return Math.round(rng() * maxBoost);
+  }
+
   state.recruitment.recruitableHeroes = [];
   for (let i = 0; i < 6; i++) {
-    state.recruitment.recruitableHeroes.push(createHero());
+    const hero = createHero();
+
+    hero.stats.force += statBonusForRecruit('force');
+    hero.stats.piety += statBonusForRecruit('piety');
+    hero.stats.progress += statBonusForRecruit('progress');
+    hero.stats.resistance += statBonusForRecruit('resistance');
+    hero.stats.speed += statBonusForRecruit('speed');
+
+    state.recruitment.recruitableHeroes.push(hero);
   }
 
   setGameState(state);

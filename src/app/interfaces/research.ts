@@ -1,3 +1,4 @@
+import { GameHeroStat } from './hero';
 import { Content } from './identifiable';
 
 export interface GameResearch extends Content {
@@ -37,4 +38,18 @@ export interface GameResearch extends Content {
    * Click XP bonuses that are unlocked by this research.
    */
   unlocksClickXpBonus?: number;
+
+  /**
+   * What stat to increase when rolling a new recruit.
+   *
+   * @requires `unlockRecruitStatBonusValue`
+   */
+  unlockRecruitStatBonus?: GameHeroStat;
+
+  /**
+   * The value a stat can go up by when rolling a new recruit.
+   *
+   * @requires `unlockRecruitStatBonus`
+   */
+  unlockRecruitStatBonusValue?: number;
 }

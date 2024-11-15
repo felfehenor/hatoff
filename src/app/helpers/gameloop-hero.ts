@@ -20,6 +20,7 @@ import { gamestate, setGameState } from './gamestate';
 import { maxXpForLevel } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
+import { allUnlockedStatBoostResearchValue } from './research';
 import { getResourceValue, loseResource } from './resource';
 import { seededrng } from './rng';
 import {
@@ -241,7 +242,9 @@ function levelup(state: GameState, hero: GameHero): void {
   }
 
   const hpBoost =
-    statBoost(5) + getArchetypeLevelUpStatBonusForHero(hero, 'health');
+    statBoost(5) +
+    getArchetypeLevelUpStatBonusForHero(hero, 'health') +
+    allUnlockedStatBoostResearchValue('health');
   const forceBoost =
     statBoost(1, 35) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
   const pietyBoost =
