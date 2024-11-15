@@ -76,7 +76,10 @@ export function canReroll(): boolean {
 }
 
 export function rerollCost(): number {
-  const totalRerolls = 1 + (gamestate().recruitment.numRerolls ?? 0);
+  const numRerolls = gamestate().recruitment.numRerolls ?? 0;
+  if (numRerolls === 0) return 0;
+
+  const totalRerolls = 1 + numRerolls;
   return recruitCost() + Math.floor(Math.pow(totalRerolls, 1.5)) * 5;
 }
 
