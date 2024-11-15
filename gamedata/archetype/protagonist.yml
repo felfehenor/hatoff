@@ -1,0 +1,6 @@
+- id: b60343ef-695f-4e2a-a30c-d011db501bcc
+  name: Protagonist
+  boostGainTaskId: Any
+  boostGainTaskAmount: 1
+  boostXpGain: 1
+  description: This hero gains +1 XP from all tasks, as well as getting +1 to every task output.

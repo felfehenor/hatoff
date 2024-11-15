@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { GameResearch, GameResource } from '../interfaces';
+import { GameArchetype, GameResearch, GameResource } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
 import { blankGameState, gamestate, setGameState } from './gamestate';
 import { addHero, createHero, totalHeroes } from './hero';
@@ -50,7 +50,15 @@ export function ensureFirstHero() {
   const state = gamestate();
   const firstHero = createHero();
 
+  const heroArchId = getEntry<GameArchetype>('Protagonist')?.id;
+  if (heroArchId) {
+    firstHero.archetypeIds[0] = heroArchId;
+  }
+
   firstHero.name = state.townSetup.heroName;
+
+  firstHero.stats.force = 7;
+  firstHero.stats.speed = 2;
 
   state.townSetup.heroId = firstHero.id;
   setGameState(state);

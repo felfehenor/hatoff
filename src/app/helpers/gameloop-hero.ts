@@ -25,6 +25,7 @@ import { seededrng } from './rng';
 import {
   heroesAllocatedToTask,
   maxLevelForTask,
+  numHeroesAllocatedToTask,
   synergyBonus,
   xpRequiredForTaskLevel,
 } from './task';
@@ -37,7 +38,7 @@ function applyHeroSpeed(
 ): void {
   state.heroCurrentTaskSpeed[hero.id] ??= 0;
   state.heroCurrentTaskSpeed[hero.id] +=
-    (hero.stats.speed + taskBonusForHero(hero, task)) *
+    (hero.stats.speed + taskSpeedAndForceBoostForHero(hero, task)) *
     getOption('heroSpeedMultiplier');
 }
 
@@ -71,7 +72,7 @@ function applyHeroForce(
     1,
     Math.floor(
       ((percentApplied + percentBonus) / 100) *
-        (hero.stats.force + taskBonusForHero(hero, task)),
+        (hero.stats.force + taskSpeedAndForceBoostForHero(hero, task)),
     ),
   );
 
@@ -82,6 +83,10 @@ function applyHeroForce(
 
 function updateHero(state: GameState, hero: GameHero): void {
   state.heroes[hero.id] = hero;
+}
+
+function taskSpeedAndForceBoostForHero(hero: GameHero, task: GameTask): number {
+  return hero.taskLevels[task.id] ?? 0;
 }
 
 function taskBonusForHero(hero: GameHero, task: GameTask): number {
@@ -125,9 +130,12 @@ function finalizeTask(state: GameState, task: GameTask): void {
   if (task.resourceIdPerCycle && task.resourceRewardPerCycle) {
     const res = getEntry<GameResource>(task.resourceIdPerCycle);
     const bonusResources = resourceBonusForTask(task);
+    const numHeroesOnTask = numHeroesAllocatedToTask(task);
 
     const gained =
-      (heroBonusSum + bonusResources + task.resourceRewardPerCycle) *
+      (heroBonusSum +
+        bonusResources +
+        task.resourceRewardPerCycle * numHeroesOnTask) *
       numTaskRewards(state, task) *
       getOption('rewardMultiplier');
     state.resources[task.resourceIdPerCycle] ??= 0;
@@ -237,7 +245,7 @@ function levelup(state: GameState, hero: GameHero): void {
   const resistanceBoost =
     statBoost(1, 15) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
   const speedBoost =
-    statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
+    statBoost(1, 10) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
 
   gainStat(hero, 'health', hpBoost);
   gainStat(hero, 'force', forceBoost);

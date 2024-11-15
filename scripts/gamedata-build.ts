@@ -112,7 +112,7 @@ const rewriteDataIds = () => {
       }
 
       // our match key is a simple string, so we rewrite it to be an id
-      else {
+      else if (entry[entryKey] !== 'Any') {
         entry[entryKey] = getIdForName(entry[entryKey], keyMatch);
       }
     });

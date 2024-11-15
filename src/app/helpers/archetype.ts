@@ -27,7 +27,10 @@ export function getArchetypeTaskBonusForHero(
   return sum(
     hero.archetypeIds
       .map((arch) => getEntry<GameArchetype>(arch))
-      .filter((arch) => arch?.boostGainTaskId === task.id)
+      .filter(
+        (arch) =>
+          arch?.boostGainTaskId === task.id || arch?.boostGainTaskId === 'Any',
+      )
       .map((arch) => arch?.boostGainTaskAmount ?? 0),
   );
 }
