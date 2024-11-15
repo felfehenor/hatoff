@@ -4,11 +4,15 @@ import { v4 as uuid } from 'uuid';
 
 import { species } from 'fantastical';
 import { sumBy } from 'lodash';
-import { gamestate, setGameState } from './gamestate';
+import { cooldown } from './cooldown';
+import { gainXp } from './gameloop-hero';
+import { gamestate, setGameState, updateGamestate } from './gamestate';
 import {
   allUnlockedArchetypes,
+  allUnlockedClickXpResearch,
   allUnlockedDamageTypes,
   allUnlockedPopulationResearch,
+  isResearchComplete,
 } from './research';
 import { randomIdentifiableChoice } from './rng';
 
@@ -100,4 +104,22 @@ export function setHeroDamageType(hero: GameHero, damageTypeId: string): void {
   const state = gamestate();
   state.heroes[hero.id].damageTypeId = damageTypeId;
   setGameState(state);
+}
+
+export function clickXpBoost(): number {
+  return sumBy(allUnlockedClickXpResearch(), (r) => r.unlocksClickXpBonus ?? 0);
+}
+
+export function canGiveClickXp(): boolean {
+  return isResearchComplete('Help From Above');
+}
+
+export function giveClickXp(hero: GameHero): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+    state.cooldowns.nextClickResetTime = cooldown(5);
+    gainXp(state, heroRef, clickXpBoost());
+
+    return state;
+  });
 }

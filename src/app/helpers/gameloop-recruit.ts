@@ -10,7 +10,7 @@ export function doRecruitGameloop() {
     return;
   }
 
-  if (Date.now() > state.recruitment.nextResetTime) {
+  if (Date.now() > state.cooldowns.nextRecruitResetTime) {
     generateHeroesToRecruit();
     setResetTime();
     resetRerolls();

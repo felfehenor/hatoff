@@ -31,7 +31,7 @@
   name: Wood Harvesting
   description: Chop trees near your town, gaining Wood.
   damageTypeId: Physical
-  maxHeroesAllocable: 1
+  maxHeroesAllocable: 2
 
   speedPerCycle: 5
   damageRequiredPerCycle: 25
@@ -54,7 +54,7 @@
   name: Stone Gathering
   description: Gather from the quarry near your town, gaining Stone.
   damageTypeId: Physical
-  maxHeroesAllocable: 1
+  maxHeroesAllocable: 2
 
   speedPerCycle: 5
   damageRequiredPerCycle: 25

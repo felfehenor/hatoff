@@ -237,7 +237,7 @@ function levelup(state: GameState, hero: GameHero): void {
   const hpBoost =
     statBoost(5) + getArchetypeLevelUpStatBonusForHero(hero, 'health');
   const forceBoost =
-    statBoost(1, 65) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
+    statBoost(1, 35) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
   const pietyBoost =
     statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
   const progressBoost =
@@ -293,7 +293,7 @@ function gainTaskXp(
   }
 }
 
-function gainXp(state: GameState, hero: GameHero, xp = 1): void {
+export function gainXp(state: GameState, hero: GameHero, xp = 1): void {
   if (hero.level >= hero.maxLevel) return;
 
   hero.xp += xp * getOption('heroXpMultiplier');

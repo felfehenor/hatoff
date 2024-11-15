@@ -9,8 +9,12 @@ export interface GameStateTownSetup {
 
 export interface GameStateRecruitment {
   recruitableHeroes: GameHero[];
-  nextResetTime: number;
   numRerolls: number;
+}
+
+export interface GameStateCooldowns {
+  nextRecruitResetTime: number;
+  nextClickResetTime: number;
 }
 
 export interface GameState {
@@ -68,4 +72,9 @@ export interface GameState {
    * Recruitment data
    */
   recruitment: GameStateRecruitment;
+
+  /**
+   * Cooldowns data
+   */
+  cooldowns: GameStateCooldowns;
 }

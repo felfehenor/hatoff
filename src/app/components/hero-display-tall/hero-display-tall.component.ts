@@ -1,8 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {
+  canGiveClickXp,
+  clickXpBoost,
   gamestate,
   getHero,
+  giveClickXp,
   removeHero,
   setHeroDamageType,
 } from '../../helpers';
@@ -47,6 +50,8 @@ export class HeroDisplayTallComponent {
     () => this.hero().id !== gamestate().townSetup.heroId,
   );
 
+  public xpOnClick = computed(() => clickXpBoost());
+
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();
     if (!hero) return;
@@ -57,5 +62,15 @@ export class HeroDisplayTallComponent {
   public dismissHero() {
     removeHero(this.hero());
     this.close.emit();
+  }
+
+  public canGiveClickXp(): boolean {
+    return (
+      Date.now() >= gamestate().cooldowns.nextClickResetTime && canGiveClickXp()
+    );
+  }
+
+  public giveXp() {
+    giveClickXp(this.hero());
   }
 }

@@ -14,8 +14,11 @@ export function blankGameState(): GameState {
     activeResearch: '',
     recruitment: {
       recruitableHeroes: [],
-      nextResetTime: 0,
       numRerolls: 0,
+    },
+    cooldowns: {
+      nextClickResetTime: 0,
+      nextRecruitResetTime: 0,
     },
     townSetup: {
       hasDoneSetup: false,

@@ -94,3 +94,11 @@ export function allUnlockedPopulationResearch(): GameResearch[] {
 
   return sortBy(validResearch, 'name') as GameResearch[];
 }
+
+export function allUnlockedClickXpResearch(): GameResearch[] {
+  const validResearch = allCompletedResearch().filter(
+    (r) => (r as GameResearch).unlocksClickXpBonus,
+  ) as GameResearch[];
+
+  return sortBy(validResearch, 'name') as GameResearch[];
+}

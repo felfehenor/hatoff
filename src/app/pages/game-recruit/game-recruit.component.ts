@@ -54,12 +54,12 @@ export class GameRecruitComponent {
   );
   public secondsUntilReset = computed(() =>
     Math.floor(
-      ((gamestate().recruitment.nextResetTime - Date.now()) / 1000) % 60,
+      ((gamestate().cooldowns.nextRecruitResetTime - Date.now()) / 1000) % 60,
     ),
   );
   public minutesUntilReset = computed(() =>
     Math.floor(
-      (gamestate().recruitment.nextResetTime - Date.now()) / 1000 / 60,
+      (gamestate().cooldowns.nextRecruitResetTime - Date.now()) / 1000 / 60,
     ),
   );
 

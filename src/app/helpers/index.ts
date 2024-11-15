@@ -1,5 +1,6 @@
 export * from './archetype';
 export * from './content';
+export * from './cooldown';
 export * from './damagetype';
 export * from './fusion';
 export * from './gameloop';

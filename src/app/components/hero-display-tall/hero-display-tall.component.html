@@ -15,7 +15,18 @@
       {{ activeHero.name }}
     </div>
 
-    <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
+    <div class="flex gap-2">
+      @let canClickForXP = canGiveClickXp();
+
+      <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
+      <button class="btn btn-primary btn-xs" [disabled]="!canClickForXP" (click)="giveXp()">
+        @if(canClickForXP) {
+        +{{ xpOnClick() }} XP
+        } @else {
+        <span class="loading loading-spinner loading-xs"></span>
+        }
+      </button>
+    </div>
 
     <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
       (idChange)="changeMainCharacterType($event)"></app-damage-type>

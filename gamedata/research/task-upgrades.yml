@@ -1,7 +1,7 @@
 - id: 7cc6b312-4748-44ad-bbbd-7d557196542f
   name: Task Heroes I
   description: Unlock a task upgrade that allows you to allocate more heroes to tasks.
-  researchRequired: 500
+  researchRequired: 50
 
   requiresResearchIds:
     - Financial Knowledge
@@ -9,7 +9,7 @@
 - id: 2d468635-00f8-4a9f-ab2d-c94a13814fca
   name: Task Heroes II
   description: Unlock a task upgrade that allows you to allocate more heroes to tasks.
-  researchRequired: 1500
+  researchRequired: 500
 
   requiresResearchIds:
     - Task Heroes I

@@ -1,5 +1,6 @@
 import { GameHero, GameResource } from '../interfaces';
 import { getEntry } from './content';
+import { cooldown } from './cooldown';
 import { gamestate, setGameState } from './gamestate';
 import { addHero, canRecruitHero, createHero, totalHeroes } from './hero';
 import { notifyError } from './notify';
@@ -8,7 +9,7 @@ import { hasResource, loseResource } from './resource';
 
 export function setResetTime(): void {
   const state = gamestate();
-  state.recruitment.nextResetTime = Date.now() + 3600_000;
+  state.cooldowns.nextRecruitResetTime = cooldown(3600);
   setGameState(state);
 }
 

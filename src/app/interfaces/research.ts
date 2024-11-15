@@ -9,4 +9,5 @@ export interface GameResearch extends Content {
   unlocksDamageTypeIds?: string[];
   unlocksArchetypeIds?: string[];
   unlocksPopulation?: number;
+  unlocksClickXpBonus?: number;
 }
