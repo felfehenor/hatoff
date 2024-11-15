@@ -1,0 +1,6 @@
+- id: cd5265ec-eafa-40fe-8890-1c8231441669
+  name: Help From Above
+  description: Unlock the ability to give heroes a little push.
+  researchRequired: 0
+
+  unlocksClickXpBonus: 5
