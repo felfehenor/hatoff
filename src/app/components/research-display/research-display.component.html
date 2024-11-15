@@ -14,6 +14,10 @@
     <p>{{ researchData.description }}</p>
   </div>
 
+  <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2">
+    <ng-icon name="heroBeaker"></ng-icon> {{ currentResearch() }} / {{ researchData.researchRequired }}
+  </div>
+
   <div class="absolute bottom-[-7px] left-0 right-0">
     <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
   </div>

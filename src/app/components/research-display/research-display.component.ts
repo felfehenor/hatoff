@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroStar } from '@ng-icons/heroicons/outline';
+import { heroBeaker, heroStar } from '@ng-icons/heroicons/outline';
 import { getResearchFor } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 
@@ -11,6 +11,7 @@ import { GameResearch } from '../../interfaces';
   providers: [
     provideIcons({
       heroStar,
+      heroBeaker,
     }),
   ],
   templateUrl: './research-display.component.html',
@@ -20,9 +21,9 @@ export class ResearchDisplayComponent {
   public research = input.required<GameResearch>();
   public active = input<boolean>(false);
 
+  public currentResearch = computed(() => getResearchFor(this.research().id));
+
   public completion = computed(
-    () =>
-      (getResearchFor(this.research().id) / this.research().researchRequired) *
-      100,
+    () => (this.currentResearch() / this.research().researchRequired) * 100,
   );
 }
