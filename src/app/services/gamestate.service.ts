@@ -84,6 +84,21 @@ export class GamestateService {
   }
 
   private runGameloop(): void {
-    interval(1000).subscribe(() => doGameloop());
+    let lastRunTime = 0;
+
+    function runLoop() {
+      lastRunTime = Date.now();
+      doGameloop();
+    }
+
+    runLoop();
+
+    interval(1000).subscribe(() => {
+      const secondsElapsed = Math.round((Date.now() - lastRunTime) / 1000);
+      console.log({ secondsElapsed });
+      for (let i = 0; i < secondsElapsed; i++) {
+        runLoop();
+      }
+    });
   }
 }
