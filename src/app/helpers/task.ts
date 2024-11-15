@@ -1,7 +1,9 @@
+import { sum } from 'lodash';
 import { GameDamageType, GameHero, GameTask } from '../interfaces';
 import { getEntry } from './content';
 import { canUseDamageTypeForRequirement } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
+import { allUnlockedTasks } from './research';
 import { allocationBonusForTask, maxLevelBonusForTask } from './upgrade';
 
 export function heroesAllocatedToTask(task: GameTask): GameHero[] {
@@ -86,4 +88,15 @@ export function maxLevelForTask(task: GameTask): number {
 
 export function xpRequiredForTaskLevel(task: GameTask, level: number): number {
   return task.xpRequiredPerLevel * level;
+}
+
+export function getGlobalBoostForDamageType(type: GameDamageType): number {
+  return sum(
+    allUnlockedTasks()
+      .filter((t) => t.spreadHeroDamageType)
+      .flatMap((t) =>
+        heroesAllocatedToTask(t).filter((h) => h.damageTypeId === type.id),
+      )
+      .map((h) => h.stats.force),
+  );
 }

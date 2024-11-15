@@ -21,3 +21,16 @@
     - More Resources II
     - Higher Level Cap I
     - Higher Level Cap II
+
+- id: d33d8494-5330-41de-9168-e059c34e5fbc
+  name: Sovereign
+  description: Boost all heroes with this hero's damage type by this hero's Force
+  damageTypeId: Any
+  maxHeroesAllocable: 1
+
+  xpPerCycle: 0
+  speedPerCycle: 0
+  damageRequiredPerCycle: 0
+  xpRequiredPerLevel: 0
+  maxLevel: 0
+  spreadHeroDamageType: true

@@ -56,7 +56,7 @@ export function createHero(): GameHero {
 }
 
 export function maxXpForLevel(level: number, fusionLevel: number): number {
-  return level * (50 + fusionLevel * 100);
+  return level * (50 + fusionLevel ** 3 * 100);
 }
 
 export function populationCap(): number {

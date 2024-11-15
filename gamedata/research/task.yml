@@ -7,3 +7,13 @@
     - Financial Knowledge
 
   unlocksTaskIds: [Tax Collection]
+
+- id: 79bbd970-91c1-4586-a51d-ad1785af5930
+  name: Sovereignty
+  description: Unlock the task "Sovereign". Allows you to boost all of a single damage type by one hero's Force.
+  researchRequired: 50000
+
+  requiresResearchIds:
+    - Spirituality
+
+  unlocksTaskIds: [Sovereign]

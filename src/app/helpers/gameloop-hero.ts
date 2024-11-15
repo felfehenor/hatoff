@@ -23,6 +23,7 @@ import { getOption } from './options';
 import { getResourceValue, loseResource } from './resource';
 import { seededrng } from './rng';
 import {
+  getGlobalBoostForDamageType,
   heroesAllocatedToTask,
   maxLevelForTask,
   numHeroesAllocatedToTask,
@@ -66,13 +67,16 @@ function applyHeroForce(
   const percentApplied = getDamageForcePercentage(heroDamage, taskDamage);
   if (percentApplied === 0) return;
 
+  const bonusDamage = getGlobalBoostForDamageType(heroDamage);
   const percentBonus = synergyBonus(task);
 
   const damageApplied = Math.max(
     1,
     Math.floor(
       ((percentApplied + percentBonus) / 100) *
-        (hero.stats.force + taskSpeedAndForceBoostForHero(hero, task)),
+        (hero.stats.force +
+          bonusDamage +
+          taskSpeedAndForceBoostForHero(hero, task)),
     ),
   );
 
@@ -309,6 +313,10 @@ export function gainXp(state: GameState, hero: GameHero, xp = 1): void {
   }
 }
 
+export function canDoTask(task: GameTask): boolean {
+  return task.speedPerCycle > 0;
+}
+
 export function doHeroGameloop(): void {
   const state = gamestate();
 
@@ -317,6 +325,8 @@ export function doHeroGameloop(): void {
 
     const task = getEntry<GameTask>(state.taskAssignments[hero.id]);
     if (!task) return;
+
+    if (!canDoTask(task)) return;
 
     // boost speed, track action
     applyHeroSpeed(state, hero, task);
