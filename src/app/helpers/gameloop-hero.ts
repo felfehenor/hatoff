@@ -197,6 +197,8 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
     statValueGained += resourceValue;
   }
 
+  const taskXpGained = task.xpPerCycle;
+
   heroesAllocatedToTask(task).forEach((hero) => {
     const archXpBonus = getArchetypeXpBonusForHero(hero);
 
@@ -205,7 +207,7 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
       state,
       hero,
       xpGained *
-        (1 +
+        (taskXpGained +
           bonusConversionXp +
           archXpBonus +
           heroXpBonus +

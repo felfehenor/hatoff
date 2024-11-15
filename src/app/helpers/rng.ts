@@ -15,5 +15,10 @@ export function randomIdentifiableChoice<T extends Identifiable>(
 
 export function randomChoice<T>(seed: string, choices: T[]): T {
   const rng = seededrng(seed);
+
+  // throw away the first 2 rng values. who needs 'em anyway?
+  rng();
+  rng();
+
   return choices[Math.floor(rng() * choices.length)];
 }

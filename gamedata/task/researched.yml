@@ -4,6 +4,7 @@
   damageTypeId: Financial
   maxHeroesAllocable: 2
 
+  xpPerCycle: 1
   speedPerCycle: 3
   damageRequiredPerCycle: 35
   xpRequiredPerLevel: 2500

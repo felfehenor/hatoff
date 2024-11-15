@@ -4,6 +4,7 @@
   damageTypeId: Intellectual
   maxHeroesAllocable: 0
 
+  xpPerCycle: 1
   speedPerCycle: 1
   damageRequiredPerCycle: 1000
   xpRequiredPerLevel: 1000
@@ -16,6 +17,7 @@
   allowAnyType: true
   maxHeroesAllocable: 5
 
+  xpPerCycle: 1
   speedPerCycle: 5
   damageRequiredPerCycle: 100
   xpRequiredPerLevel: 500
@@ -33,6 +35,7 @@
   damageTypeId: Physical
   maxHeroesAllocable: 2
 
+  xpPerCycle: 1
   speedPerCycle: 5
   damageRequiredPerCycle: 25
   xpRequiredPerLevel: 2500
@@ -56,6 +59,7 @@
   damageTypeId: Physical
   maxHeroesAllocable: 2
 
+  xpPerCycle: 1
   speedPerCycle: 5
   damageRequiredPerCycle: 25
   xpRequiredPerLevel: 2500
@@ -79,6 +83,7 @@
   damageTypeId: Emotional
   maxHeroesAllocable: 2
 
+  xpPerCycle: 1
   speedPerCycle: 5
   damageRequiredPerCycle: 25
   xpRequiredPerLevel: 2500
@@ -102,6 +107,7 @@
   damageTypeId: Intellectual
   maxHeroesAllocable: 2
 
+  xpPerCycle: 1
   speedPerCycle: 3
   damageRequiredPerCycle: 25
   xpRequiredPerLevel: 2500

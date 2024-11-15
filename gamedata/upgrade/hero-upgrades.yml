@@ -4,7 +4,7 @@
 
   costs:
     - resourceId: Gold
-      value: 200
+      value: 600
 
     - resourceId: Stone
       value: 100
@@ -20,7 +20,7 @@
 
   costs:
     - resourceId: Gold
-      value: 400
+      value: 2400
 
     - resourceId: Stone
       value: 200
@@ -38,6 +38,9 @@
   description: Gain an additional +1 XP for completing a cycle of this task.
 
   costs:
+    - resourceId: Gold
+      value: 400
+
     - resourceId: Stone
       value: 150
 
@@ -54,6 +57,9 @@
   description: Gain an additional +1 XP for completing a cycle of this task.
 
   costs:
+    - resourceId: Gold
+      value: 1600
+
     - resourceId: Stone
       value: 300
 

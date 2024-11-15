@@ -13,7 +13,7 @@
       value: 200
 
     - resourceId: Gold
-      value: 600
+      value: 1500
 
   requiresResearchIds:
     - Task Resource Gain I
@@ -35,7 +35,7 @@
       value: 400
 
     - resourceId: Gold
-      value: 1200
+      value: 6000
 
   requiresUpgradeIds:
     - More Resources I
@@ -50,6 +50,9 @@
   description: Heroes gain an additional +1 max task level for this task.
 
   costs:
+    - resourceId: Gold
+      value: 2800
+
     - resourceId: Stone
       value: 600
 
@@ -66,6 +69,9 @@
   description: Heroes gain an additional +1 max task level for this task.
 
   costs:
+    - resourceId: Gold
+      value: 10800
+
     - resourceId: Stone
       value: 2400
 

@@ -8,6 +8,7 @@ export interface GameTask extends Content {
   requireExactType?: boolean;
   maxHeroesAllocable: number;
 
+  xpPerCycle: number;
   speedPerCycle: number;
   damageRequiredPerCycle: number;
   xpRequiredPerLevel: number;
