@@ -8,7 +8,19 @@
     }
 
     <div class="card-title">
-      <div class="font-semibold">{{ researchData.name }}</div>
+      @let unlocks = unlockedResearch();
+      <div class="font-semibold" [class.unlocks-more]="unlocks.length > 0" [tp]="tooltip"
+        [tpIsEnabled]="unlocks.length > 0">
+        {{ researchData.name }}
+      </div>
+
+      <ng-template #tooltip>
+        <div class="font-bold mb-2">Unlocks</div>
+
+        @for(research of unlocks; track $index) {
+        <div>{{ research.name }}</div>
+        }
+      </ng-template>
     </div>
 
     <p>{{ researchData.description }}</p>

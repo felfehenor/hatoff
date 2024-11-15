@@ -1,17 +1,20 @@
 import { Component, computed, input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroBeaker, heroStar } from '@ng-icons/heroicons/outline';
-import { getResearchFor } from '../../helpers';
+import { tablerInfoHexagon } from '@ng-icons/tabler-icons';
+import { TippyDirective } from '@ngneat/helipopper';
+import { getEntriesByType, getResearchFor } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 
 @Component({
   selector: 'app-research-display',
   standalone: true,
-  imports: [NgIconComponent],
+  imports: [NgIconComponent, TippyDirective],
   providers: [
     provideIcons({
       heroStar,
       heroBeaker,
+      tablerInfoHexagon,
     }),
   ],
   templateUrl: './research-display.component.html',
@@ -25,5 +28,11 @@ export class ResearchDisplayComponent {
 
   public completion = computed(
     () => (this.currentResearch() / this.research().researchRequired) * 100,
+  );
+
+  public unlockedResearch = computed(() =>
+    getEntriesByType<GameResearch>('research').filter((f) =>
+      f.requiresResearchIds?.includes(this.research().id),
+    ),
   );
 }
