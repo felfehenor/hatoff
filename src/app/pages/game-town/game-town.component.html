@@ -7,11 +7,5 @@
     }
   </span>
 
-  <div pageactions>
-    @for(res of resources(); track $index) {
-    <app-resource-display class="mr-1" [id]="res"></app-resource-display>
-    }
-  </div>
-
   <app-task-list></app-task-list>
 </app-page-card>

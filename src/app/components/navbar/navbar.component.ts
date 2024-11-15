@@ -10,11 +10,17 @@ import {
 } from '@ng-icons/heroicons/outline';
 import { gamestate, isResearchComplete, isSetup } from '../../helpers';
 import { MetaService } from '../../services/meta.service';
+import { ResourceListComponent } from '../resource-list/resource-list.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgIconComponent],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgIconComponent,
+    ResourceListComponent,
+  ],
   providers: [
     provideIcons({
       heroCog6Tooth,
