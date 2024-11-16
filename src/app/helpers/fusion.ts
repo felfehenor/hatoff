@@ -1,4 +1,4 @@
-import { uniq } from 'lodash';
+import { difference, uniq } from 'lodash';
 import { GameDamageType, GameHero, GameHeroStat } from '../interfaces';
 import { getEntry } from './content';
 import { gamestate } from './gamestate';
@@ -100,7 +100,10 @@ export function heroFusionResult(
   newHero.maxXp = maxXpForLevel(1, newHero.fusionLevel);
 
   newHero.archetypeIds = [
-    ...new Set([...bigHero.archetypeIds, smallHero.archetypeIds[0]]),
+    ...new Set([
+      ...bigHero.archetypeIds,
+      difference(smallHero.archetypeIds, bigHero.archetypeIds)[0],
+    ]),
   ];
 
   newHero.taskXp = {};
