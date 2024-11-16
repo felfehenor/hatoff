@@ -58,7 +58,7 @@ export function recruitHero(hero: GameHero): void {
   const state = gamestate();
 
   if (!state.recruitment.recruitableHeroes.includes(hero)) {
-    notifyError('That hero is not available for recruitment!');
+    notifyError('That hero is not available for recruitment!', true);
     return;
   }
 

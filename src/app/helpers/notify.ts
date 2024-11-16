@@ -20,9 +20,9 @@ export function notify(message: string, category: NotificationCategory): void {
   notification.next({ message, type: 'show', category });
 }
 
-export function notifyError(message: string): void {
+export function notifyError(message: string, mustSend = false): void {
   if (!canSendNotifications()) return;
-  if (gamestate().meta.numTicks % 10 !== 0) return;
+  if (!mustSend && gamestate().meta.numTicks % 10 !== 0) return;
   notification.next({ message, type: 'error', category: 'Error' });
 }
 
