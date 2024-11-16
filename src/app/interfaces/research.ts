@@ -52,4 +52,18 @@ export interface GameResearch extends Content {
    * @requires `unlockRecruitStatBonus`
    */
   unlockRecruitStatBonusValue?: number;
+
+  /**
+   * What stat to increase when doing fusion.
+   *
+   * @requires `unlockFusionStatBonusValue`
+   */
+  unlockFusionStatBonus?: GameHeroStat;
+
+  /**
+   * The value a stat goes up by when doing fusion.
+   *
+   * @requires `unlockFusionStatBonus`
+   */
+  unlockFusionStatBonusValue?: number;
 }

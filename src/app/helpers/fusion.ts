@@ -10,7 +10,10 @@ import {
   removeHero,
 } from './hero';
 import { notifySuccess } from './notify';
-import { allUnlockedDamageTypes } from './research';
+import {
+  allUnlockedDamageTypes,
+  allUnlockedFusionStatBoostResearchValue,
+} from './research';
 import { randomChoice } from './rng';
 
 export function validFusionHeroes(): GameHero[] {
@@ -105,7 +108,9 @@ export function heroFusionResult(
 
   Object.keys(newStats).forEach((key) => {
     const statKey = key as GameHeroStat;
-    newStats[statKey] += newHero.fusionLevel;
+    const statMult = statKey === 'health' ? 10 : 1;
+    newStats[statKey] += newHero.fusionLevel * statMult;
+    newStats[statKey] += allUnlockedFusionStatBoostResearchValue(statKey);
   });
 
   newHero.stats = newStats;

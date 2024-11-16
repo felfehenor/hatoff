@@ -111,3 +111,13 @@ export function allUnlockedStatBoostResearchValue(stat: GameHeroStat): number {
 
   return sum(validResearch.map((r) => r.unlockRecruitStatBonusValue ?? 0));
 }
+
+export function allUnlockedFusionStatBoostResearchValue(
+  stat: GameHeroStat,
+): number {
+  const validResearch = allCompletedResearch().filter(
+    (r) => (r as GameResearch).unlockFusionStatBonus === stat,
+  ) as GameResearch[];
+
+  return sum(validResearch.map((r) => r.unlockFusionStatBonusValue ?? 0));
+}
