@@ -2,6 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import {
   getTaskProgress,
   heroesAllocatedToTask,
+  isStrictDamageType,
   maxHeroesForTask,
   maxTaskLevel,
   taskLevel,
@@ -37,4 +38,5 @@ export class TaskDisplayComponent {
   public maxHeroes = computed(() => maxHeroesForTask(this.task()));
   public taskLevel = computed(() => taskLevel(this.task()));
   public maxTasklevel = computed(() => maxTaskLevel(this.task()));
+  public isStrict = computed(() => isStrictDamageType(this.task()));
 }

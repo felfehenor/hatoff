@@ -2,6 +2,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { TownInfoCardComponent } from '../../components/town-info-card/town-info-card.component';
 import {
   blankGameState,
   gamestate,
@@ -13,7 +14,7 @@ import { GameState } from '../../interfaces';
 @Component({
   selector: 'app-options-savefile',
   standalone: true,
-  imports: [SweetAlert2Module, DatePipe, DecimalPipe],
+  imports: [SweetAlert2Module, DatePipe, DecimalPipe, TownInfoCardComponent],
   templateUrl: './options-savefile.component.html',
   styleUrl: './options-savefile.component.scss',
 })

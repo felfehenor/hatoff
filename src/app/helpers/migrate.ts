@@ -5,6 +5,7 @@ import { blankGameState, gamestate, setGameState } from './gamestate';
 import { addHero, createHero, totalHeroes } from './hero';
 import { defaultOptions, options, setOptions } from './options';
 import { gainResource } from './resource';
+import { isTownName } from './town';
 
 export function migrateGameState() {
   const state = gamestate();
@@ -69,10 +70,18 @@ export function ensureFirstHero() {
 export function ensureSomeResources() {
   if (totalHeroes() > 0) return;
 
-  ['Food'].forEach((res) => {
+  let resources = ['Food'];
+  let amount = 50;
+
+  if (isTownName('Rosebud')) {
+    resources = ['Food', 'Gold', 'Stone', 'Wood'];
+    amount = 5000;
+  }
+
+  resources.forEach((res) => {
     const resource = getEntry<GameResource>(res);
     if (!resource) return;
 
-    gainResource(resource, 50);
+    gainResource(resource, amount);
   });
 }

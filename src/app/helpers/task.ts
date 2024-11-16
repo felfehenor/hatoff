@@ -7,11 +7,16 @@ import {
 } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
 import { allUnlockedTasks } from './research';
+import { isTownName } from './town';
 import {
   allocationBonusForTask,
   maxLevelBonusForTask,
   synergyBonusForTask,
 } from './upgrade';
+
+export function isStrictDamageType(task: GameTask): boolean {
+  return task.requireExactType || isTownName('Fel Fhenor');
+}
 
 export function heroesAllocatedToTask(task: GameTask): GameHero[] {
   const state = gamestate();
@@ -27,7 +32,7 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
 
   if (!heroDamageType || !taskDamageType) return false;
 
-  if (task.requireExactType && taskDamageType.id !== heroDamageType.id)
+  if (isStrictDamageType(task) && taskDamageType.id !== heroDamageType.id)
     return false;
 
   if (!canUseDamageTypeForRequirement(heroDamageType, taskDamageType))

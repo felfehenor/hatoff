@@ -11,8 +11,7 @@
     }
 
     <div class="card-title flex items-center">
-      <app-damage-type-breakdown [id]="taskData.damageTypeId"
-        [showSubtypes]="!taskData.requireExactType"></app-damage-type-breakdown>
+      <app-damage-type-breakdown [id]="taskData.damageTypeId" [showSubtypes]="!isStrict()"></app-damage-type-breakdown>
       <div class="font-semibold">
         {{ taskData.name }}
       </div>
