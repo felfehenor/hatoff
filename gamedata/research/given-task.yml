@@ -1,10 +1,3 @@
-- id: 12da70fc-b8e3-4339-ae52-902bbc856e0c
-  name: Help Posters
-  description: Unlock the task "Recruitment". Allows you to recruit more heroes.
-  researchRequired: 0
-
-  unlocksTaskIds: [Recruitment]
-
 - id: c980215d-83be-4164-a344-fdea7189fdd1
   name: Forestry
   description: Unlock the task "Forestry".

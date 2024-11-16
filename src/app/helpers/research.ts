@@ -23,7 +23,7 @@ export function isResearchComplete(id: string): boolean {
   const entry = getEntry<GameResearch>(id);
   if (!entry) return false;
 
-  return getResearchFor(id) >= entry.researchRequired;
+  return getResearchFor(entry.id) >= entry.researchRequired;
 }
 
 export function allAvailableIncompleteResearch(): GameResearch[] {

@@ -3,7 +3,8 @@
 
   <div pageactions>
     @if(canFuse()) {
-    <button class="btn btn-sm btn-success mr-1" [routerLink]="['/game/fuse']">Fuse Heroes</button>
+    <button class="btn btn-sm btn-success mr-1" [routerLink]="['/game/fuse']"
+      [appDisableIfNotResearched]="'Fusion Engine'">Fuse Heroes</button>
     }
     <button class="btn btn-sm btn-primary" [routerLink]="['/game/recruit']">View Recruits</button>
   </div>
