@@ -1,0 +1,53 @@
+- id: 0c907def-069c-4004-9984-9f25530b0370
+  name: Knowledge Transfer I
+  description: Gain an additional +5 Knowledge for completing this task.
+
+  costs:
+    - resourceId: Gold
+      value: 2000
+
+    - resourceId: Food
+      value: 6000
+
+    - resourceId: Wood
+      value: 3000
+
+  boostResourceGain: 5
+
+- id: 5f04400e-420f-45bb-a8e5-a0721984277f
+  name: Knowledge Transfer II
+  description: Gain an additional +5 Knowledge for completing this task.
+
+  costs:
+    - resourceId: Gold
+      value: 6000
+
+    - resourceId: Food
+      value: 18000
+
+    - resourceId: Wood
+      value: 9000
+
+  boostResourceGain: 5
+
+  requiresUpgradeIds:
+    - Knowledge Transfer I
+
+- id: 6411fee5-4a62-4786-9975-9f14e0ad6f7b
+  name: Knowledge Transfer III
+  description: Gain an additional +5 Knowledge for completing this task.
+
+  costs:
+    - resourceId: Gold
+      value: 18000
+
+    - resourceId: Food
+      value: 48000
+
+    - resourceId: Wood
+      value: 27000
+
+  boostResourceGain: 5
+
+  requiresUpgradeIds:
+    - Knowledge Transfer II

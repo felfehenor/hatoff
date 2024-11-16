@@ -17,10 +17,11 @@
   possibleUpgradeIds:
     - More XP I
     - More XP II
-    - More Resources I
-    - More Resources II
     - Higher Level Cap I
     - Higher Level Cap II
+    - Knowledge Transfer I
+    - Knowledge Transfer II
+    - Knowledge Transfer III
 
 - id: 179ee4f0-c49e-4cc9-9e07-363f7f41ba97
   name: 'School: Student'
