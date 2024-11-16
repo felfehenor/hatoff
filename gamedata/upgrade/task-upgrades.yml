@@ -85,3 +85,53 @@
     - Task Level Cap II
 
   boostLevelCap: 1
+
+- id: 9f9a0b15-d379-4feb-89a6-71158f5fcfa0
+  name: Stronger Synergy I
+  description: Heroes gain an additional +10% synergy bonus for this task.
+
+  costs:
+    - resourceId: Gold
+      value: 25000
+
+    - resourceId: Stone
+      value: 9000
+
+    - resourceId: Food
+      value: 35000
+
+    - resourceId: Wood
+      value: 12000
+
+  requiresUpgradeIds:
+    - Higher Level Cap I
+
+  requiresResearchIds:
+    - Task Synergy I
+
+  boostSynergy: 10
+
+- id: 5edd93b0-da7f-4dae-8ffa-79858f8e2979
+  name: Stronger Synergy II
+  description: Heroes gain an additional +10% synergy bonus for this task.
+
+  costs:
+    - resourceId: Gold
+      value: 50000
+
+    - resourceId: Stone
+      value: 18000
+
+    - resourceId: Food
+      value: 70000
+
+    - resourceId: Wood
+      value: 24000
+
+  requiresUpgradeIds:
+    - Stronger Synergy I
+
+  requiresResearchIds:
+    - Task Synergy II
+
+  boostSynergy: 10

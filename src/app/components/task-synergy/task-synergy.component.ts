@@ -27,6 +27,10 @@ export class TaskSynergyComponent {
     if (bonus <= 20) return '#f9d030';
     if (bonus <= 30) return '#b8ee30';
     if (bonus <= 40) return '#26dfd0';
-    return '#f62aA0';
+    if (bonus <= 50) return '#f62aA0';
+    if (bonus <= 60) return '#f07cc4';
+    if (bonus <= 70) return '#2d9479';
+
+    return '#08708a';
   });
 }

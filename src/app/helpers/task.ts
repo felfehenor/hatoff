@@ -7,7 +7,11 @@ import {
 } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
 import { allUnlockedTasks } from './research';
-import { allocationBonusForTask, maxLevelBonusForTask } from './upgrade';
+import {
+  allocationBonusForTask,
+  maxLevelBonusForTask,
+  synergyBonusForTask,
+} from './upgrade';
 
 export function heroesAllocatedToTask(task: GameTask): GameHero[] {
   const state = gamestate();
@@ -81,7 +85,9 @@ export function synergyBonus(task: GameTask): number {
   const doAllMatch = allHeroes.every((h) => h.damageTypeId === damageType);
   if (!doAllMatch) return 0;
 
-  return Math.min(5, allHeroes.length) * 10;
+  const bonus = allHeroes.length > 0 ? synergyBonusForTask(task) : 0;
+
+  return bonus + Math.min(5, allHeroes.length) * 10;
 }
 
 export function maxHeroesForTask(task: GameTask): number {

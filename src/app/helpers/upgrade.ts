@@ -79,6 +79,15 @@ export function maxLevelBonusForTask(task: GameTask): number {
   );
 }
 
+export function synergyBonusForTask(task: GameTask): number {
+  const state = gamestate();
+  return sum(
+    Object.keys(state.taskUpgrades[task.id] ?? {})
+      .map((upgId) => getEntry<GameUpgrade>(upgId))
+      .map((u) => u?.boostSynergy ?? 0),
+  );
+}
+
 export function canBuyUpgrade(upgrade: GameUpgrade): boolean {
   const state = gamestate();
   return upgrade.costs.every(

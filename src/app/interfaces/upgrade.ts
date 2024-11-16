@@ -42,4 +42,9 @@ export interface GameUpgrade extends Content {
    * The amount to boost the level cap for this task by.
    */
   boostLevelCap?: number;
+
+  /**
+   * The amount to boost the synergy for this task by.
+   */
+  boostSynergy?: number;
 }

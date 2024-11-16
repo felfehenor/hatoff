@@ -61,3 +61,19 @@
 
   requiresResearchIds:
     - Task Level Cap I
+
+- id: 77b8bdc7-2334-4bee-a350-217451d18c2e
+  name: Task Synergy I
+  description: Unlock a task upgrade that allows heroes to get an additional +10% task synergy.
+  researchRequired: 5000
+
+  requiresResearchIds:
+    - Task Heroes I
+
+- id: b3a9faa1-2427-4808-b27b-704fd26c712b
+  name: Task Synergy II
+  description: Unlock a task upgrade that allows heroes to get an additional +10% task synergy.
+  researchRequired: 15000
+
+  requiresResearchIds:
+    - Task Synergy I
