@@ -1,5 +1,3 @@
-export {};
-
 const { promisify } = require('util');
 const child = require('child_process');
 
