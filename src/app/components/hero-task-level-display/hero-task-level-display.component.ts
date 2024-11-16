@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, HostBinding, input } from '@angular/core';
 import { TippyDirective } from '@ngneat/helipopper';
 import {
   getEntry,
@@ -33,4 +33,9 @@ export class HeroTaskLevelDisplayComponent {
           this.level() + 1,
         )} XP`,
   );
+
+  @HostBinding('class.hidden')
+  public get isHidden() {
+    return !this.shouldDisplay();
+  }
 }

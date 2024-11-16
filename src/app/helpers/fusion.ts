@@ -2,7 +2,13 @@ import { uniq } from 'lodash';
 import { GameDamageType, GameHero, GameHeroStat } from '../interfaces';
 import { getEntry } from './content';
 import { gamestate } from './gamestate';
-import { addHero, allHeroes, maxXpForLevel, removeHero } from './hero';
+import {
+  addHero,
+  allHeroes,
+  createHero,
+  maxXpForLevel,
+  removeHero,
+} from './hero';
 import { notifySuccess } from './notify';
 import { allUnlockedDamageTypes } from './research';
 import { randomChoice } from './rng';
@@ -95,22 +101,11 @@ export function heroFusionResult(
 
   newHero.taskXp = {};
 
-  const newStats: Record<GameHeroStat, number> = {
-    force: 0,
-    health: 0,
-    piety: 0,
-    progress: 0,
-    resistance: 0,
-    speed: 0,
-  };
+  const newStats: Record<GameHeroStat, number> = createHero().stats;
 
   Object.keys(newStats).forEach((key) => {
     const statKey = key as GameHeroStat;
-    const biggest = Math.max(bigHero.stats[statKey], smallHero.stats[statKey]);
-    const smallest = Math.min(bigHero.stats[statKey], smallHero.stats[statKey]);
-
-    const newStatValue = biggest + Math.floor(smallest / 2);
-    newStats[statKey] = newStatValue;
+    newStats[statKey] += newHero.fusionLevel;
   });
 
   newHero.stats = newStats;
