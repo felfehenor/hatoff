@@ -1,5 +1,6 @@
 import { doHeroGameloop } from './gameloop-hero';
 import { doRecruitGameloop } from './gameloop-recruit';
+import { updateGamestate } from './gamestate';
 import { isSetup } from './setup';
 
 export function isPlayingGame(): boolean {
@@ -12,4 +13,9 @@ export function doGameloop(): void {
 
   doHeroGameloop();
   doRecruitGameloop();
+
+  updateGamestate((state) => {
+    state.meta.numTicks++;
+    return state;
+  });
 }

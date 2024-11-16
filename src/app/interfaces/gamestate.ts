@@ -1,5 +1,11 @@
 import { GameHero } from './hero';
 
+export interface GameStateMeta {
+  version: number;
+  createdAt: number;
+  numTicks: number;
+}
+
 export interface GameStateTownSetup {
   hasDoneSetup: boolean;
   townName: string;
@@ -18,11 +24,6 @@ export interface GameStateCooldowns {
 }
 
 export interface GameState {
-  /**
-   * Current version of the game state
-   */
-  version: number;
-
   /**
    * Hero id -> Hero data
    */
@@ -77,4 +78,9 @@ export interface GameState {
    * Cooldowns data
    */
   cooldowns: GameStateCooldowns;
+
+  /**
+   * Meta data
+   */
+  meta: GameStateMeta;
 }

@@ -26,7 +26,11 @@ export function blankGameState(): GameState {
       heroName: '',
       townName: '',
     },
-    version: 1,
+    meta: {
+      version: 1,
+      createdAt: Date.now(),
+      numTicks: 0,
+    },
   };
 }
 

@@ -5,6 +5,21 @@
     <div class="card bg-neutral foreground shadow-xl">
       <div class="card-body">
         <div class="card-title">
+          Savefile Metadata
+        </div>
+
+        <p class="mb-3">
+          You started playing this savefile {{ startedAt() | date }}.
+          <br>
+          A total of {{ numTicks() | number }} seconds have elapsed since you started playing.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="card bg-neutral foreground shadow-xl mt-3">
+      <div class="card-body">
+        <div class="card-title">
           Savefile Management
         </div>
 
