@@ -1,4 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { marked } from 'marked';
 import { timer } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -48,20 +49,12 @@ export class MetaService {
       this.versionString() !== this.liveVersionString(),
   );
 
-  /*
-  private changelogCurrent = '';
-  private changelogAll = '';
-  */
+  public changelogCurrent = signal<string>('');
+  public changelogAll = signal<string>('');
 
-  /*
-  public get hasChangelogs() {
-    return !!this.changelogCurrent && !!this.changelogAll;
-  }
-
-  public get changelogAllText() {
-    return this.changelogAll;
-  }
-    */
+  public hasChangelogs = computed(
+    () => this.changelogAll() && this.changelogCurrent(),
+  );
 
   async init() {
     try {
@@ -72,31 +65,28 @@ export class MetaService {
       console.error('Failed to load version info', e);
     }
 
-    /*
     try {
-      const changelog = await fetch('assets/CHANGELOG.md');
+      const changelog = await fetch('CHANGELOG.md');
       const changelogData = await changelog.text();
-      this.changelogAll = await marked(changelogData);
+      this.changelogAll.set(await marked(changelogData));
     } catch {
       console.error('Could not load changelog (all) - probably on local.');
     }
 
     try {
-      const changelog = await fetch('assets/CHANGELOG-current.md');
+      const changelog = await fetch('CHANGELOG-current.md');
       const changelogData = await changelog.text();
-      this.changelogCurrent = await marked(changelogData);
+      this.changelogCurrent.set(await marked(changelogData));
     } catch {
       console.error('Could not load changelog (current) - probably on local.');
     }
-    */
 
-    timer(3600 * 60 * 1000).subscribe(() => {
+    timer(15 * 60 * 1000).subscribe(() => {
       this.checkVersionAgainstLiveVersion();
     });
   }
 
   private async checkVersionAgainstLiveVersion() {
-    console.log('update check');
     /*
     if (!isInElectron()) {
       return;

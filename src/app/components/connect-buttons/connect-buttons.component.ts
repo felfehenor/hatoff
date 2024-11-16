@@ -5,11 +5,13 @@ import {
   tablerMail,
   tablerRss,
 } from '@ng-icons/tabler-icons';
+import { TippyDirective } from '@ngneat/helipopper';
+import { ChangelogModalComponent } from '../changelog-modal/changelog-modal.component';
 
 @Component({
   selector: 'app-connect-buttons',
   standalone: true,
-  imports: [NgIconComponent],
+  imports: [NgIconComponent, TippyDirective, ChangelogModalComponent],
   providers: [
     provideIcons({
       tablerBrandDiscord,
