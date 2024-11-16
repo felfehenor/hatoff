@@ -2,7 +2,7 @@
   <tbody>
     @for(stat of gameStats; track $index) {
     <tr>
-      <td class="pl-0">{{ stat | titlecase }}</td>
+      <td class="pl-0 has-help" [tp]="statTooltips[$index]">{{ stat | titlecase }}</td>
       <td class="text-right">{{ hero().stats[stat] | number }}</td>
     </tr>
     }

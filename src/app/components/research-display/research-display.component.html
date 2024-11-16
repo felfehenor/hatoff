@@ -9,7 +9,7 @@
 
     <div class="card-title">
       @let unlocks = unlockedResearch();
-      <div class="font-semibold" [class.unlocks-more]="unlocks.length > 0" [tp]="tooltip"
+      <div class="font-semibold" [class.has-help]="unlocks.length > 0" [tp]="tooltip"
         [tpIsEnabled]="unlocks.length > 0">
         {{ researchData.name }}
       </div>
