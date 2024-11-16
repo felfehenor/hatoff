@@ -52,7 +52,7 @@ jobs:
         run: echo "${{ steps.createRelease.outputs.upload_url }}" > release_url.txt
 
       - name: Save Release URL File for Publish
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: release_url
           path: release_url.txt
