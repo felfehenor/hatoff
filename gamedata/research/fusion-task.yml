@@ -1,0 +1,31 @@
+- id: 9c7d048e-429c-4bb1-9b43-f945ccc9d9c8
+  name: Fusion Retaining I
+  description: Allow fused heroes to retain 1 Task level.
+  researchRequired: 100000
+
+  unlockFusionTaskLevelRetain: 1
+
+  requiresResearchIds:
+    - Fusion Progress I
+    - Fusion Health I
+    - Fusion Force I
+    - Fusion Resistance I
+    - Fusion Piety I
+    - Fusion Speed I
+
+- id: 4c64e796-f238-4d0f-9103-70b2dc07cbd8
+  name: Fusion Retaining II
+  description: Allow fused heroes to retain 2 Task levels.
+  researchRequired: 500000
+
+  unlockFusionTaskLevelRetain: 2
+
+  requiresResearchIds:
+    - Fusion Retaining I
+
+    - Fusion Progress II
+    - Fusion Health II
+    - Fusion Force II
+    - Fusion Resistance II
+    - Fusion Piety II
+    - Fusion Speed II

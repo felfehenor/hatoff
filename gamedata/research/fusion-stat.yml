@@ -1,3 +1,26 @@
+# health
+- id: fb7d10ae-d90a-4271-b212-7cdeb0e43224
+  name: Fusion Health I
+  description: Allow fused heroes to come with an additional +25 Health (HP).
+  researchRequired: 3000
+
+  unlockFusionStatBonus: health
+  unlockFusionStatBonusValue: 25
+
+  requiresResearchIds:
+    - Fusion Engine
+
+- id: fdfc0580-bfac-4cd4-8b48-46d9dbbaa259
+  name: Fusion Health II
+  description: Allow fused heroes to come with an additional +25 Health (HP).
+  researchRequired: 15000
+
+  unlockFusionStatBonus: health
+  unlockFusionStatBonusValue: 25
+
+  requiresResearchIds:
+    - Fusion Health I
+
 # progress
 - id: 49fc59ba-ca3d-49c9-8fff-c51a6a1eb169
   name: Fusion Progress I

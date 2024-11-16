@@ -1,5 +1,6 @@
 import { signal } from '@angular/core';
 import { Subject } from 'rxjs';
+import { gamestate } from './gamestate';
 import { getOption } from './options';
 
 export const canSendNotifications = signal<boolean>(false);
@@ -21,6 +22,7 @@ export function notify(message: string, category: NotificationCategory): void {
 
 export function notifyError(message: string): void {
   if (!canSendNotifications()) return;
+  if (gamestate().meta.numTicks % 10 !== 0) return;
   notification.next({ message, type: 'error', category: 'Error' });
 }
 

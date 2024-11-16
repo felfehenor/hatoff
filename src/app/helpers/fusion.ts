@@ -12,6 +12,7 @@ import {
 import { notifySuccess } from './notify';
 import {
   allUnlockedDamageTypes,
+  allUnlockedFusionMaxTaskLevelResearchValue,
   allUnlockedFusionStatBoostResearchValue,
 } from './research';
 import { randomChoice } from './rng';
@@ -115,6 +116,8 @@ export function heroFusionResult(
 
   newHero.stats = newStats;
 
+  const maxTaskRetainLevel = allUnlockedFusionMaxTaskLevelResearchValue();
+
   const newTaskLevels: Record<string, number> = {};
   [
     ...new Set([
@@ -122,9 +125,12 @@ export function heroFusionResult(
       ...Object.keys(smallHero.taskLevels ?? {}),
     ]),
   ].forEach((taskKey) => {
-    const max = Math.max(
-      bigHero.taskLevels[taskKey] ?? 0,
-      smallHero.taskLevels[taskKey] ?? 0,
+    const max = Math.min(
+      maxTaskRetainLevel,
+      Math.max(
+        bigHero.taskLevels[taskKey] ?? 0,
+        smallHero.taskLevels[taskKey] ?? 0,
+      ),
     );
     newTaskLevels[taskKey] = max;
   });

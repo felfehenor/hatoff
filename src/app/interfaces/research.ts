@@ -66,4 +66,9 @@ export interface GameResearch extends Content {
    * @requires `unlockFusionStatBonus`
    */
   unlockFusionStatBonusValue?: number;
+
+  /**
+   * The max level of a retained task for fused heroes.
+   */
+  unlockFusionTaskLevelRetain?: number;
 }

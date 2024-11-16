@@ -121,3 +121,11 @@ export function allUnlockedFusionStatBoostResearchValue(
 
   return sum(validResearch.map((r) => r.unlockFusionStatBonusValue ?? 0));
 }
+
+export function allUnlockedFusionMaxTaskLevelResearchValue(): number {
+  const validResearch = allCompletedResearch().filter(
+    (r) => (r as GameResearch).unlockFusionTaskLevelRetain,
+  ) as GameResearch[];
+
+  return sum(validResearch.map((r) => r.unlockFusionTaskLevelRetain ?? 0));
+}

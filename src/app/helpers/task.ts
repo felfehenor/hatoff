@@ -1,7 +1,10 @@
 import { sum } from 'lodash';
 import { GameDamageType, GameHero, GameTask } from '../interfaces';
 import { getEntry } from './content';
-import { canUseDamageTypeForRequirement } from './damagetype';
+import {
+  canUseDamageTypeForRequirement,
+  getDamageForcePercentage,
+} from './damagetype';
 import { gamestate, setGameState } from './gamestate';
 import { allUnlockedTasks } from './research';
 import { allocationBonusForTask, maxLevelBonusForTask } from './upgrade';
@@ -24,6 +27,9 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
     return false;
 
   if (!canUseDamageTypeForRequirement(heroDamageType, taskDamageType))
+    return false;
+
+  if (getDamageForcePercentage(heroDamageType, taskDamageType) === 0)
     return false;
 
   return heroesAllocatedToTask(task).length < maxHeroesForTask(task);
