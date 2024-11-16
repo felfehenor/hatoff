@@ -7,11 +7,13 @@
     {{ typeInfo()?.name }}: 100%
   </div>
 
+  @if(showSubtypes()) {
   @for(type of subtypeInfo(); track $index) {
   <div class="flex items-center">
     <ng-icon [name]="type.icon" class="mx-1 text-sm" [style.color]="type.color"></ng-icon>
     {{ type.name }}: {{ type.percent }}%
   </div>
+  }
   }
 </ng-template>
 }

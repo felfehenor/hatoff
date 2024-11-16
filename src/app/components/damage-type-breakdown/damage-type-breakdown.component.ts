@@ -1,4 +1,4 @@
-import { Component, computed, model } from '@angular/core';
+import { Component, computed, input, model } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { TippyDirective } from '@ngneat/helipopper';
 import {
@@ -18,6 +18,7 @@ import { GameDamageType } from '../../interfaces';
 })
 export class DamageTypeBreakdownComponent {
   public id = model.required<string>();
+  public showSubtypes = input<boolean>(true);
 
   public typeInfo = computed(() => getEntry<GameDamageType>(this.id()));
   public subtypeInfo = computed(
