@@ -1,5 +1,6 @@
 - id: Seiyria
   name: Seiyria
+  credits: Creator. Just a little vanity here and there.
   damageTypeId: Any
   archetypeIds:
     - Protagonist
@@ -9,6 +10,7 @@
 
 - id: Sellie
   name: Sellie
+  credits: Friend. Helper. Supporter. Snuck in when no one was looking.
   damageTypeId: Intellectual
   archetypeIds:
     - Thinker
@@ -18,6 +20,7 @@
 
 - id: Juke Dragh
   name: Juke Dragh
+  credits: Friend. Long-term supporter. Creative support. Inspiration. Thank you for always helping me with my dumb designs.
   damageTypeId: Theoretical
   archetypeIds:
     - Experiential
@@ -27,6 +30,7 @@
 
 - id: Kenny
   name: Kenny
+  credits: Friend. Fellow developer. Multiple PRs (thank you!). Played a terrible version multiple times in an effort to help me balance test.
   damageTypeId: Physical
   archetypeIds:
     - Thinker
