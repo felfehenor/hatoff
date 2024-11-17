@@ -87,25 +87,23 @@ export class GamestateService {
   private runGameloop(): void {
     let lastRunTime = 0;
 
-    function runLoop() {
+    function runLoop(numTicks: number) {
       lastRunTime = Date.now();
-      doGameloop();
+      doGameloop(numTicks);
     }
 
-    runLoop();
+    runLoop(1);
 
     interval(1000).subscribe(() => {
       if (lastRunTime <= 0) return;
 
       const secondsElapsed = Math.round((Date.now() - lastRunTime) / 1000);
 
-      if (secondsElapsed > 5) {
+      if (document.hidden) {
         canSendNotifications.set(false);
       }
 
-      for (let i = 0; i < secondsElapsed; i++) {
-        runLoop();
-      }
+      runLoop(secondsElapsed);
 
       canSendNotifications.set(true);
     });

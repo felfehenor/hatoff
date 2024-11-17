@@ -14,6 +14,7 @@ export function defaultOptions(): GameOptions {
     heroTaskXpMultiplier: 1,
     heroLevelUpStatGainMultiplier: 1,
 
+    tickMultiplier: 1,
     rewardMultiplier: 1,
 
     notificationError: true,

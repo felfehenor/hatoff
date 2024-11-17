@@ -37,11 +37,13 @@ function applyHeroSpeed(
   state: GameState,
   hero: GameHero,
   task: GameTask,
+  numTimes: number,
 ): void {
   state.heroCurrentTaskSpeed[hero.id] ??= 0;
   state.heroCurrentTaskSpeed[hero.id] +=
     (hero.stats.speed + taskSpeedAndForceBoostForHero(hero, task)) *
-    getOption('heroSpeedMultiplier');
+    getOption('heroSpeedMultiplier') *
+    numTimes;
 }
 
 function resetHeroSpeed(state: GameState, hero: GameHero): void {
@@ -56,10 +58,19 @@ function canApplyDamageToTask(
   return state.heroCurrentTaskSpeed[hero.id] >= task.speedPerCycle;
 }
 
+function numTimesToApplyDamageToTask(
+  state: GameState,
+  hero: GameHero,
+  task: GameTask,
+): number {
+  return Math.floor(state.heroCurrentTaskSpeed[hero.id] / task.speedPerCycle);
+}
+
 function applyHeroForce(
   state: GameState,
   hero: GameHero,
   task: GameTask,
+  numTimes: number,
 ): void {
   const heroDamage = getEntry<GameDamageType>(hero.damageTypeId);
   const taskDamage = getEntry<GameDamageType>(task.damageTypeId);
@@ -83,7 +94,7 @@ function applyHeroForce(
 
   state.taskProgress[task.id] ??= 0;
   state.taskProgress[task.id] +=
-    damageApplied * getOption('heroForceMultiplier');
+    damageApplied * getOption('heroForceMultiplier') * numTimes;
 }
 
 function updateHero(state: GameState, hero: GameHero): void {
@@ -320,7 +331,7 @@ export function canDoTask(task: GameTask): boolean {
   return task.speedPerCycle > 0;
 }
 
-export function doHeroGameloop(): void {
+export function doHeroGameloop(numTicks: number): void {
   const state = gamestate();
 
   Object.values(state.heroes).forEach((hero) => {
@@ -332,12 +343,13 @@ export function doHeroGameloop(): void {
     if (!canDoTask(task)) return;
 
     // boost speed, track action
-    applyHeroSpeed(state, hero, task);
+    applyHeroSpeed(state, hero, task, numTicks);
     if (!canApplyDamageToTask(state, hero, task)) return;
+    const numTimesToApplyForce = numTimesToApplyDamageToTask(state, hero, task);
     resetHeroSpeed(state, hero);
 
     // if we've met the terms, we can do damage
-    applyHeroForce(state, hero, task);
+    applyHeroForce(state, hero, task, numTimesToApplyForce);
 
     if (!isTaskFinished(state, task)) return;
 

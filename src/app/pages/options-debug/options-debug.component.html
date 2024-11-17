@@ -48,6 +48,13 @@
         </div>
 
         <div class="form-control">
+          @let tkmult = currentValueForOption('tickMultiplier');
+          <h3 class="mb-1 text-lg">Tick Multiplier ({{ tkmult }}x)</h3>
+          <input type="range" min="1" max="100" [value]="tkmult" class="range range-xs range-secondary"
+            (change)="setValueForOptionFromRange('tickMultiplier', $event)" />
+        </div>
+
+        <div class="form-control">
           @let smult = currentValueForOption('heroSpeedMultiplier');
           <h3 class="mb-1 text-lg">Hero Speed Multiplier ({{ smult }}x)</h3>
           <input type="range" min="1" max="100" [value]="smult" class="range range-xs range-secondary"

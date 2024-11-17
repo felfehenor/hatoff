@@ -9,6 +9,7 @@ export interface GameOptions {
   heroTaskXpMultiplier: number;
   heroLevelUpStatGainMultiplier: number;
 
+  tickMultiplier: number;
   rewardMultiplier: number;
 
   notificationLevelUp: boolean;
