@@ -1,13 +1,22 @@
-import { GameHero, GameHeroStat, SpecialGameHero } from '../interfaces';
+import {
+  GameDamageType,
+  GameHero,
+  GameHeroStat,
+  GameTask,
+  SpecialGameHero,
+} from '../interfaces';
 
 import { v4 as uuid } from 'uuid';
 
 import { signal, WritableSignal } from '@angular/core';
 import { species } from 'fantastical';
 import { cloneDeep, merge, sumBy } from 'lodash';
+import { getEntry } from './content';
 import { cooldown } from './cooldown';
+import { getDamageForcePercentage } from './damagetype';
 import { gainXp } from './gameloop-hero';
 import { gamestate, setGameState, updateGamestate } from './gamestate';
+import { getOption } from './options';
 import {
   allUnlockedArchetypes,
   allUnlockedClickXpResearch,
@@ -16,6 +25,7 @@ import {
   isResearchComplete,
 } from './research';
 import { randomChoice, randomIdentifiableChoice } from './rng';
+import { getGlobalBoostForDamageType, synergyBonus } from './task';
 
 const _specialHeroes: WritableSignal<SpecialGameHero[]> = signal([]);
 
@@ -161,4 +171,51 @@ export function giveClickXp(hero: GameHero): void {
 
     return state;
   });
+}
+
+export function taskSpeedAndForceBoostForHero(
+  hero: GameHero,
+  task: GameTask,
+): number {
+  return hero.taskLevels[task.id] ?? 0;
+}
+
+export function totalHeroSpeed(
+  hero: GameHero,
+  task: GameTask,
+  numTimes: number,
+): number {
+  return (
+    (hero.stats.speed + taskSpeedAndForceBoostForHero(hero, task)) *
+    getOption('heroSpeedMultiplier') *
+    numTimes
+  );
+}
+
+export function totalHeroForce(
+  hero: GameHero,
+  task: GameTask,
+  numTimes: number,
+): number {
+  const heroDamage = getEntry<GameDamageType>(hero.damageTypeId);
+  const taskDamage = getEntry<GameDamageType>(task.damageTypeId);
+  if (!heroDamage || !taskDamage) return 0;
+
+  const percentApplied = getDamageForcePercentage(heroDamage, taskDamage);
+  if (percentApplied === 0) return 0;
+
+  const bonusDamage = getGlobalBoostForDamageType(heroDamage);
+  const percentBonus = synergyBonus(task);
+
+  const damageApplied = Math.max(
+    1,
+    Math.floor(
+      ((percentApplied + percentBonus) / 100) *
+        (hero.stats.force +
+          bonusDamage +
+          taskSpeedAndForceBoostForHero(hero, task)),
+    ),
+  );
+
+  return damageApplied * getOption('heroForceMultiplier') * numTimes;
 }

@@ -1,11 +1,17 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { TippyDirective } from '@ngneat/helipopper';
+import { sum } from 'lodash';
 import {
+  getOption,
   getTaskProgress,
   heroesAllocatedToTask,
   isStrictDamageType,
   maxHeroesForTask,
   maxTaskLevel,
   taskLevel,
+  totalHeroForce,
+  totalHeroSpeed,
 } from '../../helpers';
 import { GameTask } from '../../interfaces';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
@@ -21,6 +27,8 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     DamageTypeBreakdownComponent,
     TaskSynergyComponent,
     LevelDisplayComponent,
+    TippyDirective,
+    DecimalPipe,
   ],
   templateUrl: './task-display.component.html',
   styleUrl: './task-display.component.scss',
@@ -39,4 +47,24 @@ export class TaskDisplayComponent {
   public taskLevel = computed(() => taskLevel(this.task()));
   public maxTasklevel = computed(() => maxTaskLevel(this.task()));
   public isStrict = computed(() => isStrictDamageType(this.task()));
+
+  public perTick = computed(() => {
+    const task = this.task();
+    const numTicksPerTick = getOption('tickMultiplier');
+    const heroes = heroesAllocatedToTask(task);
+    const totalSpeed = sum(
+      heroes.map((t) => totalHeroSpeed(t, task, numTicksPerTick)),
+    );
+
+    if (totalSpeed > 0) {
+      const numApplications = totalSpeed / task.speedPerCycle;
+      const heroDamage = sum(
+        heroes.map((t) => totalHeroForce(t, task, numApplications)),
+      );
+      return heroDamage;
+    }
+
+    return 0;
+  });
+  public requiredPerTick = computed(() => this.task().damageRequiredPerCycle);
 }

@@ -1,6 +1,5 @@
 import { sum } from 'lodash';
 import {
-  GameDamageType,
   GameHero,
   GameHeroStat,
   GameResearch,
@@ -15,20 +14,17 @@ import {
   getArchetypeXpBonusForHero,
 } from './archetype';
 import { getEntry } from './content';
-import { getDamageForcePercentage } from './damagetype';
 import { gamestate, setGameState } from './gamestate';
-import { maxXpForLevel } from './hero';
+import { maxXpForLevel, totalHeroForce, totalHeroSpeed } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { allUnlockedStatBoostResearchValue } from './research';
 import { getResourceValue, loseResource } from './resource';
 import { seededrng } from './rng';
 import {
-  getGlobalBoostForDamageType,
   heroesAllocatedToTask,
   maxLevelForTask,
   numHeroesAllocatedToTask,
-  synergyBonus,
   xpRequiredForTaskLevel,
 } from './task';
 import { resourceBonusForTask, xpBonusForTask } from './upgrade';
@@ -40,10 +36,7 @@ function applyHeroSpeed(
   numTimes: number,
 ): void {
   state.heroCurrentTaskSpeed[hero.id] ??= 0;
-  state.heroCurrentTaskSpeed[hero.id] +=
-    (hero.stats.speed + taskSpeedAndForceBoostForHero(hero, task)) *
-    getOption('heroSpeedMultiplier') *
-    numTimes;
+  state.heroCurrentTaskSpeed[hero.id] += totalHeroSpeed(hero, task, numTimes);
 }
 
 function resetHeroSpeed(state: GameState, hero: GameHero): void {
@@ -72,37 +65,14 @@ function applyHeroForce(
   task: GameTask,
   numTimes: number,
 ): void {
-  const heroDamage = getEntry<GameDamageType>(hero.damageTypeId);
-  const taskDamage = getEntry<GameDamageType>(task.damageTypeId);
-  if (!heroDamage || !taskDamage) return;
-
-  const percentApplied = getDamageForcePercentage(heroDamage, taskDamage);
-  if (percentApplied === 0) return;
-
-  const bonusDamage = getGlobalBoostForDamageType(heroDamage);
-  const percentBonus = synergyBonus(task);
-
-  const damageApplied = Math.max(
-    1,
-    Math.floor(
-      ((percentApplied + percentBonus) / 100) *
-        (hero.stats.force +
-          bonusDamage +
-          taskSpeedAndForceBoostForHero(hero, task)),
-    ),
-  );
+  const damage = totalHeroForce(hero, task, numTimes);
 
   state.taskProgress[task.id] ??= 0;
-  state.taskProgress[task.id] +=
-    damageApplied * getOption('heroForceMultiplier') * numTimes;
+  state.taskProgress[task.id] += damage;
 }
 
 function updateHero(state: GameState, hero: GameHero): void {
   state.heroes[hero.id] = hero;
-}
-
-function taskSpeedAndForceBoostForHero(hero: GameHero, task: GameTask): number {
-  return hero.taskLevels[task.id] ?? 0;
 }
 
 function taskBonusForHero(hero: GameHero, task: GameTask): number {
