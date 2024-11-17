@@ -1,6 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { timer } from 'rxjs';
 import { DamageTypeComponent } from '../../components/damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../../components/hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../../components/hero-art/hero-art.component';
@@ -46,7 +47,7 @@ export class GameRecruitComponent {
   public currentHeroCount = computed(() => totalHeroes());
   public currentHeroCap = computed(() => populationCap());
   public canRecruit = computed(() => canRecruit());
-  public canReroll = computed(() => canReroll());
+  public canReroll = computed(() => canReroll() && !this.isRerollOnTimeout());
   public rerollCost = computed(() => rerollCost());
   public recruitCost = computed(() => recruitCost());
   public currentHeroPool = computed(
@@ -64,6 +65,7 @@ export class GameRecruitComponent {
   );
 
   public selectedHero = signal<GameHero | undefined>(undefined);
+  public isRerollOnTimeout = signal<boolean>(false);
 
   public hasRecruitedHero(hero: GameHero) {
     return getHero(hero.id);
@@ -81,5 +83,10 @@ export class GameRecruitComponent {
 
   public doReroll(): void {
     doReroll();
+
+    this.isRerollOnTimeout.set(true);
+    timer(2000).subscribe(() => {
+      this.isRerollOnTimeout.set(false);
+    });
   }
 }

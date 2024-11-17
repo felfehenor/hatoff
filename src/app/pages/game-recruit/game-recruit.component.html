@@ -18,7 +18,11 @@
 
   <div pageactions class="flex items-center">
     <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()">
+      @if(isRerollOnTimeout()) {
+      <span class="loading loading-spinner loading-xs"></span>
+      } @else {
       Reroll for {{ rerollCost() | number }} Food
+      }
     </button>
   </div>
 
