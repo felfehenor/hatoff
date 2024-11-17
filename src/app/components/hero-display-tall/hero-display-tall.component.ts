@@ -1,6 +1,7 @@
 import { Component, computed, input, output } from '@angular/core';
 import { TippyDirective } from '@ngneat/helipopper';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canGiveClickXp,
   clickXpBoost,
@@ -34,6 +35,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     SweetAlert2Module,
     ButtonCloseComponent,
     TippyDirective,
+    HeroSpecialGlowDirective,
   ],
   templateUrl: './hero-display-tall.component.html',
   styleUrl: './hero-display-tall.component.scss',

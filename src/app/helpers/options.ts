@@ -18,6 +18,7 @@ export function defaultOptions(): GameOptions {
 
     notificationError: true,
     notificationLevelUp: true,
+    notificationRecruitment: true,
     notificationResourceGain: false,
     notificationSuccess: true,
   };

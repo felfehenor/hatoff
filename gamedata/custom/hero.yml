@@ -1,0 +1,35 @@
+- id: Seiyria
+  name: Seiyria
+  damageTypeId: Any
+  archetypeIds:
+    - Protagonist
+
+  stats:
+    speed: 3
+
+- id: Sellie
+  name: Sellie
+  damageTypeId: Intellectual
+  archetypeIds:
+    - Thinker
+
+  stats:
+    force: 6
+
+- id: Juke Dragh
+  name: Juke Dragh
+  damageTypeId: Theoretical
+  archetypeIds:
+    - Experiential
+
+  stats:
+    force: 6
+
+- id: Kenny
+  name: Kenny
+  damageTypeId: Physical
+  archetypeIds:
+    - Thinker
+
+  stats:
+    speed: 4

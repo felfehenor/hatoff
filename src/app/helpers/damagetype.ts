@@ -16,6 +16,7 @@ export function getDamageForcePercentage(
   taskType: GameDamageType,
 ): number {
   if (heroType.id === taskType.id) return 100;
+  if (heroType.isAny) return 100;
 
   return (
     taskType.subTypes?.find((t) => t.damageTypeId === heroType.id)?.percent ?? 0

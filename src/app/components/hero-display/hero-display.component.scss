@@ -1,0 +1,7 @@
+.can-click {
+  @apply hover:ring-2 hover:cursor-pointer;
+}
+
+.active {
+  @apply ring-2;
+}

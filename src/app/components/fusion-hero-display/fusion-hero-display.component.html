@@ -1,6 +1,6 @@
 @let heroData = hero();
 
-<div class="card card-side foreground-2 cursor-pointer shadow-xl hover:ring-2">
+<div class="card card-side foreground-2 cursor-pointer shadow-xl hover:ring-2" [appHeroSpecialGlow]="heroData">
   <figure class="max-w-[96px] pl-2">
     <app-hero-art [id]="heroData.id" [size]="96"></app-hero-art>
   </figure>

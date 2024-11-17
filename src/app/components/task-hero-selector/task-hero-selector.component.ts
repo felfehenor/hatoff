@@ -1,5 +1,6 @@
 import { Component, computed, input, output, signal } from '@angular/core';
 import { sortBy } from 'lodash';
+import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   allHeroes,
   assignHeroToTask,
@@ -48,6 +49,7 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     TaskSynergyComponent,
     LevelDisplayComponent,
     ResourceDisplayComponent,
+    HeroSpecialGlowDirective,
   ],
   templateUrl: './task-hero-selector.component.html',
   styleUrl: './task-hero-selector.component.scss',

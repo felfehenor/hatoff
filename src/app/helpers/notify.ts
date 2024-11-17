@@ -5,7 +5,12 @@ import { getOption } from './options';
 
 export const canSendNotifications = signal<boolean>(false);
 
-type NotificationCategory = 'ResourceGain' | 'LevelUp' | 'Error' | 'Success';
+type NotificationCategory =
+  | 'ResourceGain'
+  | 'LevelUp'
+  | 'Recruitment'
+  | 'Error'
+  | 'Success';
 
 const notification = new Subject<{
   message: string;

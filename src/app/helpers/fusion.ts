@@ -6,6 +6,7 @@ import {
   addHero,
   allHeroes,
   createHero,
+  createSpecialHero,
   maxXpForLevel,
   removeHero,
 } from './hero';
@@ -62,6 +63,9 @@ export function heroFusionDamageType(
   const subHeroDamage = getEntry<GameDamageType>(subHero.damageTypeId);
   if (!mainHeroDamage || !subHeroDamage) return mainHero.damageTypeId;
 
+  if (mainHeroDamage.isAny) return mainHeroDamage.id;
+  if (subHeroDamage.isAny) return mainHeroDamage.id;
+
   const seed = [mainHero.id, subHero.id].sort().join('-');
 
   let choices = allUnlockedDamageTypes().map((i) => i.id);
@@ -90,6 +94,11 @@ export function heroFusionResult(
 ): GameHero {
   const newHero = structuredClone(bigHero);
 
+  let baseHero = createHero();
+  if (bigHero.isSpecial) {
+    baseHero = createSpecialHero(bigHero.id) ?? createHero();
+  }
+
   newHero.fusionLevel += 1;
   newHero.level = 1;
   newHero.maxLevel += 10;
@@ -108,7 +117,7 @@ export function heroFusionResult(
 
   newHero.taskXp = {};
 
-  const newStats: Record<GameHeroStat, number> = createHero().stats;
+  const newStats: Record<GameHeroStat, number> = baseHero.stats;
 
   Object.keys(newStats).forEach((key) => {
     const statKey = key as GameHeroStat;

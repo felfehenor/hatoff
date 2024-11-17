@@ -14,8 +14,15 @@ import {
   setAllContentById,
   setAllIdsByName,
   setArt,
+  setSpecialHeroes,
 } from '../helpers';
-import { Content, ContentType, GameDamageType, HeroArt } from '../interfaces';
+import {
+  Content,
+  ContentType,
+  GameDamageType,
+  HeroArt,
+  SpecialGameHero,
+} from '../interfaces';
 
 interface SharedCanvas {
   canvas: HTMLCanvasElement;
@@ -160,14 +167,21 @@ export class ContentService {
       research: this.http.get('./json/research.json'),
       upgrade: this.http.get('./json/upgrade.json'),
       art: this.http.get('./json/art.json'),
+      custom: this.http.get('./json/custom.json'),
     }).subscribe((assets) => {
-      this.unfurlAssets(assets as unknown as Record<string, Content[]>);
+      const { art, custom: customHeroes, ...contentAssets } = assets;
+      setArt(art as unknown as HeroArt);
+      setSpecialHeroes(customHeroes as SpecialGameHero[]);
+
+      this.unfurlAssets(contentAssets as unknown as Record<string, Content[]>);
 
       this.postprocessContent();
 
       console.log('[Content] Content loaded.');
       this.hasLoadedData.set(true);
     });
+
+    forkJoin({});
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -180,11 +194,6 @@ export class ContentService {
     const allEntriesByIdAssets: Record<string, Content> = allContentById();
 
     Object.keys(assets).forEach((subtype) => {
-      if (subtype === 'art') {
-        setArt(assets[subtype] as unknown as HeroArt);
-        return;
-      }
-
       Object.values(assets[subtype]).forEach((entry) => {
         entry.__type = subtype as ContentType;
 

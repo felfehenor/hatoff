@@ -1,7 +1,7 @@
 import { PercentPipe } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import { GameHero } from '../../interfaces';
-import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
@@ -10,11 +10,11 @@ import { LevelDisplayComponent } from '../level-display/level-display.component'
   selector: 'app-hero-display',
   standalone: true,
   imports: [
-    ContentNameComponent,
     DamageTypeComponent,
     PercentPipe,
     HeroArtComponent,
     LevelDisplayComponent,
+    HeroSpecialGlowDirective,
   ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',

@@ -35,6 +35,8 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
 
   if (!heroDamageType || !taskDamageType) return false;
 
+  if (heroDamageType.isAny) return true;
+
   if (isStrictDamageType(task) && taskDamageType.id !== heroDamageType.id)
     return false;
 

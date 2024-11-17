@@ -1,9 +1,21 @@
-import { GameHero, GameHeroStat, GameResource } from '../interfaces';
+import {
+  GameHero,
+  GameHeroStat,
+  GameResource,
+  SpecialGameHero,
+} from '../interfaces';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { gamestate, setGameState } from './gamestate';
-import { addHero, canRecruitHero, createHero, totalHeroes } from './hero';
-import { notifyError } from './notify';
+import {
+  addHero,
+  canRecruitHero,
+  createHero,
+  createSpecialHero,
+  getRandomSpecialHero,
+  totalHeroes,
+} from './hero';
+import { notify, notifyError } from './notify';
 import {
   allUnlockedStatBoostResearchValue,
   isResearchComplete,
@@ -28,16 +40,33 @@ export function resetRerolls(): void {
 export function generateHeroesToRecruit() {
   const state = gamestate();
 
-  const rng = seededrng(uuid());
+  const recruitSeed = uuid();
+  const rng = seededrng(recruitSeed);
 
   function statBonusForRecruit(stat: GameHeroStat): number {
     const maxBoost = allUnlockedStatBoostResearchValue(stat);
     return Math.round(rng() * maxBoost);
   }
 
+  function doesHeroExist(hero: SpecialGameHero) {
+    if (state.recruitment.recruitableHeroes.find((s) => s.id === hero.id))
+      return true;
+    if (state.heroes[hero.id]) return true;
+
+    return false;
+  }
+
   state.recruitment.recruitableHeroes = [];
   for (let i = 0; i < 6; i++) {
-    const hero = createHero();
+    let hero: GameHero = createHero();
+
+    if (rng() <= 0.01) {
+      const specialHero = getRandomSpecialHero(recruitSeed + '-' + i);
+      if (!doesHeroExist(specialHero)) {
+        hero = createSpecialHero(specialHero.id) ?? createHero();
+        notify(`${hero.name} has come into town!`, 'Recruitment');
+      }
+    }
 
     hero.stats.force += statBonusForRecruit('force');
     hero.stats.piety += statBonusForRecruit('piety');

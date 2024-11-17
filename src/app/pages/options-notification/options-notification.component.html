@@ -19,6 +19,15 @@
 
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
+            <input type="checkbox" [checked]="currentValueForOption('notificationRecruitment') === true"
+              class="checkbox checkbox-secondary"
+              (click)="setValueForOption('notificationRecruitment', !currentValueForOption('notificationRecruitment'))" />
+            <span class="label-text">Special Heroes For Recruitment</span>
+          </label>
+        </div>
+
+        <div class="form-control">
+          <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationLevelUp') === true"
               class="checkbox checkbox-secondary"
               (click)="setValueForOption('notificationLevelUp', !currentValueForOption('notificationLevelUp'))" />

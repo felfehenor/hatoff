@@ -24,8 +24,9 @@
 
   <div class="flex flex-wrap gap-2">
     @for(hero of currentHeroPool(); track $index) {
-    <div class="flex-1 min-w-[30%]">
-      <div class="card foreground shadow-xl" [class.recruited-already]="hasRecruitedHero(hero)">
+    <div class="flex-1 min-w-[30%] m-1">
+      <div class="card foreground shadow-xl" [class.recruited-already]="hasRecruitedHero(hero)"
+        [appHeroSpecialGlow]="hero">
         <div class="card-body">
           <div class="absolute top-5 right-5">
             <app-hero-art [id]="hero.id" [size]="240"></app-hero-art>

@@ -66,10 +66,3 @@ body {
 progress::-webkit-progress-value {
   transition: 250ms width;
 }
-
-.has-help {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-
-  @apply cursor-help;
-}

@@ -18,6 +18,8 @@ export const AllGameHeroStats: GameHeroStat[] = [
 ];
 
 export interface GameHero extends Identifiable {
+  isSpecial?: boolean;
+
   damageTypeId: string;
   archetypeIds: string[];
 
@@ -32,4 +34,14 @@ export interface GameHero extends Identifiable {
   taskLevels: Record<string, number>;
 
   stats: Record<GameHeroStat, number>;
+}
+
+export interface SpecialGameHero {
+  id: string;
+  name: string;
+
+  damageTypeId: string;
+  archetypeIds: string[];
+
+  stats: Partial<Record<GameHeroStat, number>>;
 }

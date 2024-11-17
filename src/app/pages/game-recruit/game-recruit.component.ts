@@ -8,7 +8,7 @@ import { HeroLevelTaglineComponent } from '../../components/hero-level-tagline/h
 import { HeroStatsTableComponent } from '../../components/hero-stats-table/hero-stats-table.component';
 import { HeroTaskLevelListComponent } from '../../components/hero-task-level-list/hero-task-level-list.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
-import { ResourceDisplayComponent } from '../../components/resource-display/resource-display.component';
+import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canRecruit,
   canReroll,
@@ -29,7 +29,6 @@ import { GameDamageType, GameHero } from '../../interfaces';
   standalone: true,
   imports: [
     PageCardComponent,
-    ResourceDisplayComponent,
     DecimalPipe,
     HeroLevelTaglineComponent,
     DamageTypeComponent,
@@ -38,6 +37,7 @@ import { GameDamageType, GameHero } from '../../interfaces';
     HeroStatsTableComponent,
     HeroTaskLevelListComponent,
     SweetAlert2Module,
+    HeroSpecialGlowDirective,
   ],
   templateUrl: './game-recruit.component.html',
   styleUrl: './game-recruit.component.scss',

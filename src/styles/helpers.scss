@@ -18,3 +18,14 @@
     @apply overflow-x-hidden overflow-y-auto;
   }
 }
+
+.has-help {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+
+  @apply cursor-help;
+}
+
+.special-hero-glow {
+  @apply ring-1 ring-amber-400;
+}

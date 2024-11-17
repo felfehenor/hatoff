@@ -1,7 +1,7 @@
 @let activeHero = liveHeroData();
 
 @if(activeHero) {
-<div class="card foreground shadow-xl flex-1">
+<div class="card foreground shadow-xl flex-1" [appHeroSpecialGlow]="activeHero">
   <div class="card-body">
     <div class="absolute top-2 right-2 z-50">
       <app-button-close (click)="close.emit()"></app-button-close>

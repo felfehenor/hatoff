@@ -1,9 +1,10 @@
-import { GameHero } from '../interfaces';
+import { GameHero, GameHeroStat, SpecialGameHero } from '../interfaces';
 
 import { v4 as uuid } from 'uuid';
 
+import { signal, WritableSignal } from '@angular/core';
 import { species } from 'fantastical';
-import { sumBy } from 'lodash';
+import { cloneDeep, merge, sumBy } from 'lodash';
 import { cooldown } from './cooldown';
 import { gainXp } from './gameloop-hero';
 import { gamestate, setGameState, updateGamestate } from './gamestate';
@@ -14,7 +15,9 @@ import {
   allUnlockedPopulationResearch,
   isResearchComplete,
 } from './research';
-import { randomIdentifiableChoice } from './rng';
+import { randomChoice, randomIdentifiableChoice } from './rng';
+
+const _specialHeroes: WritableSignal<SpecialGameHero[]> = signal([]);
 
 export function defaultHero(): GameHero {
   return {
@@ -53,6 +56,42 @@ export function createHero(): GameHero {
   hero.archetypeIds = [randomIdentifiableChoice(hero.id, availableArchetypes)];
 
   return hero;
+}
+
+export function setSpecialHeroes(heroes: SpecialGameHero[]): void {
+  _specialHeroes.set(heroes);
+}
+
+export function getRandomSpecialHero(seed: string): SpecialGameHero {
+  return randomChoice<SpecialGameHero>(seed, _specialHeroes());
+}
+
+export function createSpecialHero(id: string): GameHero | undefined {
+  const modifications = cloneDeep(_specialHeroes().find((s) => s.id === id));
+  if (!modifications) return undefined;
+
+  const hero = createHero();
+  hero.isSpecial = true;
+
+  hero.id = modifications.id;
+  hero.name = modifications.name;
+
+  hero.damageTypeId = modifications.damageTypeId;
+  hero.archetypeIds = modifications.archetypeIds;
+
+  Object.keys(modifications.stats).forEach((statKey) => {
+    const stat = statKey as GameHeroStat;
+
+    hero.stats[stat] += modifications.stats[stat] ?? 0;
+  });
+
+  merge(hero.stats, modifications.stats);
+
+  return hero;
+}
+
+export function hasSpecialHero(id: string): boolean {
+  return !!_specialHeroes().find((s) => s.id === id);
 }
 
 export function maxXpForLevel(level: number, fusionLevel: number): number {
