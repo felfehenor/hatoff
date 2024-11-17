@@ -15,6 +15,9 @@ import {
 } from './upgrade';
 
 export function isStrictDamageType(task: GameTask): boolean {
+  const damageType = getEntry<GameDamageType>(task.damageTypeId);
+  if (damageType?.isAny) return false;
+
   return task.requireExactType || isTownName('Fel Fhenor');
 }
 
