@@ -16,6 +16,7 @@ import { v4 as uuid } from 'uuid';
 import { allArt, seededrng } from '../../helpers';
 import { HeroArtPieceContainer, HeroMood } from '../../interfaces';
 import { ContentService } from '../../services/content.service';
+import { GamestateService } from '../../services/gamestate.service';
 
 type ColorDataTuple = [number, number, number];
 
@@ -40,6 +41,7 @@ const defaultDrawingFlags = () => ({
 })
 export class HeroArtComponent implements OnDestroy {
   private contentService = inject(ContentService);
+  private gamestateService = inject(GamestateService);
 
   public id = input.required<string>();
   public mood = input<HeroMood>('neutral');
@@ -86,6 +88,8 @@ export class HeroArtComponent implements OnDestroy {
     effect(
       () => {
         this.id();
+
+        if (!this.gamestateService.hasLoaded()) return;
 
         this.drawCharacter();
       },

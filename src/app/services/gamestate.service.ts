@@ -22,7 +22,7 @@ export class GamestateService {
   private localStorage = inject(LocalStorageService);
   private contentService = inject(ContentService);
 
-  private hasLoaded = signal<boolean>(false);
+  public hasLoaded = signal<boolean>(false);
 
   constructor() {
     effect(
