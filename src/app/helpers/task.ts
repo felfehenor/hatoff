@@ -90,9 +90,15 @@ export function synergyBonus(task: GameTask): number {
   const allHeroes = heroesAllocatedToTask(task);
   if (allHeroes.length <= 1) return 0;
 
-  const damageType = allHeroes[0].damageTypeId;
+  const normalDamageTypes = allHeroes.filter(
+    (t) => !getEntry<GameDamageType>(t.damageTypeId)?.isAny,
+  );
 
-  const doAllMatch = allHeroes.every((h) => h.damageTypeId === damageType);
+  const damageType = normalDamageTypes[0].damageTypeId;
+
+  const doAllMatch = normalDamageTypes.every(
+    (h) => h.damageTypeId === damageType,
+  );
   if (!doAllMatch) return 0;
 
   const bonus = allHeroes.length > 0 ? synergyBonusForTask(task) : 0;
