@@ -2,7 +2,13 @@ import { merge } from 'lodash';
 import { GameArchetype, GameResearch, GameResource } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
 import { blankGameState, gamestate, setGameState } from './gamestate';
-import { addHero, createHero, totalHeroes } from './hero';
+import {
+  addHero,
+  createHero,
+  createSpecialHero,
+  hasSpecialHero,
+  totalHeroes,
+} from './hero';
 import { defaultOptions, options, setOptions } from './options';
 import { gainResource } from './resource';
 import { isTownName } from './town';
@@ -49,7 +55,12 @@ export function ensureFirstHero() {
   if (totalHeroes() > 0) return;
 
   const state = gamestate();
-  const firstHero = createHero();
+  let firstHero = createHero();
+
+  if (hasSpecialHero(state.townSetup.heroName)) {
+    state.townSetup.heroId = 'SpecialHero';
+    firstHero = createSpecialHero(state.townSetup.heroName) ?? createHero();
+  }
 
   const heroArchId = getEntry<GameArchetype>('Protagonist')?.id;
   if (heroArchId) {
