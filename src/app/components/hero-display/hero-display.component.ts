@@ -4,6 +4,7 @@ import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.dir
 import { GameHero } from '../../interfaces';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
+import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
@@ -15,6 +16,7 @@ import { LevelDisplayComponent } from '../level-display/level-display.component'
     HeroArtComponent,
     LevelDisplayComponent,
     HeroSpecialGlowDirective,
+    HeroFusionIndicatorComponent,
   ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',

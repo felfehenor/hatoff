@@ -32,6 +32,7 @@ import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
+import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 import { ResourceDisplayComponent } from '../resource-display/resource-display.component';
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
@@ -50,6 +51,7 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     LevelDisplayComponent,
     ResourceDisplayComponent,
     HeroSpecialGlowDirective,
+    HeroFusionIndicatorComponent,
   ],
   templateUrl: './task-hero-selector.component.html',
   styleUrl: './task-hero-selector.component.scss',

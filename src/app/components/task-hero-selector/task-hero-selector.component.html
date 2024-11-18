@@ -52,14 +52,19 @@
         </figure>
 
         <div class="card-body p-1 pl-3">
+
+
           <div class="card-title flex items-center">
-            {{ hero.name }} <app-level-display [currentLevel]="hero.level"></app-level-display> <app-hero-archetype-list
-              [hero]="hero"></app-hero-archetype-list>
+            {{ hero.name }}
+            <app-level-display [currentLevel]="hero.level"></app-level-display>
+            <app-hero-fusion-indicator [hero]="hero"></app-hero-fusion-indicator>
           </div>
 
           <div>
             <app-damage-type [id]="hero.damageTypeId" [damage]="hero.stats.force"></app-damage-type>
           </div>
+
+          <app-hero-archetype-list [hero]="hero"></app-hero-archetype-list>
 
           <app-hero-assignment [hero]="hero"></app-hero-assignment>
 
