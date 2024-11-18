@@ -4,6 +4,7 @@ export * from './damage';
 export * from './gamestate';
 export * from './hero';
 export * from './identifiable';
+export * from './item';
 export * from './options';
 export * from './research';
 export * from './resource';

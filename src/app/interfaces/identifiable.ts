@@ -2,6 +2,7 @@ export type ContentType =
   | 'damagetype'
   | 'archetype'
   | 'resource'
+  | 'item'
   | 'task'
   | 'research'
   | 'upgrade';

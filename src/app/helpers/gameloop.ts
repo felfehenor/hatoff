@@ -1,5 +1,6 @@
 import { doHeroGameloop } from './gameloop-hero';
 import { doRecruitGameloop } from './gameloop-recruit';
+import { doShopGameloop } from './gameloop-shop';
 import { updateGamestate } from './gamestate';
 import { getOption } from './options';
 import { isSetup } from './setup';
@@ -16,6 +17,7 @@ export function doGameloop(numTicks: number): void {
 
   doHeroGameloop(totalTicks);
   doRecruitGameloop();
+  doShopGameloop();
 
   updateGamestate((state) => {
     state.meta.numTicks += totalTicks;

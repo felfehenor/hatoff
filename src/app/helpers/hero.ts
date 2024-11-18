@@ -10,21 +10,23 @@ import { v4 as uuid } from 'uuid';
 
 import { signal, WritableSignal } from '@angular/core';
 import { species } from 'fantastical';
-import { cloneDeep, merge, sumBy } from 'lodash';
+import { cloneDeep, merge, sample, sampleSize, sumBy } from 'lodash';
+import { getArchetypeLevelUpStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { getDamageForcePercentage } from './damagetype';
-import { gainXp } from './gameloop-hero';
 import { gamestate, setGameState, updateGamestate } from './gamestate';
+import { notify } from './notify';
 import { getOption } from './options';
 import {
   allUnlockedArchetypes,
   allUnlockedClickXpResearch,
   allUnlockedDamageTypes,
   allUnlockedPopulationResearch,
+  allUnlockedStatBoostResearchValue,
   isResearchComplete,
 } from './research';
-import { randomChoice, randomIdentifiableChoice } from './rng';
+import { randomChoice, randomIdentifiableChoice, seededrng } from './rng';
 import { getGlobalBoostForDamageType, synergyBonus } from './task';
 
 const _specialHeroes: WritableSignal<SpecialGameHero[]> = signal([]);
@@ -167,7 +169,7 @@ export function giveClickXp(hero: GameHero): void {
   updateGamestate((state) => {
     const heroRef = state.heroes[hero.id];
     state.cooldowns.nextClickResetTime = cooldown(5);
-    gainXp(state, heroRef, clickXpBoost());
+    gainXp(heroRef, clickXpBoost());
 
     return state;
   });
@@ -218,4 +220,102 @@ export function totalHeroForce(
   );
 
   return damageApplied * getOption('heroForceMultiplier') * numTimes;
+}
+
+export function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
+  hero.stats[stat] += Math.floor(val);
+}
+
+export function levelup(hero: GameHero): void {
+  const rng = seededrng(hero.id + ' ' + hero.level);
+
+  function statBoost(val = 1, chance = 50) {
+    const shouldGain = rng() * 100 <= chance;
+    if (!shouldGain) return 0;
+
+    return val * getOption('heroLevelUpStatGainMultiplier');
+  }
+
+  const hpBoost =
+    statBoost(5) +
+    getArchetypeLevelUpStatBonusForHero(hero, 'health') +
+    allUnlockedStatBoostResearchValue('health');
+  const forceBoost =
+    statBoost(1, 35) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
+  const pietyBoost =
+    statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
+  const progressBoost =
+    statBoost(1, 50) + getArchetypeLevelUpStatBonusForHero(hero, 'progress');
+  const resistanceBoost =
+    statBoost(1, 15) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
+  const speedBoost =
+    statBoost(1, 10) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
+
+  gainStat(hero, 'health', hpBoost);
+  gainStat(hero, 'force', forceBoost);
+  gainStat(hero, 'piety', pietyBoost);
+  gainStat(hero, 'progress', progressBoost);
+  gainStat(hero, 'resistance', resistanceBoost);
+  gainStat(hero, 'speed', speedBoost);
+
+  const stats = [
+    hpBoost > 0 ? `+${hpBoost} HP` : '',
+    forceBoost > 0 ? `+${forceBoost} FRC` : '',
+    pietyBoost > 0 ? `+${pietyBoost} PIE` : '',
+    progressBoost > 0 ? `+${progressBoost} PRG` : '',
+    resistanceBoost > 0 ? `+${resistanceBoost} RES` : '',
+    speedBoost > 0 ? `+${speedBoost} SPD` : '',
+  ].filter(Boolean);
+
+  notify(
+    `Level up: ${hero.name} Lv.${hero.level}! ${stats.join(', ')}`,
+    'LevelUp',
+  );
+}
+
+export function gainXp(hero: GameHero, xp = 1): void {
+  if (hero.level >= hero.maxLevel) return;
+
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+
+    heroRef.xp += xp * getOption('heroXpMultiplier');
+
+    while (heroRef.xp >= heroRef.maxXp) {
+      heroRef.xp = heroRef.xp - heroRef.maxXp;
+      heroRef.maxXp = maxXpForLevel(heroRef.level + 1, heroRef.fusionLevel);
+      heroRef.level += 1;
+
+      levelup(heroRef);
+    }
+
+    return state;
+  });
+}
+
+export function pickRandomArchetypes(hero: GameHero): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+    const numArchetypes = heroRef.archetypeIds.length;
+
+    const unlockedArchetypes = allUnlockedArchetypes();
+    const newArchetypes = sampleSize(unlockedArchetypes, numArchetypes).map(
+      (i) => i.id,
+    );
+    heroRef.archetypeIds = newArchetypes;
+
+    return state;
+  });
+}
+
+export function pickRandomDamageType(hero: GameHero): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+
+    const unlockedDamageTypes = allUnlockedDamageTypes();
+    const newDamageType = sample(unlockedDamageTypes)!;
+    heroRef.damageTypeId = newDamageType?.id;
+
+    return state;
+  });
 }

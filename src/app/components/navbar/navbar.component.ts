@@ -4,10 +4,12 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   heroBeaker,
   heroBuildingOffice2,
+  heroBuildingStorefront,
   heroCog6Tooth,
   heroSparkles,
   heroUserGroup,
 } from '@ng-icons/heroicons/outline';
+import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import { gamestate, isResearchComplete, isSetup } from '../../helpers';
 import { MetaService } from '../../services/meta.service';
 import { ResourceListComponent } from '../resource-list/resource-list.component';
@@ -20,6 +22,7 @@ import { ResourceListComponent } from '../resource-list/resource-list.component'
     RouterLinkActive,
     NgIconComponent,
     ResourceListComponent,
+    HideResearchDirective,
   ],
   providers: [
     provideIcons({
@@ -28,6 +31,7 @@ import { ResourceListComponent } from '../resource-list/resource-list.component'
       heroBeaker,
       heroUserGroup,
       heroSparkles,
+      heroBuildingStorefront,
     }),
   ],
   templateUrl: './navbar.component.html',

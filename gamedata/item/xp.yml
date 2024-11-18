@@ -1,0 +1,38 @@
+- id: 51db1b71-1f1c-417d-891d-9b7b4d2420bd
+  name: Small EXP Potion
+  description: Grant a hero +500 XP.
+  cost: 1000
+
+  giveXp: 500
+
+  icon: gameRoundPotion
+  color: '#008080'
+
+  requiresResearchIds:
+    - Shopping Trip
+
+- id: ccb9b7a6-f345-4e25-9ede-dbd51fc86424
+  name: Large EXP Potion
+  description: Grant a hero +2500 XP.
+  cost: 7500
+
+  giveXp: 2500
+
+  icon: gameRoundPotion
+  color: '#0a0'
+
+  requiresResearchIds:
+    - Large EXP Potions
+
+- id: bb5308c2-1a39-43f4-8ff7-ff2a57b7409d
+  name: Massive EXP Potion
+  description: Grant a hero +10000 XP.
+  cost: 40000
+
+  giveXp: 10000
+
+  icon: gameRoundPotion
+  color: '#a0a000'
+
+  requiresResearchIds:
+    - Massive EXP Potions

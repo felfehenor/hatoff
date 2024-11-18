@@ -1,4 +1,14 @@
 <div class="flex flex-row">
+
+  @let activeHero = selectedHero();
+
+  @if(activeHero) {
+  <app-hero-display-tall class="flex-1 flex pl-3 p-1" [hero]="activeHero"
+    (close)="selectedHero.set(undefined); shouldShowItems.set(false)"
+    (showItemPanel)="shouldShowItems.set(true)"></app-hero-display-tall>
+  }
+
+  @if(!shouldShowItems()) {
   <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
     @for(hero of allHeroes(); track $index) {
     <div class="hero-container" [ngClass]="cardClasses()">
@@ -7,9 +17,12 @@
     </div>
     }
   </div>
+  }
 
-  @if(selectedHero(); as activeHero) {
-  <app-hero-display-tall class="flex-1 flex pl-3 p-1" [hero]="activeHero"
-    (close)="selectedHero.set(undefined)"></app-hero-display-tall>
+  @else {
+  @if(activeHero) {
+  <app-item-use-list class="flex-1 flex pl-3 p-1" [hero]="activeHero"
+    (close)="shouldShowItems.set(false)"></app-item-use-list>
+  }
   }
 </div>

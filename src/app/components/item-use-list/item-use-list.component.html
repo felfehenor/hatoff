@@ -1,0 +1,41 @@
+<div class="card inner-card-content foreground shadow-xl flex-1">
+  <div class="card-body overflow-hidden">
+    <div class="absolute top-2 right-2 z-50">
+      <app-button-close (click)="close.emit()"></app-button-close>
+    </div>
+
+    <div class="card-title">
+      Usable Items
+    </div>
+
+    <div class="overflow-y-auto p-1">
+      @if(usableItems().length === 0) {
+      <div>
+        There are no items available to you at this time.
+      </div>
+      }
+
+      @for(entry of usableItems(); track $index) {
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 p-2">
+        <figure class="max-w-[96px] pl-2 flex items-center">
+          <ng-icon [name]="entry.item.icon" [color]="entry.item.color" size="72px"></ng-icon>
+        </figure>
+
+        <div class="card-body p-1 pl-3">
+          <div class="card-title flex items-center">
+            {{ entry.item.name }} ({{ entry.quantity }}x)
+          </div>
+
+          <div>
+            {{ entry.item.description }}
+          </div>
+
+          <div class="w-[96px] flex content-center items-center">
+            <button class="btn btn-primary btn-sm" (click)="useItem(entry.item)">Use Item</button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

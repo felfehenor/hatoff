@@ -8,6 +8,7 @@ export const canSendNotifications = signal<boolean>(false);
 type NotificationCategory =
   | 'ResourceGain'
   | 'LevelUp'
+  | 'Item'
   | 'Recruitment'
   | 'Error'
   | 'Success';

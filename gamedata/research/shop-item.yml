@@ -1,0 +1,71 @@
+- id: a196f98b-cd5a-4b65-b954-f1a78787c6d0
+  name: Large EXP Potions
+  description: Unlock Large EXP Potions in the Shop. Grant +2500 XP when used.
+  researchRequired: 2500
+
+  requiresResearchIds:
+    - Shopping Trip
+
+- id: 226fa5ee-6ad9-4744-ba5e-2180af6fd90e
+  name: Massive EXP Potions
+  description: Unlock Large EXP Potions in the Shop. Grant +10000 XP when used.
+  researchRequired: 10000
+
+  requiresResearchIds:
+    - Large EXP Potions
+
+- id: fccba0e8-8b92-4372-80db-87fd9ead3fe4
+  name: Church Carvings
+  description: Unlock Abbot Likenesses in the Shop. Grant +1 Piety (PIE) when used.
+  researchRequired: 2500
+
+  requiresResearchIds:
+    - Bigger Shop I
+
+- id: 520a058e-a358-40ec-83ee-7764996ba4bf
+  name: Work Receipts
+  description: Unlock Proof of Work in the Shop. Grant +1 Progress (PRG) when used.
+  researchRequired: 7500
+
+  requiresResearchIds:
+    - Bigger Shop II
+
+- id: cfb7b215-f663-4dbe-9e75-70649eb85cae
+  name: Shield Spray
+  description: Unlock Shield Coatings in the Shop. Grant +1 Resistance (RES) when used.
+  researchRequired: 5000
+
+  requiresResearchIds:
+    - Bigger Shop II
+
+- id: 93c3c5d3-7b00-4cd3-9933-a11bb156a039
+  name: Forgetful Fountain
+  description: Unlock Bottles of Forgetfulness in the Shop. Change a hero's archetypes randomly.
+  researchRequired: 15000
+
+  requiresResearchIds:
+    - Bigger Shop III
+
+- id: 00a4ee1a-43b6-4b47-a12f-6badce758b8f
+  name: Passionate Alchemy
+  description: Unlock Bottles of Passion Unabated in the Shop. Change a hero's damage type randomly.
+  researchRequired: 15000
+
+  requiresResearchIds:
+    - Bigger Shop III
+
+- id: a85af169-663d-4942-9201-9074bb826c0b
+  name: Weapon Enhancements
+  description: Unlock Whetstones in the Shop. Grant +1 Force (FRC) when used.
+  researchRequired: 10000
+
+  requiresResearchIds:
+    - Bigger Shop IV
+
+- id: 91487ddb-a80c-4aab-a225-e5ef880c465f
+  name: Broken Clocks
+  description: Unlock Clock Hands in the Shop. Grant +1 Speed (SPD) when used.
+  researchRequired: 50000
+
+  requiresResearchIds:
+    - Bigger Shop IV

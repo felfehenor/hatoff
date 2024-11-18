@@ -44,6 +44,8 @@ export function getEntriesByType<T>(type: ContentType): T[] {
 export function getEntry<T extends Content>(
   entryIdOrName: string,
 ): T | undefined {
+  if (!entryIdOrName) return undefined;
+
   const idHash = allIdsByName();
   const entriesHash = allContentById();
 

@@ -25,13 +25,13 @@ import { seededrng } from './rng';
 
 import { v4 as uuid } from 'uuid';
 
-export function setResetTime(): void {
+export function setRecruitResetTime(): void {
   const state = gamestate();
   state.cooldowns.nextRecruitResetTime = cooldown(3600);
   setGameState(state);
 }
 
-export function resetRerolls(): void {
+export function resetRecruitRerolls(): void {
   const state = gamestate();
   state.recruitment.numRerolls = 0;
   setGameState(state);
@@ -95,12 +95,12 @@ export function recruitHero(hero: GameHero): void {
   addHero(hero);
 }
 
-export function doReroll(): void {
+export function doRecruitReroll(): void {
   const resource = getEntry<GameResource>('Food');
   if (!resource) return;
 
   generateHeroesToRecruit();
-  loseResource(resource, rerollCost());
+  loseResource(resource, recruitRerollCost());
 
   const state = gamestate();
   state.recruitment.numRerolls += 1;
@@ -118,14 +118,14 @@ export function canRecruit(): boolean {
   );
 }
 
-export function canReroll(): boolean {
+export function canRerollRecruit(): boolean {
   const resource = getEntry<GameResource>('Food');
   if (!resource) return false;
 
-  return hasResource(resource, rerollCost());
+  return hasResource(resource, recruitRerollCost());
 }
 
-export function rerollCost(): number {
+export function recruitRerollCost(): number {
   const numRerolls = gamestate().recruitment.numRerolls ?? 0;
   if (numRerolls === 0) return 0;
 

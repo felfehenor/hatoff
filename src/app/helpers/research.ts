@@ -3,6 +3,7 @@ import {
   GameArchetype,
   GameDamageType,
   GameHeroStat,
+  GameItem,
   GameResearch,
   GameTask,
 } from '../interfaces';
@@ -128,4 +129,20 @@ export function allUnlockedFusionMaxTaskLevelResearchValue(): number {
   ) as GameResearch[];
 
   return sum(validResearch.map((r) => r.unlockFusionTaskLevelRetain ?? 0));
+}
+
+export function allUnlockedShopSlotBoosts(): number {
+  const validResearch = allCompletedResearch().filter(
+    (r) => (r as GameResearch).unlockShopSlots,
+  ) as GameResearch[];
+
+  return sum(validResearch.map((r) => r.unlockShopSlots ?? 0));
+}
+
+export function allUnlockedShopItems(): GameItem[] {
+  const validItems = getEntriesByType<GameItem>('item').filter((r) =>
+    (r as GameItem).requiresResearchIds?.every((r) => isResearchComplete(r)),
+  ) as GameItem[];
+
+  return validItems;
 }

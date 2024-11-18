@@ -8,6 +8,7 @@ import {
   gamestate,
   getHero,
   giveClickXp,
+  hasAnyitemsToUse,
   removeHero,
   setHeroDamageType,
 } from '../../helpers';
@@ -43,6 +44,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();
   public close = output<void>();
+  public showItemPanel = output<void>();
 
   public liveHeroData = computed(() => getHero(this.hero().id));
 
@@ -55,6 +57,8 @@ export class HeroDisplayTallComponent {
   );
 
   public xpOnClick = computed(() => clickXpBoost());
+
+  public hasItems = computed(() => hasAnyitemsToUse());
 
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();

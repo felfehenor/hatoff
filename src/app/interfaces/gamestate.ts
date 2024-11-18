@@ -19,8 +19,15 @@ export interface GameStateRecruitment {
 }
 
 export interface GameStateCooldowns {
+  nextShopResetTime: number;
   nextRecruitResetTime: number;
   nextClickResetTime: number;
+}
+
+export interface GameStateShop {
+  ownedItems: Record<string, number>;
+  shopItems: (string | undefined)[];
+  numRerolls: number;
 }
 
 export interface GameState {
@@ -73,6 +80,11 @@ export interface GameState {
    * Recruitment data
    */
   recruitment: GameStateRecruitment;
+
+  /**
+   * Shop data
+   */
+  shop: GameStateShop;
 
   /**
    * Cooldowns data

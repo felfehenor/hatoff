@@ -19,6 +19,15 @@
 
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
+            <input type="checkbox" [checked]="currentValueForOption('notificationItem') === true"
+              class="checkbox checkbox-secondary"
+              (click)="setValueForOption('notificationItem', !currentValueForOption('notificationItem'))" />
+            <span class="label-text">Item Usage</span>
+          </label>
+        </div>
+
+        <div class="form-control">
+          <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationRecruitment') === true"
               class="checkbox checkbox-secondary"
               (click)="setValueForOption('notificationRecruitment', !currentValueForOption('notificationRecruitment'))" />

@@ -5,6 +5,7 @@ import { GameHeroesComponent } from './pages/game-heroes/game-heroes.component';
 import { GameRecruitComponent } from './pages/game-recruit/game-recruit.component';
 import { GameResearchComponent } from './pages/game-research/game-research.component';
 import { GameSetupComponent } from './pages/game-setup/game-setup.component';
+import { GameShopComponent } from './pages/game-shop/game-shop.component';
 import { GameTownComponent } from './pages/game-town/game-town.component';
 import { OptionsComponent } from './pages/options/options.component';
 
@@ -36,6 +37,11 @@ export const gameRoutes: Routes = [
   {
     component: GameResearchComponent,
     path: 'research',
+    canActivate: [requireSetupGuard],
+  },
+  {
+    component: GameShopComponent,
+    path: 'shop',
     canActivate: [requireSetupGuard],
   },
   {

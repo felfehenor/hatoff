@@ -18,6 +18,7 @@ export function blankGameState(): GameState {
     },
     cooldowns: {
       nextClickResetTime: 0,
+      nextShopResetTime: 0,
       nextRecruitResetTime: 0,
     },
     townSetup: {
@@ -25,6 +26,11 @@ export function blankGameState(): GameState {
       heroId: '',
       heroName: '',
       townName: '',
+    },
+    shop: {
+      ownedItems: {},
+      shopItems: [],
+      numRerolls: 0,
     },
     meta: {
       version: 1,

@@ -1,4 +1,14 @@
 import {
+  gameAbbotMeeple,
+  gameBeerBottle,
+  gameClockwork,
+  gameFoldedPaper,
+  gameHeartBottle,
+  gameRoundPotion,
+  gameShieldEchoes,
+  gameStoneTablet,
+} from '@ng-icons/game-icons';
+import {
   tablerBible,
   tablerBlob,
   tablerBrain,
@@ -23,5 +33,18 @@ export function usedContentIcons(): Record<string, string> {
     tablerBlob,
     tablerCarrot,
     tablerBible,
+  };
+}
+
+export function usedItemIcons(): Record<string, string> {
+  return {
+    gameRoundPotion,
+    gameStoneTablet,
+    gameFoldedPaper,
+    gameShieldEchoes,
+    gameAbbotMeeple,
+    gameClockwork,
+    gameHeartBottle,
+    gameBeerBottle,
   };
 }

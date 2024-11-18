@@ -13,6 +13,7 @@ export interface GameOptions {
   rewardMultiplier: number;
 
   notificationLevelUp: boolean;
+  notificationItem: boolean;
   notificationResourceGain: boolean;
   notificationRecruitment: boolean;
   notificationError: boolean;

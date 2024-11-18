@@ -1,0 +1,22 @@
+@let itemData = item();
+
+<div class="card card-side foreground shadow-xl cursor-pointer min-h-[250px] overflow-hidden">
+  <div class="card-body">
+
+    <div class="card-title">
+      <div class="font-semibold flex items-center gap-2">
+        <ng-icon [name]="itemData.icon" [color]="itemData.color"></ng-icon>
+        {{ itemData.name }}
+      </div>
+    </div>
+
+    <p>{{ itemData.description }}</p>
+
+    <div class="card-actions">
+      <button class="btn btn-primary" [disabled]="!canBuy()" (click)="buy.emit()">
+        Buy for {{ itemData.cost | number }} Gold
+      </button>
+    </div>
+
+  </div>
+</div>

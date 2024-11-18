@@ -15,7 +15,6 @@
       {{ activeHero.name }}
     </div>
 
-
     <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
 
     <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
@@ -34,15 +33,21 @@
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
     <div class="card-actions justify-between mt-4">
-      @let canClickForXP = canGiveClickXp();
-      <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
-        tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
-        @if(canClickForXP) {
-        Give +{{ xpOnClick() }} XP
-        } @else {
-        <span class="loading loading-spinner loading-xs"></span>
+      <div>
+        @let canClickForXP = canGiveClickXp();
+        <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
+          tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
+          @if(canClickForXP) {
+          Give +{{ xpOnClick() }} XP
+          } @else {
+          <span class="loading loading-spinner loading-xs"></span>
+          }
+        </button>
+
+        @if(hasItems()) {
+        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()">Use Items</button>
         }
-      </button>
+      </div>
 
       @if(canDismissHero()) {
       <button class="btn btn-error" [swal]="deleteSwal">Dismiss Hero</button>

@@ -12,15 +12,15 @@ import { PageCardComponent } from '../../components/page-card/page-card.componen
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canRecruit,
-  canReroll,
-  doReroll,
+  canRerollRecruit,
+  doRecruitReroll,
   gamestate,
   getEntry,
   getHero,
   populationCap,
   recruitCost,
   recruitHero,
-  rerollCost,
+  recruitRerollCost,
   totalHeroes,
 } from '../../helpers';
 import { GameDamageType, GameHero } from '../../interfaces';
@@ -47,8 +47,10 @@ export class GameRecruitComponent {
   public currentHeroCount = computed(() => totalHeroes());
   public currentHeroCap = computed(() => populationCap());
   public canRecruit = computed(() => canRecruit());
-  public canReroll = computed(() => canReroll() && !this.isRerollOnTimeout());
-  public rerollCost = computed(() => rerollCost());
+  public canReroll = computed(
+    () => canRerollRecruit() && !this.isRerollOnTimeout(),
+  );
+  public rerollCost = computed(() => recruitRerollCost());
   public recruitCost = computed(() => recruitCost());
   public currentHeroPool = computed(
     () => gamestate().recruitment.recruitableHeroes,
@@ -82,7 +84,7 @@ export class GameRecruitComponent {
   }
 
   public doReroll(): void {
-    doReroll();
+    doRecruitReroll();
 
     this.isRerollOnTimeout.set(true);
     timer(2000).subscribe(() => {

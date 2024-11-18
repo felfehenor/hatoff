@@ -71,4 +71,9 @@ export interface GameResearch extends Content {
    * The max level of a retained task for fused heroes.
    */
   unlockFusionTaskLevelRetain?: number;
+
+  /**
+   * The number of new shop slots to unlock.
+   */
+  unlockShopSlots?: number;
 }

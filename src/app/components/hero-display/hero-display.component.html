@@ -11,7 +11,10 @@
       <div class="font-semibold">{{ heroData.name }}</div>
       <div class="italic">
         <app-level-display [currentLevel]="heroData.level" [maxLevel]="heroData.maxLevel"></app-level-display>
+
+        @if(heroData.level !== heroData.maxLevel) {
         [{{ heroData.xp / heroData.maxXp | percent }}]
+        }
       </div>
 
       <div class="text-sm">

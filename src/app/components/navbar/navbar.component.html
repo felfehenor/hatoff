@@ -27,6 +27,12 @@
           <ng-icon [name]="isResearching() ? 'heroBeaker' : 'heroSparkles'"></ng-icon> Research
         </a>
       </li>
+
+      <li class="mr-1" [appHideIfNotResearched]="'Shopping Trip'">
+        <a [routerLink]="['/game/shop']" [routerLinkActive]="'text-primary'">
+          <ng-icon name="heroBuildingStorefront"></ng-icon> Shop
+        </a>
+      </li>
     </ul>
     }
   </div>
