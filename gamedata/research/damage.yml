@@ -1,5 +1,6 @@
 - id: 9f595aa6-f055-4133-b4ce-dab7451bbd85
   name: Financial Knowledge
+  type: Damage Type
   description: Unlock the damage type "Financial". This unlocks tasks involving money.
   researchRequired: 5
 

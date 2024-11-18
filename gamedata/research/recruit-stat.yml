@@ -1,6 +1,7 @@
 # progress
 - id: 0c118be5-3ac2-427e-b0fb-45406c07bbb6
   name: Recruit Progress I
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Progress (PRG) sometimes.
   researchRequired: 2500
 
@@ -12,6 +13,7 @@
 
 - id: b62c1a4d-db4b-498e-b974-b56985f40a02
   name: Recruit Progress II
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Progress (PRG) sometimes.
   researchRequired: 10000
 
@@ -24,6 +26,7 @@
 # force
 - id: 26bb05c2-877a-4d87-8093-ba2b097ee790
   name: Recruit Force I
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Force (FRC) sometimes.
   researchRequired: 7500
 
@@ -35,6 +38,7 @@
 
 - id: bfc82d89-1bb4-46eb-887e-280ce25dede5
   name: Recruit Force II
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Force (FRC) sometimes.
   researchRequired: 20000
 
@@ -47,6 +51,7 @@
 # resistance
 - id: 1283b1a0-1f59-430c-a443-f281ae32f7e1
   name: Recruit Resistance I
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Resistance (RES) sometimes.
   researchRequired: 2500
 
@@ -58,6 +63,7 @@
 
 - id: 18435f3c-809f-4425-8e5b-3edc15ea0e6c
   name: Recruit Resistance II
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Resistance (RES) sometimes.
   researchRequired: 10000
 
@@ -70,6 +76,7 @@
 # piety
 - id: 2671c877-b017-464d-837d-5d3b87d60ef9
   name: Recruit Piety I
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Piety (PIE) sometimes.
   researchRequired: 1000
 
@@ -81,6 +88,7 @@
 
 - id: 7cfe8e4e-fce8-47ab-9f37-ad2b599cb1b4
   name: Recruit Piety II
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Piety (PIE) sometimes.
   researchRequired: 2500
 
@@ -93,6 +101,7 @@
 # speed
 - id: 1121a0c2-c41a-4944-9c1b-b73d09a3f134
   name: Recruit Speed I
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Speed (SPD) sometimes.
   researchRequired: 10000
 
@@ -104,6 +113,7 @@
 
 - id: 53c5e588-9227-4bd0-82d1-00bd50cc9518
   name: Recruit Speed II
+  type: Recruit
   description: Allow recruits to spawn with an additional +1 Speed (SPD) sometimes.
   researchRequired: 25000
 

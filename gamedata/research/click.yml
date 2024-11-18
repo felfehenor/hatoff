@@ -1,5 +1,6 @@
 - id: 75a9cedf-eefd-480f-8ece-49b16d7eeae5
   name: Click XP I
+  type: Click
   description: Give heroes +5 more XP when clicking.
   researchRequired: 10
 
@@ -9,6 +10,7 @@
 
 - id: d4dff3e9-547f-4d56-b7d5-a27161f1abfd
   name: Click XP II
+  type: Click
   description: Give heroes +5 more XP when clicking.
   researchRequired: 50
 
@@ -18,6 +20,7 @@
 
 - id: ef67a5b6-fdc1-4d1f-b20f-320bdb42ff97
   name: Click XP III
+  type: Click
   description: Give heroes +5 more XP when clicking.
   researchRequired: 200
 
@@ -27,6 +30,7 @@
 
 - id: 5cdf56d8-90d6-4b74-b7d5-176e4aa15e44
   name: Click XP IV
+  type: Click
   description: Give heroes +5 more XP when clicking.
   researchRequired: 500
 

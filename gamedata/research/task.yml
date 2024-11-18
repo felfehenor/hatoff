@@ -1,5 +1,6 @@
 - id: d57a3127-6b98-47d9-8798-89d68311ac1f
   name: Taxes
+  type: Task
   description: Unlock the task "Tax Collection". Allows you to gain Gold by collecting taxes from your town.
   researchRequired: 15
 
@@ -10,6 +11,7 @@
 
 - id: 79bbd970-91c1-4586-a51d-ad1785af5930
   name: Sovereignty
+  type: Task
   description: Unlock the task "Sovereign". Allows you to boost all of a single damage type by one hero's Force.
   researchRequired: 50000
 

@@ -1,5 +1,16 @@
 <app-page-card>
   <span header>Research Tasks</span>
 
-  <app-research-list></app-research-list>
+  <div pageactions class="flex items-center">
+    <div class="tabs tabs-boxed">
+      @for(category of allResearchCategories(); track category.name) {
+      <a class="tab" (click)="activeType.set(category.name)" [class.tab-active]="activeType() === category.name"
+        (keydown.enter)="activeType.set(category.name)" tabindex="1">
+        {{ category.name }} ({{ category.num }})
+      </a>
+      }
+    </div>
+  </div>
+
+  <app-research-list [displayedResearch]="researchList()"></app-research-list>
 </app-page-card>

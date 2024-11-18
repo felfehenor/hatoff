@@ -1,10 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component, computed } from '@angular/core';
-import {
-  allAvailableIncompleteResearch,
-  gamestate,
-  setActiveResearch,
-} from '../../helpers';
+import { Component, computed, input } from '@angular/core';
+import { gamestate, setActiveResearch } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 import { ResearchDisplayComponent } from '../research-display/research-display.component';
 
@@ -16,7 +12,7 @@ import { ResearchDisplayComponent } from '../research-display/research-display.c
   styleUrl: './research-list.component.scss',
 })
 export class ResearchListComponent {
-  public allResearch = computed(() => allAvailableIncompleteResearch());
+  public displayedResearch = input.required<GameResearch[]>();
   public activeResearch = computed(() => gamestate().activeResearch);
 
   public cardClasses = computed(() => {

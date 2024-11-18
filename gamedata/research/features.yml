@@ -1,5 +1,6 @@
 - id: 12da70fc-b8e3-4339-ae52-902bbc856e0c
   name: Help Posters
+  type: Meta
   description: Unlock the task "Recruitment". Allows you to recruit more heroes.
   researchRequired: 0
 
@@ -7,5 +8,6 @@
 
 - id: a3132cf4-2baf-4e56-b0df-0ac00eb25f7c
   name: Fusion Engine
+  type: Fusion
   description: Unlock the ability to fuse heroes together.
   researchRequired: 250

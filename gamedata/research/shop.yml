@@ -1,5 +1,6 @@
 - id: 6475a98c-2be8-490d-978f-16b3f3f92b36
   name: Shopping Trip
+  type: Shop
   description: Unlock the Shop. Allows you to spend your hard-earned Gold on your heroes.
   researchRequired: 500
 
@@ -10,6 +11,7 @@
 
 - id: 47e4813d-43b3-48de-8a3f-0830e7629317
   name: Bigger Shop I
+  type: Shop
   description: Add 2 slots to the Shop.
   researchRequired: 1000
 
@@ -20,6 +22,7 @@
 
 - id: df1d856c-6b8d-4575-9271-8a812a50c9ff
   name: Bigger Shop II
+  type: Shop
   description: Add 2 slots to the Shop.
   researchRequired: 5000
 
@@ -30,6 +33,7 @@
 
 - id: 97ee31d9-93bb-4b36-8cc7-b7b69ee34cd8
   name: Bigger Shop III
+  type: Shop
   description: Add 2 slots to the Shop.
   researchRequired: 25000
 
@@ -40,6 +44,7 @@
 
 - id: 1c795a6b-cc51-4695-a127-34f7731b66e8
   name: Bigger Shop IV
+  type: Shop
   description: Add 2 slots to the Shop.
   researchRequired: 125000
 

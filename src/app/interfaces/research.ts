@@ -3,6 +3,7 @@ import { Content } from './identifiable';
 
 export interface GameResearch extends Content {
   description: string;
+  type: string;
 
   /**
    * The total number of research required to complete this research task.

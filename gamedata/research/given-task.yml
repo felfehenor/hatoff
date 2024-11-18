@@ -1,5 +1,6 @@
 - id: c980215d-83be-4164-a344-fdea7189fdd1
   name: Forestry
+  type: Task
   description: Unlock the task "Forestry".
   researchRequired: 0
 
@@ -7,6 +8,7 @@
 
 - id: 4f36f790-8771-4630-b256-96a902aa36ea
   name: Quarrying
+  type: Task
   description: Unlock the task "Quarrying".
   researchRequired: 0
 
@@ -14,6 +16,7 @@
 
 - id: a7f15dfd-1dfd-4c38-8b8a-7cc2bbdd455e
   name: Hunting
+  type: Task
   description: Unlock the task "Hunting".
   researchRequired: 0
 
@@ -21,6 +24,7 @@
 
 - id: c617668c-c6cf-4480-93f6-139a2a6bc3e5
   name: Fortifications
+  type: Task
   description: Unlock the task "Fortifications".
   researchRequired: 0
 
@@ -28,6 +32,7 @@
 
 - id: c5b1052e-2c9a-4005-b9d5-33c6dac7712c
   name: Institutionalization
+  type: Task
   description: Unlock the task "Institutionalization".
   researchRequired: 0
 
