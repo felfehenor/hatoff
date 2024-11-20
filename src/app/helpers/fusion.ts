@@ -113,7 +113,7 @@ export function heroFusionResult(
       ...bigHero.archetypeIds,
       difference(smallHero.archetypeIds, bigHero.archetypeIds)[0],
     ]),
-  ];
+  ].filter(Boolean);
 
   newHero.taskXp = {};
 
