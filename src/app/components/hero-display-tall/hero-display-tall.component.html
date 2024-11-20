@@ -33,7 +33,7 @@
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
     <div class="card-actions justify-between mt-4">
-      <div>
+      <div class="flex items-center">
         @let canClickForXP = canGiveClickXp();
         <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
           tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
