@@ -7,7 +7,7 @@
   }
 
   @for(item of allShopItems(); track $index) {
-  <div class="hero-container" [ngClass]="cardClasses()" [class.opacity-80]="!item">
+  <div class="hero-container" [ngClass]="cardClasses()" [class.opacity-50]="!item">
     @if(item) {
     <app-shop-item-display [item]="item" (buy)="buyItem(item, $index)"></app-shop-item-display>
     } @else {

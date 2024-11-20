@@ -25,6 +25,21 @@
           <input [(ngModel)]="heroName" type="text" placeholder="Hero name..." maxlength="25" (keydown.enter)="play()"
             class="input input-bordered w-full max-w-sm" />
         </div>
+
+        <div class="font-bold mt-3">
+          Choose Difficulty
+        </div>
+
+        <div class="join">
+          @for(difficulty of difficulties; track $index) {
+          <button class="btn join-item" (click)="gameDifficulty.set(difficulty)"
+            [class.btn-secondary]="gameDifficulty() === difficulty">{{ difficulty | titlecase }}</button>
+          }
+        </div>
+
+        <p class="text-center min-h-[50px] mt-3">
+          {{ difficultyDescriptions[gameDifficulty()] }}
+        </p>
       </div>
 
       <div class="card-actions pt-3">
