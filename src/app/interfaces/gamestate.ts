@@ -18,7 +18,7 @@ export interface GameStateTownSetup {
 }
 
 export interface GameStateRecruitment {
-  recruitableHeroes: GameHero[];
+  recruitableHeroes: (GameHero | undefined)[];
   numRerolls: number;
 }
 

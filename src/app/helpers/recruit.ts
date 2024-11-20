@@ -51,7 +51,11 @@ export function generateHeroesToRecruit() {
   }
 
   function doesHeroExist(hero: SpecialGameHero) {
-    if (state.recruitment.recruitableHeroes.find((s) => s.id === hero.id))
+    if (
+      state.recruitment.recruitableHeroes
+        .filter(Boolean)
+        .find((s) => s!.id === hero.id)
+    )
       return true;
     if (state.heroes[hero.id]) return true;
 
@@ -82,7 +86,7 @@ export function generateHeroesToRecruit() {
   setGameState(state);
 }
 
-export function recruitHero(hero: GameHero): void {
+export function recruitHero(hero: GameHero, index: number): void {
   const resource = getEntry<GameResource>('Food');
   if (!resource) return;
 
@@ -95,6 +99,11 @@ export function recruitHero(hero: GameHero): void {
 
   loseResource(resource, recruitCost());
   addHero(hero);
+
+  updateGamestate((state) => {
+    state.recruitment.recruitableHeroes[index] = undefined;
+    return state;
+  });
 }
 
 export function doRecruitReroll(): void {
