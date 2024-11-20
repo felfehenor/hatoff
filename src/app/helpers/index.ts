@@ -16,6 +16,7 @@ export * from './icons';
 export * from './migrate';
 export * from './notify';
 export * from './options';
+export * from './pause';
 export * from './recruit';
 export * from './research';
 export * from './resource';

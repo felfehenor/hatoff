@@ -6,6 +6,7 @@ import { doRecruitGameloop } from './gameloop-recruit';
 import { doShopGameloop } from './gameloop-shop';
 import { updateGamestate } from './gamestate';
 import { getOption } from './options';
+import { isPaused } from './pause';
 import { isSetup } from './setup';
 
 export function isPlayingGame(): boolean {
@@ -15,6 +16,7 @@ export function isPlayingGame(): boolean {
 export function doGameloop(numTicks: number): void {
   if (!isSetup()) return;
   if (!isPlayingGame()) return;
+  if (isPaused()) return;
 
   const totalTicks = numTicks * getOption('tickMultiplier');
 

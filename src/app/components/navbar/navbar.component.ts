@@ -6,11 +6,20 @@ import {
   heroBuildingOffice2,
   heroBuildingStorefront,
   heroCog6Tooth,
+  heroPauseCircle,
+  heroPlayCircle,
   heroSparkles,
   heroUserGroup,
 } from '@ng-icons/heroicons/outline';
+import { TippyDirective } from '@ngneat/helipopper';
 import { HideResearchDirective } from '../../directives/hideresearch.directive';
-import { gamestate, isResearchComplete, isSetup } from '../../helpers';
+import {
+  gamestate,
+  isPaused,
+  isResearchComplete,
+  isSetup,
+  togglePause,
+} from '../../helpers';
 import { MetaService } from '../../services/meta.service';
 import { ResourceListComponent } from '../resource-list/resource-list.component';
 
@@ -23,6 +32,7 @@ import { ResourceListComponent } from '../resource-list/resource-list.component'
     NgIconComponent,
     ResourceListComponent,
     HideResearchDirective,
+    TippyDirective,
   ],
   providers: [
     provideIcons({
@@ -32,6 +42,8 @@ import { ResourceListComponent } from '../resource-list/resource-list.component'
       heroUserGroup,
       heroSparkles,
       heroBuildingStorefront,
+      heroPauseCircle,
+      heroPlayCircle,
     }),
   ],
   templateUrl: './navbar.component.html',
@@ -48,4 +60,16 @@ export class NavbarComponent {
       gamestate().activeResearch &&
       !isResearchComplete(gamestate().activeResearch),
   );
+
+  isPaused = computed(() => isPaused());
+
+  pauseTooltip = computed(() => {
+    return isPaused()
+      ? "The game is paused, and no ticks are happening. You can adjust settings, heroes, use items, and anything else that doesn't need real time progress."
+      : 'The game is unpaused, and moving at 1x speed. You can pause it if you need to walk away, or think about how to approach a problem.';
+  });
+
+  togglePause() {
+    togglePause();
+  }
 }

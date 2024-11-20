@@ -217,13 +217,13 @@ export function totalHeroForce(
   const bonusDamage = getGlobalBoostForDamageType(heroDamage);
   const percentBonus = synergyBonus(task);
 
+  const taskBonusDamage = taskSpeedAndForceBoostForHero(hero, task);
+
   const damageApplied = Math.max(
     1,
     Math.floor(
       ((percentApplied + percentBonus) / 100) *
-        (hero.stats.force +
-          bonusDamage +
-          taskSpeedAndForceBoostForHero(hero, task)),
+        (hero.stats.force + bonusDamage + taskBonusDamage),
     ),
   );
 

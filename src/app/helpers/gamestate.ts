@@ -41,6 +41,7 @@ export function blankGameState(): GameState {
     },
     meta: {
       version: 1,
+      isPaused: false,
       difficulty: 'normal',
       createdAt: Date.now(),
       numTicks: 0,

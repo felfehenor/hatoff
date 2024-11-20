@@ -40,6 +40,15 @@
   @if(isSetup()) {
   <div class="navbar-end">
     <ul class="menu menu-horizontal px-1">
+
+      <li class="mr-1" [tp]="pauseTooltip()">
+        <a (click)="togglePause()" (keydown.enter)="togglePause()" tabindex="1" class="ring-emerald-500"
+          [class.ring-2]="isPaused()">
+          <ng-icon [name]="isPaused() ? 'heroPlayCircle' : 'heroPauseCircle'" class="ring-emerald-500"
+            [color]="isPaused() ? 'var(--tw-ring-color)' : ''"></ng-icon>
+        </a>
+      </li>
+
       <li class="mr-1">
         <a [routerLink]="['/game/options']" [routerLinkActive]="'text-primary'">
           <ng-icon name="heroCog6Tooth"></ng-icon>

@@ -4,6 +4,7 @@ export type GameDifficulty = 'easy' | 'normal' | 'hard';
 
 export interface GameStateMeta {
   version: number;
+  isPaused: boolean;
   createdAt: number;
   numTicks: number;
   difficulty: GameDifficulty;
