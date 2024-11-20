@@ -19,7 +19,7 @@
     @for(hero of currentHeroPool(); track $index) {
     <div class="flex-1 min-w-[30%] m-1">
       @if(hero) {
-      <div class="card foreground shadow-xl" [appHeroSpecialGlow]="hero">
+      <div class="card foreground shadow-xl min-h-[540px]" [appHeroSpecialGlow]="hero">
         <div class="card-body">
           <div class="absolute top-5 right-5">
             <app-hero-art [id]="hero.id" [size]="240"></app-hero-art>
@@ -56,7 +56,7 @@
         </div>
       </div>
       } @else {
-      <div class="card foreground shadow-xl recruited-already h-full">
+      <div class="card foreground shadow-xl recruited-already h-full min-h-[540px]">
         <div class="card-body">
           <div class="card-title">
             Recruited Hero

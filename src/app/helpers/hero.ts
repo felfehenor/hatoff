@@ -142,11 +142,10 @@ export function getHero(id: string): GameHero | undefined {
 }
 
 export function addHero(hero: GameHero): void {
-  const state = gamestate();
-
-  state.heroes[hero.id] = hero;
-
-  setGameState(state);
+  updateGamestate((state) => {
+    state.heroes[hero.id] = hero;
+    return state;
+  });
 }
 
 export function removeHero(hero: GameHero): void {
