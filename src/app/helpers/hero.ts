@@ -110,6 +110,10 @@ export function hasSpecialHero(id: string): boolean {
   return !!_specialHeroes().find((s) => s.id === id);
 }
 
+export function isMaxLevel(hero: GameHero): boolean {
+  return hero.level >= hero.maxLevel;
+}
+
 export function maxXpForLevel(level: number, fusionLevel: number): number {
   return level * (50 + fusionLevel ** 3 * 100);
 }
@@ -278,10 +282,9 @@ export function levelup(hero: GameHero): void {
 }
 
 export function gainXp(hero: GameHero, xp = 1): void {
-  if (hero.level >= hero.maxLevel) return;
-
   updateGamestate((state) => {
     const heroRef = state.heroes[hero.id];
+    if (heroRef.level >= heroRef.maxLevel) return state;
 
     heroRef.xp += xp * getOption('heroXpMultiplier');
 
@@ -292,7 +295,7 @@ export function gainXp(hero: GameHero, xp = 1): void {
 
       levelup(heroRef);
 
-      if (hero.level >= hero.maxLevel) break;
+      if (heroRef.level >= heroRef.maxLevel) break;
     }
 
     return state;

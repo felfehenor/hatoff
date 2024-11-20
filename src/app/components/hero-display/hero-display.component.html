@@ -14,14 +14,11 @@
       <div class="italic">
         <app-level-display [currentLevel]="heroData.level" [maxLevel]="heroData.maxLevel"></app-level-display>
 
-        @if(heroData.level !== heroData.maxLevel) {
-        [{{ heroData.xp / heroData.maxXp | percent }}]
-        }
-      </div>
+        @if(heroData.level < heroData.maxLevel) { [{{ heroData.xp / heroData.maxXp | percent }}] } </div>
 
-      <div class="text-sm">
-        <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+          <div class="text-sm">
+            <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+          </div>
       </div>
     </div>
   </div>
-</div>
