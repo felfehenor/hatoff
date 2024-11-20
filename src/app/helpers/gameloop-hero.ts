@@ -16,7 +16,7 @@ import { gamestate, setGameState } from './gamestate';
 import { gainStat, gainXp, totalHeroForce, totalHeroSpeed } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
-import { getResourceValue, loseResource } from './resource';
+import { getResourceValue, loseResource, zeroResource } from './resource';
 import {
   heroesAllocatedToTask,
   maxLevelForTask,
@@ -175,7 +175,7 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
     if (!resourceRef) return;
 
     const resourceValue = getResourceValue(resourceRef.id);
-    loseResource(resourceRef, resourceValue);
+    zeroResource(resourceRef);
     statValueGained += resourceValue;
   }
 

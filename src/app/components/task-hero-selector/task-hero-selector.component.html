@@ -1,6 +1,6 @@
 @let activeTask = task();
 
-<div class="card foreground shadow-xl flex-1">
+<div class="card foreground shadow-xl flex-1 m-1" [class.ring-red-500]="threatened()" [class.ring-1]="threatened()">
   <div class="card-body overflow-hidden">
     <div class="h-[128px]">
       <div class="absolute top-2 right-2 z-50">
@@ -8,8 +8,13 @@
       </div>
 
       <div class="card-title flex items-center">
-        <app-damage-type-breakdown [id]="activeTask.damageTypeId"></app-damage-type-breakdown>
+        <app-damage-type-breakdown [damageType]="taskDamageType()"></app-damage-type-breakdown>
         {{ activeTask.name }}
+
+        @if(threatened()) {
+        <ng-icon name="tablerAlertOctagon" color="red" size="1em"
+          tp="This building is threatened by an incoming attack. If you can't generate enough Fortifications before the attack hits, your heroes will get stunned and your building will lose a level."></ng-icon>
+        }
 
         @if(maxTasklevel() > 0) {
         <app-level-display [currentLevel]="taskLevel()" [maxLevel]="maxTasklevel()"></app-level-display>

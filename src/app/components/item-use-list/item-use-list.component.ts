@@ -3,7 +3,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   gamestate,
   getEntriesByType,
-  usedItemIcons,
+  usedContentIcons,
   useItemOnHero,
 } from '../../helpers';
 import { GameHero, GameItem } from '../../interfaces';
@@ -13,7 +13,7 @@ import { ButtonCloseComponent } from '../button-close/button-close.component';
   selector: 'app-item-use-list',
   standalone: true,
   imports: [ButtonCloseComponent, NgIconComponent],
-  providers: [provideIcons(usedItemIcons())],
+  providers: [provideIcons(usedContentIcons())],
   templateUrl: './item-use-list.component.html',
   styleUrl: './item-use-list.component.scss',
 })

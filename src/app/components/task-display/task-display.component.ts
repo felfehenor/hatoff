@@ -4,9 +4,11 @@ import { TippyDirective } from '@ngneat/helipopper';
 import { sum } from 'lodash';
 import {
   getOption,
+  getTaskDamageType,
   getTaskProgress,
   heroesAllocatedToTask,
   isStrictDamageType,
+  isTaskThreatened,
   maxHeroesForTask,
   maxTaskLevel,
   taskLevel,
@@ -48,6 +50,9 @@ export class TaskDisplayComponent {
   public maxTasklevel = computed(() => maxTaskLevel(this.task()));
   public isStrict = computed(() => isStrictDamageType(this.task()));
 
+  public taskDamageType = computed(() => getTaskDamageType(this.task()));
+  public threatened = computed(() => isTaskThreatened(this.task()));
+
   public perTick = computed(() => {
     const task = this.task();
     const numTicksPerTick = getOption('tickMultiplier');
@@ -66,5 +71,6 @@ export class TaskDisplayComponent {
 
     return 0;
   });
+
   public requiredPerTick = computed(() => this.task().damageRequiredPerCycle);
 }

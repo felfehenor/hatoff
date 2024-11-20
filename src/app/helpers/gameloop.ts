@@ -1,3 +1,5 @@
+import { GameStateCooldowns } from '../interfaces';
+import { doDefenseGameloop } from './gameloop-defense';
 import { doHeroGameloop } from './gameloop-hero';
 import { doRecruitGameloop } from './gameloop-recruit';
 import { doShopGameloop } from './gameloop-shop';
@@ -18,9 +20,14 @@ export function doGameloop(numTicks: number): void {
   doHeroGameloop(totalTicks);
   doRecruitGameloop();
   doShopGameloop();
+  doDefenseGameloop();
 
   updateGamestate((state) => {
     state.meta.numTicks += totalTicks;
+
+    Object.keys(state.cooldowns).forEach((cd) => {
+      state.cooldowns[cd as keyof GameStateCooldowns] -= 1;
+    });
     return state;
   });
 }

@@ -5,9 +5,9 @@ import {
   canUseDamageTypeForRequirement,
   getDamageForcePercentage,
 } from './damagetype';
-import { gamestate, setGameState } from './gamestate';
-import { allUnlockedTasks } from './research';
-import { isTownName } from './town';
+import { isHardMode } from './difficulty';
+import { gamestate, updateGamestate } from './gamestate';
+import { allUnlockedDamageTypes, allUnlockedTasks } from './research';
 import {
   allocationBonusForTask,
   maxLevelBonusForTask,
@@ -15,10 +15,10 @@ import {
 } from './upgrade';
 
 export function isStrictDamageType(task: GameTask): boolean {
-  const damageType = getEntry<GameDamageType>(task.damageTypeId);
-  if (damageType?.isAny) return false;
+  const damageType = getTaskDamageType(task);
+  if (damageType?.isAny || damageType.name === 'Defensive') return false;
 
-  return task.requireExactType || isTownName('Fel Fhenor');
+  return task.requireExactType || isHardMode();
 }
 
 export function heroesAllocatedToTask(task: GameTask): GameHero[] {
@@ -31,7 +31,7 @@ export function heroesAllocatedToTask(task: GameTask): GameHero[] {
 
 export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
   const heroDamageType = getEntry<GameDamageType>(hero.damageTypeId);
-  const taskDamageType = getEntry<GameDamageType>(task.damageTypeId);
+  const taskDamageType = getTaskDamageType(task);
 
   if (!heroDamageType || !taskDamageType) return false;
 
@@ -73,17 +73,19 @@ export function getTaskProgress(task: GameTask): number {
 }
 
 export function assignHeroToTask(task: GameTask, hero: GameHero): void {
-  const state = gamestate();
-  state.taskAssignments[hero.id] = task.id;
-  state.heroCurrentTaskSpeed[hero.id] = 0;
-  setGameState(state);
+  updateGamestate((state) => {
+    state.taskAssignments[hero.id] = task.id;
+    state.heroCurrentTaskSpeed[hero.id] = 0;
+    return state;
+  });
 }
 
 export function unassignHeroTask(hero: GameHero): void {
-  const state = gamestate();
-  delete state.taskAssignments[hero.id];
-  delete state.heroCurrentTaskSpeed[hero.id];
-  setGameState(state);
+  updateGamestate((state) => {
+    delete state.taskAssignments[hero.id];
+    delete state.heroCurrentTaskSpeed[hero.id];
+    return state;
+  });
 }
 
 export function synergyBonus(task: GameTask): number {
@@ -127,4 +129,39 @@ export function getGlobalBoostForDamageType(type: GameDamageType): number {
       )
       .map((h) => h.stats.force),
   );
+}
+
+export function getDefenseDamageType(): GameDamageType {
+  const defenseType = getEntry<GameDamageType>('Defensive')!;
+  const baseType = getEntry<GameDamageType>(gamestate().defense.damageTypeId)!;
+
+  const sumType = {
+    ...structuredClone(defenseType),
+  };
+
+  sumType.color = baseType.color;
+
+  sumType.subTypes = [
+    { damageTypeId: baseType.id, percent: 100 },
+    ...baseType.subTypes,
+  ];
+
+  const existingTypes = sumType.subTypes.map((t) => t.damageTypeId);
+  const remainingTypes = allUnlockedDamageTypes().filter(
+    (t) => !existingTypes.includes(t.id),
+  );
+
+  sumType.subTypes.push(
+    ...remainingTypes.map((t) => ({ damageTypeId: t.id, percent: 25 })),
+  );
+
+  return sumType;
+}
+
+export function getTaskDamageType(task: GameTask): GameDamageType {
+  if (task.damageTypeAutoChange === 'defense') {
+    return getDefenseDamageType();
+  }
+
+  return getEntry<GameDamageType>(task.damageTypeId)!;
 }

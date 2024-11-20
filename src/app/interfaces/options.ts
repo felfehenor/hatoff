@@ -14,6 +14,7 @@ export interface GameOptions {
 
   notificationLevelUp: boolean;
   notificationItem: boolean;
+  notificationDefense: boolean;
   notificationResourceGain: boolean;
   notificationRecruitment: boolean;
   notificationError: boolean;

@@ -11,6 +11,11 @@ export interface GameResearch extends Content {
   researchRequired: number;
 
   /**
+   * The number of completed research tasks required for this to appear.
+   */
+  requireResearchCount?: number;
+
+  /**
    * Prerequisite research tasks that need to be completed before this one can be researched.
    */
   requiresResearchIds?: string[];

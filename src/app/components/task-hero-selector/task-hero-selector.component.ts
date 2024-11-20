@@ -1,4 +1,7 @@
 import { Component, computed, input, output, signal } from '@angular/core';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { tablerAlertOctagon } from '@ng-icons/tabler-icons';
+import { TippyDirective } from '@ngneat/helipopper';
 import { sortBy } from 'lodash';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
@@ -10,8 +13,10 @@ import {
   currentHeroTask,
   getDamageForcePercentage,
   getEntry,
+  getTaskDamageType,
   heroesAllocatedToTask,
   isHeroAllocatedToTask,
+  isTaskThreatened,
   maxHeroesForTask,
   maxTaskLevel,
   purchasedUpgradesForTask,
@@ -52,6 +57,13 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     ResourceDisplayComponent,
     HeroSpecialGlowDirective,
     HeroFusionIndicatorComponent,
+    NgIconComponent,
+    TippyDirective,
+  ],
+  providers: [
+    provideIcons({
+      tablerAlertOctagon,
+    }),
   ],
   templateUrl: './task-hero-selector.component.html',
   styleUrl: './task-hero-selector.component.scss',
@@ -70,6 +82,7 @@ export class TaskHeroSelectorComponent {
   public maxHeroes = computed(() => maxHeroesForTask(this.task()));
   public taskLevel = computed(() => taskLevel(this.task()));
   public maxTasklevel = computed(() => maxTaskLevel(this.task()));
+  public threatened = computed(() => isTaskThreatened(this.task()));
 
   public currentMode = signal<'heroes' | 'upgrades'>('heroes');
   public canChangeModes = computed(
@@ -81,6 +94,7 @@ export class TaskHeroSelectorComponent {
   public purchasedUpgrades = computed(() =>
     purchasedUpgradesForTask(this.task()),
   );
+  public taskDamageType = computed(() => getTaskDamageType(this.task()));
 
   public selectHero(hero: GameHero): void {
     if (!this.canAssignHeroToTask(hero)) return;

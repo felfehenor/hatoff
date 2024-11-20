@@ -3,7 +3,9 @@ import { gamestate } from '../../helpers';
 
 const townInfo: Record<string, string> = {
   Rosebud: 'Start with 5,000 of all resources.',
-  'Fel Fhenor': 'All task types are strict assignments.',
+  Simpletown: 'Easy mode: No town defense.',
+  'Fel Fhenor':
+    'Hard mode: All task types are strict assignments. Town Defense requires twice as much Fortifications.',
 };
 
 @Component({

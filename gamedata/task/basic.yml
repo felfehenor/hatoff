@@ -13,7 +13,8 @@
 - id: 6a620f52-5946-4990-a081-b7d9afcd0856
   name: Town Defense
   description: Defend your town from the woodland threats.
-  damageTypeId: Any
+  damageTypeId: Defensive
+  damageTypeAutoChange: 'defense'
   allowAnyType: true
   maxHeroesAllocable: 5
 
@@ -21,6 +22,8 @@
   speedPerCycle: 5
   damageRequiredPerCycle: 100
   xpRequiredPerLevel: 500
+  resourceIdPerCycle: Fortifications
+  resourceRewardPerCycle: 1
   maxLevel: 1
 
   possibleUpgradeIds:
@@ -28,6 +31,8 @@
     - More Heroes II
     - More XP I
     - More XP II
+    - More Resources I
+    - More Resources II
     - Stronger Synergy I
     - Stronger Synergy II
 

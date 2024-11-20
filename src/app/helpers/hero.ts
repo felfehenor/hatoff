@@ -27,7 +27,11 @@ import {
   isResearchComplete,
 } from './research';
 import { randomChoice, randomIdentifiableChoice, seededrng } from './rng';
-import { getGlobalBoostForDamageType, synergyBonus } from './task';
+import {
+  getGlobalBoostForDamageType,
+  getTaskDamageType,
+  synergyBonus,
+} from './task';
 
 const _specialHeroes: WritableSignal<SpecialGameHero[]> = signal([]);
 
@@ -75,7 +79,7 @@ export function setSpecialHeroes(heroes: SpecialGameHero[]): void {
 }
 
 export function getRandomSpecialHero(seed: string): SpecialGameHero {
-  return randomChoice<SpecialGameHero>(seed, _specialHeroes());
+  return randomChoice<SpecialGameHero>(_specialHeroes(), seed);
 }
 
 export function createSpecialHero(id: string): GameHero | undefined {
@@ -200,7 +204,7 @@ export function totalHeroForce(
   numTimes: number,
 ): number {
   const heroDamage = getEntry<GameDamageType>(hero.damageTypeId);
-  const taskDamage = getEntry<GameDamageType>(task.damageTypeId);
+  const taskDamage = getTaskDamageType(task);
   if (!heroDamage || !taskDamage) return 0;
 
   const percentApplied = getDamageForcePercentage(heroDamage, taskDamage);

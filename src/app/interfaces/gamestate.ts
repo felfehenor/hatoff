@@ -1,9 +1,12 @@
 import { GameHero } from './hero';
 
+export type GameDifficulty = 'easy' | 'normal' | 'hard';
+
 export interface GameStateMeta {
   version: number;
   createdAt: number;
   numTicks: number;
+  difficulty: GameDifficulty;
 }
 
 export interface GameStateTownSetup {
@@ -19,6 +22,7 @@ export interface GameStateRecruitment {
 }
 
 export interface GameStateCooldowns {
+  nextDefenseAttackTime: number;
   nextShopResetTime: number;
   nextRecruitResetTime: number;
   nextClickResetTime: number;
@@ -28,6 +32,13 @@ export interface GameStateShop {
   ownedItems: Record<string, number>;
   shopItems: (string | undefined)[];
   numRerolls: number;
+}
+
+export interface GameStateDefense {
+  numAttacks: number;
+  incomingDamage: number;
+  damageTypeId: string;
+  targettedTaskIds: string[];
 }
 
 export interface GameState {
@@ -85,6 +96,11 @@ export interface GameState {
    * Shop data
    */
   shop: GameStateShop;
+
+  /**
+   * Defense data
+   */
+  defense: GameStateDefense;
 
   /**
    * Cooldowns data

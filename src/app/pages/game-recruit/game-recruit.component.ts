@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { timer } from 'rxjs';
+import { CountdownComponent } from '../../components/countdown/countdown.component';
 import { DamageTypeComponent } from '../../components/damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../../components/hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../../components/hero-art/hero-art.component';
@@ -39,6 +40,7 @@ import { GameDamageType, GameHero } from '../../interfaces';
     HeroTaskLevelListComponent,
     SweetAlert2Module,
     HeroSpecialGlowDirective,
+    CountdownComponent,
   ],
   templateUrl: './game-recruit.component.html',
   styleUrl: './game-recruit.component.scss',
@@ -55,15 +57,8 @@ export class GameRecruitComponent {
   public currentHeroPool = computed(
     () => gamestate().recruitment.recruitableHeroes,
   );
-  public secondsUntilReset = computed(() =>
-    Math.floor(
-      ((gamestate().cooldowns.nextRecruitResetTime - Date.now()) / 1000) % 60,
-    ),
-  );
-  public minutesUntilReset = computed(() =>
-    Math.floor(
-      (gamestate().cooldowns.nextRecruitResetTime - Date.now()) / 1000 / 60,
-    ),
+  public secondsUntilReset = computed(
+    () => gamestate().cooldowns.nextRecruitResetTime,
   );
 
   public selectedHero = signal<GameHero | undefined>(undefined);

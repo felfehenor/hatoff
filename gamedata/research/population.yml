@@ -65,3 +65,23 @@
     - Apartments II
 
   unlocksPopulation: 1
+
+- id: 17f18b23-687c-4438-9ed5-dde038f60871
+  name: Garrison I
+  type: Population
+  description: Increase the population cap by 1.
+  researchRequired: 1000
+  requiresResearchIds:
+    - Apartments III
+
+  unlocksPopulation: 1
+
+- id: dfff9937-8431-4c58-b769-93c93983a1a2
+  name: Garrison II
+  type: Population
+  description: Increase the population cap by 1.
+  researchRequired: 2000
+  requiresResearchIds:
+    - Garrison I
+
+  unlocksPopulation: 1

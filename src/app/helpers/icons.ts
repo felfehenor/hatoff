@@ -17,7 +17,9 @@ import {
   tablerCoins,
   tablerHeartBroken,
   tablerHelpHexagon,
+  tablerShield,
   tablerSword,
+  tablerWall,
   tablerWood,
 } from '@ng-icons/tabler-icons';
 
@@ -33,11 +35,8 @@ export function usedContentIcons(): Record<string, string> {
     tablerBlob,
     tablerCarrot,
     tablerBible,
-  };
-}
-
-export function usedItemIcons(): Record<string, string> {
-  return {
+    tablerWall,
+    tablerShield,
     gameRoundPotion,
     gameStoneTablet,
     gameFoldedPaper,

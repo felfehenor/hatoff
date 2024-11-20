@@ -83,7 +83,7 @@ export function heroFusionDamageType(
     ]);
   }
 
-  const choice = randomChoice<string>(seed, choices);
+  const choice = randomChoice<string>(choices, seed);
 
   return choice;
 }

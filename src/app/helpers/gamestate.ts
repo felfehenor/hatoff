@@ -17,9 +17,16 @@ export function blankGameState(): GameState {
       numRerolls: 0,
     },
     cooldowns: {
+      nextDefenseAttackTime: 0,
       nextClickResetTime: 0,
       nextShopResetTime: 0,
       nextRecruitResetTime: 0,
+    },
+    defense: {
+      numAttacks: -1,
+      incomingDamage: 0,
+      damageTypeId: '',
+      targettedTaskIds: [],
     },
     townSetup: {
       hasDoneSetup: false,
@@ -34,6 +41,7 @@ export function blankGameState(): GameState {
     },
     meta: {
       version: 1,
+      difficulty: 'normal',
       createdAt: Date.now(),
       numTicks: 0,
     },

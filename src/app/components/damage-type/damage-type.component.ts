@@ -3,7 +3,12 @@ import { Component, computed, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 
-import { allUnlockedDamageTypes, usedContentIcons } from '../../helpers';
+import {
+  allUnlockedDamageTypes,
+  getEntry,
+  usedContentIcons,
+} from '../../helpers';
+import { GameDamageType } from '../../interfaces';
 import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 
@@ -26,5 +31,7 @@ export class DamageTypeComponent {
 
   public editable = input<boolean>(false);
   public isEditing = signal<boolean>(false);
+
+  public thisDamageType = computed(() => getEntry<GameDamageType>(this.id())!);
   public unlockedDamageTypes = computed(() => allUnlockedDamageTypes());
 }

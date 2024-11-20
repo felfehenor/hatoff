@@ -23,10 +23,11 @@
   unlocksTaskIds: [Food Hunting]
 
 - id: c617668c-c6cf-4480-93f6-139a2a6bc3e5
-  name: Fortifications
+  name: Defensive Measures
   type: Task
-  description: Unlock the task "Fortifications".
+  description: Unlock the task "Town Defense".
   researchRequired: 0
+  requireResearchCount: 15
 
   unlocksTaskIds: [Town Defense]
 

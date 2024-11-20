@@ -21,7 +21,7 @@ export function setShopResetTime(): void {
 
 export function resetShopRerolls(): void {
   updateGamestate((state) => {
-    state.recruitment.numRerolls = 0;
+    state.shop.numRerolls = 0;
     return state;
   });
 }
@@ -80,7 +80,7 @@ export function doShopReroll(): void {
   loseResource(resource, rerollShopCost());
 
   const state = gamestate();
-  state.recruitment.numRerolls += 1;
+  state.shop.numRerolls += 1;
   setGameState(state);
 }
 
@@ -101,7 +101,7 @@ export function canRerollShop(): boolean {
 }
 
 export function rerollShopCost(): number {
-  const numRerolls = gamestate().recruitment.numRerolls ?? 0;
+  const numRerolls = gamestate().shop.numRerolls ?? 0;
   if (numRerolls === 0) return 0;
 
   const totalRerolls = 1 + numRerolls;

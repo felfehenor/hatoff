@@ -4,7 +4,7 @@
 <ng-template #breakdown>
   <div class="font-bold flex items-center" [class.mb-3]="showSubtypes() && subtypeInfo().length > 0">
     <ng-icon [name]="icon" class="mx-1 text-sm" [style.color]="color()"></ng-icon>
-    {{ typeInfo()?.name }}: 100%
+    {{ damageType().name }}: 100%
   </div>
 
   @if(showSubtypes()) {

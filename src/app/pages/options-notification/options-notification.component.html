@@ -28,6 +28,15 @@
 
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
+            <input type="checkbox" [checked]="currentValueForOption('notificationDefense') === true"
+              class="checkbox checkbox-secondary"
+              (click)="setValueForOption('notificationDefense', !currentValueForOption('notificationDefense'))" />
+            <span class="label-text">Defensive Measures</span>
+          </label>
+        </div>
+
+        <div class="form-control">
+          <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationRecruitment') === true"
               class="checkbox checkbox-secondary"
               (click)="setValueForOption('notificationRecruitment', !currentValueForOption('notificationRecruitment'))" />

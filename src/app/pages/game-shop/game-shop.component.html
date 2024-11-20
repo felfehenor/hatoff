@@ -2,18 +2,7 @@
   <span header>
     Shop
 
-    <span class="ml-1">
-      <span class="badge badge-warning">
-        <span>Reset in</span>
-
-        <span class="ml-1 countdown">
-          <span [style.--value]="minutesUntilReset()"></span>
-          m
-          <span class="ml-1" [style.--value]="secondsUntilReset()"></span>
-          s
-        </span>
-      </span>
-    </span>
+    <app-countdown class="ml-1" [secondsLeft]="secondsUntilReset()" label="Reset in"></app-countdown>
   </span>
 
   <div pageactions class="flex items-center">

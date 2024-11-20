@@ -73,9 +73,7 @@ export class HeroDisplayTallComponent {
   }
 
   public canGiveClickXp(): boolean {
-    return (
-      Date.now() >= gamestate().cooldowns.nextClickResetTime && canGiveClickXp()
-    );
+    return gamestate().cooldowns.nextClickResetTime <= 0 && canGiveClickXp();
   }
 
   public giveXp() {

@@ -7,3 +7,8 @@
   name: Holiness
   icon: tablerBible
   description: Used to gain Piety from Church tasks.
+
+- id: 8e2613f6-ca79-4146-a191-55c92d2dbe79
+  name: Fortifications
+  icon: tablerWall
+  description: Used to defend the town.

@@ -2,10 +2,17 @@
   <span header>
     Town Tasks
 
+    @if(shouldShowCountdown()) {
+    <app-countdown class="ml-1" [secondsLeft]="secondsUntilAttack()" label="Attack in"
+      [tp]="defenseTooltip()"></app-countdown>
+    }
+  </span>
+
+  <div pageactions>
     @if(numIdle() > 0) {
     <span class="ml-2 badge badge-warning">You have {{ numIdle() }} idle heroe(s)!</span>
     }
-  </span>
+  </div>
 
   <app-task-list></app-task-list>
 </app-page-card>

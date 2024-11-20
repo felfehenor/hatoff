@@ -9,7 +9,7 @@
   color: '#ffb6c1'
 
   requiresResearchIds:
-    - Forgetful Fountain
+    - Passionate Alchemy
 
 - id: 6f8b24f0-ba01-415f-9519-72f52dcebf2b
   name: Bottle of Forgetfulness
@@ -22,4 +22,4 @@
   color: '#ff7f50'
 
   requiresResearchIds:
-    - Passionate Alchemy
+    - Forgetful Fountain

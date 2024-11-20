@@ -6,7 +6,7 @@ import {
 } from '../interfaces';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
-import { gamestate, setGameState } from './gamestate';
+import { gamestate, setGameState, updateGamestate } from './gamestate';
 import {
   addHero,
   canRecruitHero,
@@ -26,15 +26,17 @@ import { seededrng } from './rng';
 import { v4 as uuid } from 'uuid';
 
 export function setRecruitResetTime(): void {
-  const state = gamestate();
-  state.cooldowns.nextRecruitResetTime = cooldown(3600);
-  setGameState(state);
+  updateGamestate((state) => {
+    state.cooldowns.nextRecruitResetTime = cooldown(3600);
+    return state;
+  });
 }
 
 export function resetRecruitRerolls(): void {
-  const state = gamestate();
-  state.recruitment.numRerolls = 0;
-  setGameState(state);
+  updateGamestate((state) => {
+    state.recruitment.numRerolls = 0;
+    return state;
+  });
 }
 
 export function generateHeroesToRecruit() {

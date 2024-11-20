@@ -9,13 +9,14 @@ type NotificationCategory =
   | 'ResourceGain'
   | 'LevelUp'
   | 'Item'
+  | 'Defense'
   | 'Recruitment'
   | 'Error'
   | 'Success';
 
 const notification = new Subject<{
   message: string;
-  type: 'show' | 'error' | 'success';
+  type: 'show' | 'error' | 'success' | 'warning';
   category: NotificationCategory;
 }>();
 export const notification$ = notification.asObservable();

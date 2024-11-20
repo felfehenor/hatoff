@@ -13,6 +13,6 @@ export class ResourceListComponent {
   public resources = computed(() =>
     options().debugShowAllResources
       ? Object.keys(gamestate().resources).filter((k) => getEntry(k))
-      : ['Gold', 'Wood', 'Stone', 'Food'],
+      : ['Gold', 'Wood', 'Stone', 'Food', 'Fortifications'],
   );
 }

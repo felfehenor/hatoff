@@ -6,6 +6,7 @@ import { TownInfoCardComponent } from '../../components/town-info-card/town-info
 import {
   blankGameState,
   gamestate,
+  migrateGameState,
   notifySuccess,
   setGameState,
 } from '../../helpers';
@@ -56,6 +57,7 @@ export class OptionsSavefileComponent {
       };
 
       setGameState(charFile);
+      migrateGameState();
 
       finish();
 
