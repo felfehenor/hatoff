@@ -27,7 +27,7 @@ import {
 
 export function setDefenseResetTime(): void {
   updateGamestate((state) => {
-    state.cooldowns.nextDefenseAttackTime = cooldown(3600);
+    state.cooldowns.nextDefenseAttackTime = cooldown('nextDefenseAttackTime');
     return state;
   });
 }

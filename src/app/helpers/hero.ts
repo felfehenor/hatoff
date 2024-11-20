@@ -172,7 +172,7 @@ export function canGiveClickXp(): boolean {
 export function giveClickXp(hero: GameHero): void {
   updateGamestate((state) => {
     const heroRef = state.heroes[hero.id];
-    state.cooldowns.nextClickResetTime = cooldown(5);
+    state.cooldowns.nextClickResetTime = cooldown('nextClickResetTime');
     gainXp(heroRef, clickXpBoost());
 
     return state;
@@ -291,6 +291,8 @@ export function gainXp(hero: GameHero, xp = 1): void {
       heroRef.level += 1;
 
       levelup(heroRef);
+
+      if (hero.level >= hero.maxLevel) break;
     }
 
     return state;

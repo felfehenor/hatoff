@@ -1,3 +1,12 @@
-export function cooldown(seconds: number): number {
-  return seconds;
+import { GameStateCooldowns } from '../interfaces';
+
+export const maxCooldowns: Record<keyof GameStateCooldowns, number> = {
+  nextClickResetTime: 5,
+  nextDefenseAttackTime: 3600,
+  nextRecruitResetTime: 3600,
+  nextShopResetTime: 3600,
+};
+
+export function cooldown(key: keyof GameStateCooldowns): number {
+  return maxCooldowns[key];
 }

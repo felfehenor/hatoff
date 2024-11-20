@@ -14,7 +14,7 @@ import { hasResource, loseResource } from './resource';
 
 export function setShopResetTime(): void {
   updateGamestate((state) => {
-    state.cooldowns.nextShopResetTime = cooldown(3600);
+    state.cooldowns.nextShopResetTime = cooldown('nextShopResetTime');
     return state;
   });
 }

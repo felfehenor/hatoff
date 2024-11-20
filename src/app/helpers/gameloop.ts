@@ -1,4 +1,5 @@
 import { GameStateCooldowns } from '../interfaces';
+import { maxCooldowns } from './cooldown';
 import { doDefenseGameloop } from './gameloop-defense';
 import { doHeroGameloop } from './gameloop-hero';
 import { doRecruitGameloop } from './gameloop-recruit';
@@ -26,8 +27,14 @@ export function doGameloop(numTicks: number): void {
     state.meta.numTicks += totalTicks;
 
     Object.keys(state.cooldowns).forEach((cd) => {
-      state.cooldowns[cd as keyof GameStateCooldowns] -= 1;
+      const cdKey = cd as keyof GameStateCooldowns;
+      state.cooldowns[cdKey] -= 1;
+
+      if (state.cooldowns[cdKey] <= 0) state.cooldowns[cdKey] = 0;
+      if (state.cooldowns[cdKey] >= maxCooldowns[cdKey])
+        state.cooldowns[cdKey] = maxCooldowns[cdKey];
     });
+
     return state;
   });
 }

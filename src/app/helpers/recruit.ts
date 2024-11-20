@@ -27,7 +27,7 @@ import { v4 as uuid } from 'uuid';
 
 export function setRecruitResetTime(): void {
   updateGamestate((state) => {
-    state.cooldowns.nextRecruitResetTime = cooldown(3600);
+    state.cooldowns.nextRecruitResetTime = cooldown('nextRecruitResetTime');
     return state;
   });
 }
