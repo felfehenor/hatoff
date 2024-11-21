@@ -265,6 +265,13 @@ export function levelup(hero: GameHero): void {
   gainStat(hero, 'resistance', resistanceBoost);
   gainStat(hero, 'speed', speedBoost);
 
+  hero.stats.health = Math.min(hero.stats.health, 9999);
+  hero.stats.force = Math.min(hero.stats.force, 999);
+  hero.stats.resistance = Math.min(hero.stats.resistance, 999);
+  hero.stats.progress = Math.min(hero.stats.progress, 999);
+  hero.stats.piety = Math.min(hero.stats.piety, 999);
+  hero.stats.speed = Math.min(hero.stats.speed, 99);
+
   const stats = [
     hpBoost > 0 ? `+${hpBoost} HP` : '',
     forceBoost > 0 ? `+${forceBoost} FRC` : '',
