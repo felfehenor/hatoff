@@ -164,10 +164,15 @@ export class HeroArtComponent implements OnDestroy {
   }
 
   private async drawCharacter() {
+    const canvas = this.canvas();
+    if (!canvas) return;
+
     if (!this.offscreen) {
+      canvas.nativeElement.height = this.size();
+      canvas.nativeElement.width = this.size();
       this.canvasId = uuid();
       this.offscreen =
-        this.canvas()?.nativeElement.transferControlToOffscreen() as OffscreenCanvas;
+        canvas.nativeElement.transferControlToOffscreen() as OffscreenCanvas;
 
       this.contentService.sendWorkerMessage(
         'transferspritecanvas',

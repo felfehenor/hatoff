@@ -1,4 +1,4 @@
-<canvas [width]="size()" [height]="size()" #canvas [class.hidden]="!loaded()"></canvas>
+<canvas #canvas [class.hidden]="!loaded()"></canvas>
 
 @if(!loaded()) {
 <div [style.width.px]="size()" [style.height.px]="size()" class="flex justify-center items-center">
