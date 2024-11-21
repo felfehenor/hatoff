@@ -25,19 +25,16 @@ export class GamestateService {
   public hasLoaded = signal<boolean>(false);
 
   constructor() {
-    effect(
-      () => {
-        if (!this.contentService.hasLoaded() || this.hasLoaded()) return;
-        console.log('[Gamestate] Migrating gamestate...');
+    effect(() => {
+      if (!this.contentService.hasLoaded() || this.hasLoaded()) return;
+      console.log('[Gamestate] Migrating gamestate...');
 
-        migrateGameState();
-        migrateOptionsState();
+      migrateGameState();
+      migrateOptionsState();
 
-        console.log('[Gamestate] Gamestate migrated & loaded.');
-        this.hasLoaded.set(true);
-      },
-      { allowSignalWrites: true },
-    );
+      console.log('[Gamestate] Gamestate migrated & loaded.');
+      this.hasLoaded.set(true);
+    });
 
     effect(() => {
       if (!this.hasLoaded()) return;

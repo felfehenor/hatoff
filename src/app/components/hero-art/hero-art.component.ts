@@ -33,10 +33,10 @@ const defaultDrawingFlags = () => ({
 });
 
 @Component({
-    selector: 'app-hero-art',
-    imports: [],
-    templateUrl: './hero-art.component.html',
-    styleUrl: './hero-art.component.scss'
+  selector: 'app-hero-art',
+  imports: [],
+  templateUrl: './hero-art.component.html',
+  styleUrl: './hero-art.component.scss',
 })
 export class HeroArtComponent implements OnDestroy {
   private contentService = inject(ContentService);
@@ -84,16 +84,13 @@ export class HeroArtComponent implements OnDestroy {
   private drawingFlags = defaultDrawingFlags();
 
   constructor() {
-    effect(
-      () => {
-        this.id();
+    effect(() => {
+      this.id();
 
-        if (!this.gamestateService.hasLoaded()) return;
+      if (!this.gamestateService.hasLoaded()) return;
 
-        this.drawCharacter();
-      },
-      { allowSignalWrites: true },
-    );
+      this.drawCharacter();
+    });
   }
 
   ngOnDestroy() {
