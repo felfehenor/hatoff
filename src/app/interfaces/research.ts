@@ -1,5 +1,10 @@
+import { GameArchetype } from './archetype';
+import { GameDamageType } from './damage';
 import { GameHeroStat } from './hero';
 import { Content } from './identifiable';
+import { GameTask } from './task';
+
+export type ResearchableContent = GameTask | GameDamageType | GameArchetype;
 
 export interface GameResearch extends Content {
   description: string;

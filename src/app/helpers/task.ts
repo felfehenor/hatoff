@@ -1,6 +1,6 @@
 import { sum } from 'lodash';
 import { GameDamageType, GameHero, GameTask } from '../interfaces';
-import { getEntry } from './content';
+import { getEntry, getResearchableEntriesByType } from './content';
 import {
   canUseDamageTypeForRequirement,
   getDamageForcePercentage,
@@ -16,7 +16,12 @@ import {
 
 export function isStrictDamageType(task: GameTask): boolean {
   const damageType = getTaskDamageType(task);
-  if (damageType?.isAny || damageType.name === 'Defensive') return false;
+  if (
+    !getResearchableEntriesByType<GameDamageType>('damagetype')
+      .map((t) => t.id)
+      .includes(damageType.id)
+  )
+    return false;
 
   return task.requireExactType || isHardMode();
 }

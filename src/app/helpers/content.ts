@@ -1,6 +1,13 @@
 import { signal, Signal, WritableSignal } from '@angular/core';
 import { cloneDeep } from 'lodash';
-import { Content, ContentType, HeroArt } from '../interfaces';
+import {
+  Content,
+  ContentType,
+  GameResearch,
+  HeroArt,
+  ResearchableContent,
+  ResearchableContentType,
+} from '../interfaces';
 
 const _art: WritableSignal<HeroArt> = signal({
   ear: {},
@@ -33,6 +40,20 @@ export function setAllIdsByName(state: Record<string, string>): void {
 
 export function setAllContentById(state: Record<string, Content>): void {
   _allContentById.set(cloneDeep(state));
+}
+
+export function getResearchableEntriesByType<T extends ResearchableContent>(
+  type: ResearchableContentType,
+): T[] {
+  const research = getEntriesByType<GameResearch>('research')
+    .flatMap((r) => [
+      r.unlocksArchetypeIds ?? [],
+      r.unlocksDamageTypeIds ?? [],
+      r.unlocksTaskIds ?? [],
+    ])
+    .flat();
+
+  return getEntriesByType<T>(type).filter((t) => research.includes(t.id));
 }
 
 export function getEntriesByType<T>(type: ContentType): T[] {

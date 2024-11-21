@@ -1,9 +1,9 @@
+export type ResearchableContentType = 'damagetype' | 'archetype' | 'task';
+
 export type ContentType =
-  | 'damagetype'
-  | 'archetype'
+  | ResearchableContentType
   | 'resource'
   | 'item'
-  | 'task'
   | 'research'
   | 'upgrade';
 

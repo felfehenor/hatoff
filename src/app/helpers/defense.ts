@@ -5,7 +5,7 @@ import {
   GameTask,
   GameUpgrade,
 } from '../interfaces';
-import { getEntriesByType, getEntry } from './content';
+import { getEntry, getResearchableEntriesByType } from './content';
 import { cooldown } from './cooldown';
 import { isEasyMode, isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
@@ -70,22 +70,22 @@ export function pickTownDamageType(): GameDamageType {
   const numAttacks = gamestate().defense.numAttacks;
   const allUnlockedIds = allUnlockedDamageTypes().map((f) => f.id);
 
-  const damageTypes = getEntriesByType<GameDamageType>('damagetype')
-    .filter((t) => !t.isAny && t.name !== 'Defensive')
-    .filter((t) => {
-      // no locked damage types in the first few
-      if (numAttacks < 3) {
-        return allUnlockedIds.includes(t.id);
-      }
+  const damageTypes = getResearchableEntriesByType<GameDamageType>(
+    'damagetype',
+  ).filter((t) => {
+    // no locked damage types in the first few
+    if (numAttacks < 3) {
+      return allUnlockedIds.includes(t.id);
+    }
 
-      // 30% chance of having a locked damage type up until attack 7
-      if (numAttacks < 7 && randomrng()() > 0.7) {
-        return allUnlockedIds.includes(t.id);
-      }
+    // 30% chance of having a locked damage type up until attack 7
+    if (numAttacks < 7 && randomrng()() > 0.7) {
+      return allUnlockedIds.includes(t.id);
+    }
 
-      // every damage type
-      return t;
-    });
+    // every damage type
+    return t;
+  });
 
   return randomChoice<GameDamageType>(damageTypes);
 }
