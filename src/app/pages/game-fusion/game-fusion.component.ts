@@ -12,16 +12,15 @@ import {
 import { GameHero } from '../../interfaces';
 
 @Component({
-  selector: 'app-game-fusion',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    FusionHeroDisplayComponent,
-    FusionHeroDisplayTallComponent,
-    SweetAlert2Module,
-  ],
-  templateUrl: './game-fusion.component.html',
-  styleUrl: './game-fusion.component.scss',
+    selector: 'app-game-fusion',
+    imports: [
+        PageCardComponent,
+        FusionHeroDisplayComponent,
+        FusionHeroDisplayTallComponent,
+        SweetAlert2Module,
+    ],
+    templateUrl: './game-fusion.component.html',
+    styleUrl: './game-fusion.component.scss'
 })
 export class GameFusionComponent {
   public mainHero = signal<GameHero | undefined>(undefined);

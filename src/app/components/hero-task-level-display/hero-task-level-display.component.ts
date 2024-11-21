@@ -9,11 +9,10 @@ import { GameHero, GameTask } from '../../interfaces';
 import { ContentNameComponent } from '../content-name/content-name.component';
 
 @Component({
-  selector: 'app-hero-task-level-display',
-  standalone: true,
-  imports: [ContentNameComponent, TippyDirective],
-  templateUrl: './hero-task-level-display.component.html',
-  styleUrl: './hero-task-level-display.component.scss',
+    selector: 'app-hero-task-level-display',
+    imports: [ContentNameComponent, TippyDirective],
+    templateUrl: './hero-task-level-display.component.html',
+    styleUrl: './hero-task-level-display.component.scss'
 })
 export class HeroTaskLevelDisplayComponent {
   public id = input.required<string>();

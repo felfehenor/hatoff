@@ -33,11 +33,10 @@ const defaultDrawingFlags = () => ({
 });
 
 @Component({
-  selector: 'app-hero-art',
-  standalone: true,
-  imports: [],
-  templateUrl: './hero-art.component.html',
-  styleUrl: './hero-art.component.scss',
+    selector: 'app-hero-art',
+    imports: [],
+    templateUrl: './hero-art.component.html',
+    styleUrl: './hero-art.component.scss'
 })
 export class HeroArtComponent implements OnDestroy {
   private contentService = inject(ContentService);

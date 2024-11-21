@@ -6,16 +6,15 @@ import { TaskListComponent } from '../../components/task-list/task-list.componen
 import { gamestate, hasQueuedAttack, numIdleHeroes } from '../../helpers';
 
 @Component({
-  selector: 'app-game-town',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    TaskListComponent,
-    CountdownComponent,
-    TippyDirective,
-  ],
-  templateUrl: './game-town.component.html',
-  styleUrl: './game-town.component.scss',
+    selector: 'app-game-town',
+    imports: [
+        PageCardComponent,
+        TaskListComponent,
+        CountdownComponent,
+        TippyDirective,
+    ],
+    templateUrl: './game-town.component.html',
+    styleUrl: './game-town.component.scss'
 })
 export class GameTownComponent {
   public numIdle = computed(() => numIdleHeroes());

@@ -7,18 +7,17 @@ import { getEntriesByType, getResearchFor } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 
 @Component({
-  selector: 'app-research-display',
-  standalone: true,
-  imports: [NgIconComponent, TippyDirective],
-  providers: [
-    provideIcons({
-      heroStar,
-      heroBeaker,
-      tablerInfoHexagon,
-    }),
-  ],
-  templateUrl: './research-display.component.html',
-  styleUrl: './research-display.component.scss',
+    selector: 'app-research-display',
+    imports: [NgIconComponent, TippyDirective],
+    providers: [
+        provideIcons({
+            heroStar,
+            heroBeaker,
+            tablerInfoHexagon,
+        }),
+    ],
+    templateUrl: './research-display.component.html',
+    styleUrl: './research-display.component.scss'
 })
 export class ResearchDisplayComponent {
   public research = input.required<GameResearch>();

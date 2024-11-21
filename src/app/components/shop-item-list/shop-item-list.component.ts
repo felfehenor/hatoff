@@ -10,11 +10,10 @@ import { GameItem } from '../../interfaces';
 import { ShopItemDisplayComponent } from '../shop-item-display/shop-item-display.component';
 
 @Component({
-  selector: 'app-shop-item-list',
-  standalone: true,
-  imports: [ShopItemDisplayComponent, NgClass],
-  templateUrl: './shop-item-list.component.html',
-  styleUrl: './shop-item-list.component.scss',
+    selector: 'app-shop-item-list',
+    imports: [ShopItemDisplayComponent, NgClass],
+    templateUrl: './shop-item-list.component.html',
+    styleUrl: './shop-item-list.component.scss'
 })
 export class ShopItemListComponent {
   public allShopItems = computed(() =>

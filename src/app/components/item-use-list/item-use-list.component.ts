@@ -10,12 +10,11 @@ import { GameHero, GameItem } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 
 @Component({
-  selector: 'app-item-use-list',
-  standalone: true,
-  imports: [ButtonCloseComponent, NgIconComponent],
-  providers: [provideIcons(usedContentIcons())],
-  templateUrl: './item-use-list.component.html',
-  styleUrl: './item-use-list.component.scss',
+    selector: 'app-item-use-list',
+    imports: [ButtonCloseComponent, NgIconComponent],
+    providers: [provideIcons(usedContentIcons())],
+    templateUrl: './item-use-list.component.html',
+    styleUrl: './item-use-list.component.scss'
 })
 export class ItemUseListComponent {
   public hero = input.required<GameHero>();

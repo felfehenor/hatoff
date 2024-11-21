@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { gamestate } from '../../helpers';
 
 @Component({
-  selector: 'app-savefile-export',
-  standalone: true,
-  imports: [],
-  templateUrl: './savefile-export.component.html',
-  styleUrl: './savefile-export.component.scss',
+    selector: 'app-savefile-export',
+    imports: [],
+    templateUrl: './savefile-export.component.html',
+    styleUrl: './savefile-export.component.scss'
 })
 export class SavefileExportComponent {
   exportSavefile() {

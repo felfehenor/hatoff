@@ -9,12 +9,11 @@ import {
 import { GameDamageType } from '../../interfaces';
 
 @Component({
-  selector: 'app-damage-type-breakdown',
-  standalone: true,
-  imports: [NgIconComponent, TippyDirective],
-  providers: [provideIcons(usedContentIcons())],
-  templateUrl: './damage-type-breakdown.component.html',
-  styleUrl: './damage-type-breakdown.component.scss',
+    selector: 'app-damage-type-breakdown',
+    imports: [NgIconComponent, TippyDirective],
+    providers: [provideIcons(usedContentIcons())],
+    templateUrl: './damage-type-breakdown.component.html',
+    styleUrl: './damage-type-breakdown.component.scss'
 })
 export class DamageTypeBreakdownComponent {
   public damageType = model.required<GameDamageType>();

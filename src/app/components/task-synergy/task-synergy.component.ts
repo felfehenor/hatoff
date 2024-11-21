@@ -7,16 +7,15 @@ import { synergyBonus } from '../../helpers';
 import { GameTask } from '../../interfaces';
 
 @Component({
-  selector: 'app-task-synergy',
-  standalone: true,
-  imports: [NgIconComponent, TippyDirective],
-  providers: [
-    provideIcons({
-      gameGooeyMolecule,
-    }),
-  ],
-  templateUrl: './task-synergy.component.html',
-  styleUrl: './task-synergy.component.scss',
+    selector: 'app-task-synergy',
+    imports: [NgIconComponent, TippyDirective],
+    providers: [
+        provideIcons({
+            gameGooeyMolecule,
+        }),
+    ],
+    templateUrl: './task-synergy.component.html',
+    styleUrl: './task-synergy.component.scss'
 })
 export class TaskSynergyComponent {
   public task = input.required<GameTask>();

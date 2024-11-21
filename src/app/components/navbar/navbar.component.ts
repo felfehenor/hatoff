@@ -24,30 +24,29 @@ import { MetaService } from '../../services/meta.service';
 import { ResourceListComponent } from '../resource-list/resource-list.component';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    NgIconComponent,
-    ResourceListComponent,
-    HideResearchDirective,
-    TippyDirective,
-  ],
-  providers: [
-    provideIcons({
-      heroCog6Tooth,
-      heroBuildingOffice2,
-      heroBeaker,
-      heroUserGroup,
-      heroSparkles,
-      heroBuildingStorefront,
-      heroPauseCircle,
-      heroPlayCircle,
-    }),
-  ],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+    selector: 'app-navbar',
+    imports: [
+        RouterLink,
+        RouterLinkActive,
+        NgIconComponent,
+        ResourceListComponent,
+        HideResearchDirective,
+        TippyDirective,
+    ],
+    providers: [
+        provideIcons({
+            heroCog6Tooth,
+            heroBuildingOffice2,
+            heroBeaker,
+            heroUserGroup,
+            heroSparkles,
+            heroBuildingStorefront,
+            heroPauseCircle,
+            heroPlayCircle,
+        }),
+    ],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
   public meta = inject(MetaService);

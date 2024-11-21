@@ -7,16 +7,15 @@ import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusi
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
-  selector: 'app-hero-level-tagline',
-  standalone: true,
-  imports: [DecimalPipe, LevelDisplayComponent, HeroFusionIndicatorComponent],
-  providers: [
-    provideIcons({
-      gameOvermind,
-    }),
-  ],
-  templateUrl: './hero-level-tagline.component.html',
-  styleUrl: './hero-level-tagline.component.scss',
+    selector: 'app-hero-level-tagline',
+    imports: [DecimalPipe, LevelDisplayComponent, HeroFusionIndicatorComponent],
+    providers: [
+        provideIcons({
+            gameOvermind,
+        }),
+    ],
+    templateUrl: './hero-level-tagline.component.html',
+    styleUrl: './hero-level-tagline.component.scss'
 })
 export class HeroLevelTaglineComponent {
   public hero = input.required<GameHero>();

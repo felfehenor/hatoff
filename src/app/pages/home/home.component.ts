@@ -6,12 +6,11 @@ import { isSetup } from '../../helpers';
 import { MetaService } from '../../services/meta.service';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink, NgIconComponent, ConnectButtonsComponent],
-  providers: [],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+    selector: 'app-home',
+    imports: [RouterLink, NgIconComponent, ConnectButtonsComponent],
+    providers: [],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   public meta = inject(MetaService);

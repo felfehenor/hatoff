@@ -5,17 +5,16 @@ import { PageCardComponent } from '../../components/page-card/page-card.componen
 import { options } from '../../helpers';
 
 @Component({
-  selector: 'app-options',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    ConnectButtonsComponent,
-  ],
-  templateUrl: './options.component.html',
-  styleUrl: './options.component.scss',
+    selector: 'app-options',
+    imports: [
+        PageCardComponent,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+        ConnectButtonsComponent,
+    ],
+    templateUrl: './options.component.html',
+    styleUrl: './options.component.scss'
 })
 export class OptionsComponent {
   public readonly tabs = [

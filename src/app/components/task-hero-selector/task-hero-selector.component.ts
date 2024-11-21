@@ -44,31 +44,30 @@ import { ResourceDisplayComponent } from '../resource-display/resource-display.c
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
-  selector: 'app-task-hero-selector',
-  standalone: true,
-  imports: [
-    HeroArtComponent,
-    DamageTypeComponent,
-    HeroAssignmentComponent,
-    ButtonCloseComponent,
-    HeroArchetypeListComponent,
-    DamageTypeBreakdownComponent,
-    TaskSynergyComponent,
-    LevelDisplayComponent,
-    ResourceDisplayComponent,
-    HeroSpecialGlowDirective,
-    HeroFusionIndicatorComponent,
-    NgIconComponent,
-    TippyDirective,
-    BlurCardComponent,
-  ],
-  providers: [
-    provideIcons({
-      tablerAlertOctagon,
-    }),
-  ],
-  templateUrl: './task-hero-selector.component.html',
-  styleUrl: './task-hero-selector.component.scss',
+    selector: 'app-task-hero-selector',
+    imports: [
+        HeroArtComponent,
+        DamageTypeComponent,
+        HeroAssignmentComponent,
+        ButtonCloseComponent,
+        HeroArchetypeListComponent,
+        DamageTypeBreakdownComponent,
+        TaskSynergyComponent,
+        LevelDisplayComponent,
+        ResourceDisplayComponent,
+        HeroSpecialGlowDirective,
+        HeroFusionIndicatorComponent,
+        NgIconComponent,
+        TippyDirective,
+        BlurCardComponent,
+    ],
+    providers: [
+        provideIcons({
+            tablerAlertOctagon,
+        }),
+    ],
+    templateUrl: './task-hero-selector.component.html',
+    styleUrl: './task-hero-selector.component.scss'
 })
 export class TaskHeroSelectorComponent {
   public task = input.required<GameTask>();

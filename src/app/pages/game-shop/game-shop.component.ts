@@ -12,16 +12,15 @@ import {
 } from '../../helpers';
 
 @Component({
-  selector: 'app-game-shop',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    DecimalPipe,
-    ShopItemListComponent,
-    CountdownComponent,
-  ],
-  templateUrl: './game-shop.component.html',
-  styleUrl: './game-shop.component.scss',
+    selector: 'app-game-shop',
+    imports: [
+        PageCardComponent,
+        DecimalPipe,
+        ShopItemListComponent,
+        CountdownComponent,
+    ],
+    templateUrl: './game-shop.component.html',
+    styleUrl: './game-shop.component.scss'
 })
 export class GameShopComponent {
   public canReroll = computed(

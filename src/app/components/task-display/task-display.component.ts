@@ -22,18 +22,17 @@ import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.compo
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
-  selector: 'app-task-display',
-  standalone: true,
-  imports: [
-    TaskHeroSmallComponent,
-    DamageTypeBreakdownComponent,
-    TaskSynergyComponent,
-    LevelDisplayComponent,
-    TippyDirective,
-    DecimalPipe,
-  ],
-  templateUrl: './task-display.component.html',
-  styleUrl: './task-display.component.scss',
+    selector: 'app-task-display',
+    imports: [
+        TaskHeroSmallComponent,
+        DamageTypeBreakdownComponent,
+        TaskSynergyComponent,
+        LevelDisplayComponent,
+        TippyDirective,
+        DecimalPipe,
+    ],
+    templateUrl: './task-display.component.html',
+    styleUrl: './task-display.component.scss'
 })
 export class TaskDisplayComponent {
   public task = input.required<GameTask>();

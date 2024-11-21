@@ -23,23 +23,22 @@ import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.co
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
 
 @Component({
-  selector: 'app-hero-display-tall',
-  standalone: true,
-  imports: [
-    DamageTypeComponent,
-    HeroArtComponent,
-    HeroArchetypeListComponent,
-    HeroStatsTableComponent,
-    HeroAssignmentComponent,
-    HeroLevelTaglineComponent,
-    HeroTaskLevelListComponent,
-    SweetAlert2Module,
-    ButtonCloseComponent,
-    TippyDirective,
-    HeroSpecialGlowDirective,
-  ],
-  templateUrl: './hero-display-tall.component.html',
-  styleUrl: './hero-display-tall.component.scss',
+    selector: 'app-hero-display-tall',
+    imports: [
+        DamageTypeComponent,
+        HeroArtComponent,
+        HeroArchetypeListComponent,
+        HeroStatsTableComponent,
+        HeroAssignmentComponent,
+        HeroLevelTaglineComponent,
+        HeroTaskLevelListComponent,
+        SweetAlert2Module,
+        ButtonCloseComponent,
+        TippyDirective,
+        HeroSpecialGlowDirective,
+    ],
+    templateUrl: './hero-display-tall.component.html',
+    styleUrl: './hero-display-tall.component.scss'
 })
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();

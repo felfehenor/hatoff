@@ -6,12 +6,11 @@ import { TippyDirective } from '@ngneat/helipopper';
 import { MetaService } from '../../services/meta.service';
 
 @Component({
-  selector: 'app-changelog-modal',
-  standalone: true,
-  imports: [NgIconComponent, TippyDirective],
-  providers: [provideIcons({ tablerPackage })],
-  templateUrl: './changelog-modal.component.html',
-  styleUrl: './changelog-modal.component.scss',
+    selector: 'app-changelog-modal',
+    imports: [NgIconComponent, TippyDirective],
+    providers: [provideIcons({ tablerPackage })],
+    templateUrl: './changelog-modal.component.html',
+    styleUrl: './changelog-modal.component.scss'
 })
 export class ChangelogModalComponent {
   private meta = inject(MetaService);

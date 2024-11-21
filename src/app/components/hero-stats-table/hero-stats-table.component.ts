@@ -13,21 +13,20 @@ import { TippyDirective } from '@ngneat/helipopper';
 import { GameHero, GameHeroStat } from '../../interfaces';
 
 @Component({
-  selector: 'app-hero-stats-table',
-  standalone: true,
-  imports: [TitleCasePipe, DecimalPipe, TippyDirective, NgIconComponent],
-  providers: [
-    provideIcons({
-      tablerHeart,
-      tablerProgressBolt,
-      tablerBolt,
-      tablerShield,
-      tablerCloud,
-      tablerClock,
-    }),
-  ],
-  templateUrl: './hero-stats-table.component.html',
-  styleUrl: './hero-stats-table.component.scss',
+    selector: 'app-hero-stats-table',
+    imports: [TitleCasePipe, DecimalPipe, TippyDirective, NgIconComponent],
+    providers: [
+        provideIcons({
+            tablerHeart,
+            tablerProgressBolt,
+            tablerBolt,
+            tablerShield,
+            tablerCloud,
+            tablerClock,
+        }),
+    ],
+    templateUrl: './hero-stats-table.component.html',
+    styleUrl: './hero-stats-table.component.scss'
 })
 export class HeroStatsTableComponent {
   public hero = input.required<GameHero>();

@@ -8,18 +8,17 @@ import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.co
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
 
 @Component({
-  selector: 'app-fusion-hero-display-tall',
-  standalone: true,
-  imports: [
-    HeroArtComponent,
-    HeroLevelTaglineComponent,
-    DamageTypeComponent,
-    HeroArchetypeListComponent,
-    HeroStatsTableComponent,
-    HeroTaskLevelListComponent,
-  ],
-  templateUrl: './fusion-hero-display-tall.component.html',
-  styleUrl: './fusion-hero-display-tall.component.scss',
+    selector: 'app-fusion-hero-display-tall',
+    imports: [
+        HeroArtComponent,
+        HeroLevelTaglineComponent,
+        DamageTypeComponent,
+        HeroArchetypeListComponent,
+        HeroStatsTableComponent,
+        HeroTaskLevelListComponent,
+    ],
+    templateUrl: './fusion-hero-display-tall.component.html',
+    styleUrl: './fusion-hero-display-tall.component.scss'
 })
 export class FusionHeroDisplayTallComponent {
   public hero = input.required<GameHero>();

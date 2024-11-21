@@ -12,16 +12,15 @@ import {
 } from '../../helpers';
 
 @Component({
-  selector: 'app-game-heroes',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    HeroListComponent,
-    RouterLink,
-    DisableResearchDirective,
-  ],
-  templateUrl: './game-heroes.component.html',
-  styleUrl: './game-heroes.component.scss',
+    selector: 'app-game-heroes',
+    imports: [
+        PageCardComponent,
+        HeroListComponent,
+        RouterLink,
+        DisableResearchDirective,
+    ],
+    templateUrl: './game-heroes.component.html',
+    styleUrl: './game-heroes.component.scss'
 })
 export class GameHeroesComponent {
   public currentHeroCount = computed(() => totalHeroes());

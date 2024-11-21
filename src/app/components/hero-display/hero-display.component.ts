@@ -8,18 +8,17 @@ import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusi
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
-  selector: 'app-hero-display',
-  standalone: true,
-  imports: [
-    DamageTypeComponent,
-    PercentPipe,
-    HeroArtComponent,
-    LevelDisplayComponent,
-    HeroSpecialGlowDirective,
-    HeroFusionIndicatorComponent,
-  ],
-  templateUrl: './hero-display.component.html',
-  styleUrl: './hero-display.component.scss',
+    selector: 'app-hero-display',
+    imports: [
+        DamageTypeComponent,
+        PercentPipe,
+        HeroArtComponent,
+        LevelDisplayComponent,
+        HeroSpecialGlowDirective,
+        HeroFusionIndicatorComponent,
+    ],
+    templateUrl: './hero-display.component.html',
+    styleUrl: './hero-display.component.scss'
 })
 export class HeroDisplayComponent {
   public hero = input.required<GameHero>();

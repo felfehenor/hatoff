@@ -7,7 +7,6 @@ import { TaskHeroSelectorComponent } from '../task-hero-selector/task-hero-selec
 
 @Component({
   selector: 'app-task-list',
-  standalone: true,
   imports: [TaskDisplayComponent, NgClass, TaskHeroSelectorComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',

@@ -9,18 +9,17 @@ import { TippyDirective } from '@ngneat/helipopper';
 import { ChangelogModalComponent } from '../changelog-modal/changelog-modal.component';
 
 @Component({
-  selector: 'app-connect-buttons',
-  standalone: true,
-  imports: [NgIconComponent, TippyDirective, ChangelogModalComponent],
-  providers: [
-    provideIcons({
-      tablerBrandDiscord,
-      tablerMail,
-      tablerRss,
-    }),
-  ],
-  templateUrl: './connect-buttons.component.html',
-  styleUrl: './connect-buttons.component.scss',
+    selector: 'app-connect-buttons',
+    imports: [NgIconComponent, TippyDirective, ChangelogModalComponent],
+    providers: [
+        provideIcons({
+            tablerBrandDiscord,
+            tablerMail,
+            tablerRss,
+        }),
+    ],
+    templateUrl: './connect-buttons.component.html',
+    styleUrl: './connect-buttons.component.scss'
 })
 export class ConnectButtonsComponent {
   public readonly externalLinks = [

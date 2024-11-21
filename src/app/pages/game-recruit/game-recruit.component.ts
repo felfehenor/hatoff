@@ -26,23 +26,22 @@ import {
 import { GameDamageType, GameHero } from '../../interfaces';
 
 @Component({
-  selector: 'app-game-recruit',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    DecimalPipe,
-    HeroLevelTaglineComponent,
-    DamageTypeComponent,
-    HeroArtComponent,
-    HeroArchetypeListComponent,
-    HeroStatsTableComponent,
-    HeroTaskLevelListComponent,
-    SweetAlert2Module,
-    HeroSpecialGlowDirective,
-    CountdownComponent,
-  ],
-  templateUrl: './game-recruit.component.html',
-  styleUrl: './game-recruit.component.scss',
+    selector: 'app-game-recruit',
+    imports: [
+        PageCardComponent,
+        DecimalPipe,
+        HeroLevelTaglineComponent,
+        DamageTypeComponent,
+        HeroArtComponent,
+        HeroArchetypeListComponent,
+        HeroStatsTableComponent,
+        HeroTaskLevelListComponent,
+        SweetAlert2Module,
+        HeroSpecialGlowDirective,
+        CountdownComponent,
+    ],
+    templateUrl: './game-recruit.component.html',
+    styleUrl: './game-recruit.component.scss'
 })
 export class GameRecruitComponent {
   public currentHeroCount = computed(() => totalHeroes());

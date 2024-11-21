@@ -7,11 +7,10 @@ import { finishSetup, isSetup } from '../../helpers';
 import { GameDifficulty } from '../../interfaces';
 
 @Component({
-  selector: 'app-game-setup',
-  standalone: true,
-  imports: [FormsModule, SavefileImportComponent, TitleCasePipe],
-  templateUrl: './game-setup.component.html',
-  styleUrl: './game-setup.component.scss',
+    selector: 'app-game-setup',
+    imports: [FormsModule, SavefileImportComponent, TitleCasePipe],
+    templateUrl: './game-setup.component.html',
+    styleUrl: './game-setup.component.scss'
 })
 export class GameSetupComponent implements OnInit {
   private router = inject(Router);

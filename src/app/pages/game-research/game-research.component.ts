@@ -5,11 +5,10 @@ import { ResearchListComponent } from '../../components/research-list/research-l
 import { allAvailableIncompleteResearch } from '../../helpers';
 
 @Component({
-  selector: 'app-game-research',
-  standalone: true,
-  imports: [PageCardComponent, ResearchListComponent],
-  templateUrl: './game-research.component.html',
-  styleUrl: './game-research.component.scss',
+    selector: 'app-game-research',
+    imports: [PageCardComponent, ResearchListComponent],
+    templateUrl: './game-research.component.html',
+    styleUrl: './game-research.component.scss'
 })
 export class GameResearchComponent {
   public activeType = signal<string>('All');

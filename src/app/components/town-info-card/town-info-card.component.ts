@@ -9,11 +9,10 @@ const townInfo: Record<string, string> = {
 };
 
 @Component({
-  selector: 'app-town-info-card',
-  standalone: true,
-  imports: [],
-  templateUrl: './town-info-card.component.html',
-  styleUrl: './town-info-card.component.scss',
+    selector: 'app-town-info-card',
+    imports: [],
+    templateUrl: './town-info-card.component.html',
+    styleUrl: './town-info-card.component.scss'
 })
 export class TownInfoCardComponent {
   public townName = computed(() => gamestate().townSetup.townName);
