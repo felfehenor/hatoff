@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   tablerBrandDiscord,
+  tablerBrandGithub,
   tablerMail,
   tablerRss,
 } from '@ng-icons/tabler-icons';
@@ -9,17 +10,18 @@ import { TippyDirective } from '@ngneat/helipopper';
 import { ChangelogModalComponent } from '../changelog-modal/changelog-modal.component';
 
 @Component({
-    selector: 'app-connect-buttons',
-    imports: [NgIconComponent, TippyDirective, ChangelogModalComponent],
-    providers: [
-        provideIcons({
-            tablerBrandDiscord,
-            tablerMail,
-            tablerRss,
-        }),
-    ],
-    templateUrl: './connect-buttons.component.html',
-    styleUrl: './connect-buttons.component.scss'
+  selector: 'app-connect-buttons',
+  imports: [NgIconComponent, TippyDirective, ChangelogModalComponent],
+  providers: [
+    provideIcons({
+      tablerBrandDiscord,
+      tablerBrandGithub,
+      tablerMail,
+      tablerRss,
+    }),
+  ],
+  templateUrl: './connect-buttons.component.html',
+  styleUrl: './connect-buttons.component.scss',
 })
 export class ConnectButtonsComponent {
   public readonly externalLinks = [
@@ -29,6 +31,13 @@ export class ConnectButtonsComponent {
       color: '#5865f2',
       currentColor: '#ccc',
       icon: 'tablerBrandDiscord',
+    },
+    {
+      name: 'GitHub',
+      link: 'https://github.com/felfhenor/hatoff',
+      color: '#000',
+      currentColor: '#ccc',
+      icon: 'tablerBrandGithub',
     },
     {
       name: 'Blog',
