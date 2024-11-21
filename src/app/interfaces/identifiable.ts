@@ -5,7 +5,10 @@ export type ContentType =
   | 'resource'
   | 'item'
   | 'research'
-  | 'upgrade';
+  | 'upgrade'
+  | 'dungeon'
+  | 'monster'
+  | 'loot';
 
 export interface Identifiable {
   id: string;

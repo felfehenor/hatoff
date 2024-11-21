@@ -74,9 +74,19 @@ export interface GameState {
   taskAssignments: Record<string, string>;
 
   /**
-   * Task id -> Upgrade id -> true
+   * Task id -> Upgrade id -> timestamp
    */
-  taskUpgrades: Record<string, Record<string, boolean>>;
+  taskUpgrades: Record<string, Record<string, number>>;
+
+  /**
+   * Loot id -> timestamp
+   */
+  foundLoot: Record<string, number>;
+
+  /**
+   * Current dungeon id
+   */
+  activeDungeon: string;
 
   /**
    * Current research id

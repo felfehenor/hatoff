@@ -1,3 +1,4 @@
+import { GameCombatant } from './combat';
 import { Identifiable } from './identifiable';
 
 export type GameHeroStat =
@@ -17,13 +18,11 @@ export const AllGameHeroStats: GameHeroStat[] = [
   'speed',
 ];
 
-export interface GameHero extends Identifiable {
+export interface GameHero extends Identifiable, GameCombatant {
   isSpecial?: boolean;
 
-  damageTypeId: string;
-  archetypeIds: string[];
+  stunTicks: number;
 
-  level: number;
   maxLevel: number;
   fusionLevel: number;
 
@@ -32,8 +31,6 @@ export interface GameHero extends Identifiable {
 
   taskXp: Record<string, number>;
   taskLevels: Record<string, number>;
-
-  stats: Record<GameHeroStat, number>;
 }
 
 export interface SpecialGameHero {

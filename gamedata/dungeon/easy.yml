@@ -1,0 +1,18 @@
+- id: 73357341-6066-4a5b-9df5-e67e3e267525
+  name: Slime Caverns
+  description: Fight through a series of slimes and claim a viscious reward!
+
+  encounters:
+    - monsters:
+        - monsterId: Slime
+
+    - monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+
+    - monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: King Slime
+
+      lootId: Slimy Sword

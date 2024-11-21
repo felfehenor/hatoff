@@ -11,6 +11,8 @@ export function blankGameState(): GameState {
     taskAssignments: {},
     taskUpgrades: {},
     resources: {},
+    foundLoot: {},
+    activeDungeon: '',
     activeResearch: '',
     recruitment: {
       recruitableHeroes: [],

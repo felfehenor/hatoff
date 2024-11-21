@@ -42,6 +42,7 @@ export function defaultHero(): GameHero {
 
     archetypeIds: [],
     damageTypeId: '',
+    stunTicks: 0,
     fusionLevel: 0,
     level: 1,
     maxLevel: 20,
@@ -49,6 +50,7 @@ export function defaultHero(): GameHero {
     maxXp: maxXpForLevel(1, 0),
     taskXp: {},
     taskLevels: {},
+    currentHp: 0,
     stats: {
       health: 100,
       force: 3,

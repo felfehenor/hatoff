@@ -9,6 +9,7 @@ import {
 } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
+import { hasUnlockedLootItem } from './loot';
 
 export function setActiveResearch(research: GameResearch): void {
   const state = gamestate();
@@ -33,7 +34,10 @@ export function allAvailableIncompleteResearch(): GameResearch[] {
     (entry) =>
       (isUndefined(state.researchProgress[entry.id]) ||
         state.researchProgress[entry.id] < entry.researchRequired) &&
-      (entry.requiresResearchIds ?? []).every((req) => isResearchComplete(req)),
+      (entry.requiresResearchIds ?? []).every((req) =>
+        isResearchComplete(req),
+      ) &&
+      (entry.requiresLootIds ?? []).every((loot) => hasUnlockedLootItem(loot)),
   );
 }
 

@@ -2,15 +2,16 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
-  heroBeaker,
-  heroBuildingOffice2,
-  heroBuildingStorefront,
-  heroCog6Tooth,
-  heroPauseCircle,
-  heroPlayCircle,
-  heroSparkles,
-  heroUserGroup,
-} from '@ng-icons/heroicons/outline';
+  tablerBuildingFortress,
+  tablerBuildingStore,
+  tablerCompass,
+  tablerFlask2,
+  tablerPlayerPause,
+  tablerPlayerPlay,
+  tablerSettings,
+  tablerSparkles,
+  tablerUsersGroup,
+} from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
@@ -24,29 +25,30 @@ import { MetaService } from '../../services/meta.service';
 import { ResourceListComponent } from '../resource-list/resource-list.component';
 
 @Component({
-    selector: 'app-navbar',
-    imports: [
-        RouterLink,
-        RouterLinkActive,
-        NgIconComponent,
-        ResourceListComponent,
-        HideResearchDirective,
-        TippyDirective,
-    ],
-    providers: [
-        provideIcons({
-            heroCog6Tooth,
-            heroBuildingOffice2,
-            heroBeaker,
-            heroUserGroup,
-            heroSparkles,
-            heroBuildingStorefront,
-            heroPauseCircle,
-            heroPlayCircle,
-        }),
-    ],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss'
+  selector: 'app-navbar',
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgIconComponent,
+    ResourceListComponent,
+    HideResearchDirective,
+    TippyDirective,
+  ],
+  providers: [
+    provideIcons({
+      tablerSettings,
+      tablerBuildingFortress,
+      tablerFlask2,
+      tablerUsersGroup,
+      tablerSparkles,
+      tablerBuildingStore,
+      tablerPlayerPause,
+      tablerPlayerPlay,
+      tablerCompass,
+    }),
+  ],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   public meta = inject(MetaService);

@@ -19,6 +19,7 @@ import {
   tablerHelpHexagon,
   tablerShield,
   tablerSword,
+  tablerSwords,
   tablerWall,
   tablerWood,
 } from '@ng-icons/tabler-icons';
@@ -37,6 +38,7 @@ export function usedContentIcons(): Record<string, string> {
     tablerBible,
     tablerWall,
     tablerShield,
+    tablerSwords,
     gameRoundPotion,
     gameStoneTablet,
     gameFoldedPaper,

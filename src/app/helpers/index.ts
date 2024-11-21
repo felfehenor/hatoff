@@ -13,6 +13,7 @@ export * from './gameloop-shop';
 export * from './gamestate';
 export * from './hero';
 export * from './icons';
+export * from './loot';
 export * from './migrate';
 export * from './notify';
 export * from './options';
