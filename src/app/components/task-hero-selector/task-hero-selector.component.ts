@@ -31,6 +31,7 @@ import {
   GameUpgrade,
   HeroMood,
 } from '../../interfaces';
+import { BlurCardComponent } from '../blur-card/blur-card.component';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
@@ -59,6 +60,7 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     HeroFusionIndicatorComponent,
     NgIconComponent,
     TippyDirective,
+    BlurCardComponent,
   ],
   providers: [
     provideIcons({

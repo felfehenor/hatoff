@@ -49,15 +49,18 @@
     @if(currentMode() === 'heroes') {
     <div class="overflow-y-auto p-1">
       @for(hero of allHeroes(); track hero.id) {
-      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 cursor-pointer" [appHeroSpecialGlow]="hero"
-        [class.no-assign]="!canAssignHeroToTask(hero)" (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)"
-        tabindex="1" [class.ring-2]="isHeroSelected(hero)">
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2" [appHeroSpecialGlow]="hero"
+        (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)" tabindex="1"
+        [class.ring-2]="isHeroSelected(hero)">
         <figure class="max-w-[96px] pl-2 flex items-center">
           <app-hero-art class="max-h-[96px]" [id]="hero.id" [size]="96" [mood]="heroMood(hero)"></app-hero-art>
         </figure>
 
-        <div class="card-body p-1 pl-3">
+        @if(!canAssignHeroToTask(hero)) {
+        <app-blur-card text="Hero cannot be assigned to this task." class="absolute"></app-blur-card>
+        }
 
+        <div class="card-body p-1 pl-3 cursor-pointer" [class.no-assign]="!canAssignHeroToTask(hero)">
 
           <div class="card-title flex items-center">
             {{ hero.name }}
