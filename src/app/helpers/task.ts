@@ -134,6 +134,7 @@ export function getGlobalBoostForDamageType(type: GameDamageType): number {
 export function getDefenseDamageType(): GameDamageType {
   const defenseType = getEntry<GameDamageType>('Defensive')!;
   const baseType = getEntry<GameDamageType>(gamestate().defense.damageTypeId)!;
+  if (!baseType) return defenseType;
 
   const sumType = {
     ...structuredClone(defenseType),
