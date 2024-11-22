@@ -10,6 +10,7 @@ type NotificationCategory =
   | 'LevelUp'
   | 'Item'
   | 'Defense'
+  | 'Dungeon'
   | 'Recruitment'
   | 'Error'
   | 'Success';

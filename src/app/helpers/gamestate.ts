@@ -42,6 +42,14 @@ export function blankGameState(): GameState {
       shopItems: [],
       numRerolls: 0,
     },
+    exploration: {
+      id: '',
+      isExploring: false,
+      currentStep: -1,
+      hasFinishedCurrentStep: false,
+      currentCombat: undefined,
+      exploringParty: [],
+    },
     meta: {
       version: 1,
       isPaused: false,

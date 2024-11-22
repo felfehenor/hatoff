@@ -1,4 +1,5 @@
 export * from './archetype';
+export * from './combat';
 export * from './content';
 export * from './cooldown';
 export * from './damagetype';

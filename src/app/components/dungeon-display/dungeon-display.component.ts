@@ -8,7 +8,12 @@ import {
   tablerSwords,
 } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
-import { getEntry, isDungeonComplete } from '../../helpers';
+import {
+  dungeonCompletionPercent,
+  getEntry,
+  isCurrentDungeon,
+  isDungeonComplete,
+} from '../../helpers';
 import { GameDungeon, GameLoot } from '../../interfaces';
 
 @Component({
@@ -54,5 +59,6 @@ export class DungeonDisplayComponent {
     () => this.dungeon().encounters.filter((f) => f.type === 'loot').length,
   );
 
-  public completion = computed(() => 0);
+  public isCurrent = computed(() => isCurrentDungeon(this.dungeon()));
+  public completion = computed(() => dungeonCompletionPercent());
 }

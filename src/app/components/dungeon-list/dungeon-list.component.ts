@@ -1,6 +1,10 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import { gamestate, setActiveDungeon } from '../../helpers';
+import {
+  gamestate,
+  isDungeonInProgress,
+  setActiveDungeon,
+} from '../../helpers';
 import { GameDungeon } from '../../interfaces';
 import { DungeonDisplayComponent } from '../dungeon-display/dungeon-display.component';
 
@@ -13,6 +17,7 @@ import { DungeonDisplayComponent } from '../dungeon-display/dungeon-display.comp
 export class DungeonListComponent {
   public displayedDungeons = input.required<GameDungeon[]>();
   public activeDungeon = computed(() => gamestate().activeDungeon);
+  public isAnyDungeonActive = computed(() => isDungeonInProgress());
 
   public cardClasses = computed(() => {
     return [

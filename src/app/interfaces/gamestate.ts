@@ -1,3 +1,4 @@
+import { GameCombat, GameCombatant } from './combat';
 import { GameHero } from './hero';
 
 export type GameDifficulty = 'easy' | 'normal' | 'hard';
@@ -40,6 +41,15 @@ export interface GameStateDefense {
   incomingDamage: number;
   damageTypeId: string;
   targettedTaskIds: string[];
+}
+
+export interface GameStateExplore {
+  id: string;
+  isExploring: boolean;
+  currentStep: number;
+  hasFinishedCurrentStep: boolean;
+  currentCombat?: GameCombat;
+  exploringParty: GameCombatant[];
 }
 
 export interface GameState {
@@ -122,6 +132,11 @@ export interface GameState {
    * Cooldowns data
    */
   cooldowns: GameStateCooldowns;
+
+  /**
+   * Exploration data
+   */
+  exploration: GameStateExplore;
 
   /**
    * Meta data

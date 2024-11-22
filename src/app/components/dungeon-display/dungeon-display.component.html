@@ -37,7 +37,9 @@
     </div>
   </div>
 
+  @if(isCurrent()) {
   <div class="absolute bottom-[-7px] left-0 right-0">
     <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
   </div>
+  }
 </div>

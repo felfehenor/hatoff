@@ -336,3 +336,26 @@ export function pickRandomDamageType(hero: GameHero): void {
     return state;
   });
 }
+
+export function unstunAllHeroes(): void {
+  updateGamestate((state) => {
+    Object.values(state.heroes).forEach((hero) => {
+      hero.stunTicks = 0;
+    });
+
+    return state;
+  });
+}
+
+export function stunHero(hero: GameHero, ticks: number): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+    heroRef.stunTicks = ticks;
+
+    return state;
+  });
+}
+
+export function isStunned(hero: GameHero): boolean {
+  return hero.stunTicks > 0;
+}

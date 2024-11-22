@@ -20,25 +20,27 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
+import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
 
 @Component({
-    selector: 'app-hero-display-tall',
-    imports: [
-        DamageTypeComponent,
-        HeroArtComponent,
-        HeroArchetypeListComponent,
-        HeroStatsTableComponent,
-        HeroAssignmentComponent,
-        HeroLevelTaglineComponent,
-        HeroTaskLevelListComponent,
-        SweetAlert2Module,
-        ButtonCloseComponent,
-        TippyDirective,
-        HeroSpecialGlowDirective,
-    ],
-    templateUrl: './hero-display-tall.component.html',
-    styleUrl: './hero-display-tall.component.scss'
+  selector: 'app-hero-display-tall',
+  imports: [
+    DamageTypeComponent,
+    HeroArtComponent,
+    HeroArchetypeListComponent,
+    HeroStatsTableComponent,
+    HeroAssignmentComponent,
+    HeroLevelTaglineComponent,
+    HeroTaskLevelListComponent,
+    SweetAlert2Module,
+    ButtonCloseComponent,
+    TippyDirective,
+    HeroSpecialGlowDirective,
+    HeroStatusComponent,
+  ],
+  templateUrl: './hero-display-tall.component.html',
+  styleUrl: './hero-display-tall.component.scss',
 })
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();

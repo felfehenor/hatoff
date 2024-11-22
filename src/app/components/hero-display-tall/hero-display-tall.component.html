@@ -13,6 +13,7 @@
 
     <div class="card-title">
       {{ activeHero.name }}
+      <app-hero-status [hero]="activeHero"></app-hero-status>
     </div>
 
     <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>

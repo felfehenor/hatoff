@@ -13,7 +13,7 @@ import { sortBy } from 'lodash';
 import { PRNG } from 'seedrandom';
 import { v4 as uuid } from 'uuid';
 
-import { allArt, seededrng } from '../../helpers';
+import { allArt, getHero, isStunned, seededrng } from '../../helpers';
 import { HeroArtPieceContainer, HeroMood } from '../../interfaces';
 import { ContentService } from '../../services/content.service';
 import { GamestateService } from '../../services/gamestate.service';
@@ -45,6 +45,13 @@ export class HeroArtComponent implements OnDestroy {
   public id = input.required<string>();
   public mood = input<HeroMood>('neutral');
   public size = input<number>(64);
+
+  public moodFromStatus = computed(() => {
+    const hero = getHero(this.id());
+    if (hero && isStunned(hero)) return 'sad';
+
+    return this.mood();
+  });
 
   public loaded = signal<boolean>(false);
 
@@ -231,12 +238,12 @@ export class HeroArtComponent implements OnDestroy {
     const optionsHash = allArt().eye;
     const allOptions = Object.keys(optionsHash);
     const chosenOption = this.rngChoose(allOptions);
-    const moodPieces = optionsHash[chosenOption][this.mood()];
+    const moodPieces = optionsHash[chosenOption][this.moodFromStatus()];
 
     for (const piece of moodPieces.pieces) {
       this.queuePieceToDraw(
         'eye',
-        `${this.bodyString()}_eye_${chosenOption}/${this.mood()}/${
+        `${this.bodyString()}_eye_${chosenOption}/${this.moodFromStatus()}/${
           piece.name
         }.png`,
         piece.layer ?? 60,

@@ -13,7 +13,13 @@ import {
 } from './archetype';
 import { getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
-import { gainStat, gainXp, totalHeroForce, totalHeroSpeed } from './hero';
+import {
+  gainStat,
+  gainXp,
+  isStunned,
+  totalHeroForce,
+  totalHeroSpeed,
+} from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { getResourceValue, loseResource, zeroResource } from './resource';
@@ -235,6 +241,11 @@ export function doHeroGameloop(numTicks: number): void {
   const state = gamestate();
 
   Object.values(state.heroes).forEach((hero) => {
+    if (isStunned(hero)) {
+      hero.stunTicks -= numTicks;
+      return;
+    }
+
     if (!state.taskAssignments[hero.id]) return;
 
     const task = getEntry<GameTask>(state.taskAssignments[hero.id]);
