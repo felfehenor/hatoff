@@ -3,16 +3,64 @@
   description: Fight through a series of slimes and claim a viscious reward!
 
   encounters:
-    - monsters:
+    - type: fight
+      monsters:
         - monsterId: Slime
 
-    - monsters:
+    - type: fight
+      monsters:
         - monsterId: Slime
         - monsterId: Slime
 
-    - monsters:
+    - type: treasure
+      treasureIds:
+        - Small EXP Potion
+
+    - type: fight
+      monsters:
         - monsterId: Slime
         - monsterId: Slime
         - monsterId: King Slime
 
+    - type: loot
       lootId: Slimy Sword
+
+- id: ce3f6290-fd75-4451-aa78-18a03662dc7d
+  name: Extra Slimy Caverns
+  description: Slash through a series of slimes to claim an slimy treasure!
+
+  requiresLootIds:
+    - Slimy Sword
+
+  encounters:
+    - type: fight
+      monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+
+    - type: treasure
+      treasureIds:
+        - Small EXP Potion
+
+    - type: fight
+      monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+
+    - type: treasure
+      treasureIds:
+        - Small EXP Potion
+
+    - type: fight
+      monsters:
+        - monsterId: King Slime
+        - monsterId: King Slime
+
+    - type: loot
+      lootId: Goopy Crown

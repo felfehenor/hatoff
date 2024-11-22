@@ -10,11 +10,13 @@ import {
   tablerPlayerPlay,
   tablerSettings,
   tablerSparkles,
+  tablerSwords,
   tablerUsersGroup,
 } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
+  currentDungeon,
   gamestate,
   isPaused,
   isResearchComplete,
@@ -45,6 +47,7 @@ import { ResourceListComponent } from '../resource-list/resource-list.component'
       tablerPlayerPause,
       tablerPlayerPlay,
       tablerCompass,
+      tablerSwords,
     }),
   ],
   templateUrl: './navbar.component.html',
@@ -61,6 +64,8 @@ export class NavbarComponent {
       gamestate().activeResearch &&
       !isResearchComplete(gamestate().activeResearch),
   );
+
+  isExploring = computed(() => !!currentDungeon());
 
   isPaused = computed(() => isPaused());
 

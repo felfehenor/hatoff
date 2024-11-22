@@ -1,6 +1,7 @@
 import { GameStateCooldowns } from '../interfaces';
 import { maxCooldowns } from './cooldown';
 import { doDefenseGameloop } from './gameloop-defense';
+import { doDungeonGameloop } from './gameloop-dungeon';
 import { doHeroGameloop } from './gameloop-hero';
 import { doRecruitGameloop } from './gameloop-recruit';
 import { doShopGameloop } from './gameloop-shop';
@@ -24,6 +25,7 @@ export function doGameloop(numTicks: number): void {
   doRecruitGameloop();
   doShopGameloop();
   doDefenseGameloop();
+  doDungeonGameloop();
 
   updateGamestate((state) => {
     state.meta.numTicks += totalTicks;

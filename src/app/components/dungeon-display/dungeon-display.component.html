@@ -1,1 +1,43 @@
-<p>dungeon-display works!</p>
+@let dungeonData = dungeon();
+
+<div class="card card-side foreground shadow-xl cursor-pointer min-h-[250px] overflow-hidden" [class.ring-2]="active()">
+  <div class="card-body">
+
+    @if(active()) {
+    <ng-icon name="tablerSwords" class="absolute top-5 right-5 text-primary"></ng-icon>
+    }
+
+    <div class="card-title">
+      <div class="font-semibold flex items-center gap-2">
+        {{ dungeonData.name }}
+
+        @if(isDone()) {
+        <ng-icon name="tablerCircleCheck" color="green"></ng-icon>
+        }
+      </div>
+    </div>
+
+    <p>{{ dungeonData.description }}</p>
+
+    <div class="flex">
+      <div class="flex-1 flex items-center justify-center gap-2 text-xl" [tp]="'Number of fights in this dungeon'">
+        <ng-icon name="tablerSword"></ng-icon>
+        {{ numFights() }}
+      </div>
+
+      <div class="flex-1 flex items-center justify-center gap-2 text-xl" [tp]="'Number of treasures in this dungeon'">
+        <ng-icon name="tablerPackage"></ng-icon>
+        {{ numTreasures() }}
+      </div>
+
+      <div class="flex-1 flex items-center justify-center gap-2 text-xl" [tp]="lootTooltip()">
+        <ng-icon name="tablerAward"></ng-icon>
+        {{ numLoots() }}
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-[-7px] left-0 right-0">
+    <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
+  </div>
+</div>

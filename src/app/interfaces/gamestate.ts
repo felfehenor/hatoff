@@ -84,6 +84,11 @@ export interface GameState {
   foundLoot: Record<string, number>;
 
   /**
+   * Dungeon id -> completion count
+   */
+  dungeonsCompleted: Record<string, number>;
+
+  /**
    * Current dungeon id
    */
   activeDungeon: string;

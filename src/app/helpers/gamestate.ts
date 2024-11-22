@@ -12,6 +12,7 @@ export function blankGameState(): GameState {
     taskUpgrades: {},
     resources: {},
     foundLoot: {},
+    dungeonsCompleted: {},
     activeDungeon: '',
     activeResearch: '',
     recruitment: {

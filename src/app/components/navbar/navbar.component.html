@@ -36,7 +36,7 @@
 
       <li class="mr-1" [appHideIfNotResearched]="'Houses III'">
         <a [routerLink]="['/game/explore']" [routerLinkActive]="'text-primary'">
-          <ng-icon name="tablerCompass"></ng-icon> Explore
+          <ng-icon [name]="isExploring() ? 'tablerSwords' : 'tablerCompass'"></ng-icon> Explore
         </a>
       </li>
     </ul>

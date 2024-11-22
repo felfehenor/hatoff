@@ -3,7 +3,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   tablerFlask2,
   tablerInfoHexagon,
-  tablerStar,
+  tablerSparkles,
 } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { getEntriesByType, getResearchFor } from '../../helpers';
@@ -14,7 +14,7 @@ import { GameResearch } from '../../interfaces';
   imports: [NgIconComponent, TippyDirective],
   providers: [
     provideIcons({
-      tablerStar,
+      tablerSparkles,
       tablerFlask2,
       tablerInfoHexagon,
     }),
