@@ -1,0 +1,9 @@
+- id: d739ddbb-00ab-4fa7-9de5-9947c3b398ac
+  name: Smelling Salts
+  description: Bring a hero back from the incapacitated state.
+  cost: 50000
+
+  reviveHero: true
+
+  icon: gameCrystalBars
+  color: '#9542f5'

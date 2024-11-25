@@ -6,6 +6,7 @@ import {
   getDamageForcePercentage,
 } from './damagetype';
 import { isHardMode } from './difficulty';
+import { heroesInExploreTask, isDungeonInProgress } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
 import { allUnlockedDamageTypes, allUnlockedTasks } from './research';
 import {
@@ -38,6 +39,11 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
   const heroDamageType = getEntry<GameDamageType>(hero.damageTypeId);
   const taskDamageType = getTaskDamageType(task);
 
+  if (isDungeonInProgress()) {
+    const explore = getEntry<GameTask>('Explore');
+    if (explore?.id === task.id) return false;
+  }
+
   if (!heroDamageType || !taskDamageType) return false;
 
   if (heroDamageType.isAny) return true;
@@ -52,6 +58,20 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
     return false;
 
   return heroesAllocatedToTask(task).length < maxHeroesForTask(task);
+}
+
+export function canUnallocateHeroFromTask(
+  hero: GameHero,
+  task: GameTask,
+): boolean {
+  if (isDungeonInProgress()) {
+    const explore = getEntry<GameTask>('Explore');
+    if (!explore || explore.id !== task.id) return true;
+
+    return !heroesInExploreTask().find((h) => h.id === hero.id);
+  }
+
+  return true;
 }
 
 export function numHeroesAllocatedToTask(task: GameTask): number {

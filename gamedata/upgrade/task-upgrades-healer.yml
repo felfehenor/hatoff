@@ -1,0 +1,53 @@
+- id: 895b4c66-cbe5-4c0e-a7e0-2c45c25c798d
+  name: Healing Expertise I
+  description: Gain an additional +5 Healing when resurrecting heroes.
+
+  costs:
+    - resourceId: Gold
+      value: 2000
+
+    - resourceId: Food
+      value: 6000
+
+    - resourceId: Wood
+      value: 3000
+
+  boostResourceGain: 5
+
+- id: ebf89733-dbde-4f5d-9772-0da104be9023
+  name: Healing Expertise II
+  description: Gain an additional +5 Healing when resurrecting heroes.
+
+  costs:
+    - resourceId: Gold
+      value: 10000
+
+    - resourceId: Food
+      value: 30000
+
+    - resourceId: Wood
+      value: 15000
+
+  boostResourceGain: 5
+
+  requiresUpgradeIds:
+    - Healing Expertise I
+
+- id: 0f0275f4-83e5-4a86-aa05-db2dfa0eee73
+  name: Healing Expertise III
+  description: Gain an additional +5 Healing when resurrecting heroes.
+
+  costs:
+    - resourceId: Gold
+      value: 50000
+
+    - resourceId: Food
+      value: 150000
+
+    - resourceId: Wood
+      value: 75000
+
+  boostResourceGain: 5
+
+  requiresUpgradeIds:
+    - Healing Expertise II

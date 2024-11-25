@@ -6,6 +6,7 @@ import {
   doGameloop,
   gamestate,
   getOption,
+  isGameStateReady,
   migrateGameState,
   migrateOptionsState,
   options,
@@ -34,6 +35,7 @@ export class GamestateService {
 
       console.log('[Gamestate] Gamestate migrated & loaded.');
       this.hasLoaded.set(true);
+      isGameStateReady.set(true);
     });
 
     effect(() => {

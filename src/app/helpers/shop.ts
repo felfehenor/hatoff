@@ -3,7 +3,13 @@ import { GameHero, GameItem, GameResource } from '../interfaces';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { gamestate, setGameState, updateGamestate } from './gamestate';
-import { gainXp, pickRandomArchetypes, pickRandomDamageType } from './hero';
+import {
+  gainXp,
+  pickRandomArchetypes,
+  pickRandomDamageType,
+  reviveHero,
+} from './hero';
+import { gainItemById } from './item';
 import { notify, notifyError } from './notify';
 import {
   allUnlockedShopItems,
@@ -30,13 +36,11 @@ export function maxShopSlots(): number {
   return allUnlockedShopSlotBoosts();
 }
 
-export function addItemToInventory(item: GameItem, index: number): void {
+export function addShopItemToInventory(item: GameItem, index: number): void {
+  gainItemById(item.id, 1);
+
   updateGamestate((state) => {
-    state.shop.ownedItems[item.id] ??= 0;
-    state.shop.ownedItems[item.id] += 1;
-
     state.shop.shopItems[index] = undefined;
-
     return state;
   });
 }
@@ -69,7 +73,7 @@ export function buyItem(item: GameItem, index: number): void {
   }
 
   loseResource(resource, item.cost);
-  addItemToInventory(item, index);
+  addShopItemToInventory(item, index);
 }
 
 export function doShopReroll(): void {
@@ -129,6 +133,11 @@ export function useItemOnHero(hero: GameHero, item: GameItem): void {
       notify(`Gave ${hero.name} +${statValue} ${item.giveStat}!`, 'Item');
       return state;
     });
+  }
+
+  if (item.reviveHero) {
+    reviveHero(hero);
+    notify(`Revived ${hero.name}!`, 'Item');
   }
 
   if (item.pickRandomArchetypes) {

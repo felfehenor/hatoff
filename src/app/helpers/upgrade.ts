@@ -15,7 +15,7 @@ export function maxTaskLevel(task: GameTask): number {
 
 export function hasUpgrade(task: GameTask, upgrade: GameUpgrade): boolean {
   const state = gamestate();
-  return state.taskUpgrades[task.id]?.[upgrade.id];
+  return !!state.taskUpgrades[task.id]?.[upgrade.id];
 }
 
 export function loseUpgrade(task: GameTask, upgrade: GameUpgrade): void {
@@ -113,7 +113,7 @@ export function canBuyUpgrade(upgrade: GameUpgrade): boolean {
 export function buyUpgrade(upgrade: GameUpgrade, task: GameTask): void {
   const state = gamestate();
   state.taskUpgrades[task.id] ??= {};
-  state.taskUpgrades[task.id][upgrade.id] = true;
+  state.taskUpgrades[task.id][upgrade.id] = Date.now();
 
   upgrade.costs.forEach((resCost) => {
     state.resources[resCost.resourceId] -= resCost.value;

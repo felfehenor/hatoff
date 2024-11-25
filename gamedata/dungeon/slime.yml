@@ -1,0 +1,92 @@
+- id: 73357341-6066-4a5b-9df5-e67e3e267525
+  name: Slime Caverns
+  description: Fight through a series of slimes and claim a viscious reward!
+
+  stunTimeOnFailure: 30
+
+  encounters:
+    - type: fight
+      xpGained: 5
+      ticksRequired: 0
+      monsters:
+        - monsterId: Slime
+
+    - type: fight
+      xpGained: 10
+      ticksRequired: 0
+      monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 30
+      treasureIds:
+        - EXP Potion (Small)
+
+    - type: fight
+      xpGained: 50
+      ticksRequired: 0
+      monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: King Slime
+
+    - type: loot
+      xpGained: 0
+      ticksRequired: 120
+      lootId: Medicinal Slime
+
+- id: ce3f6290-fd75-4451-aa78-18a03662dc7d
+  name: 'Slime Caverns: Depths'
+  description: Slash through a series of slimes to claim an slimy treasure!
+
+  stunTimeOnFailure: 150
+
+  requiresLootIds:
+    - Medicinal Slime
+
+  encounters:
+    - type: fight
+      xpGained: 25
+      ticksRequired: 0
+      monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 120
+      treasureIds:
+        - EXP Potion (Small)
+
+    - type: fight
+      xpGained: 100
+      ticksRequired: 0
+      monsters:
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+        - monsterId: Slime
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 120
+      treasureIds:
+        - EXP Potion (Small)
+
+    - type: fight
+      xpGained: 100
+      ticksRequired: 0
+      monsters:
+        - monsterId: King Slime
+        - monsterId: King Slime
+
+    - type: loot
+      xpGained: 0
+      ticksRequired: 600
+      lootId: Slimy Sword

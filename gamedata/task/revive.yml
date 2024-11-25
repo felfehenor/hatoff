@@ -1,0 +1,21 @@
+- id: b2d9bdf5-c1c7-4faa-9481-068b3c8021c5
+  name: Healer
+  description: Bring heroes back to consciousness.
+  damageTypeId: Any
+  maxHeroesAllocable: 2
+
+  xpPerCycle: 0
+  speedPerCycle: 0
+  damageRequiredPerCycle: 0
+  xpRequiredPerLevel: 0
+  maxLevel: 0
+  resourceRewardPerCycle: 5
+
+  slowlyRevivesHeroes: true
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - Healing Expertise I
+    - Healing Expertise II
+    - Healing Expertise III

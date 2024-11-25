@@ -10,6 +10,7 @@ import {
   buyUpgrade,
   canAllocateHeroToTask,
   canBuyUpgrade,
+  canUnallocateHeroFromTask,
   currentHeroTask,
   getDamageForcePercentage,
   getEntry,
@@ -39,35 +40,37 @@ import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetyp
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
+import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 import { ResourceDisplayComponent } from '../resource-display/resource-display.component';
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
-    selector: 'app-task-hero-selector',
-    imports: [
-        HeroArtComponent,
-        DamageTypeComponent,
-        HeroAssignmentComponent,
-        ButtonCloseComponent,
-        HeroArchetypeListComponent,
-        DamageTypeBreakdownComponent,
-        TaskSynergyComponent,
-        LevelDisplayComponent,
-        ResourceDisplayComponent,
-        HeroSpecialGlowDirective,
-        HeroFusionIndicatorComponent,
-        NgIconComponent,
-        TippyDirective,
-        BlurCardComponent,
-    ],
-    providers: [
-        provideIcons({
-            tablerAlertOctagon,
-        }),
-    ],
-    templateUrl: './task-hero-selector.component.html',
-    styleUrl: './task-hero-selector.component.scss'
+  selector: 'app-task-hero-selector',
+  imports: [
+    HeroArtComponent,
+    DamageTypeComponent,
+    HeroAssignmentComponent,
+    ButtonCloseComponent,
+    HeroArchetypeListComponent,
+    DamageTypeBreakdownComponent,
+    TaskSynergyComponent,
+    LevelDisplayComponent,
+    ResourceDisplayComponent,
+    HeroSpecialGlowDirective,
+    HeroFusionIndicatorComponent,
+    NgIconComponent,
+    TippyDirective,
+    BlurCardComponent,
+    HeroStatusComponent,
+  ],
+  providers: [
+    provideIcons({
+      tablerAlertOctagon,
+    }),
+  ],
+  templateUrl: './task-hero-selector.component.html',
+  styleUrl: './task-hero-selector.component.scss',
 })
 export class TaskHeroSelectorComponent {
   public task = input.required<GameTask>();
@@ -121,6 +124,10 @@ export class TaskHeroSelectorComponent {
       canAllocateHeroToTask(hero, this.task()) ||
       isHeroAllocatedToTask(this.task(), hero)
     );
+  }
+
+  public canUnassignHeroFromTask(hero: GameHero): boolean {
+    return canUnallocateHeroFromTask(hero, this.task());
   }
 
   public heroMood(hero: GameHero): HeroMood {

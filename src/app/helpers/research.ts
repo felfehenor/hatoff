@@ -8,12 +8,14 @@ import {
   GameTask,
 } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
-import { gamestate, setGameState } from './gamestate';
+import { gamestate, updateGamestate } from './gamestate';
+import { hasUnlockedLootItem } from './loot';
 
 export function setActiveResearch(research: GameResearch): void {
-  const state = gamestate();
-  state.activeResearch = research.id;
-  setGameState(state);
+  updateGamestate((state) => {
+    state.activeResearch = research.id;
+    return state;
+  });
 }
 
 export function getResearchFor(id: string): number {
@@ -33,7 +35,10 @@ export function allAvailableIncompleteResearch(): GameResearch[] {
     (entry) =>
       (isUndefined(state.researchProgress[entry.id]) ||
         state.researchProgress[entry.id] < entry.researchRequired) &&
-      (entry.requiresResearchIds ?? []).every((req) => isResearchComplete(req)),
+      (entry.requiresResearchIds ?? []).every((req) =>
+        isResearchComplete(req),
+      ) &&
+      (entry.requiresLootIds ?? []).every((loot) => hasUnlockedLootItem(loot)),
   );
 }
 

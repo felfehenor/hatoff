@@ -11,6 +11,9 @@ export function blankGameState(): GameState {
     taskAssignments: {},
     taskUpgrades: {},
     resources: {},
+    foundLoot: {},
+    dungeonsCompleted: {},
+    activeDungeon: '',
     activeResearch: '',
     recruitment: {
       recruitableHeroes: [],
@@ -39,6 +42,15 @@ export function blankGameState(): GameState {
       shopItems: [],
       numRerolls: 0,
     },
+    exploration: {
+      id: '',
+      isExploring: false,
+      currentStep: -1,
+      currentStepTicks: 0,
+      hasFinishedCurrentStep: false,
+      currentCombat: undefined,
+      exploringParty: [],
+    },
     meta: {
       version: 1,
       isPaused: false,
@@ -51,6 +63,8 @@ export function blankGameState(): GameState {
 
 const _gamestate: WritableSignal<GameState> = signal(blankGameState());
 export const gamestate: Signal<GameState> = _gamestate.asReadonly();
+
+export const isGameStateReady = signal<boolean>(false);
 
 export function setGameState(state: GameState): void {
   _gamestate.set(cloneDeep(state));

@@ -1,7 +1,7 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
 
-@import './styles/global';
-@import './styles/font';
-@import './styles/helpers';
+@use './styles/global';
+@use './styles/font';
+@use './styles/helpers';

@@ -1,0 +1,23 @@
+# force
+- id: 869ae86f-93b8-48dd-a6e2-d76b6176cb8a
+  name: Combat Power
+  type: Archetype
+  description: Unlock the archetype "Adrenalized" for newly-recruited heroes. This will increase Force (FRC) by +10 in combat.
+  researchRequired: 7500
+
+  unlocksArchetypeIds: [Adrenalized]
+
+  requiresLootIds:
+    - Goblish Club
+
+# speed
+- id: eb40458b-7e0d-4e40-b698-190a21a6364e
+  name: Combat Speed
+  type: Archetype
+  description: Unlock the archetype "Flighty" for newly-recruited heroes. This will increase Speed (SPD) by +10 in combat.
+  researchRequired: 7500
+
+  unlocksArchetypeIds: [Flighty]
+
+  requiresLootIds:
+    - Goblish Dagger

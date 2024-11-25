@@ -1,3 +1,4 @@
+import { GameCombat, GameCombatant } from './combat';
 import { GameHero } from './hero';
 
 export type GameDifficulty = 'easy' | 'normal' | 'hard';
@@ -42,6 +43,16 @@ export interface GameStateDefense {
   targettedTaskIds: string[];
 }
 
+export interface GameStateExplore {
+  id: string;
+  isExploring: boolean;
+  currentStep: number;
+  currentStepTicks: number;
+  hasFinishedCurrentStep: boolean;
+  currentCombat?: GameCombat;
+  exploringParty: GameCombatant[];
+}
+
 export interface GameState {
   /**
    * Hero id -> Hero data
@@ -74,9 +85,24 @@ export interface GameState {
   taskAssignments: Record<string, string>;
 
   /**
-   * Task id -> Upgrade id -> true
+   * Task id -> Upgrade id -> timestamp
    */
-  taskUpgrades: Record<string, Record<string, boolean>>;
+  taskUpgrades: Record<string, Record<string, number>>;
+
+  /**
+   * Loot id -> timestamp
+   */
+  foundLoot: Record<string, number>;
+
+  /**
+   * Dungeon id -> completion count
+   */
+  dungeonsCompleted: Record<string, number>;
+
+  /**
+   * Current dungeon id
+   */
+  activeDungeon: string;
 
   /**
    * Current research id
@@ -107,6 +133,11 @@ export interface GameState {
    * Cooldowns data
    */
   cooldowns: GameStateCooldowns;
+
+  /**
+   * Exploration data
+   */
+  exploration: GameStateExplore;
 
   /**
    * Meta data

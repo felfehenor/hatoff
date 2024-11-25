@@ -52,8 +52,8 @@
               }
             ],
             "styles": [
-              "./node_modules/@sweetalert2/theme-dark/dark.scss",
-              "./node_modules/@ngxpert/hot-toast/src/styles/styles.scss",
+              "./node_modules/@sweetalert2/theme-dark/dark.css",
+              "./node_modules/@ngxpert/hot-toast/src/styles/styles.css",
               "./node_modules/tippy.js/dist/tippy.css",
               "./node_modules/tippy.js/themes/translucent.css",
               "./node_modules/tippy.js/animations/scale.css",

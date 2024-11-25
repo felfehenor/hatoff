@@ -3,6 +3,8 @@
 <div class="card card-side foreground shadow-xl" [class.can-click]="clickable()" [class.active]="active()"
   [appHeroSpecialGlow]="heroData">
   <figure class="max-w-[96px] pl-2">
+    <app-hero-status [hero]="heroData" class="absolute top-2 left-2"></app-hero-status>
+
     <app-hero-art [id]="heroData.id" [size]="96"></app-hero-art>
   </figure>
 

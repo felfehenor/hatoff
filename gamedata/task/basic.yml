@@ -138,3 +138,17 @@
     - Higher Level Cap II
     - Stronger Synergy I
     - Stronger Synergy II
+
+- id: e31dd9c0-dd6e-40f3-bac4-25070aaa97ac
+  name: Explore
+  description: Explore the world, seeking riches and fame.
+  damageTypeId: Combat
+  maxHeroesAllocable: 4
+
+  xpPerCycle: 0
+  speedPerCycle: 0
+  damageRequiredPerCycle: 0
+  xpRequiredPerLevel: 0
+  maxLevel: 0
+
+  possibleUpgradeIds: []

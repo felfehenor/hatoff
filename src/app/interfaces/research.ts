@@ -26,6 +26,11 @@ export interface GameResearch extends Content {
   requiresResearchIds?: string[];
 
   /**
+   * Prerequisite loot that needs to be found before this one can be researched.
+   */
+  requiresLootIds?: string[];
+
+  /**
    * Tasks that are unlocked by this research.
    */
   unlocksTaskIds?: string[];
