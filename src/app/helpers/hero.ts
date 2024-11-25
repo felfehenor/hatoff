@@ -152,13 +152,12 @@ export function addHero(hero: GameHero): void {
 }
 
 export function removeHero(hero: GameHero): void {
-  const state = gamestate();
-
-  delete state.heroes[hero.id];
-  delete state.taskAssignments[hero.id];
-  delete state.heroCurrentTaskSpeed[hero.id];
-
-  setGameState(state);
+  updateGamestate((state) => {
+    delete state.heroes[hero.id];
+    delete state.taskAssignments[hero.id];
+    delete state.heroCurrentTaskSpeed[hero.id];
+    return state;
+  });
 }
 
 export function setHeroDamageType(hero: GameHero, damageTypeId: string): void {

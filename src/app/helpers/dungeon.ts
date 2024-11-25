@@ -19,8 +19,9 @@ import {
   toCombatant,
 } from './combat';
 import { getEntriesByType, getEntry } from './content';
+import { isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
-import { gainXp, isStunned, stunHero } from './hero';
+import { gainXp, isStunned, removeHero, stunHero } from './hero';
 import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
@@ -190,9 +191,15 @@ export function handleCurrentDungeonStep(ticks: number) {
 export function heroWinCombat(): void {}
 
 export function heroLoseCombat(): void {
-  notifyError('The exploration party has returned unsuccessful...');
+  notifyError('The exploration party was unsuccessful...', true);
 
   heroesInExploreTask().forEach((hero) => {
+    if (isHardMode()) {
+      removeHero(hero);
+      notify(`${hero.name} has perished...`, 'Dungeon');
+      return;
+    }
+
     stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
   });
 
