@@ -1,0 +1,59 @@
+- id: e0e9f1aa-8030-4d42-b6b7-c07d7936fd0a
+  name: Goblin
+  archetypeIds: []
+  level: 5
+
+  damageTypeId: Physical
+
+  stats:
+    health: 45
+    progress: 0
+    force: 10
+    resistance: 8
+    piety: 5
+    speed: 5
+
+- id: 44a7193d-39ce-4d45-a4cc-3651a10d7446
+  name: Goblin Brute
+  archetypeIds: []
+  level: 8
+
+  damageTypeId: Physical
+
+  stats:
+    health: 90
+    progress: 0
+    force: 20
+    resistance: 10
+    piety: 5
+    speed: 3
+
+- id: 5cd3cf00-a35a-4e94-8677-af7e90dec356
+  name: Goblin Thief
+  archetypeIds: []
+  level: 8
+
+  damageTypeId: Physical
+
+  stats:
+    health: 30
+    progress: 0
+    force: 8
+    resistance: 3
+    piety: 5
+    speed: 20
+
+- id: fd8dccb4-19a2-43bf-bf83-5dbaaa13d1ac
+  name: Goblin Priest
+  archetypeIds: []
+  level: 10
+
+  damageTypeId: Spiritual
+
+  stats:
+    health: 60
+    progress: 0
+    force: 15
+    resistance: 7
+    piety: 25
+    speed: 10

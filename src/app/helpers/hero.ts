@@ -15,6 +15,7 @@ import { getArchetypeLevelUpStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { getDamageForcePercentage } from './damagetype';
+import { isDungeonInProgress, isHeroExploring } from './dungeon';
 import { gamestate, setGameState, updateGamestate } from './gamestate';
 import { notify } from './notify';
 import { getOption } from './options';
@@ -310,6 +311,14 @@ export function gainXp(hero: GameHero, xp = 1): void {
   });
 }
 
+export function reviveHero(hero: GameHero): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+    heroRef.stunTicks = 0;
+    return state;
+  });
+}
+
 export function pickRandomArchetypes(hero: GameHero): void {
   updateGamestate((state) => {
     const heroRef = state.heroes[hero.id];
@@ -358,4 +367,17 @@ export function stunHero(hero: GameHero, ticks: number): void {
 
 export function isStunned(hero: GameHero): boolean {
   return hero.stunTicks > 0;
+}
+
+export function reduceStun(hero: GameHero, ticks: number): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+    heroRef.stunTicks -= ticks;
+
+    return state;
+  });
+}
+
+export function canUseItemsOnHero(hero: GameHero): boolean {
+  return isDungeonInProgress() ? !isHeroExploring(hero) : true;
 }

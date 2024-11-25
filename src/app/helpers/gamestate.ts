@@ -46,6 +46,7 @@ export function blankGameState(): GameState {
       id: '',
       isExploring: false,
       currentStep: -1,
+      currentStepTicks: 0,
       hasFinishedCurrentStep: false,
       currentCombat: undefined,
       exploringParty: [],
@@ -62,6 +63,8 @@ export function blankGameState(): GameState {
 
 const _gamestate: WritableSignal<GameState> = signal(blankGameState());
 export const gamestate: Signal<GameState> = _gamestate.asReadonly();
+
+export const isGameStateReady = signal<boolean>(false);
 
 export function setGameState(state: GameState): void {
   _gamestate.set(cloneDeep(state));

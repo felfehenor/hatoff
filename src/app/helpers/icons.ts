@@ -2,6 +2,7 @@ import {
   gameAbbotMeeple,
   gameBeerBottle,
   gameClockwork,
+  gameCrystalBars,
   gameFoldedPaper,
   gameHeartBottle,
   gameRoundPotion,
@@ -47,5 +48,6 @@ export function usedContentIcons(): Record<string, string> {
     gameClockwork,
     gameHeartBottle,
     gameBeerBottle,
+    gameCrystalBars,
   };
 }

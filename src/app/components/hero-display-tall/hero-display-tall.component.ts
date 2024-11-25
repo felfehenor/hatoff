@@ -4,6 +4,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canGiveClickXp,
+  canUseItemsOnHero,
   clickXpBoost,
   gamestate,
   getHero,
@@ -60,6 +61,8 @@ export class HeroDisplayTallComponent {
   public xpOnClick = computed(() => clickXpBoost());
 
   public hasItems = computed(() => hasAnyitemsToUse());
+
+  public canUseItemsOnThisHero = computed(() => canUseItemsOnHero(this.hero()));
 
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();

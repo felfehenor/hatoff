@@ -1,6 +1,7 @@
 import { GameHeroStat } from './hero';
 
 export interface GameCombatant {
+  id: string;
   name: string;
   archetypeIds: string[];
   level: number;

@@ -11,6 +11,8 @@ export interface GameItem extends Content {
   giveStat?: GameHeroStat;
   giveStatValue?: number;
 
+  reviveHero?: boolean;
+
   pickRandomDamageType?: boolean;
   pickRandomArchetypes?: boolean;
 

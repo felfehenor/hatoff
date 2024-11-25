@@ -1,22 +1,47 @@
-import { sample } from 'lodash';
+import { clamp, sample } from 'lodash';
 import {
   GameCombat,
   GameCombatant,
   GameDungeonEncounterFight,
+  GameHeroStat,
   GameMonster,
 } from '../interfaces';
+import { getArchetypeCombatStatBonusForHero } from './archetype';
 import { getEntry } from './content';
-import { gamestate } from './gamestate';
-import { randomrng } from './rng';
+import { gamestate, updateGamestate } from './gamestate';
+import { getHero } from './hero';
+import { randomNumber, randomrng } from './rng';
 
 export function toCombatant(char: GameCombatant): GameCombatant {
+  const newStats: Record<GameHeroStat, number> = {
+    force:
+      getCombatStat(char, 'force') +
+      getArchetypeCombatStatBonusForHero(char, 'force'),
+    health:
+      getCombatStat(char, 'health') +
+      getArchetypeCombatStatBonusForHero(char, 'health'),
+    piety:
+      getCombatStat(char, 'piety') +
+      getArchetypeCombatStatBonusForHero(char, 'piety'),
+    progress:
+      getCombatStat(char, 'progress') +
+      getArchetypeCombatStatBonusForHero(char, 'progress'),
+    resistance:
+      getCombatStat(char, 'resistance') +
+      getArchetypeCombatStatBonusForHero(char, 'resistance'),
+    speed:
+      getCombatStat(char, 'speed') +
+      getArchetypeCombatStatBonusForHero(char, 'speed'),
+  };
+
   return {
+    id: char.id ?? '',
     archetypeIds: char.archetypeIds,
-    currentHp: char.stats.health,
+    currentHp: newStats.health,
     damageTypeId: char.damageTypeId,
     level: char.level,
     name: char.name,
-    stats: { ...char.stats },
+    stats: newStats,
   };
 }
 
@@ -72,14 +97,9 @@ export function doTeamAction(
       const damage = damageDealt(attacker, target);
       target.currentHp -= damage;
 
-      console.log(
-        'attack',
-        attacker.name,
-        target.name,
-        damage,
-        attacker.stats.force,
-        damageReduction(target),
-      );
+      if (target.currentHp <= 0) {
+        attemptToDie(target);
+      }
     });
 }
 
@@ -87,7 +107,9 @@ export function doCombatRound() {
   const fight = gamestate().exploration.currentCombat;
   if (!fight) return;
 
-  doTeamAction(fight.attackers, fight.defenders);
+  if (!isCombatResolved()) {
+    doTeamAction(fight.attackers, fight.defenders);
+  }
 
   if (!isCombatResolved()) {
     doTeamAction(fight.defenders, fight.attackers);
@@ -98,7 +120,13 @@ export function chanceToHit(
   attacker: GameCombatant,
   defender: GameCombatant,
 ): number {
-  return 90;
+  // higher than opponent speed = higher chance to hit
+  const diff = clamp(attacker.stats.speed - defender.stats.speed, -30, 15);
+  return 80 + diff;
+}
+
+export function baseHeroDamage(attacker: GameCombatant): number {
+  return attacker.stats.force;
 }
 
 export function damageDealt(
@@ -107,7 +135,7 @@ export function damageDealt(
 ): number {
   return Math.max(
     1,
-    Math.floor(attacker.stats.force * damageReduction(defender)),
+    Math.floor(baseHeroDamage(attacker) * damageReduction(defender)),
   );
 }
 
@@ -115,8 +143,29 @@ export function damageReduction(defender: GameCombatant): number {
   return Math.max(0.1, 0.92 * 0.996 ** defender.stats.resistance + 0.07);
 }
 
-export function attemptToDie(character: GameCombatant): void {}
+export function attemptToDie(character: GameCombatant): void {
+  const pietyRequired = 25 + randomNumber(75);
+  if (character.stats.piety >= pietyRequired) {
+    character.stats.piety -= pietyRequired;
+    character.currentHp = character.stats.health;
 
-export function chanceToBeIncapacitated(character: GameCombatant): number {
-  return 100;
+    // write it back
+    if (character.id) {
+      updateGamestate((state) => {
+        const ref = getHero(character.id);
+        if (!ref) return state;
+
+        ref.stats.piety = character.stats.piety;
+
+        return state;
+      });
+    }
+  }
+}
+
+export function getCombatStat(
+  character: GameCombatant,
+  stat: GameHeroStat,
+): number {
+  return character.stats[stat];
 }

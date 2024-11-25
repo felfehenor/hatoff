@@ -1,10 +1,14 @@
+import { sumBy } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import {
   GameDungeon,
+  GameDungeonEncounter,
   GameDungeonEncounterFight,
   GameDungeonEncounterLoot,
   GameDungeonEncounterTreasure,
   GameHero,
+  GameItem,
+  GameLoot,
   GameTask,
 } from '../interfaces';
 import {
@@ -16,9 +20,11 @@ import {
 } from './combat';
 import { getEntriesByType, getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
-import { isStunned, stunHero } from './hero';
-import { hasUnlockedLootItem } from './loot';
+import { gainXp, isStunned, stunHero } from './hero';
+import { gainItemById } from './item';
+import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
+import { randomChoice } from './rng';
 import { heroesAllocatedToTask } from './task';
 
 export function setActiveDungeon(dungeon: GameDungeon): void {
@@ -54,12 +60,32 @@ export function isDungeonInProgress(): boolean {
   return gamestate().exploration.isExploring;
 }
 
-export function dungeonCompletionPercent(): number {
-  return (
-    100 *
-    (gamestate().exploration.currentStep /
-      (currentDungeon()?.encounters.length ?? 1))
+export function currentTicksForDungeon(dungeon: GameDungeon): number {
+  const currentStep = gamestate().exploration.currentStep;
+
+  const doneTicks = sumBy(
+    dungeon.encounters.filter((e, i) => i < currentStep),
+    (e) => e.ticksRequired,
   );
+  const currentTicks = gamestate().exploration.currentStepTicks;
+
+  return currentTicks + doneTicks;
+}
+
+export function totalTicksForDungeon(dungeon: GameDungeon): number {
+  return sumBy(dungeon.encounters, (e) => e.ticksRequired);
+}
+
+export function dungeonCompletionPercent(): number {
+  const dungeon = currentDungeon();
+  if (!dungeon) return 0;
+
+  const totalTicks = totalTicksForDungeon(dungeon);
+  const currentTicks = currentTicksForDungeon(dungeon);
+
+  const tickPercent = currentTicks / totalTicks;
+
+  return 100 * tickPercent;
 }
 
 export function canStepThroughCurrentDungeon(): boolean {
@@ -67,28 +93,78 @@ export function canStepThroughCurrentDungeon(): boolean {
 }
 
 export function stepThroughCurrentDungeon(): void {
-  console.log('taking a step');
+  const currentStep = currentDungeonStep();
+
+  // attempt to gain xp for previous, finished
+  if (currentStep) {
+    const xpGained = currentStep.xpGained ?? 0;
+    if (xpGained > 0) {
+      heroesInExploreTask().forEach((h) => gainXp(h, xpGained));
+    }
+  }
+
+  // move to the next step
   updateGamestate((state) => {
     state.exploration.currentStep++;
+    state.exploration.currentStepTicks = 0;
     state.exploration.hasFinishedCurrentStep = false;
     return state;
   });
 }
 
-export function handleCurrentDungeonStep() {
-  console.log('handle current step');
+export function currentDungeonStep(): GameDungeonEncounter | undefined {
+  const currentStep = gamestate().exploration.currentStep;
+  const currentStepData = currentDungeon()?.encounters[currentStep];
 
+  return currentStepData;
+}
+
+export function hasSpentEnoughTicksAtCurrentStep(): boolean {
+  return (
+    gamestate().exploration.currentStepTicks >=
+    (currentDungeonStep()?.ticksRequired ?? 0)
+  );
+}
+
+export function tickExploration(ticks: number): void {
+  updateGamestate((state) => {
+    state.exploration.currentStepTicks += ticks;
+    return state;
+  });
+}
+
+export function clearActiveDungeon() {
+  const dungeon = currentDungeon();
+  if (!dungeon) return;
+
+  notify(`Successfully cleared ${dungeon.name ?? 'the dungeon'}!`, 'Dungeon');
+
+  updateGamestate((state) => {
+    state.dungeonsCompleted[dungeon.id] ??= 0;
+    state.dungeonsCompleted[dungeon.id]++;
+
+    return state;
+  });
+
+  exitDungeon();
+}
+
+export function handleCurrentDungeonStep(ticks: number) {
   // if we've finished our current step
   if (canStepThroughCurrentDungeon()) {
-    console.log('we can step');
     // our next tick, we move through to the next step, and mark our current step as unresolved
     stepThroughCurrentDungeon();
     return;
   }
 
-  const currentStep = gamestate().exploration.currentStep;
-  const currentStepData = currentDungeon()?.encounters[currentStep];
+  // if we haven't been at the current step long enough, tick it
+  if (!hasSpentEnoughTicksAtCurrentStep()) {
+    tickExploration(ticks);
+    return;
+  }
 
+  // tick the current step
+  const currentStepData = currentDungeonStep();
   switch (currentStepData?.type) {
     case 'fight': {
       dungeonFightStep(currentStepData);
@@ -106,35 +182,26 @@ export function handleCurrentDungeonStep() {
     }
 
     default: {
-      notify(
-        `Successfully cleared ${currentDungeon()?.name ?? 'the dungeon'}!`,
-        'Dungeon',
-      );
-      exitDungeon();
+      clearActiveDungeon();
     }
   }
 }
 
-export function heroWinCombat(fightStep: GameDungeonEncounterFight): void {
-  console.log('hero rewards');
-
-  // TODO: gain xp
-}
+export function heroWinCombat(): void {}
 
 export function heroLoseCombat(): void {
-  console.log('hero lose');
   notifyError('The exploration party has returned unsuccessful...');
 
   heroesInExploreTask().forEach((hero) => {
-    stunHero(hero, 900);
+    stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
   });
 
   exitDungeon();
 }
 
-export function handleFightOutcome(fightStep: GameDungeonEncounterFight): void {
+export function handleFightOutcome(): void {
   if (didHeroesWin()) {
-    heroWinCombat(fightStep);
+    heroWinCombat();
     return;
   }
 
@@ -143,8 +210,6 @@ export function handleFightOutcome(fightStep: GameDungeonEncounterFight): void {
 
 export function dungeonFightStep(fightStep: GameDungeonEncounterFight): void {
   const exploreState = gamestate().exploration;
-
-  console.log('combat step', fightStep, { exploreState });
 
   // if we don't have combat, we generate combat
   if (!exploreState.currentCombat) {
@@ -159,7 +224,7 @@ export function dungeonFightStep(fightStep: GameDungeonEncounterFight): void {
 
   // if combat is resolved, we delete it, and move to the next step
   if (isCombatResolved()) {
-    handleFightOutcome(fightStep);
+    handleFightOutcome();
 
     updateGamestate((state) => {
       state.exploration.exploringParty =
@@ -179,20 +244,32 @@ export function dungeonFightStep(fightStep: GameDungeonEncounterFight): void {
 export function dungeonTreasureStep(
   treasureStep: GameDungeonEncounterTreasure,
 ): void {
-  console.log('treasure step', treasureStep);
+  const pickedTreasure = randomChoice(
+    treasureStep.treasureIds,
+    gamestate().exploration.id,
+  );
   updateGamestate((state) => {
-    // TODO: gain treasure
-    // TODO: notify of treasure
+    if (pickedTreasure) {
+      const itemRef = getEntry<GameItem>(pickedTreasure);
+      if (itemRef) {
+        gainItemById(itemRef.id, 1);
+        notify(`You got 1x ${itemRef.name}!`, 'Dungeon');
+      }
+    }
+
     state.exploration.hasFinishedCurrentStep = true;
     return state;
   });
 }
 
 export function dungeonLootStep(lootStep: GameDungeonEncounterLoot): void {
-  console.log('loot step', lootStep);
   updateGamestate((state) => {
-    // TODO: gain loot
-    // TODO: notify of loot
+    const itemRef = getEntry<GameLoot>(lootStep.lootId);
+    if (itemRef) {
+      gainLootItemById(itemRef.id, 1);
+      notify(`You got a relic: ${itemRef.name}!`, 'Dungeon');
+    }
+
     state.exploration.hasFinishedCurrentStep = true;
     return state;
   });
@@ -214,10 +291,10 @@ export function canEnterDungeon(): boolean {
 }
 
 export function enterDungeon(): void {
-  console.log('enter dungeon');
   updateGamestate((state) => {
     state.exploration.id = uuid();
     state.exploration.currentStep = -1;
+    state.exploration.currentStepTicks = 0;
     state.exploration.isExploring = true;
     state.exploration.hasFinishedCurrentStep = true;
     state.exploration.exploringParty = heroesInExploreTask().map((h) =>
@@ -228,11 +305,11 @@ export function enterDungeon(): void {
 }
 
 export function exitDungeon(): void {
-  console.log('exit dungeon');
   updateGamestate((state) => {
     state.activeDungeon = '';
     state.exploration.isExploring = false;
     state.exploration.currentStep = -1;
+    state.exploration.currentStepTicks = 0;
     state.exploration.hasFinishedCurrentStep = false;
     state.exploration.exploringParty = [];
     return state;

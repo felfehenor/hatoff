@@ -3,16 +3,21 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   tablerAward,
   tablerCircleCheck,
+  tablerClock,
   tablerPackage,
   tablerSword,
   tablerSwords,
 } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import {
+  currentDungeonStep,
+  currentTicksForDungeon,
   dungeonCompletionPercent,
+  gamestate,
   getEntry,
   isCurrentDungeon,
   isDungeonComplete,
+  totalTicksForDungeon,
 } from '../../helpers';
 import { GameDungeon, GameLoot } from '../../interfaces';
 
@@ -26,6 +31,7 @@ import { GameDungeon, GameLoot } from '../../interfaces';
       tablerCircleCheck,
       tablerPackage,
       tablerAward,
+      tablerClock,
     }),
   ],
   templateUrl: './dungeon-display.component.html',
@@ -41,13 +47,19 @@ export class DungeonDisplayComponent {
     this.dungeon().encounters.filter((f) => f.type === 'loot'),
   );
 
-  public lootTooltip = computed(() => {
+  public lootItemNames = computed(() => {
     const lootNames = this.dungeon()
       .encounters.filter((f) => f.type === 'loot')
       .map((l) => getEntry<GameLoot>(l.lootId)?.name ?? 'Unknown');
 
-    return `Loot: ${lootNames.join(', ')}`;
+    return lootNames.join(', ');
   });
+
+  public enemyNames = computed(() =>
+    gamestate()
+      .exploration.currentCombat?.defenders.map((t) => t.name)
+      .join(', '),
+  );
 
   public numFights = computed(
     () => this.dungeon().encounters.filter((f) => f.type === 'fight').length,
@@ -57,6 +69,21 @@ export class DungeonDisplayComponent {
   );
   public numLoots = computed(
     () => this.dungeon().encounters.filter((f) => f.type === 'loot').length,
+  );
+
+  public dungeonTickDisplay = computed(() => {
+    const total = totalTicksForDungeon(this.dungeon());
+
+    if (this.active()) {
+      const current = currentTicksForDungeon(this.dungeon());
+      return `${current} / ${total}`;
+    }
+
+    return total;
+  });
+
+  public currentDungeonStepType = computed(() =>
+    this.active() ? currentDungeonStep()?.type : '',
   );
 
   public isCurrent = computed(() => isCurrentDungeon(this.dungeon()));

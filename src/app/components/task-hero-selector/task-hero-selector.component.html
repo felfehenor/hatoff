@@ -61,6 +61,10 @@
         <app-blur-card text="Hero cannot be assigned to this task." class="absolute"></app-blur-card>
         }
 
+        @if(!canUnassignHeroFromTask(hero)) {
+        <app-blur-card text="Hero cannot be unassigned from this task." class="absolute"></app-blur-card>
+        }
+
         <div class="card-body p-1 pl-3 cursor-pointer" [class.no-assign]="!canAssignHeroToTask(hero)">
 
           <div class="card-title flex items-center">

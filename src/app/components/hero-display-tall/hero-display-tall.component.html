@@ -23,6 +23,12 @@
 
     <app-hero-assignment [hero]="activeHero"></app-hero-assignment>
 
+    @if(!canUseItemsOnThisHero()) {
+    <div class="text-error italic">
+      Cannot use items on this hero currently.
+    </div>
+    }
+
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
 
@@ -46,7 +52,9 @@
         </button>
 
         @if(hasItems()) {
-        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()">Use Items</button>
+        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()">
+          Use Items
+        </button>
         }
       </div>
 

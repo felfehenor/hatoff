@@ -1,31 +1,38 @@
 import { Content } from './identifiable';
 
-export type GameDungeonEncounter =
-  | GameDungeonEncounterFight
-  | GameDungeonEncounterTreasure
-  | GameDungeonEncounterLoot;
-
 export interface GameDungeonEncounterFightMonster {
   monsterId: string;
 }
 
-export interface GameDungeonEncounterFight {
+export type GameDungeonEncounter =
+  | GameDungeonEncounterFight
+  | GameDungeonEncounterLoot
+  | GameDungeonEncounterTreasure;
+
+export interface GameDungeonEncounterFight extends GameDungeonEncounterBase {
   type: 'fight';
   monsters: GameDungeonEncounterFightMonster[];
 }
 
-export interface GameDungeonEncounterTreasure {
+export interface GameDungeonEncounterTreasure extends GameDungeonEncounterBase {
   type: 'treasure';
   treasureIds: string[];
 }
 
-export interface GameDungeonEncounterLoot {
+export interface GameDungeonEncounterLoot extends GameDungeonEncounterBase {
   type: 'loot';
   lootId: string;
 }
 
+export interface GameDungeonEncounterBase {
+  type: 'fight' | 'treasure' | 'loot';
+  xpGained: number;
+  ticksRequired: number;
+}
+
 export interface GameDungeon extends Content {
   description: string;
+  stunTimeOnFailure: number;
 
   requiresLootIds?: string[];
 

@@ -1,6 +1,6 @@
 @let dungeonData = dungeon();
 
-<div class="card card-side foreground shadow-xl cursor-pointer min-h-[250px] overflow-hidden" [class.ring-2]="active()">
+<div class="card card-side foreground shadow-xl min-h-[250px] overflow-hidden" [class.ring-2]="active()">
   <div class="card-body">
 
     @if(active()) {
@@ -19,22 +19,56 @@
 
     <p>{{ dungeonData.description }}</p>
 
-    <div class="flex">
-      <div class="flex-1 flex items-center justify-center gap-2 text-xl" [tp]="'Number of fights in this dungeon'">
-        <ng-icon name="tablerSword"></ng-icon>
+    <div class="flex mb-5">
+      @let stepType = currentDungeonStepType();
+
+      <ng-template #fightNotActive>
+        Number of fights in this dungeon
+      </ng-template>
+
+      <ng-template #fightActive>
+        Currently fighting: {{ enemyNames() }}
+      </ng-template>
+
+      <ng-template #treasureNotActive>
+        Number of treasures in this dungeon
+      </ng-template>
+
+      <ng-template #treasureActive>
+        Currently looting treasure
+      </ng-template>
+
+      <ng-template #lootNotActive>
+        Relics: {{ lootItemNames() }}
+      </ng-template>
+
+      <ng-template #lootActive>
+        Currently looting {{ lootItemNames() }}
+      </ng-template>
+
+      <div class="flex-1 flex items-center justify-center gap-2 text-xl"
+        [tp]="stepType === 'fight' ? fightActive : fightNotActive">
+        <ng-icon name="tablerSword" [color]="stepType === 'fight' ? 'oklch(var(--su))' : ''"></ng-icon>
         {{ numFights() }}
       </div>
 
-      <div class="flex-1 flex items-center justify-center gap-2 text-xl" [tp]="'Number of treasures in this dungeon'">
-        <ng-icon name="tablerPackage"></ng-icon>
+      <div class="flex-1 flex items-center justify-center gap-2 text-xl"
+        [tp]="stepType === 'treasure' ? treasureActive : treasureNotActive">
+        <ng-icon name="tablerPackage" [color]="stepType === 'treasure' ? 'oklch(var(--su))' : ''"></ng-icon>
         {{ numTreasures() }}
       </div>
 
-      <div class="flex-1 flex items-center justify-center gap-2 text-xl" [tp]="lootTooltip()">
-        <ng-icon name="tablerAward"></ng-icon>
+      <div class="flex-1 flex items-center justify-center gap-2 text-xl"
+        [tp]="stepType === 'loot' ? lootActive : lootNotActive">
+        <ng-icon name="tablerAward" [color]="stepType === 'loot' ? 'oklch(var(--su))' : ''"></ng-icon>
         {{ numLoots() }}
       </div>
     </div>
+  </div>
+
+  <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2"
+    tp="Time required to explore this dungeon.">
+    <ng-icon name="tablerClock"></ng-icon> {{ dungeonTickDisplay() }}
   </div>
 
   @if(isCurrent()) {

@@ -1,0 +1,13 @@
+# force
+- id: 9710e65d-6dd0-4ea0-bb17-47fd0a3e6524
+  name: Adrenalized
+  description: This hero gains +10 Force (FRC) in combat.
+  boostCombatStat: force
+  boostCombatStatValue: 10
+
+# speed
+- id: 3a7e515b-02d0-498f-acb0-4b690547b188
+  name: Flighty
+  description: This hero gains +10 Speed (SPD) in combat.
+  boostCombatStat: speed
+  boostCombatStatValue: 10

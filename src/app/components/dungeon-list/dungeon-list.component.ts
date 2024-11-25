@@ -31,6 +31,7 @@ export class DungeonListComponent {
   });
 
   public selectDungeon(dungeon: GameDungeon): void {
+    if (this.isAnyDungeonActive()) return;
     setActiveDungeon(dungeon);
   }
 }

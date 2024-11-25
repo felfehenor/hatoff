@@ -5,7 +5,7 @@ import {
 } from './dungeon';
 import { gamestate } from './gamestate';
 
-export function doDungeonGameloop() {
+export function doDungeonGameloop(ticks: number) {
   const state = gamestate();
 
   if (!state.exploration.isExploring) {
@@ -16,5 +16,5 @@ export function doDungeonGameloop() {
     return;
   }
 
-  handleCurrentDungeonStep();
+  handleCurrentDungeonStep(ticks);
 }

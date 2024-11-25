@@ -47,6 +47,7 @@ export interface GameStateExplore {
   id: string;
   isExploring: boolean;
   currentStep: number;
+  currentStepTicks: number;
   hasFinishedCurrentStep: boolean;
   currentCombat?: GameCombat;
   exploringParty: GameCombatant[];

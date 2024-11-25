@@ -10,6 +10,7 @@ import {
   buyUpgrade,
   canAllocateHeroToTask,
   canBuyUpgrade,
+  canUnallocateHeroFromTask,
   currentHeroTask,
   getDamageForcePercentage,
   getEntry,
@@ -123,6 +124,10 @@ export class TaskHeroSelectorComponent {
       canAllocateHeroToTask(hero, this.task()) ||
       isHeroAllocatedToTask(this.task(), hero)
     );
+  }
+
+  public canUnassignHeroFromTask(hero: GameHero): boolean {
+    return canUnallocateHeroFromTask(hero, this.task());
   }
 
   public heroMood(hero: GameHero): HeroMood {

@@ -18,6 +18,10 @@ export function randomIdentifiableChoice<T extends Identifiable>(
   return choices[Math.floor(rng() * choices.length)].id;
 }
 
+export function randomNumber(max: number, seed = uuid()): number {
+  return Math.floor(seededrng(seed)() * max);
+}
+
 export function randomChoice<T>(choices: T[], seed = uuid()): T {
   const rng = seededrng(seed);
 

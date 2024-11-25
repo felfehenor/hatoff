@@ -2,14 +2,9 @@
   name: Slimy Hero
   type: Population
   description: Increase the population cap by 1.
-  researchRequired: 10
+  researchRequired: 5000
 
   requiresLootIds:
     - Slimy Sword
 
-  requiresResearchIds:
-    - Huts
-
   unlocksPopulation: 1
-
-  unlocksTaskIds: [Explore]

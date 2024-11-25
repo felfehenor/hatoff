@@ -47,6 +47,20 @@ export interface GameArchetype extends Content {
   boostLevelupStatValue?: number;
 
   /**
+   * The stat that is boosted in combat.
+   *
+   * @require `boostCombatStatValue`
+   */
+  boostCombatStat?: GameHeroStat;
+
+  /**
+   * The value to boost the stat by in combat.
+   *
+   * @require `boostCombatStat`
+   */
+  boostCombatStatValue?: number;
+
+  /**
    * The amount to boost XP gained by. Applies to all sources of XP gain.
    */
   boostXpGain?: number;

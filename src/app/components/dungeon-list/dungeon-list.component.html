@@ -8,8 +8,9 @@
 
   @for(dungeon of displayedDungeons(); track $index) {
   <div class="hero-container" [ngClass]="cardClasses()">
-    <app-dungeon-display [dungeon]="dungeon" [class.pointer-events-none]="isAnyDungeonActive()"
-      (click)="selectDungeon(dungeon)" [active]="activeDungeon() === dungeon.id"></app-dungeon-display>
+    <app-dungeon-display [dungeon]="dungeon" [class.cursor-pointer]="!isAnyDungeonActive()"
+      [class.cursor-not-allowed]="isAnyDungeonActive()" (click)="selectDungeon(dungeon)"
+      [active]="activeDungeon() === dungeon.id"></app-dungeon-display>
   </div>
   }
 </div>
