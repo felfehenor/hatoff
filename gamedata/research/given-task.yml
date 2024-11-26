@@ -4,7 +4,7 @@
   description: Unlock the task "Forestry".
   researchRequired: 0
 
-  unlocksTaskIds: [Wood Harvesting]
+  unlocksTaskIds: [Gather Wood]
 
 - id: 4f36f790-8771-4630-b256-96a902aa36ea
   name: Quarrying
@@ -12,7 +12,7 @@
   description: Unlock the task "Quarrying".
   researchRequired: 0
 
-  unlocksTaskIds: [Stone Gathering]
+  unlocksTaskIds: [Gather Stone]
 
 - id: a7f15dfd-1dfd-4c38-8b8a-7cc2bbdd455e
   name: Hunting
@@ -20,16 +20,16 @@
   description: Unlock the task "Hunting".
   researchRequired: 0
 
-  unlocksTaskIds: [Food Hunting]
+  unlocksTaskIds: [Gather Food]
 
 - id: c617668c-c6cf-4480-93f6-139a2a6bc3e5
   name: Defensive Measures
   type: Task
-  description: Unlock the task "Town Defense".
+  description: Unlock the task "Defend Town".
   researchRequired: 0
   requireResearchCount: 15
 
-  unlocksTaskIds: [Town Defense]
+  unlocksTaskIds: [Defend Town]
 
 - id: c5b1052e-2c9a-4005-b9d5-33c6dac7712c
   name: Institutionalization

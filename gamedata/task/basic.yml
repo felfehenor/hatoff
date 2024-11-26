@@ -11,7 +11,7 @@
   maxLevel: 0
 
 - id: 6a620f52-5946-4990-a081-b7d9afcd0856
-  name: Town Defense
+  name: Defend Town
   description: Defend your town from the woodland threats.
   damageTypeId: Defensive
   damageTypeAutoChange: 'defense'
@@ -37,7 +37,7 @@
     - Stronger Synergy II
 
 - id: 4a11631e-b5b4-4673-8715-460fe6725ed3
-  name: Wood Harvesting
+  name: Gather Wood
   description: Chop trees near your town, gaining Wood.
   damageTypeId: Physical
   maxHeroesAllocable: 2
@@ -63,7 +63,7 @@
     - Stronger Synergy II
 
 - id: 39e534ec-8ec0-4735-aff6-2674051f40fa
-  name: Stone Gathering
+  name: Gather Stone
   description: Gather from the quarry near your town, gaining Stone.
   damageTypeId: Physical
   maxHeroesAllocable: 2
@@ -89,7 +89,7 @@
     - Stronger Synergy II
 
 - id: a5e60559-ad21-4df9-bb5f-d1e392a74c8d
-  name: Food Hunting
+  name: Gather Food
   description: Hunt and set traps near your town, gaining Food.
   damageTypeId: Emotional
   maxHeroesAllocable: 2

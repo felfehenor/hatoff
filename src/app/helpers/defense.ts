@@ -171,7 +171,7 @@ export function doTownAttack(): void {
   const tasksToLoseUpgradesFor: GameTask[] = [];
 
   updateGamestate((state) => {
-    const defenseTask = getEntry<GameTask>('Town Defense');
+    const defenseTask = getEntry<GameTask>('Defend Town');
     if (defenseTask) {
       const allocated = heroesAllocatedToTask(defenseTask);
       allocated.forEach((hero) => unassignHeroTask(hero));

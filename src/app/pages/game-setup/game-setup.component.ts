@@ -7,10 +7,10 @@ import { finishSetup, isSetup } from '../../helpers';
 import { GameDifficulty } from '../../interfaces';
 
 @Component({
-    selector: 'app-game-setup',
-    imports: [FormsModule, SavefileImportComponent, TitleCasePipe],
-    templateUrl: './game-setup.component.html',
-    styleUrl: './game-setup.component.scss'
+  selector: 'app-game-setup',
+  imports: [FormsModule, SavefileImportComponent, TitleCasePipe],
+  templateUrl: './game-setup.component.html',
+  styleUrl: './game-setup.component.scss',
 })
 export class GameSetupComponent implements OnInit {
   private router = inject(Router);
@@ -22,9 +22,9 @@ export class GameSetupComponent implements OnInit {
   public canSubmit = computed(() => this.heroName() && this.townName());
 
   public readonly difficultyDescriptions: Record<GameDifficulty, string> = {
-    easy: 'Easy peasy. Town Defense is disabled, leading to a more chill, idle game.',
+    easy: 'Easy peasy. Defend Town is disabled, leading to a more chill, idle game.',
     normal: 'The game as intended. No upscaling, no downscaling.',
-    hard: 'Hard mode. Town Defense costs more, and all task types are strict assignment. Heroes will die permanently.',
+    hard: 'Hard mode. Defend Town costs more, and all task types are strict assignment. Heroes will die permanently.',
   };
 
   public readonly difficulties: GameDifficulty[] = ['easy', 'normal', 'hard'];

@@ -1,5 +1,5 @@
 - id: b2d9bdf5-c1c7-4faa-9481-068b3c8021c5
-  name: Healer
+  name: Heal
   description: Bring heroes back to consciousness.
   damageTypeId: Any
   maxHeroesAllocable: 2

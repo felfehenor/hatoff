@@ -1,5 +1,5 @@
 - id: 12ead923-71c1-465b-afbb-d4cc84b6a242
-  name: Tax Collection
+  name: Collect Taxes
   description: Collect taxes from your town, gaining Gold.
   damageTypeId: Financial
   maxHeroesAllocable: 2
