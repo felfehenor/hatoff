@@ -1,0 +1,22 @@
+<div class="flex justify-center items-center page-size">
+
+  <div class="card card-side bg-neutral shadow-xl min-h-[300px] max-h-[500px] w-1/2">
+
+    <div class="card-body items-center justify-between">
+      <div class="card-title text-center flex flex-col">
+        Game Over
+      </div>
+
+      <div class="w-3/4 text-center mt-5">
+        Your main hero has perished. Your town is unable to continue without a leader. Want to try again?
+      </div>
+
+      <div class="card-actions">
+        <button class="btn btn-default btn-wide" [routerLink]="['/']">Main Menu</button>
+        <button class="btn btn-primary btn-wide" [routerLink]="['/game/setup']">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

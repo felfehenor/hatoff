@@ -3,6 +3,7 @@ import { requireSetupGuard } from './guards/require-setup.guard';
 import { GameExploreComponent } from './pages/game-explore/game-explore.component';
 import { GameFusionComponent } from './pages/game-fusion/game-fusion.component';
 import { GameHeroesComponent } from './pages/game-heroes/game-heroes.component';
+import { GameOverComponent } from './pages/game-over/game-over.component';
 import { GameRecruitComponent } from './pages/game-recruit/game-recruit.component';
 import { GameResearchComponent } from './pages/game-research/game-research.component';
 import { GameSetupComponent } from './pages/game-setup/game-setup.component';
@@ -49,6 +50,10 @@ export const gameRoutes: Routes = [
     component: GameExploreComponent,
     path: 'explore',
     canActivate: [requireSetupGuard],
+  },
+  {
+    component: GameOverComponent,
+    path: 'over',
   },
   {
     component: OptionsComponent,
