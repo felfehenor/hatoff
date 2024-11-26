@@ -23,7 +23,6 @@ const notification = new Subject<{
 export const notification$ = notification.asObservable();
 
 export function notify(message: string, category: NotificationCategory): void {
-  console.log(getOption(`notification${category}`), canSendNotifications());
   if (!getOption(`notification${category}`)) return;
   if (!canSendNotifications()) return;
   notification.next({ message, type: 'show', category });
