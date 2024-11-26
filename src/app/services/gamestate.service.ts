@@ -94,6 +94,7 @@ export class GamestateService {
 
     notifyError(
       'Your main hero has perished, leaving your town without a leader...',
+      true,
     );
 
     await this.router.navigate(['/game/over']);
