@@ -27,7 +27,8 @@ const content = `${header}
 
 ${changelog}
 
-Play the latest update [online](https://heroes.felfhenor.com).
+> Play the latest update [online](https://heroes.felfhenor.com).
+{: .prompt-info }
 `;
 
 const filename = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}-version-update.md`;
