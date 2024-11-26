@@ -1,21 +1,14 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { interval } from 'rxjs';
 import {
   canSendNotifications,
   doGameloop,
-  doGameOver,
   gamestate,
   getOption,
-  hasMainHero,
-  isGameOver,
   isGameStateReady,
-  isPlayingGame,
-  isSetup,
   migrateGameState,
   migrateOptionsState,
-  notifyError,
   options,
   setGameState,
   setOptions,
@@ -27,7 +20,6 @@ import { ContentService } from './content.service';
   providedIn: 'root',
 })
 export class GamestateService {
-  private router = inject(Router);
   private localStorage = inject(LocalStorageService);
   private contentService = inject(ContentService);
 
@@ -56,8 +48,6 @@ export class GamestateService {
       }
 
       this.saveGamestate(state);
-
-      this.checkForGameOver();
     });
 
     effect(() => {
@@ -83,21 +73,6 @@ export class GamestateService {
     if (options) {
       setOptions(options);
     }
-  }
-
-  async checkForGameOver() {
-    if (!isPlayingGame()) return;
-    if (isGameOver() || !isSetup()) return;
-
-    const shouldGameOver = !hasMainHero();
-    if (!shouldGameOver) return;
-
-    notifyError(
-      'Your main hero has perished, leaving your town without a leader...',
-    );
-
-    await this.router.navigate(['/game/over']);
-    doGameOver();
   }
 
   saveGamestate(saveState: GameState) {
