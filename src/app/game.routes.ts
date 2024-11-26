@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { requireResearchGuard } from './guards/require-research.guard';
 import { requireSetupGuard } from './guards/require-setup.guard';
 import { GameExploreComponent } from './pages/game-explore/game-explore.component';
 import { GameFusionComponent } from './pages/game-fusion/game-fusion.component';
@@ -34,7 +35,7 @@ export const gameRoutes: Routes = [
   {
     component: GameFusionComponent,
     path: 'fuse',
-    canActivate: [requireSetupGuard],
+    canActivate: [requireSetupGuard, requireResearchGuard('Fusion Engine')],
   },
   {
     component: GameResearchComponent,
@@ -44,12 +45,12 @@ export const gameRoutes: Routes = [
   {
     component: GameShopComponent,
     path: 'shop',
-    canActivate: [requireSetupGuard],
+    canActivate: [requireSetupGuard, requireResearchGuard('Shopping Trip')],
   },
   {
     component: GameExploreComponent,
     path: 'explore',
-    canActivate: [requireSetupGuard],
+    canActivate: [requireSetupGuard, requireResearchGuard('Houses III')],
   },
   {
     component: GameOverComponent,
