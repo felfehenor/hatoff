@@ -77,6 +77,11 @@ export function createHero(): GameHero {
   return hero;
 }
 
+export function hasMainHero(): boolean {
+  const state = gamestate();
+  return !!getHero(state.townSetup.heroId);
+}
+
 export function setSpecialHeroes(heroes: SpecialGameHero[]): void {
   _specialHeroes.set(heroes);
 }
