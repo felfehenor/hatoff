@@ -48,6 +48,12 @@
 
     @if(currentMode() === 'heroes') {
     <div class="overflow-y-auto p-1">
+      @if(allHeroes().length === 0) {
+        <div class="italic">
+          You don't have any heroes that can be assigned to this task.
+        </div>
+      }
+
       @for(hero of allHeroes(); track hero.id) {
       <div class="card card-side foreground-2 shadow-xl mb-4 mr-2" [appHeroSpecialGlow]="hero"
         (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)" tabindex="1"
@@ -56,10 +62,6 @@
           <app-hero-status [hero]="hero" class="absolute top-2 left-2"></app-hero-status>
           <app-hero-art class="max-h-[96px]" [id]="hero.id" [size]="96" [mood]="heroMood(hero)"></app-hero-art>
         </figure>
-
-        @if(!canAssignHeroToTask(hero)) {
-        <app-blur-card text="Hero cannot be assigned to this task." class="absolute"></app-blur-card>
-        }
 
         @if(!canUnassignHeroFromTask(hero)) {
         <app-blur-card text="Hero cannot be unassigned from this task." class="absolute"></app-blur-card>

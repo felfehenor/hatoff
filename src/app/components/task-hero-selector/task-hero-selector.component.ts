@@ -12,6 +12,7 @@ import {
   canBuyUpgrade,
   canUnallocateHeroFromTask,
   currentHeroTask,
+  gamestate,
   getDamageForcePercentage,
   getEntry,
   getTaskDamageType,
@@ -78,9 +79,9 @@ export class TaskHeroSelectorComponent {
 
   public heroes = computed(() => heroesAllocatedToTask(this.task()));
   public allHeroes = computed(() =>
-    sortBy(allHeroes(), [
+    sortBy(allHeroes().filter(f => this.canAssignHeroToTask(f)), [
       (hero) => !this.heroes().includes(hero),
-      (hero) => !canAllocateHeroToTask(hero, this.task()),
+      (hero) => !!gamestate().taskAssignments[hero.id]
     ]),
   );
   public maxHeroes = computed(() => maxHeroesForTask(this.task()));
