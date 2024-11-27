@@ -56,26 +56,26 @@ jobs:
         with:
           name: release_url
           path: release_url.txt
-#      - name: Build Blog Post for Version Update
-#        run: npm run blogpost:generate
-#
-#      - name: Read blog_post.txt file
-#        id: getBlogPost
-#        run: echo "filename=$(cat blog-post.txt)" >> $GITHUB_OUTPUT
-#
-#      - name: Publish Version Update Blog Post
-#        uses: dmnemec/copy_file_to_another_repo_action@main
-#        env:
-#          API_TOKEN_GITHUB: ${{ secrets.PUSH_TO_REPO_TOKEN }}
-#        with:
-#          source_file: '${{ steps.getBlogPost.outputs.filename }}'
-#          destination_repo: 'Spellwriters/blog'
-#          destination_folder: '_posts'
-#          user_email: 'kyle@seiyria.com'
-#          user_name: 'seiyria'
-#          commit_message: 'Add version notes'
-#          destination_branch: master
 
+      - name: Build Blog Post for Version Update
+        run: npm run build:blogpost
+
+      - name: Read blog_post.txt file
+        id: getBlogPost
+        run: echo "filename=$(cat blog-post.txt)" >> $GITHUB_OUTPUT
+
+      - name: Publish Version Update Blog Post
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_TO_REPO_TOKEN }}
+        with:
+          source_file: '${{ steps.getBlogPost.outputs.filename }}'
+          destination_repo: 'felfhenor/blog'
+          destination_folder: '_posts'
+          user_email: 'kyle@seiyria.com'
+          user_name: 'seiyria'
+          commit_message: 'Add version notes'
+          destination_branch: master
 #  publish-windows:
 #    needs: [build]
 #    name: Create Windows Binary

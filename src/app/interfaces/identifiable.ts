@@ -1,10 +1,14 @@
+export type ResearchableContentType = 'damagetype' | 'archetype' | 'task';
+
 export type ContentType =
-  | 'damagetype'
-  | 'archetype'
+  | ResearchableContentType
   | 'resource'
-  | 'task'
+  | 'item'
   | 'research'
-  | 'upgrade';
+  | 'upgrade'
+  | 'dungeon'
+  | 'monster'
+  | 'loot';
 
 export interface Identifiable {
   id: string;

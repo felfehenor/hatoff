@@ -1,5 +1,6 @@
 - id: d24c6580-988a-4982-b334-a4f554d81c67
   name: Physical Knowledge
+  type: Damage Type
   description: Unlock the damage type "Physical".
   researchRequired: 0
 
@@ -7,6 +8,7 @@
 
 - id: 431a8d5c-da70-47e9-9b62-5f2b296ed60c
   name: Emotional Knowledge
+  type: Damage Type
   description: Unlock the damage type "Emotional".
   researchRequired: 0
 
@@ -14,6 +16,7 @@
 
 - id: f6b2b5fc-cf41-4150-a008-faf7477be9c6
   name: Intellectual Knowledge
+  type: Damage Type
   description: Unlock the damage type "Intellectual".
   researchRequired: 0
 

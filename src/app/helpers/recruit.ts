@@ -6,7 +6,7 @@ import {
 } from '../interfaces';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
-import { gamestate, setGameState } from './gamestate';
+import { gamestate, setGameState, updateGamestate } from './gamestate';
 import {
   addHero,
   canRecruitHero,
@@ -25,16 +25,18 @@ import { seededrng } from './rng';
 
 import { v4 as uuid } from 'uuid';
 
-export function setResetTime(): void {
-  const state = gamestate();
-  state.cooldowns.nextRecruitResetTime = cooldown(3600);
-  setGameState(state);
+export function setRecruitResetTime(): void {
+  updateGamestate((state) => {
+    state.cooldowns.nextRecruitResetTime = cooldown('nextRecruitResetTime');
+    return state;
+  });
 }
 
-export function resetRerolls(): void {
-  const state = gamestate();
-  state.recruitment.numRerolls = 0;
-  setGameState(state);
+export function resetRecruitRerolls(): void {
+  updateGamestate((state) => {
+    state.recruitment.numRerolls = 0;
+    return state;
+  });
 }
 
 export function generateHeroesToRecruit() {
@@ -49,7 +51,11 @@ export function generateHeroesToRecruit() {
   }
 
   function doesHeroExist(hero: SpecialGameHero) {
-    if (state.recruitment.recruitableHeroes.find((s) => s.id === hero.id))
+    if (
+      state.recruitment.recruitableHeroes
+        .filter(Boolean)
+        .find((s) => s!.id === hero.id)
+    )
       return true;
     if (state.heroes[hero.id]) return true;
 
@@ -80,7 +86,7 @@ export function generateHeroesToRecruit() {
   setGameState(state);
 }
 
-export function recruitHero(hero: GameHero): void {
+export function recruitHero(hero: GameHero, index: number): void {
   const resource = getEntry<GameResource>('Food');
   if (!resource) return;
 
@@ -93,14 +99,19 @@ export function recruitHero(hero: GameHero): void {
 
   loseResource(resource, recruitCost());
   addHero(hero);
+
+  updateGamestate((state) => {
+    state.recruitment.recruitableHeroes[index] = undefined;
+    return state;
+  });
 }
 
-export function doReroll(): void {
+export function doRecruitReroll(): void {
   const resource = getEntry<GameResource>('Food');
   if (!resource) return;
 
   generateHeroesToRecruit();
-  loseResource(resource, rerollCost());
+  loseResource(resource, recruitRerollCost());
 
   const state = gamestate();
   state.recruitment.numRerolls += 1;
@@ -118,14 +129,14 @@ export function canRecruit(): boolean {
   );
 }
 
-export function canReroll(): boolean {
+export function canRerollRecruit(): boolean {
   const resource = getEntry<GameResource>('Food');
   if (!resource) return false;
 
-  return hasResource(resource, rerollCost());
+  return hasResource(resource, recruitRerollCost());
 }
 
-export function rerollCost(): number {
+export function recruitRerollCost(): number {
   const numRerolls = gamestate().recruitment.numRerolls ?? 0;
   if (numRerolls === 0) return 0;
 

@@ -1,6 +1,7 @@
 import { sum } from 'lodash';
 import {
   GameArchetype,
+  GameCombatant,
   GameHero,
   GameHeroStat,
   GameResource,
@@ -9,7 +10,7 @@ import {
 import { getEntry } from './content';
 
 export function getArchetypeResourceBonusForHero(
-  hero: GameHero,
+  hero: GameCombatant,
   resource: GameResource,
 ): number {
   return sum(
@@ -21,7 +22,7 @@ export function getArchetypeResourceBonusForHero(
 }
 
 export function getArchetypeTaskBonusForHero(
-  hero: GameHero,
+  hero: GameCombatant,
   task: GameTask,
 ): number {
   return sum(
@@ -36,7 +37,7 @@ export function getArchetypeTaskBonusForHero(
 }
 
 export function getArchetypeLevelUpStatBonusForHero(
-  hero: GameHero,
+  hero: GameCombatant,
   stat: GameHeroStat,
 ): number {
   return sum(
@@ -44,6 +45,18 @@ export function getArchetypeLevelUpStatBonusForHero(
       .map((arch) => getEntry<GameArchetype>(arch))
       .filter((arch) => arch?.boostLevelupStat === stat)
       .map((arch) => arch?.boostLevelupStatValue ?? 0),
+  );
+}
+
+export function getArchetypeCombatStatBonusForHero(
+  hero: GameCombatant,
+  stat: GameHeroStat,
+): number {
+  return sum(
+    hero.archetypeIds
+      .map((arch) => getEntry<GameArchetype>(arch))
+      .filter((arch) => arch?.boostCombatStat === stat)
+      .map((arch) => arch?.boostCombatStatValue ?? 0),
   );
 }
 

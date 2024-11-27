@@ -1,0 +1,31 @@
+<div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+
+  @if(allShopItems().length === 0) {
+  <div>
+    There is no shop items available to you at this time.
+  </div>
+  }
+
+  @for(item of allShopItems(); track $index) {
+  <div class="hero-container" [ngClass]="cardClasses()" [class.opacity-50]="!item">
+    @if(item) {
+    <app-shop-item-display [item]="item" (buy)="buyItem(item, $index)"></app-shop-item-display>
+    } @else {
+
+    <div class="card foreground shadow-xl cursor-pointer min-h-[250px] overflow-hidden">
+      <div class="card-body">
+
+        <div class="card-title">
+          <div class="font-semibold flex items-center gap-2">
+            Purchased Item
+          </div>
+        </div>
+
+        <p>You bought this item already.</p>
+
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>

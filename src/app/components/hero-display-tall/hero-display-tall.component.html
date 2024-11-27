@@ -13,8 +13,8 @@
 
     <div class="card-title">
       {{ activeHero.name }}
+      <app-hero-status [hero]="activeHero"></app-hero-status>
     </div>
-
 
     <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
 
@@ -22,6 +22,12 @@
       (idChange)="changeMainCharacterType($event)"></app-damage-type>
 
     <app-hero-assignment [hero]="activeHero"></app-hero-assignment>
+
+    @if(!canUseItemsOnThisHero()) {
+    <div class="text-error italic">
+      Cannot use items on this hero currently.
+    </div>
+    }
 
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
@@ -34,15 +40,23 @@
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
     <div class="card-actions justify-between mt-4">
-      @let canClickForXP = canGiveClickXp();
-      <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
-        tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
-        @if(canClickForXP) {
-        Give +{{ xpOnClick() }} XP
-        } @else {
-        <span class="loading loading-spinner loading-xs"></span>
+      <div class="flex items-center">
+        @let canClickForXP = canGiveClickXp();
+        <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
+          tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
+          @if(canClickForXP) {
+          Give +{{ xpOnClick() }} XP
+          } @else {
+          <span class="loading loading-spinner loading-xs"></span>
+          }
+        </button>
+
+        @if(hasItems()) {
+        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()">
+          Use Items
+        </button>
         }
-      </button>
+      </div>
 
       @if(canDismissHero()) {
       <button class="btn btn-error" [swal]="deleteSwal">Dismiss Hero</button>

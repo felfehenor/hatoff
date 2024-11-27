@@ -1,5 +1,6 @@
 - id: 9c7d048e-429c-4bb1-9b43-f945ccc9d9c8
   name: Fusion Retaining I
+  type: Fusion
   description: Allow fused heroes to retain 1 Task level.
   researchRequired: 100000
 
@@ -15,6 +16,7 @@
 
 - id: 4c64e796-f238-4d0f-9103-70b2dc07cbd8
   name: Fusion Retaining II
+  type: Fusion
   description: Allow fused heroes to retain 2 Task levels.
   researchRequired: 500000
 

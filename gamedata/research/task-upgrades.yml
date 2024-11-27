@@ -1,5 +1,6 @@
 - id: 7cc6b312-4748-44ad-bbbd-7d557196542f
   name: Task Heroes I
+  type: Task
   description: Unlock a task upgrade that allows you to allocate more heroes to tasks.
   researchRequired: 50
 
@@ -8,6 +9,7 @@
 
 - id: 2d468635-00f8-4a9f-ab2d-c94a13814fca
   name: Task Heroes II
+  type: Task
   description: Unlock a task upgrade that allows you to allocate more heroes to tasks.
   researchRequired: 500
 
@@ -16,6 +18,7 @@
 
 - id: 4d2e8d9d-6fae-40fd-b109-d97ab478531d
   name: Task XP I
+  type: Task
   description: Unlock a task upgrade that gives heroes an additional +1 XP when completing task cycles.
   researchRequired: 50
 
@@ -24,6 +27,7 @@
 
 - id: 4e0ce173-4c0d-4cfe-b0ca-3052364f3f49
   name: Task XP II
+  type: Task
   description: Unlock a task upgrade that gives heroes an additional +1 XP when completing task cycles.
   researchRequired: 500
 
@@ -32,6 +36,7 @@
 
 - id: b76d4970-6586-49c3-b734-10cb607a2ad1
   name: Task Resource Gain I
+  type: Task
   description: Unlock a task upgrade that gives an additional +1 resource when completing task cycles.
   researchRequired: 250
 
@@ -40,6 +45,7 @@
 
 - id: 4b06f346-b42a-485c-ad4c-05a622195980
   name: Task Resource Gain II
+  type: Task
   description: Unlock a task upgrade that gives an additional +1 resource when completing task cycles.
   researchRequired: 1500
 
@@ -48,6 +54,7 @@
 
 - id: 527b0f56-a396-4df3-8672-6e2c88f732c8
   name: Task Level Cap I
+  type: Task
   description: Unlock a task upgrade that allows heroes to get an additional +1 task level.
   researchRequired: 300
 
@@ -56,6 +63,7 @@
 
 - id: 7b17d1de-f963-4d4a-919a-9721708c746b
   name: Task Level Cap II
+  type: Task
   description: Unlock a task upgrade that allows heroes to get an additional +1 task level.
   researchRequired: 2500
 
@@ -64,6 +72,7 @@
 
 - id: 77b8bdc7-2334-4bee-a350-217451d18c2e
   name: Task Synergy I
+  type: Task
   description: Unlock a task upgrade that allows heroes to get an additional +10% task synergy.
   researchRequired: 5000
 
@@ -72,6 +81,7 @@
 
 - id: b3a9faa1-2427-4808-b27b-704fd26c712b
   name: Task Synergy II
+  type: Task
   description: Unlock a task upgrade that allows heroes to get an additional +10% task synergy.
   researchRequired: 15000
 

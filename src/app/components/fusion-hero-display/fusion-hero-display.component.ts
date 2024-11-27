@@ -7,17 +7,16 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
-  selector: 'app-fusion-hero-display',
-  standalone: true,
-  imports: [
-    HeroArtComponent,
-    DamageTypeComponent,
-    HeroArchetypeListComponent,
-    LevelDisplayComponent,
-    HeroSpecialGlowDirective,
-  ],
-  templateUrl: './fusion-hero-display.component.html',
-  styleUrl: './fusion-hero-display.component.scss',
+    selector: 'app-fusion-hero-display',
+    imports: [
+        HeroArtComponent,
+        DamageTypeComponent,
+        HeroArchetypeListComponent,
+        LevelDisplayComponent,
+        HeroSpecialGlowDirective,
+    ],
+    templateUrl: './fusion-hero-display.component.html',
+    styleUrl: './fusion-hero-display.component.scss'
 })
 export class FusionHeroDisplayComponent {
   public hero = input.required<GameHero>();

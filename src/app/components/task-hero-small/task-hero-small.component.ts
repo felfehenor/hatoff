@@ -6,16 +6,15 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
-  selector: 'app-task-hero-small',
-  standalone: true,
-  imports: [
-    HeroArtComponent,
-    TippyDirective,
-    DamageTypeComponent,
-    LevelDisplayComponent,
-  ],
-  templateUrl: './task-hero-small.component.html',
-  styleUrl: './task-hero-small.component.scss',
+    selector: 'app-task-hero-small',
+    imports: [
+        HeroArtComponent,
+        TippyDirective,
+        DamageTypeComponent,
+        LevelDisplayComponent,
+    ],
+    templateUrl: './task-hero-small.component.html',
+    styleUrl: './task-hero-small.component.scss'
 })
 export class TaskHeroSmallComponent {
   public hero = input.required<GameHero>();

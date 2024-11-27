@@ -26,3 +26,11 @@ export function gainResource(resource: GameResource, value = 1): void {
 export function loseResource(resource: GameResource, value = 1): void {
   gainResource(resource, -value);
 }
+
+export function zeroResource(resource: GameResource) {
+  updateGamestate((state) => {
+    state.resources[resource.id] = 0;
+
+    return state;
+  });
+}

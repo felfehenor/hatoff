@@ -4,17 +4,10 @@
     <app-level-display [currentLevel]="activeHero.level" [maxLevel]="activeHero.maxLevel"></app-level-display>
   </span>
 
-  @if(activeHero.fusionLevel > 0) {
-  <span class="ml-2 inline-flex items-center"
-    [tp]="'This hero has been through the fusion process ' + activeHero.fusionLevel + ' time(s).'">
-    <ng-icon name="gameOvermind" color="#a0a"></ng-icon>
-    <span class="ml-1">{{ activeHero.fusionLevel }} </span>
-  </span>
-  }
+  <app-hero-fusion-indicator [hero]="activeHero"></app-hero-fusion-indicator>
 
-  @if(showXp() && activeHero.level !== activeHero.maxLevel) {
-  <span class="ml-2">
+  @if(showXp() && activeHero.level < activeHero.maxLevel) { <span class="ml-2">
     [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
-  </span>
-  }
+    </span>
+    }
 </div>

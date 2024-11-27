@@ -11,9 +11,10 @@
   maxLevel: 0
 
 - id: 6a620f52-5946-4990-a081-b7d9afcd0856
-  name: Town Defense
+  name: Defend Town
   description: Defend your town from the woodland threats.
-  damageTypeId: Any
+  damageTypeId: Defensive
+  damageTypeAutoChange: 'defense'
   allowAnyType: true
   maxHeroesAllocable: 5
 
@@ -21,6 +22,8 @@
   speedPerCycle: 5
   damageRequiredPerCycle: 100
   xpRequiredPerLevel: 500
+  resourceIdPerCycle: Fortifications
+  resourceRewardPerCycle: 1
   maxLevel: 1
 
   possibleUpgradeIds:
@@ -28,11 +31,13 @@
     - More Heroes II
     - More XP I
     - More XP II
+    - More Resources I
+    - More Resources II
     - Stronger Synergy I
     - Stronger Synergy II
 
 - id: 4a11631e-b5b4-4673-8715-460fe6725ed3
-  name: Wood Harvesting
+  name: Gather Wood
   description: Chop trees near your town, gaining Wood.
   damageTypeId: Physical
   maxHeroesAllocable: 2
@@ -58,7 +63,7 @@
     - Stronger Synergy II
 
 - id: 39e534ec-8ec0-4735-aff6-2674051f40fa
-  name: Stone Gathering
+  name: Gather Stone
   description: Gather from the quarry near your town, gaining Stone.
   damageTypeId: Physical
   maxHeroesAllocable: 2
@@ -84,7 +89,7 @@
     - Stronger Synergy II
 
 - id: a5e60559-ad21-4df9-bb5f-d1e392a74c8d
-  name: Food Hunting
+  name: Gather Food
   description: Hunt and set traps near your town, gaining Food.
   damageTypeId: Emotional
   maxHeroesAllocable: 2
@@ -133,3 +138,17 @@
     - Higher Level Cap II
     - Stronger Synergy I
     - Stronger Synergy II
+
+- id: e31dd9c0-dd6e-40f3-bac4-25070aaa97ac
+  name: Explore
+  description: Explore the world, seeking riches and fame.
+  damageTypeId: Combat
+  maxHeroesAllocable: 4
+
+  xpPerCycle: 0
+  speedPerCycle: 0
+  damageRequiredPerCycle: 0
+  xpRequiredPerLevel: 0
+  maxLevel: 0
+
+  possibleUpgradeIds: []

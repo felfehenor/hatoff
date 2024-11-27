@@ -1,0 +1,69 @@
+- id: 5551c67b-5a28-4296-83b5-1bfcd78ca370
+  name: Whetstone
+  description: Grant a hero +1 Force (FRC).
+  cost: 80000
+
+  giveStat: force
+  giveStatValue: 1
+
+  icon: gameStoneTablet
+  color: '#e501b0'
+
+  requiresResearchIds:
+    - Weapon Enhancements
+
+- id: 275b57ef-daf8-472f-b65c-8f8f15143531
+  name: Proof of Work
+  description: Grant a hero +1 Progress (PRG).
+  cost: 25000
+
+  giveStat: progress
+  giveStatValue: 1
+
+  icon: gameFoldedPaper
+  color: '#a0f6a3'
+
+  requiresResearchIds:
+    - Work Receipts
+
+- id: 180fc878-7bce-4401-9b72-8e903add3741
+  name: Shield Coating
+  description: Grant a hero +1 Resistance (RES).
+  cost: 10000
+
+  giveStat: resistance
+  giveStatValue: 1
+
+  icon: gameShieldEchoes
+  color: '#fd88e2'
+
+  requiresResearchIds:
+    - Shield Spray
+
+- id: 24243c33-a91b-4f78-9af5-ea26ce9b090f
+  name: Abbot Likeness
+  description: Grant a hero +1 Piety (PIE).
+  cost: 1000
+
+  giveStat: piety
+  giveStatValue: 1
+
+  icon: gameAbbotMeeple
+  color: '#87ceeb'
+
+  requiresResearchIds:
+    - Church Carvings
+
+- id: 82039aa4-4f4c-4100-8228-e07019560977
+  name: Clock Hand
+  description: Grant a hero +1 Speed (SPD).
+  cost: 100000
+
+  giveStat: speed
+  giveStatValue: 1
+
+  icon: gameClockwork
+  color: '#e4a700'
+
+  requiresResearchIds:
+    - Broken Clocks

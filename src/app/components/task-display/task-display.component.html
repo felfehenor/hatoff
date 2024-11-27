@@ -2,7 +2,7 @@
 
 <div
   class="card card-side foreground shadow-xl cursor-pointer min-h-[300px] flex flex-col justify-between hover:ring-2 overflow-hidden"
-  [class.ring-2]="active()">
+  [class.ring-2]="active()" [class.ring-red-500]="threatened()" [class.ring-1]="threatened()">
   <div class="card-body">
 
     @if(maxTasklevel() > 0) {
@@ -11,7 +11,8 @@
     }
 
     <div class="card-title flex items-center">
-      <app-damage-type-breakdown [id]="taskData.damageTypeId" [showSubtypes]="!isStrict()"></app-damage-type-breakdown>
+      <app-damage-type-breakdown [damageType]="taskDamageType()"
+        [showSubtypes]="!isStrict()"></app-damage-type-breakdown>
       <div class="font-semibold">
         {{ taskData.name }}
       </div>
@@ -35,7 +36,7 @@
 
   @if(taskData.speedPerCycle > 0) {
 
-  <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2 has-help" tp="Damage per tick.">
+  <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2 has-help" tp="Damage per tick">
     {{ perTick() | number:'0.2-2' }} / {{ requiredPerTick() }} DPT
   </div>
 

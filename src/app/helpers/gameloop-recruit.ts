@@ -1,19 +1,29 @@
 import { gamestate } from './gamestate';
-import { generateHeroesToRecruit, resetRerolls, setResetTime } from './recruit';
+import {
+  generateHeroesToRecruit,
+  resetRecruitRerolls,
+  setRecruitResetTime,
+} from './recruit';
 
 export function doRecruitGameloop() {
   const state = gamestate();
 
-  if (state.recruitment.recruitableHeroes.length === 0) {
-    generateHeroesToRecruit();
-    setResetTime();
+  if (state.cooldowns.nextRecruitResetTime > 3600) {
+    setRecruitResetTime();
+    resetRecruitRerolls();
     return;
   }
 
-  if (Date.now() > state.cooldowns.nextRecruitResetTime) {
+  if (state.recruitment.recruitableHeroes.length === 0) {
     generateHeroesToRecruit();
-    setResetTime();
-    resetRerolls();
+    setRecruitResetTime();
+    return;
+  }
+
+  if (state.cooldowns.nextRecruitResetTime <= 0) {
+    generateHeroesToRecruit();
+    setRecruitResetTime();
+    resetRecruitRerolls();
     return;
   }
 }

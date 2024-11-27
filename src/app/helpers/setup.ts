@@ -1,3 +1,4 @@
+import { GameDifficulty } from '../interfaces';
 import { gamestate, setGameState } from './gamestate';
 import { initializeTown } from './migrate';
 
@@ -7,12 +8,17 @@ export function isSetup(): boolean {
   return state.townSetup.hasDoneSetup;
 }
 
-export function finishSetup(heroName: string, townName: string): void {
+export function finishSetup(
+  heroName: string,
+  townName: string,
+  difficulty: GameDifficulty,
+): void {
   const state = gamestate();
 
   state.townSetup.hasDoneSetup = true;
   state.townSetup.heroName = heroName;
   state.townSetup.townName = townName;
+  state.meta.difficulty = difficulty;
 
   setGameState(state);
 

@@ -1,6 +1,7 @@
 # health
 - id: fb7d10ae-d90a-4271-b212-7cdeb0e43224
   name: Fusion Health I
+  type: Fusion
   description: Allow fused heroes to come with an additional +25 Health (HP).
   researchRequired: 3000
 
@@ -12,6 +13,7 @@
 
 - id: fdfc0580-bfac-4cd4-8b48-46d9dbbaa259
   name: Fusion Health II
+  type: Fusion
   description: Allow fused heroes to come with an additional +25 Health (HP).
   researchRequired: 15000
 
@@ -24,6 +26,7 @@
 # progress
 - id: 49fc59ba-ca3d-49c9-8fff-c51a6a1eb169
   name: Fusion Progress I
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Progress (PRG).
   researchRequired: 10000
 
@@ -35,6 +38,7 @@
 
 - id: 984f5a7b-e900-42d2-9bcb-25652005d899
   name: Fusion Progress II
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Progress (PRG).
   researchRequired: 30000
 
@@ -47,6 +51,7 @@
 # force
 - id: fca22b09-03ab-4d2b-b4d6-967d1f986528
   name: Fusion Force I
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Force (FRC).
   researchRequired: 15000
 
@@ -58,6 +63,7 @@
 
 - id: 7f04d4a6-e27e-45c6-abb9-f523366d36e6
   name: Fusion Force II
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Force (FRC).
   researchRequired: 50000
 
@@ -70,6 +76,7 @@
 # resistance
 - id: 5c24c174-e744-4435-8ca1-bda0f0092a9b
   name: Fusion Resistance I
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Resistance (RES).
   researchRequired: 5000
 
@@ -81,6 +88,7 @@
 
 - id: 6c004867-b0ed-4a51-975e-aac0cc7dfcf3
   name: Fusion Resistance II
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Resistance (RES).
   researchRequired: 30000
 
@@ -93,6 +101,7 @@
 # piety
 - id: 0bd6cae6-2cc1-4aba-93e9-546a2e7b58ce
   name: Fusion Piety I
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Piety (PIE).
   researchRequired: 2500
 
@@ -104,6 +113,7 @@
 
 - id: ed096f9a-49c8-4d91-954e-3fb7b023ca24
   name: Fusion Piety II
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Piety (PIE).
   researchRequired: 12500
 
@@ -116,6 +126,7 @@
 # speed
 - id: 46ab70d7-1c88-4e46-ac54-dffcb148beab
   name: Fusion Speed I
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Speed (SPD).
   researchRequired: 30000
 
@@ -127,6 +138,7 @@
 
 - id: cd4379dd-bb22-448b-8637-90596c889375
   name: Fusion Speed II
+  type: Fusion
   description: Allow fused heroes to come with an additional +1 Speed (SPD).
   researchRequired: 100000
 

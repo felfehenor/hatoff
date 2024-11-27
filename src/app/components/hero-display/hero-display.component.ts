@@ -4,17 +4,20 @@ import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.dir
 import { GameHero } from '../../interfaces';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
+import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
+import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
 @Component({
   selector: 'app-hero-display',
-  standalone: true,
   imports: [
     DamageTypeComponent,
     PercentPipe,
     HeroArtComponent,
     LevelDisplayComponent,
     HeroSpecialGlowDirective,
+    HeroFusionIndicatorComponent,
+    HeroStatusComponent,
   ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',

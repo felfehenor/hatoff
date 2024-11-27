@@ -1,0 +1,122 @@
+- id: 56f3860b-c57c-4e7d-8493-a2465de8b080
+  name: Goblin Forest
+  description: Explore a forest of Goblins in search of humanoid relics.
+
+  stunTimeOnFailure: 150
+
+  requiresLootIds:
+    - Slimy Sword
+
+  encounters:
+    - type: fight
+      xpGained: 25
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin
+        - monsterId: Goblin
+
+    - type: fight
+      xpGained: 75
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Brute
+        - monsterId: Goblin
+        - monsterId: Goblin
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 120
+      treasureIds:
+        - EXP Potion (Small)
+        - EXP Potion (Large)
+
+    - type: fight
+      xpGained: 150
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+
+    - type: fight
+      xpGained: 300
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Goblin
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 120
+      treasureIds:
+        - Smelling Salts
+
+    - type: loot
+      xpGained: 0
+      ticksRequired: 900
+      lootId: Goblish Club
+
+- id: ee7a1f28-3e50-4d9b-b0a7-4406fb332d31
+  name: 'Goblin Forest: Cave'
+  description: Explore a cave of Goblins in search of humanoid relics.
+
+  stunTimeOnFailure: 450
+
+  requiresLootIds:
+    - Goblish Club
+
+  encounters:
+    - type: fight
+      xpGained: 100
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+
+    - type: fight
+      xpGained: 300
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 300
+      treasureIds:
+        - EXP Potion (Small)
+        - EXP Potion (Large)
+
+    - type: fight
+      xpGained: 350
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+
+    - type: fight
+      xpGained: 600
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Thief
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 300
+      treasureIds:
+        - Smelling Salts
+
+    - type: loot
+      xpGained: 0
+      ticksRequired: 1500
+      lootId: Goblish Dagger

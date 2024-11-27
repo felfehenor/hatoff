@@ -1,13 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
-import { allUnlockedTasks } from '../../helpers';
+import { allUnlockedTasks, hasEnoughFortifications } from '../../helpers';
 import { GameTask } from '../../interfaces';
 import { TaskDisplayComponent } from '../task-display/task-display.component';
 import { TaskHeroSelectorComponent } from '../task-hero-selector/task-hero-selector.component';
 
 @Component({
   selector: 'app-task-list',
-  standalone: true,
   imports: [TaskDisplayComponent, NgClass, TaskHeroSelectorComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -18,6 +17,8 @@ export class TaskListComponent {
   public allTasks = computed(() =>
     allUnlockedTasks().filter((t) => t.maxHeroesAllocable > 0),
   );
+
+  public meetsRequiredDefense = computed(() => hasEnoughFortifications());
 
   public cardClasses = computed(() => {
     if (this.selectedTask()) {

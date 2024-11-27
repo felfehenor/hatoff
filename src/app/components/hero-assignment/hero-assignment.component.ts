@@ -3,11 +3,10 @@ import { currentHeroTask } from '../../helpers';
 import { GameHero } from '../../interfaces';
 
 @Component({
-  selector: 'app-hero-assignment',
-  standalone: true,
-  imports: [],
-  templateUrl: './hero-assignment.component.html',
-  styleUrl: './hero-assignment.component.scss',
+    selector: 'app-hero-assignment',
+    imports: [],
+    templateUrl: './hero-assignment.component.html',
+    styleUrl: './hero-assignment.component.scss'
 })
 export class HeroAssignmentComponent {
   public hero = input.required<GameHero>();

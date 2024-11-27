@@ -1,0 +1,25 @@
+- id: 466ec25b-ea28-4424-9b07-38ce5ffd6d4b
+  name: Bottle of Passions Unabated
+  description: Change a hero's damage type to a random unlocked type.
+  cost: 2000
+
+  pickRandomDamageType: true
+
+  icon: gameHeartBottle
+  color: '#ffb6c1'
+
+  requiresResearchIds:
+    - Passionate Alchemy
+
+- id: 6f8b24f0-ba01-415f-9519-72f52dcebf2b
+  name: Bottle of Forgetfulness
+  description: Change a hero's archetypes to random unlocked archetypes.
+  cost: 50000
+
+  pickRandomArchetypes: true
+
+  icon: gameBeerBottle
+  color: '#ff7f50'
+
+  requiresResearchIds:
+    - Forgetful Fountain

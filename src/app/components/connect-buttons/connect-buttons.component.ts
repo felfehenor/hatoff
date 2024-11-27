@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   tablerBrandDiscord,
+  tablerBrandGithub,
   tablerMail,
   tablerRss,
 } from '@ng-icons/tabler-icons';
@@ -10,11 +11,11 @@ import { ChangelogModalComponent } from '../changelog-modal/changelog-modal.comp
 
 @Component({
   selector: 'app-connect-buttons',
-  standalone: true,
   imports: [NgIconComponent, TippyDirective, ChangelogModalComponent],
   providers: [
     provideIcons({
       tablerBrandDiscord,
+      tablerBrandGithub,
       tablerMail,
       tablerRss,
     }),
@@ -30,6 +31,13 @@ export class ConnectButtonsComponent {
       color: '#5865f2',
       currentColor: '#ccc',
       icon: 'tablerBrandDiscord',
+    },
+    {
+      name: 'GitHub',
+      link: 'https://github.com/felfhenor/hatoff',
+      color: '#000',
+      currentColor: '#ccc',
+      icon: 'tablerBrandGithub',
     },
     {
       name: 'Blog',

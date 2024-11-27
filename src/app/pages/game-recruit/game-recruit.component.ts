@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { timer } from 'rxjs';
+import { CountdownComponent } from '../../components/countdown/countdown.component';
 import { DamageTypeComponent } from '../../components/damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../../components/hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../../components/hero-art/hero-art.component';
@@ -12,64 +13,54 @@ import { PageCardComponent } from '../../components/page-card/page-card.componen
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canRecruit,
-  canReroll,
-  doReroll,
+  canRerollRecruit,
+  doRecruitReroll,
   gamestate,
   getEntry,
-  getHero,
   populationCap,
   recruitCost,
   recruitHero,
-  rerollCost,
+  recruitRerollCost,
   totalHeroes,
 } from '../../helpers';
 import { GameDamageType, GameHero } from '../../interfaces';
 
 @Component({
-  selector: 'app-game-recruit',
-  standalone: true,
-  imports: [
-    PageCardComponent,
-    DecimalPipe,
-    HeroLevelTaglineComponent,
-    DamageTypeComponent,
-    HeroArtComponent,
-    HeroArchetypeListComponent,
-    HeroStatsTableComponent,
-    HeroTaskLevelListComponent,
-    SweetAlert2Module,
-    HeroSpecialGlowDirective,
-  ],
-  templateUrl: './game-recruit.component.html',
-  styleUrl: './game-recruit.component.scss',
+    selector: 'app-game-recruit',
+    imports: [
+        PageCardComponent,
+        DecimalPipe,
+        HeroLevelTaglineComponent,
+        DamageTypeComponent,
+        HeroArtComponent,
+        HeroArchetypeListComponent,
+        HeroStatsTableComponent,
+        HeroTaskLevelListComponent,
+        SweetAlert2Module,
+        HeroSpecialGlowDirective,
+        CountdownComponent,
+    ],
+    templateUrl: './game-recruit.component.html',
+    styleUrl: './game-recruit.component.scss'
 })
 export class GameRecruitComponent {
   public currentHeroCount = computed(() => totalHeroes());
   public currentHeroCap = computed(() => populationCap());
   public canRecruit = computed(() => canRecruit());
-  public canReroll = computed(() => canReroll() && !this.isRerollOnTimeout());
-  public rerollCost = computed(() => rerollCost());
+  public canReroll = computed(
+    () => canRerollRecruit() && !this.isRerollOnTimeout(),
+  );
+  public rerollCost = computed(() => recruitRerollCost());
   public recruitCost = computed(() => recruitCost());
   public currentHeroPool = computed(
     () => gamestate().recruitment.recruitableHeroes,
   );
-  public secondsUntilReset = computed(() =>
-    Math.floor(
-      ((gamestate().cooldowns.nextRecruitResetTime - Date.now()) / 1000) % 60,
-    ),
-  );
-  public minutesUntilReset = computed(() =>
-    Math.floor(
-      (gamestate().cooldowns.nextRecruitResetTime - Date.now()) / 1000 / 60,
-    ),
+  public secondsUntilReset = computed(
+    () => gamestate().cooldowns.nextRecruitResetTime,
   );
 
   public selectedHero = signal<GameHero | undefined>(undefined);
   public isRerollOnTimeout = signal<boolean>(false);
-
-  public hasRecruitedHero(hero: GameHero) {
-    return getHero(hero.id);
-  }
 
   public recruitDesc(hero: GameHero): string {
     const damageType =
@@ -77,12 +68,12 @@ export class GameRecruitComponent {
     return `Are you sure you want to recruit ${hero.name}? They do ${hero.stats.force} ${damageType} damage.`;
   }
 
-  public recruitHero(hero: GameHero): void {
-    recruitHero(hero);
+  public recruitHero(hero: GameHero, index: number): void {
+    recruitHero(hero, index);
   }
 
   public doReroll(): void {
-    doReroll();
+    doRecruitReroll();
 
     this.isRerollOnTimeout.set(true);
     timer(2000).subscribe(() => {

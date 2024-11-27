@@ -4,9 +4,11 @@ import { TippyDirective } from '@ngneat/helipopper';
 import { sum } from 'lodash';
 import {
   getOption,
+  getTaskDamageType,
   getTaskProgress,
   heroesAllocatedToTask,
   isStrictDamageType,
+  isTaskThreatened,
   maxHeroesForTask,
   maxTaskLevel,
   taskLevel,
@@ -20,18 +22,17 @@ import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.compo
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
-  selector: 'app-task-display',
-  standalone: true,
-  imports: [
-    TaskHeroSmallComponent,
-    DamageTypeBreakdownComponent,
-    TaskSynergyComponent,
-    LevelDisplayComponent,
-    TippyDirective,
-    DecimalPipe,
-  ],
-  templateUrl: './task-display.component.html',
-  styleUrl: './task-display.component.scss',
+    selector: 'app-task-display',
+    imports: [
+        TaskHeroSmallComponent,
+        DamageTypeBreakdownComponent,
+        TaskSynergyComponent,
+        LevelDisplayComponent,
+        TippyDirective,
+        DecimalPipe,
+    ],
+    templateUrl: './task-display.component.html',
+    styleUrl: './task-display.component.scss'
 })
 export class TaskDisplayComponent {
   public task = input.required<GameTask>();
@@ -47,6 +48,9 @@ export class TaskDisplayComponent {
   public taskLevel = computed(() => taskLevel(this.task()));
   public maxTasklevel = computed(() => maxTaskLevel(this.task()));
   public isStrict = computed(() => isStrictDamageType(this.task()));
+
+  public taskDamageType = computed(() => getTaskDamageType(this.task()));
+  public threatened = computed(() => isTaskThreatened(this.task()));
 
   public perTick = computed(() => {
     const task = this.task();
@@ -66,5 +70,6 @@ export class TaskDisplayComponent {
 
     return 0;
   });
+
   public requiredPerTick = computed(() => this.task().damageRequiredPerCycle);
 }

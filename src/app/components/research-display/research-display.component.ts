@@ -1,19 +1,21 @@
 import { Component, computed, input } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroBeaker, heroStar } from '@ng-icons/heroicons/outline';
-import { tablerInfoHexagon } from '@ng-icons/tabler-icons';
+import {
+  tablerFlask2,
+  tablerInfoHexagon,
+  tablerSparkles,
+} from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { getEntriesByType, getResearchFor } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 
 @Component({
   selector: 'app-research-display',
-  standalone: true,
   imports: [NgIconComponent, TippyDirective],
   providers: [
     provideIcons({
-      heroStar,
-      heroBeaker,
+      tablerSparkles,
+      tablerFlask2,
       tablerInfoHexagon,
     }),
   ],

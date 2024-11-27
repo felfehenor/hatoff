@@ -1,0 +1,19 @@
+- id: 44bcae4a-c2be-445a-a96d-955899b1b41d
+  name: Defensive
+  icon: tablerShield
+  color: '#fff'
+  subTypes: []
+
+- id: ed1a7ce9-99c3-4e8c-a554-e5367c8b53da
+  name: Combat
+  icon: tablerSwords
+  color: '#fff'
+  subTypes:
+    - damageTypeId: Physical
+      percent: 100
+
+    - damageTypeId: Intellectual
+      percent: 100
+
+    - damageTypeId: Spiritual
+      percent: 100

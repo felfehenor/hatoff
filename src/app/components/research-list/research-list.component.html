@@ -1,12 +1,12 @@
 <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
 
-  @if(allResearch().length === 0) {
+  @if(displayedResearch().length === 0) {
   <div>
     There is no research available to you at this time.
   </div>
   }
 
-  @for(research of allResearch(); track $index) {
+  @for(research of displayedResearch(); track $index) {
   <div class="hero-container" [ngClass]="cardClasses()">
     <app-research-display [research]="research" (click)="selectResearch(research)"
       [active]="activeResearch() === research.id"></app-research-display>

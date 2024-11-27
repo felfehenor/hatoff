@@ -1,26 +1,28 @@
 import { sum } from 'lodash';
 import {
   GameHero,
-  GameHeroStat,
   GameResearch,
   GameResource,
   GameState,
   GameTask,
 } from '../interfaces';
 import {
-  getArchetypeLevelUpStatBonusForHero,
   getArchetypeResourceBonusForHero,
   getArchetypeTaskBonusForHero,
   getArchetypeXpBonusForHero,
 } from './archetype';
 import { getEntry } from './content';
 import { gamestate, setGameState } from './gamestate';
-import { maxXpForLevel, totalHeroForce, totalHeroSpeed } from './hero';
+import {
+  gainStat,
+  gainXp,
+  isStunned,
+  totalHeroForce,
+  totalHeroSpeed,
+} from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
-import { allUnlockedStatBoostResearchValue } from './research';
-import { getResourceValue, loseResource } from './resource';
-import { seededrng } from './rng';
+import { getResourceValue, loseResource, zeroResource } from './resource';
 import {
   heroesAllocatedToTask,
   maxLevelForTask,
@@ -179,7 +181,7 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
     if (!resourceRef) return;
 
     const resourceValue = getResourceValue(resourceRef.id);
-    loseResource(resourceRef, resourceValue);
+    zeroResource(resourceRef);
     statValueGained += resourceValue;
   }
 
@@ -190,7 +192,6 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
 
     gainTaskXp(state, hero, task, xpGained + archXpBonus + hero.stats.progress);
     gainXp(
-      state,
       hero,
       xpGained *
         (taskXpGained +
@@ -206,57 +207,6 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
 
     updateHero(state, hero);
   });
-}
-
-function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
-  hero.stats[stat] += Math.floor(val);
-}
-
-function levelup(state: GameState, hero: GameHero): void {
-  const rng = seededrng(hero.id + ' ' + hero.level);
-
-  function statBoost(val = 1, chance = 50) {
-    const shouldGain = rng() * 100 <= chance;
-    if (!shouldGain) return 0;
-
-    return val * getOption('heroLevelUpStatGainMultiplier');
-  }
-
-  const hpBoost =
-    statBoost(5) +
-    getArchetypeLevelUpStatBonusForHero(hero, 'health') +
-    allUnlockedStatBoostResearchValue('health');
-  const forceBoost =
-    statBoost(1, 35) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
-  const pietyBoost =
-    statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
-  const progressBoost =
-    statBoost(1, 50) + getArchetypeLevelUpStatBonusForHero(hero, 'progress');
-  const resistanceBoost =
-    statBoost(1, 15) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
-  const speedBoost =
-    statBoost(1, 10) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
-
-  gainStat(hero, 'health', hpBoost);
-  gainStat(hero, 'force', forceBoost);
-  gainStat(hero, 'piety', pietyBoost);
-  gainStat(hero, 'progress', progressBoost);
-  gainStat(hero, 'resistance', resistanceBoost);
-  gainStat(hero, 'speed', speedBoost);
-
-  const stats = [
-    hpBoost > 0 ? `+${hpBoost} HP` : '',
-    forceBoost > 0 ? `+${forceBoost} FRC` : '',
-    pietyBoost > 0 ? `+${pietyBoost} PIE` : '',
-    progressBoost > 0 ? `+${progressBoost} PRG` : '',
-    resistanceBoost > 0 ? `+${resistanceBoost} RES` : '',
-    speedBoost > 0 ? `+${speedBoost} SPD` : '',
-  ].filter(Boolean);
-
-  notify(
-    `Level up: ${hero.name} Lv.${hero.level}! ${stats.join(', ')}`,
-    'LevelUp',
-  );
 }
 
 function gainTaskXp(
@@ -283,20 +233,6 @@ function gainTaskXp(
   }
 }
 
-export function gainXp(state: GameState, hero: GameHero, xp = 1): void {
-  if (hero.level >= hero.maxLevel) return;
-
-  hero.xp += xp * getOption('heroXpMultiplier');
-
-  if (hero.xp >= hero.maxXp) {
-    hero.maxXp = maxXpForLevel(hero.level + 1, hero.fusionLevel);
-    hero.xp = 0;
-    hero.level += 1;
-
-    levelup(state, hero);
-  }
-}
-
 export function canDoTask(task: GameTask): boolean {
   return task.speedPerCycle > 0;
 }
@@ -305,6 +241,11 @@ export function doHeroGameloop(numTicks: number): void {
   const state = gamestate();
 
   Object.values(state.heroes).forEach((hero) => {
+    if (isStunned(hero)) {
+      hero.stunTicks -= numTicks;
+      return;
+    }
+
     if (!state.taskAssignments[hero.id]) return;
 
     const task = getEntry<GameTask>(state.taskAssignments[hero.id]);

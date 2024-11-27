@@ -1,7 +1,7 @@
 import { sortBy, sum } from 'lodash';
 import { GameTask, GameUpgrade } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
-import { gamestate, setGameState } from './gamestate';
+import { gamestate, setGameState, updateGamestate } from './gamestate';
 import { isResearchComplete } from './research';
 
 export function taskLevel(task: GameTask): number {
@@ -15,7 +15,22 @@ export function maxTaskLevel(task: GameTask): number {
 
 export function hasUpgrade(task: GameTask, upgrade: GameUpgrade): boolean {
   const state = gamestate();
-  return state.taskUpgrades[task.id]?.[upgrade.id];
+  return !!state.taskUpgrades[task.id]?.[upgrade.id];
+}
+
+export function loseUpgrade(task: GameTask, upgrade: GameUpgrade): void {
+  updateGamestate((state) => {
+    delete state.taskUpgrades[task.id][upgrade.id];
+    return state;
+  });
+}
+
+export function allUpgradesForTask(task: GameTask): GameUpgrade[] {
+  return (
+    (task.possibleUpgradeIds
+      ?.map((t) => getEntry<GameUpgrade>(t))
+      .filter(Boolean) as GameUpgrade[]) ?? []
+  );
 }
 
 export function purchasedUpgradesForTask(task: GameTask): GameUpgrade[] {
@@ -98,7 +113,7 @@ export function canBuyUpgrade(upgrade: GameUpgrade): boolean {
 export function buyUpgrade(upgrade: GameUpgrade, task: GameTask): void {
   const state = gamestate();
   state.taskUpgrades[task.id] ??= {};
-  state.taskUpgrades[task.id][upgrade.id] = true;
+  state.taskUpgrades[task.id][upgrade.id] = Date.now();
 
   upgrade.costs.forEach((resCost) => {
     state.resources[resCost.resourceId] -= resCost.value;

@@ -9,21 +9,19 @@ import {
 import { GameDamageType } from '../../interfaces';
 
 @Component({
-  selector: 'app-damage-type-breakdown',
-  standalone: true,
-  imports: [NgIconComponent, TippyDirective],
-  providers: [provideIcons(usedContentIcons())],
-  templateUrl: './damage-type-breakdown.component.html',
-  styleUrl: './damage-type-breakdown.component.scss',
+    selector: 'app-damage-type-breakdown',
+    imports: [NgIconComponent, TippyDirective],
+    providers: [provideIcons(usedContentIcons())],
+    templateUrl: './damage-type-breakdown.component.html',
+    styleUrl: './damage-type-breakdown.component.scss'
 })
 export class DamageTypeBreakdownComponent {
-  public id = model.required<string>();
+  public damageType = model.required<GameDamageType>();
   public showSubtypes = input<boolean>(true);
 
-  public typeInfo = computed(() => getEntry<GameDamageType>(this.id()));
   public subtypeInfo = computed(
     () =>
-      (this.typeInfo()
+      (this.damageType()
         ?.subTypes?.map((t) => {
           const entry = getEntry<GameDamageType>(t.damageTypeId);
           if (!entry) return { name: '???', percent: 0 };
@@ -38,6 +36,6 @@ export class DamageTypeBreakdownComponent {
         .filter(Boolean) as (GameDamageType & { percent: number })[]) ?? [],
   );
 
-  public icon = computed(() => this.typeInfo()?.icon);
-  public color = computed(() => this.typeInfo()?.color ?? '');
+  public icon = computed(() => this.damageType()?.icon);
+  public color = computed(() => this.damageType()?.color ?? '');
 }

@@ -3,16 +3,19 @@ import {
   GameArchetype,
   GameDamageType,
   GameHeroStat,
+  GameItem,
   GameResearch,
   GameTask,
 } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
-import { gamestate, setGameState } from './gamestate';
+import { gamestate, updateGamestate } from './gamestate';
+import { hasUnlockedLootItem } from './loot';
 
 export function setActiveResearch(research: GameResearch): void {
-  const state = gamestate();
-  state.activeResearch = research.id;
-  setGameState(state);
+  updateGamestate((state) => {
+    state.activeResearch = research.id;
+    return state;
+  });
 }
 
 export function getResearchFor(id: string): number {
@@ -32,21 +35,36 @@ export function allAvailableIncompleteResearch(): GameResearch[] {
     (entry) =>
       (isUndefined(state.researchProgress[entry.id]) ||
         state.researchProgress[entry.id] < entry.researchRequired) &&
-      (entry.requiresResearchIds ?? []).every((req) => isResearchComplete(req)),
+      (entry.requiresResearchIds ?? []).every((req) =>
+        isResearchComplete(req),
+      ) &&
+      (entry.requiresLootIds ?? []).every((loot) => hasUnlockedLootItem(loot)),
   );
 }
 
 export function allCompletedResearch(): GameResearch[] {
-  const state = gamestate();
-  return getEntriesByType<GameResearch>('research').filter(
-    (entry) => state.researchProgress[entry.id] >= entry.researchRequired,
+  return getEntriesByType<GameResearch>('research').filter((entry) =>
+    isResearchComplete(entry.id),
   );
+}
+
+export function totalCompletedResearch(): number {
+  return allCompletedResearch().filter(
+    (f) => f.researchRequired > 0 && isResearchComplete(f.id),
+  ).length;
+}
+
+export function hasResearchedEnoughFor(research: GameResearch): boolean {
+  const req = research.requireResearchCount ?? 0;
+  if (req <= 0) return true;
+
+  return totalCompletedResearch() >= req;
 }
 
 export function allUnlockedArchetypes(): GameArchetype[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksArchetypeIds,
-  ) as GameResearch[];
+    (r) => r.unlocksArchetypeIds && hasResearchedEnoughFor(r),
+  );
 
   return sortBy(
     validResearch
@@ -60,8 +78,8 @@ export function allUnlockedArchetypes(): GameArchetype[] {
 
 export function allUnlockedDamageTypes(): GameDamageType[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksDamageTypeIds,
-  ) as GameResearch[];
+    (r) => r.unlocksDamageTypeIds && hasResearchedEnoughFor(r),
+  );
 
   return sortBy(
     validResearch
@@ -75,8 +93,8 @@ export function allUnlockedDamageTypes(): GameDamageType[] {
 
 export function allUnlockedTasks(): GameTask[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksTaskIds,
-  ) as GameResearch[];
+    (r) => r.unlocksTaskIds && hasResearchedEnoughFor(r),
+  );
 
   return sortBy(
     validResearch
@@ -90,24 +108,24 @@ export function allUnlockedTasks(): GameTask[] {
 
 export function allUnlockedPopulationResearch(): GameResearch[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksPopulation,
-  ) as GameResearch[];
+    (r) => r.unlocksPopulation,
+  );
 
   return sortBy(validResearch, 'name') as GameResearch[];
 }
 
 export function allUnlockedClickXpResearch(): GameResearch[] {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlocksClickXpBonus,
-  ) as GameResearch[];
+    (r) => r.unlocksClickXpBonus,
+  );
 
   return sortBy(validResearch, 'name') as GameResearch[];
 }
 
 export function allUnlockedStatBoostResearchValue(stat: GameHeroStat): number {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlockRecruitStatBonus === stat,
-  ) as GameResearch[];
+    (r) => r.unlockRecruitStatBonus === stat,
+  );
 
   return sum(validResearch.map((r) => r.unlockRecruitStatBonusValue ?? 0));
 }
@@ -116,16 +134,28 @@ export function allUnlockedFusionStatBoostResearchValue(
   stat: GameHeroStat,
 ): number {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlockFusionStatBonus === stat,
-  ) as GameResearch[];
+    (r) => r.unlockFusionStatBonus === stat,
+  );
 
   return sum(validResearch.map((r) => r.unlockFusionStatBonusValue ?? 0));
 }
 
 export function allUnlockedFusionMaxTaskLevelResearchValue(): number {
   const validResearch = allCompletedResearch().filter(
-    (r) => (r as GameResearch).unlockFusionTaskLevelRetain,
-  ) as GameResearch[];
+    (r) => r.unlockFusionTaskLevelRetain,
+  );
 
   return sum(validResearch.map((r) => r.unlockFusionTaskLevelRetain ?? 0));
+}
+
+export function allUnlockedShopSlotBoosts(): number {
+  const validResearch = allCompletedResearch().filter((r) => r.unlockShopSlots);
+
+  return sum(validResearch.map((r) => r.unlockShopSlots ?? 0));
+}
+
+export function allUnlockedShopItems(): GameItem[] {
+  return getEntriesByType<GameItem>('item').filter((r) =>
+    r.requiresResearchIds?.every((r) => isResearchComplete(r)),
+  );
 }

@@ -4,10 +4,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canGiveClickXp,
+  canUseItemsOnHero,
   clickXpBoost,
   gamestate,
   getHero,
   giveClickXp,
+  hasAnyitemsToUse,
   removeHero,
   setHeroDamageType,
 } from '../../helpers';
@@ -19,11 +21,11 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
+import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
 
 @Component({
   selector: 'app-hero-display-tall',
-  standalone: true,
   imports: [
     DamageTypeComponent,
     HeroArtComponent,
@@ -36,6 +38,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     ButtonCloseComponent,
     TippyDirective,
     HeroSpecialGlowDirective,
+    HeroStatusComponent,
   ],
   templateUrl: './hero-display-tall.component.html',
   styleUrl: './hero-display-tall.component.scss',
@@ -43,6 +46,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();
   public close = output<void>();
+  public showItemPanel = output<void>();
 
   public liveHeroData = computed(() => getHero(this.hero().id));
 
@@ -55,6 +59,10 @@ export class HeroDisplayTallComponent {
   );
 
   public xpOnClick = computed(() => clickXpBoost());
+
+  public hasItems = computed(() => hasAnyitemsToUse());
+
+  public canUseItemsOnThisHero = computed(() => canUseItemsOnHero(this.hero()));
 
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();
@@ -69,9 +77,7 @@ export class HeroDisplayTallComponent {
   }
 
   public canGiveClickXp(): boolean {
-    return (
-      Date.now() >= gamestate().cooldowns.nextClickResetTime && canGiveClickXp()
-    );
+    return gamestate().cooldowns.nextClickResetTime <= 0 && canGiveClickXp();
   }
 
   public giveXp() {

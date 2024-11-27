@@ -4,7 +4,7 @@
     {{ damage() | number }}
   </span>
 
-  <app-damage-type-breakdown [id]="id()"></app-damage-type-breakdown>
+  <app-damage-type-breakdown [damageType]="thisDamageType()"></app-damage-type-breakdown>
 
   @if(isEditing()) {
   <select class="select select-bordered select-xs mx-1" [(ngModel)]="id" (ngModelChange)="isEditing.set(false)">
@@ -28,7 +28,7 @@
 <div class="flex align-center">
   <span>{{ damage() | number }}</span>
 
-  <app-damage-type-breakdown [id]="id()"></app-damage-type-breakdown>
+  <app-damage-type-breakdown [damageType]="thisDamageType()"></app-damage-type-breakdown>
 
   <app-content-name [id]="id()"></app-content-name>
 

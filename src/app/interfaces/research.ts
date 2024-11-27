@@ -1,8 +1,14 @@
+import { GameArchetype } from './archetype';
+import { GameDamageType } from './damage';
 import { GameHeroStat } from './hero';
 import { Content } from './identifiable';
+import { GameTask } from './task';
+
+export type ResearchableContent = GameTask | GameDamageType | GameArchetype;
 
 export interface GameResearch extends Content {
   description: string;
+  type: string;
 
   /**
    * The total number of research required to complete this research task.
@@ -10,9 +16,19 @@ export interface GameResearch extends Content {
   researchRequired: number;
 
   /**
+   * The number of completed research tasks required for this to appear.
+   */
+  requireResearchCount?: number;
+
+  /**
    * Prerequisite research tasks that need to be completed before this one can be researched.
    */
   requiresResearchIds?: string[];
+
+  /**
+   * Prerequisite loot that needs to be found before this one can be researched.
+   */
+  requiresLootIds?: string[];
 
   /**
    * Tasks that are unlocked by this research.
@@ -71,4 +87,9 @@ export interface GameResearch extends Content {
    * The max level of a retained task for fused heroes.
    */
   unlockFusionTaskLevelRetain?: number;
+
+  /**
+   * The number of new shop slots to unlock.
+   */
+  unlockShopSlots?: number;
 }

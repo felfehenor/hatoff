@@ -1,12 +1,11 @@
 import { Component, output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroXMark } from '@ng-icons/heroicons/outline';
+import { tablerX } from '@ng-icons/tabler-icons';
 
 @Component({
   selector: 'app-button-close',
-  standalone: true,
   imports: [NgIconComponent],
-  providers: [provideIcons({ heroXMark })],
+  providers: [provideIcons({ tablerX })],
   templateUrl: './button-close.component.html',
   styleUrl: './button-close.component.scss',
 })

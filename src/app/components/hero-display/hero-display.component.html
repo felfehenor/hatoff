@@ -3,20 +3,24 @@
 <div class="card card-side foreground shadow-xl" [class.can-click]="clickable()" [class.active]="active()"
   [appHeroSpecialGlow]="heroData">
   <figure class="max-w-[96px] pl-2">
+    <app-hero-status [hero]="heroData" class="absolute top-2 left-2"></app-hero-status>
+
     <app-hero-art [id]="heroData.id" [size]="96"></app-hero-art>
   </figure>
 
   <div class="card-body p-2">
+    <app-hero-fusion-indicator class="absolute top-2 right-2" [hero]="heroData"></app-hero-fusion-indicator>
+
     <div class="flex-1 flex flex-col">
       <div class="font-semibold">{{ heroData.name }}</div>
       <div class="italic">
         <app-level-display [currentLevel]="heroData.level" [maxLevel]="heroData.maxLevel"></app-level-display>
-        [{{ heroData.xp / heroData.maxXp | percent }}]
-      </div>
 
-      <div class="text-sm">
-        <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+        @if(heroData.level < heroData.maxLevel) { [{{ heroData.xp / heroData.maxXp | percent }}] } </div>
+
+          <div class="text-sm">
+            <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+          </div>
       </div>
     </div>
   </div>
-</div>

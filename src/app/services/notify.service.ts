@@ -12,7 +12,7 @@ export class NotifyService {
     notification$.subscribe((messageData) => {
       const { message, type } = messageData;
 
-      this.toast[type](message);
+      this.toast[type]?.(message);
     });
   }
 }

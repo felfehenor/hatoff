@@ -3,12 +3,13 @@ import { gamestate } from '../../helpers';
 
 const townInfo: Record<string, string> = {
   Rosebud: 'Start with 5,000 of all resources.',
-  'Fel Fhenor': 'All task types are strict assignments.',
+  Simpletown: 'Easy mode: No town defense.',
+  'Fel Fhenor':
+    'Hard mode: All task types are strict assignments. Defend Town requires twice as much Fortifications. Hero death is permanent.',
 };
 
 @Component({
   selector: 'app-town-info-card',
-  standalone: true,
   imports: [],
   templateUrl: './town-info-card.component.html',
   styleUrl: './town-info-card.component.scss',

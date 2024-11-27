@@ -1,6 +1,8 @@
 import { GameHeroStat } from './hero';
 import { Content } from './identifiable';
 
+export type GameTaskTypeAutoChange = 'defense';
+
 export interface GameTask extends Content {
   description: string;
 
@@ -8,6 +10,11 @@ export interface GameTask extends Content {
    * The primary damage type needed for this task.
    */
   damageTypeId: string;
+
+  /**
+   * Whether or not this task should dynamically change its damage type. And based on what, if so.
+   */
+  damageTypeAutoChange?: GameTaskTypeAutoChange;
 
   /**
    * Whether or not the type must match (rather than support subTypes).

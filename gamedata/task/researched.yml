@@ -1,5 +1,5 @@
 - id: 12ead923-71c1-465b-afbb-d4cc84b6a242
-  name: Tax Collection
+  name: Collect Taxes
   description: Collect taxes from your town, gaining Gold.
   damageTypeId: Financial
   maxHeroesAllocable: 2
@@ -26,7 +26,7 @@
 
 - id: d33d8494-5330-41de-9168-e059c34e5fbc
   name: Sovereign
-  description: Boost all heroes with this hero's damage type by this hero's Force
+  description: Boost all heroes with this hero's damage type by this hero's Force.
   damageTypeId: Any
   maxHeroesAllocable: 1
 

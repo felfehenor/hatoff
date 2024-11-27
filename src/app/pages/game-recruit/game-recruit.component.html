@@ -2,18 +2,7 @@
   <span header>
     Recruit New Heroes ({{ currentHeroCount() }}/{{ currentHeroCap() }})
 
-    <span class="ml-1">
-      <span class="badge badge-warning">
-        <span>Reset in</span>
-
-        <span class="ml-1 countdown">
-          <span [style.--value]="minutesUntilReset()"></span>
-          m
-          <span class="ml-1" [style.--value]="secondsUntilReset()"></span>
-          s
-        </span>
-      </span>
-    </span>
+    <app-countdown class="ml-1" [secondsLeft]="secondsUntilReset()" label="Reset in"></app-countdown>
   </span>
 
   <div pageactions class="flex items-center">
@@ -29,8 +18,8 @@
   <div class="flex flex-wrap gap-2">
     @for(hero of currentHeroPool(); track $index) {
     <div class="flex-1 min-w-[30%] m-1">
-      <div class="card foreground shadow-xl" [class.recruited-already]="hasRecruitedHero(hero)"
-        [appHeroSpecialGlow]="hero">
+      @if(hero) {
+      <div class="card foreground shadow-xl min-h-[540px]" [appHeroSpecialGlow]="hero">
         <div class="card-body">
           <div class="absolute top-5 right-5">
             <app-hero-art [id]="hero.id" [size]="240"></app-hero-art>
@@ -55,17 +44,28 @@
           <app-hero-task-level-list [hero]="hero"></app-hero-task-level-list>
 
           <div class="card-actions">
-            <button class="btn btn-primary" [disabled]="!canRecruit() || hasRecruitedHero(hero)"
+            <button class="btn btn-primary" [disabled]="!canRecruit()"
               (click)="selectedHero.set(hero); recruitSwal.fire();">
               Recruit for {{ recruitCost() | number }} Food
             </button>
 
             <swal #recruitSwal [title]="'Recruit ' + hero.name" [text]="recruitDesc(hero)" icon="question"
-              [showCancelButton]="true" [focusCancel]="true" (confirm)="recruitHero(hero)">
+              [showCancelButton]="true" [focusCancel]="true" (confirm)="recruitHero(hero, $index)">
             </swal>
           </div>
         </div>
       </div>
+      } @else {
+      <div class="card foreground shadow-xl recruited-already h-full min-h-[540px]">
+        <div class="card-body">
+          <div class="card-title">
+            Recruited Hero
+          </div>
+
+          You recruited this hero already.
+        </div>
+      </div>
+      }
     </div>
     }
   </div>

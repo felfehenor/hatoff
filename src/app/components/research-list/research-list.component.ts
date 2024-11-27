@@ -1,22 +1,17 @@
 import { NgClass } from '@angular/common';
-import { Component, computed } from '@angular/core';
-import {
-  allAvailableIncompleteResearch,
-  gamestate,
-  setActiveResearch,
-} from '../../helpers';
+import { Component, computed, input } from '@angular/core';
+import { gamestate, setActiveResearch } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 import { ResearchDisplayComponent } from '../research-display/research-display.component';
 
 @Component({
-  selector: 'app-research-list',
-  standalone: true,
-  imports: [ResearchDisplayComponent, NgClass],
-  templateUrl: './research-list.component.html',
-  styleUrl: './research-list.component.scss',
+    selector: 'app-research-list',
+    imports: [ResearchDisplayComponent, NgClass],
+    templateUrl: './research-list.component.html',
+    styleUrl: './research-list.component.scss'
 })
 export class ResearchListComponent {
-  public allResearch = computed(() => allAvailableIncompleteResearch());
+  public displayedResearch = input.required<GameResearch[]>();
   public activeResearch = computed(() => gamestate().activeResearch);
 
   public cardClasses = computed(() => {

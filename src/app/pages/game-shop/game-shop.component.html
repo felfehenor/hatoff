@@ -1,0 +1,20 @@
+<app-page-card>
+  <span header>
+    Shop
+
+    <app-countdown class="ml-1" [secondsLeft]="secondsUntilReset()" label="Reset in"></app-countdown>
+  </span>
+
+  <div pageactions class="flex items-center">
+    <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()">
+      @if(isRerollOnTimeout()) {
+      <span class="loading loading-spinner loading-xs"></span>
+      } @else {
+      Reroll for {{ rerollCost() | number }} Gold
+      }
+    </button>
+  </div>
+
+  <app-shop-item-list></app-shop-item-list>
+
+</app-page-card>

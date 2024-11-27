@@ -1,0 +1,16 @@
+<div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+
+  @if(displayedDungeons().length === 0) {
+  <div>
+    There are no dungeons available to you at this time.
+  </div>
+  }
+
+  @for(dungeon of displayedDungeons(); track $index) {
+  <div class="hero-container" [ngClass]="cardClasses()">
+    <app-dungeon-display [dungeon]="dungeon" [class.cursor-pointer]="!isAnyDungeonActive()"
+      [class.cursor-not-allowed]="isAnyDungeonActive()" (click)="selectDungeon(dungeon)"
+      [active]="activeDungeon() === dungeon.id"></app-dungeon-display>
+  </div>
+  }
+</div>

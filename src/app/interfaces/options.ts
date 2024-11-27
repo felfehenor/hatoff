@@ -13,6 +13,9 @@ export interface GameOptions {
   rewardMultiplier: number;
 
   notificationLevelUp: boolean;
+  notificationItem: boolean;
+  notificationDefense: boolean;
+  notificationDungeon: boolean;
   notificationResourceGain: boolean;
   notificationRecruitment: boolean;
   notificationError: boolean;

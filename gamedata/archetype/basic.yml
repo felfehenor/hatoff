@@ -35,5 +35,5 @@
 - id: 49e83d8b-2e62-4087-8568-6c149e925a16
   name: Defender
   description: This will boost your defensive power for this hero.
-  boostGainTaskId: Town Defense
+  boostGainTaskId: Defend Town
   boostGainTaskAmount: 1
