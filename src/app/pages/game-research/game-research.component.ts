@@ -1,5 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
-import { countBy } from 'lodash';
+import { countBy, sortBy } from 'lodash';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { ResearchListComponent } from '../../components/research-list/research-list.component';
 import { allAvailableIncompleteResearch } from '../../helpers';
@@ -34,7 +34,7 @@ export class GameResearchComponent {
 
   public researchList = computed(
     () =>
-      this.allResearchCategories().find((f) => f.name === this.activeType())
-        ?.value ?? [],
+      sortBy(this.allResearchCategories().find((f) => f.name === this.activeType())
+        ?.value ?? [], r => r.researchRequired),
   );
 }
