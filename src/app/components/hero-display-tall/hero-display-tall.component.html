@@ -44,11 +44,16 @@
         @let canClickForXP = canGiveClickXp();
         <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
           tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
-          @if(canClickForXP) {
-          Give +{{ xpOnClick() }} XP
-          } @else {
-          <span class="loading loading-spinner loading-xs"></span>
+
+          @if(!canClickForXP) {
+          <div class="absolute w-full">
+            <span class="loading loading-spinner loading-xs"></span>
+          </div>
           }
+
+          <div [class.invisible]="!canClickForXP">
+            Give +{{ xpOnClick() }} XP
+          </div>
         </button>
 
         @if(hasItems()) {
