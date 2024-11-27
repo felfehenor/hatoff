@@ -18,7 +18,7 @@ export class GameResearchComponent {
 
     const base = [{ name: 'All', num: allResearch.length, value: allResearch }];
 
-    const counts = countBy(allResearch, (r) => r.type);
+    const counts = countBy(allResearch.filter(r => r.type), (r) => r.type);
     Object.keys(counts)
       .sort()
       .forEach((label) => {

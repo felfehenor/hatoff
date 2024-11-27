@@ -12,6 +12,7 @@
 
 - id: bd1cc99e-af77-4c31-a83a-13bc1e10840b
   name: Comprehensive Knowledge
+  type: Archetype
   description: Unlock the archetype "Comprehensive" for newly-recruited heroes. This will increase Progress (PRG) by +2 when leveling up.
   researchRequired: 2500
 
