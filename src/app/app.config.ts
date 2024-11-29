@@ -1,6 +1,8 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   ENVIRONMENT_INITIALIZER,
+  ErrorHandler,
   importProvidersFrom,
   inject,
   provideZoneChangeDetection,
@@ -27,6 +29,7 @@ import { routes } from './app.routes';
 import { APIService } from './services/api.service';
 import { ContentService } from './services/content.service';
 import { GamestateService } from './services/gamestate.service';
+import { LoggerService, RollbarErrorHandler } from './services/logger.service';
 import { MetaService } from './services/meta.service';
 import { NotifyService } from './services/notify.service';
 
@@ -58,9 +61,19 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     {
-      provide: ENVIRONMENT_INITIALIZER,
+      provide: ErrorHandler,
+      useClass: RollbarErrorHandler,
+    },
+    {
+      provide: APP_INITIALIZER,
       multi: true,
-      useValue: () => inject(MetaService).init(),
+      useValue: async () => {
+        const meta = inject(MetaService);
+        const logger = inject(LoggerService);
+
+        await meta.init();
+        logger.init();
+      },
     },
     {
       provide: ENVIRONMENT_INITIALIZER,
