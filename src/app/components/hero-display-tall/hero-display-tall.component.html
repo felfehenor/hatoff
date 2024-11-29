@@ -12,7 +12,21 @@
     </div>
 
     <div class="card-title">
-      {{ activeHero.name }}
+      <div class="flex items-center gap-2">
+        {{ activeHero.name }}
+
+        <span [appHideIfNotResearched]="'Name Rater'">
+          @if(!activeHero.isSpecial) {
+          <button class="btn btn-xs btn-ghost btn-untextured" tp="Rename this hero" [swal]="renameSwal">
+            <ng-icon name="tablerTag"></ng-icon>
+          </button>
+
+          <swal #renameSwal title="Rename Hero" text="Enter a new name for this hero." input="text"
+            [inputValue]="activeHero.name" [focusCancel]="true" (confirm)="renameHero($event)">
+          </swal>
+          }
+        </span>
+      </div>
       <app-hero-status [hero]="activeHero"></app-hero-status>
     </div>
 

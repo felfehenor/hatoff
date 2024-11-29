@@ -11,3 +11,12 @@
   type: Fusion
   description: Unlock the ability to fuse heroes together.
   researchRequired: 250
+
+- id: 1ead30e5-ee95-4529-aca6-47f7e668ef90
+  name: Name Rater
+  type: Population
+  description: Unlock the ability to rename heroes.
+  researchRequired: 500
+
+  requiresResearchIds:
+    - Garrison II

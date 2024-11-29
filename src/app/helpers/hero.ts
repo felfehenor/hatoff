@@ -118,6 +118,14 @@ export function hasSpecialHero(id: string): boolean {
   return !!_specialHeroes().find((s) => s.id === id);
 }
 
+export function renameHero(id: string, newName: string): void {
+  updateGamestate((state) => {
+    const heroRef = state.heroes[id];
+    heroRef.name = newName;
+    return state;
+  });
+}
+
 export function isMaxLevel(hero: GameHero): boolean {
   return hero.level >= hero.maxLevel;
 }

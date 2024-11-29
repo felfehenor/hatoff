@@ -1,7 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { tablerTag } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { startCase } from 'lodash';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
+import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
   canGiveClickXp,
   canUseItemsOnHero,
@@ -10,7 +14,9 @@ import {
   getHero,
   giveClickXp,
   hasAnyitemsToUse,
+  notifyError,
   removeHero,
+  renameHero,
   setHeroDamageType,
 } from '../../helpers';
 import { GameHero } from '../../interfaces';
@@ -39,6 +45,13 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     TippyDirective,
     HeroSpecialGlowDirective,
     HeroStatusComponent,
+    HideResearchDirective,
+    NgIconComponent,
+  ],
+  providers: [
+    provideIcons({
+      tablerTag,
+    }),
   ],
   templateUrl: './hero-display-tall.component.html',
   styleUrl: './hero-display-tall.component.scss',
@@ -74,6 +87,16 @@ export class HeroDisplayTallComponent {
   public dismissHero() {
     removeHero(this.hero());
     this.close.emit();
+  }
+
+  public renameHero(newName: string) {
+    const name = startCase(newName.replace(/[^A-Za-z ]+/g, ''));
+    if (name.length === 0) {
+      notifyError('That name is not valid!');
+      return;
+    }
+
+    renameHero(this.hero().id, name);
   }
 
   public canGiveClickXp(): boolean {
