@@ -92,7 +92,7 @@ export class HeroDisplayTallComponent {
   public renameHero(newName: string) {
     const name = startCase(newName.replace(/[^A-Za-z ]+/g, ''));
     if (name.length === 0) {
-      notifyError('That name is not valid!');
+      notifyError('That name is not valid!', true);
       return;
     }
 
