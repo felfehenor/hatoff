@@ -382,6 +382,10 @@ export function reduceStun(hero: GameHero, ticks: number): void {
   });
 }
 
-export function canUseItemsOnHero(hero: GameHero): boolean {
+export function isHeroAbleToDoMostThings(hero: GameHero): boolean {
   return isDungeonInProgress() ? !isHeroExploring(hero) : true;
+}
+
+export function canUseItemsOnHero(hero: GameHero): boolean {
+  return isHeroAbleToDoMostThings(hero);
 }

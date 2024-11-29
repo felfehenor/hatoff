@@ -7,6 +7,7 @@ import {
   allHeroes,
   createHero,
   createSpecialHero,
+  isHeroAbleToDoMostThings,
   isMaxLevel,
   maxXpForLevel,
   removeHero,
@@ -20,7 +21,9 @@ import {
 import { randomChoice } from './rng';
 
 export function validFusionHeroes(): GameHero[] {
-  return allHeroes().filter((f) => isMaxLevel(f));
+  return allHeroes().filter(
+    (f) => isMaxLevel(f) && isHeroAbleToDoMostThings(f),
+  );
 }
 
 export function isValidFusionHeroForHero(
@@ -38,7 +41,9 @@ export function isValidFusionHeroForHero(
 }
 
 export function validFusionHeroesForHero(hero: GameHero): GameHero[] {
-  return validFusionHeroes().filter((h) => isValidFusionHeroForHero(hero, h));
+  return validFusionHeroes().filter(
+    (h) => isValidFusionHeroForHero(hero, h) && isHeroAbleToDoMostThings(h),
+  );
 }
 
 export function canFuseHeroes(): boolean {
@@ -47,7 +52,12 @@ export function canFuseHeroes(): boolean {
 
   return heroes.some(
     (h) =>
-      isMaxLevel(h) && heroes.some((subH) => isValidFusionHeroForHero(h, subH)),
+      isMaxLevel(h) &&
+      isHeroAbleToDoMostThings(h) &&
+      heroes.some(
+        (subH) =>
+          isValidFusionHeroForHero(h, subH) && isHeroAbleToDoMostThings(subH),
+      ),
   );
 }
 
