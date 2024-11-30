@@ -23,7 +23,6 @@ export class AnalyticsService {
     );
 
     analyticsEvent$.subscribe(({ event, value }) => {
-      console.log(event, value);
       this.sendDesignEvent(event, value ?? 1);
     });
   }
