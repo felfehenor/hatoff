@@ -3,6 +3,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { tablerAlertOctagon } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { sortBy } from 'lodash';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   allHeroes,
@@ -64,6 +65,7 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     TippyDirective,
     BlurCardComponent,
     HeroStatusComponent,
+    AnalyticsClickDirective,
   ],
   providers: [
     provideIcons({
@@ -79,10 +81,13 @@ export class TaskHeroSelectorComponent {
 
   public heroes = computed(() => heroesAllocatedToTask(this.task()));
   public allHeroes = computed(() =>
-    sortBy(allHeroes().filter(f => this.canAssignHeroToTask(f)), [
-      (hero) => !this.heroes().includes(hero),
-      (hero) => !!gamestate().taskAssignments[hero.id]
-    ]),
+    sortBy(
+      allHeroes().filter((f) => this.canAssignHeroToTask(f)),
+      [
+        (hero) => !this.heroes().includes(hero),
+        (hero) => !!gamestate().taskAssignments[hero.id],
+      ],
+    ),
   );
   public maxHeroes = computed(() => maxHeroesForTask(this.task()));
   public taskLevel = computed(() => taskLevel(this.task()));
@@ -152,5 +157,9 @@ export class TaskHeroSelectorComponent {
 
   public buyUpgrade(upgrade: GameUpgrade): void {
     buyUpgrade(upgrade, this.task());
+  }
+
+  public heroDamageType(hero: GameHero): string {
+    return getEntry<GameDamageType>(hero.damageTypeId)?.name ?? 'Unknown';
   }
 }

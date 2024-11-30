@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { allUnlockedTasks, hasEnoughFortifications } from '../../helpers';
 import { GameTask } from '../../interfaces';
 import { TaskDisplayComponent } from '../task-display/task-display.component';
@@ -7,7 +8,12 @@ import { TaskHeroSelectorComponent } from '../task-hero-selector/task-hero-selec
 
 @Component({
   selector: 'app-task-list',
-  imports: [TaskDisplayComponent, NgClass, TaskHeroSelectorComponent],
+  imports: [
+    TaskDisplayComponent,
+    NgClass,
+    TaskHeroSelectorComponent,
+    AnalyticsClickDirective,
+  ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })

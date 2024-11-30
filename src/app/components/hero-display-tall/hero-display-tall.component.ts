@@ -4,6 +4,7 @@ import { tablerTag } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { startCase } from 'lodash';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
@@ -11,6 +12,7 @@ import {
   canUseItemsOnHero,
   clickXpBoost,
   gamestate,
+  getEntry,
   getHero,
   giveClickXp,
   hasAnyitemsToUse,
@@ -19,7 +21,7 @@ import {
   renameHero,
   setHeroDamageType,
 } from '../../helpers';
-import { GameHero } from '../../interfaces';
+import { GameDamageType, GameHero } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
@@ -47,6 +49,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     HeroStatusComponent,
     HideResearchDirective,
     NgIconComponent,
+    AnalyticsClickDirective,
   ],
   providers: [
     provideIcons({
@@ -105,5 +108,9 @@ export class HeroDisplayTallComponent {
 
   public giveXp() {
     giveClickXp(this.hero());
+  }
+
+  public heroDamageType(hero: GameHero): string {
+    return getEntry<GameDamageType>(hero.damageTypeId)?.name ?? 'Unknown';
   }
 }

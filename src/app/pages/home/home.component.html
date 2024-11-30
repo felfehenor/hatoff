@@ -19,11 +19,12 @@
 
       <div class="card-actions pb-5">
         @if(hasStartedGame()) {
-        <button class="btn btn-primary" [routerLink]="['/game']">Play</button>
+        <button class="btn btn-primary" [routerLink]="['/game']" appAnalyticsClick="Meta:Play:Return">Play</button>
         }
 
         @else {
-        <button class="btn btn-primary" [routerLink]="['/game/setup']">Get Started</button>
+        <button class="btn btn-primary" [routerLink]="['/game/setup']" appAnalyticsClick="Meta:Play:New">Get
+          Started</button>
         }
       </div>
 
@@ -42,7 +43,7 @@
   </span>
 
   @if(meta.versionMismatch()) {
-  <button class="btn btn-info btn-xs ms-3" (click)="meta.update()">
+  <button class="btn btn-info btn-xs ms-3" (click)="meta.update()" appAnalyticsClick="Meta:Update:Click">
     Update Available ({{ meta.liveVersionString() }})
   </button>
   }

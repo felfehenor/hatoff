@@ -45,6 +45,7 @@
     "@sweetalert2/theme-dark": "^5.0.18",
     "colord": "^2.9.3",
     "fantastical": "^2.0.1",
+    "gameanalytics": "^4.4.7",
     "lodash": "^4.17.21",
     "marked": "^15.0.0",
     "ngx-webstorage": "^18.0.0",

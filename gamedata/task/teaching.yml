@@ -1,5 +1,5 @@
 - id: 6cbf0b71-f445-4bd4-b1ba-e29c3e69f4d4
-  name: 'School: Professor'
+  name: 'School - Professor'
   description: Acquire Knowledge to dispense to students. Has bonus XP for task completion.
   damageTypeId: Theoretical
   requireExactType: true
@@ -11,7 +11,7 @@
   xpRequiredPerLevel: 500
   resourceIdPerCycle: Knowledge
   resourceRewardPerCycle: 1
-  siblingTaskIdRequiringHeroesAllocated: 'School: Student'
+  siblingTaskIdRequiringHeroesAllocated: 'School - Student'
   maxLevel: 1
 
   possibleUpgradeIds:
@@ -24,7 +24,7 @@
     - Knowledge Transfer III
 
 - id: 179ee4f0-c49e-4cc9-9e07-363f7f41ba97
-  name: 'School: Student'
+  name: 'School - Student'
   description: Utilizes Knowledge to gain XP. Has bonus XP for task completion.
   damageTypeId: Any
   maxHeroesAllocable: 1

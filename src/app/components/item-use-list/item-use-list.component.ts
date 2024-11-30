@@ -1,6 +1,7 @@
 import { Component, computed, input, output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { sortBy } from 'lodash';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   gamestate,
   getEntriesByType,
@@ -12,7 +13,7 @@ import { ButtonCloseComponent } from '../button-close/button-close.component';
 
 @Component({
   selector: 'app-item-use-list',
-  imports: [ButtonCloseComponent, NgIconComponent],
+  imports: [ButtonCloseComponent, NgIconComponent, AnalyticsClickDirective],
   providers: [provideIcons(usedContentIcons())],
   templateUrl: './item-use-list.component.html',
   styleUrl: './item-use-list.component.scss',

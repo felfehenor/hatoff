@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { gamestate } from '../../helpers';
 
 @Component({
-    selector: 'app-savefile-export',
-    imports: [],
-    templateUrl: './savefile-export.component.html',
-    styleUrl: './savefile-export.component.scss'
+  selector: 'app-savefile-export',
+  imports: [AnalyticsClickDirective],
+  templateUrl: './savefile-export.component.html',
+  styleUrl: './savefile-export.component.scss',
 })
 export class SavefileExportComponent {
   exportSavefile() {

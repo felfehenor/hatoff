@@ -11,7 +11,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('debugConsoleLogStateUpdates') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Debug:LogStateUpdates"
               (click)="setValueForOption('debugConsoleLogStateUpdates', !currentValueForOption('debugConsoleLogStateUpdates'))" />
             <span class="label-text">Log state updates</span>
           </label>
@@ -28,7 +28,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('debugShowAllResources') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Debug:ShowAllResources"
               (click)="setValueForOption('debugShowAllResources', !currentValueForOption('debugShowAllResources'))" />
             <span class="label-text">Show All Resources In Town</span>
           </label>

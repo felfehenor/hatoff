@@ -1,5 +1,5 @@
 - id: 5f453edf-7aca-420b-be6f-b311ce5e57c9
-  name: 'Church: Priest'
+  name: 'Church - Priest'
   description: Acquire Holiness to dispense to confessors.
   damageTypeId: Spiritual
   requireExactType: true
@@ -11,7 +11,7 @@
   xpRequiredPerLevel: 5000
   resourceIdPerCycle: Holiness
   resourceRewardPerCycle: 1
-  siblingTaskIdRequiringHeroesAllocated: 'Church: Confessor'
+  siblingTaskIdRequiringHeroesAllocated: 'Church - Confessor'
   maxLevel: 1
 
   possibleUpgradeIds:
@@ -23,7 +23,7 @@
     - Higher Level Cap II
 
 - id: d59253ba-4835-467e-a634-e81e9d6afc87
-  name: 'Church: Confessor'
+  name: 'Church - Confessor'
   description: Utilizes Holiness to gain Piety.
   damageTypeId: Any
   maxHeroesAllocable: 1

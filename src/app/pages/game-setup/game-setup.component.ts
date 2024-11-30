@@ -3,12 +3,18 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SavefileImportComponent } from '../../components/savefile-import/savefile-import.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { finishSetup, isSetup } from '../../helpers';
 import { GameDifficulty } from '../../interfaces';
 
 @Component({
   selector: 'app-game-setup',
-  imports: [FormsModule, SavefileImportComponent, TitleCasePipe],
+  imports: [
+    FormsModule,
+    SavefileImportComponent,
+    TitleCasePipe,
+    AnalyticsClickDirective,
+  ],
   templateUrl: './game-setup.component.html',
   styleUrl: './game-setup.component.scss',
 })

@@ -1,3 +1,4 @@
+export * from './analytics';
 export * from './archetype';
 export * from './combat';
 export * from './content';

@@ -1,14 +1,15 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { gamestate, setActiveResearch } from '../../helpers';
 import { GameResearch } from '../../interfaces';
 import { ResearchDisplayComponent } from '../research-display/research-display.component';
 
 @Component({
-    selector: 'app-research-list',
-    imports: [ResearchDisplayComponent, NgClass],
-    templateUrl: './research-list.component.html',
-    styleUrl: './research-list.component.scss'
+  selector: 'app-research-list',
+  imports: [ResearchDisplayComponent, NgClass, AnalyticsClickDirective],
+  templateUrl: './research-list.component.html',
+  styleUrl: './research-list.component.scss',
 })
 export class ResearchListComponent {
   public displayedResearch = input.required<GameResearch[]>();

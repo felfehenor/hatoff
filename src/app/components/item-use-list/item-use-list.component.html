@@ -31,7 +31,8 @@
           </div>
 
           <div class="w-[96px] flex content-center items-center">
-            <button class="btn btn-primary btn-sm" (click)="useItem(entry.item)">Use Item</button>
+            <button class="btn btn-primary btn-sm" (click)="useItem(entry.item)"
+              [appAnalyticsClick]="'Item:Use:' + entry.item.name">Use Item</button>
           </div>
         </div>
       </div>

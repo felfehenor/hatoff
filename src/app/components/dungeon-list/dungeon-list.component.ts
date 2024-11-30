@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   gamestate,
   isDungeonInProgress,
@@ -10,7 +11,7 @@ import { DungeonDisplayComponent } from '../dungeon-display/dungeon-display.comp
 
 @Component({
   selector: 'app-dungeon-list',
-  imports: [NgClass, DungeonDisplayComponent],
+  imports: [NgClass, DungeonDisplayComponent, AnalyticsClickDirective],
   templateUrl: './dungeon-list.component.html',
   styleUrl: './dungeon-list.component.scss',
 })

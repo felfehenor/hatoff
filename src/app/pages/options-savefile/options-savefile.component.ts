@@ -5,20 +5,22 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { SavefileExportComponent } from '../../components/savefile-export/savefile-export.component';
 import { SavefileImportComponent } from '../../components/savefile-import/savefile-import.component';
 import { TownInfoCardComponent } from '../../components/town-info-card/town-info-card.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { blankGameState, gamestate, setGameState } from '../../helpers';
 
 @Component({
-    selector: 'app-options-savefile',
-    imports: [
-        SweetAlert2Module,
-        DatePipe,
-        DecimalPipe,
-        TownInfoCardComponent,
-        SavefileExportComponent,
-        SavefileImportComponent,
-    ],
-    templateUrl: './options-savefile.component.html',
-    styleUrl: './options-savefile.component.scss'
+  selector: 'app-options-savefile',
+  imports: [
+    SweetAlert2Module,
+    DatePipe,
+    DecimalPipe,
+    TownInfoCardComponent,
+    SavefileExportComponent,
+    SavefileImportComponent,
+    AnalyticsClickDirective,
+  ],
+  templateUrl: './options-savefile.component.html',
+  styleUrl: './options-savefile.component.scss',
 })
 export class OptionsSavefileComponent {
   private router = inject(Router);

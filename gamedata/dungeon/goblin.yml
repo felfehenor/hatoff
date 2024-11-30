@@ -59,7 +59,7 @@
       lootId: Goblish Club
 
 - id: ee7a1f28-3e50-4d9b-b0a7-4406fb332d31
-  name: 'Goblin Forest: Cave'
+  name: 'Goblin Forest - Cave'
   description: Explore a cave of Goblins in search of humanoid relics.
 
   stunTimeOnFailure: 450

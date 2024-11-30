@@ -15,7 +15,7 @@
   }
 
   @else {
-  <button class="btn btn-xs mx-1" (click)="isEditing.set(true)">
+  <button class="btn btn-xs mx-1" (click)="isEditing.set(true)" appAnalyticsClick="Hero:ChangeDamageType">
     <app-content-name [id]="id()"></app-content-name>
   </button>
   }

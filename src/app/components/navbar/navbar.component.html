@@ -1,40 +1,41 @@
 <div class="navbar bg-base-100 relative flex">
   <div class="navbar-start flex-1">
-    <a class="btn btn-untextured btn-ghost text-xl relative" [routerLink]="['/game']">
+    <a class="btn btn-untextured btn-ghost text-xl relative" [routerLink]="['/game']" appAnalyticsClick="Game:Home">
       Heroic Ascension
 
       @if(meta.versionMismatch()) {
-      <button class="btn btn-xs btn-primary absolute update-button" (click)="meta.update()">Update Available!</button>
+      <button class="btn btn-xs btn-primary absolute update-button" (click)="meta.update()"
+        appAnalyticsClick="Meta:Update:Click">Update Available!</button>
       }
     </a>
 
     @if(isSetup()) {
     <ul class="menu menu-horizontal px-1">
       <li class="mr-1">
-        <a [routerLink]="['/game/town']" [routerLinkActive]="'text-primary'">
+        <a [routerLink]="['/game/town']" [routerLinkActive]="'text-primary'" appAnalyticsClick="Game:Town">
           <ng-icon name="tablerBuildingFortress"></ng-icon> Town of {{ townName() }}
         </a>
       </li>
 
       <li class="mr-1">
-        <a [routerLink]="['/game/heroes']" [routerLinkActive]="'text-primary'">
+        <a [routerLink]="['/game/heroes']" [routerLinkActive]="'text-primary'" appAnalyticsClick="Game:Heroes">
           <ng-icon name="tablerUsersGroup"></ng-icon> Heroes
         </a>
       </li>
 
       <li class="mr-1">
-        <a [routerLink]="['/game/research']" [routerLinkActive]="'text-primary'">
+        <a [routerLink]="['/game/research']" [routerLinkActive]="'text-primary'" appAnalyticsClick="Game:Research">
           <ng-icon [name]="isResearching() ? 'tablerFlask2' : 'tablerSparkles'"></ng-icon> Research
         </a>
       </li>
 
-      <li class="mr-1" [appHideIfNotResearched]="'Shopping Trip'">
+      <li class="mr-1" [appHideIfNotResearched]="'Shopping Trip'" appAnalyticsClick="Game:Shop">
         <a [routerLink]="['/game/shop']" [routerLinkActive]="'text-primary'">
           <ng-icon name="tablerBuildingStore"></ng-icon> Shop
         </a>
       </li>
 
-      <li class="mr-1" [appHideIfNotResearched]="'Houses III'">
+      <li class="mr-1" [appHideIfNotResearched]="'Houses III'" appAnalyticsClick="Game:Explore">
         <a [routerLink]="['/game/explore']" [routerLinkActive]="'text-primary'">
           <ng-icon [name]="isExploring() ? 'tablerSwords' : 'tablerCompass'"></ng-icon> Explore
         </a>
@@ -49,14 +50,14 @@
 
       <li class="mr-1" [tp]="pauseTooltip()">
         <a (click)="togglePause()" (keydown.enter)="togglePause()" tabindex="1" class="ring-emerald-500"
-          [class.ring-2]="isPaused()">
+          [class.ring-2]="isPaused()" appAnalyticsClick="Game:Pause">
           <ng-icon [name]="isPaused() ? 'tablerPlayerPlay' : 'tablerPlayerPause'" class="ring-emerald-500"
             [color]="isPaused() ? 'var(--tw-ring-color)' : ''"></ng-icon>
         </a>
       </li>
 
       <li class="mr-1">
-        <a [routerLink]="['/game/options']" [routerLinkActive]="'text-primary'">
+        <a [routerLink]="['/game/options']" [routerLinkActive]="'text-primary'" appAnalyticsClick="Game:Settings">
           <ng-icon name="tablerSettings"></ng-icon>
         </a>
       </li>

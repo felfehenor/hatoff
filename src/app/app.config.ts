@@ -26,6 +26,7 @@ import {
 import { provideNgIconsConfig } from '@ng-icons/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { routes } from './app.routes';
+import { AnalyticsService } from './services/analytics.service';
 import { APIService } from './services/api.service';
 import { ContentService } from './services/content.service';
 import { GamestateService } from './services/gamestate.service';
@@ -70,9 +71,11 @@ export const appConfig: ApplicationConfig = {
       useValue: async () => {
         const meta = inject(MetaService);
         const logger = inject(LoggerService);
+        const analytics = inject(AnalyticsService);
 
         await meta.init();
         logger.init();
+        analytics.init();
       },
     },
     {

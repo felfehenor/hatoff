@@ -6,6 +6,7 @@ import {
   GameState,
   GameTask,
 } from '../interfaces';
+import { sendDesignEvent } from './analytics';
 import {
   getArchetypeResourceBonusForHero,
   getArchetypeTaskBonusForHero,
@@ -101,6 +102,7 @@ function isTaskFinished(state: GameState, task: GameTask): boolean {
 }
 
 function finalizeTask(state: GameState, task: GameTask): void {
+  sendDesignEvent(`Task:${task.name}:Complete`);
   if (task.siblingTaskIdRequiringHeroesAllocated) {
     const sibling = getEntry<GameTask>(
       task.siblingTaskIdRequiringHeroesAllocated,

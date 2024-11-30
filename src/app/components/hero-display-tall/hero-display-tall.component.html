@@ -57,7 +57,8 @@
       <div class="flex items-center">
         @let canClickForXP = canGiveClickXp();
         <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
-          tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
+          tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown."
+          [appAnalyticsClick]="'Hero:GiveXP:' + xpOnClick()">
 
           @if(!canClickForXP) {
           <div class="absolute w-full">
@@ -71,14 +72,16 @@
         </button>
 
         @if(hasItems()) {
-        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()">
+        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()"
+          [appAnalyticsClick]="'Hero:UseItems:' + heroDamageType(activeHero)">
           Use Items
         </button>
         }
       </div>
 
       @if(canDismissHero()) {
-      <button class="btn btn-error" [swal]="deleteSwal">Dismiss Hero</button>
+      <button class="btn btn-error" [swal]="deleteSwal"
+        [appAnalyticsClick]="'Hero:Dismiss:' + heroDamageType(activeHero)">Dismiss Hero</button>
       }
     </div>
   </div>

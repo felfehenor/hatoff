@@ -11,6 +11,7 @@ import {
   GameLoot,
   GameTask,
 } from '../interfaces';
+import { sendDesignEvent } from './analytics';
 import {
   didHeroesWin,
   doCombatRound,
@@ -41,6 +42,10 @@ export function setActiveDungeon(dungeon: GameDungeon): void {
 
 export function currentDungeon(): GameDungeon | undefined {
   return getEntry<GameDungeon>(gamestate().activeDungeon);
+}
+
+export function currentDungeonName(): string {
+  return currentDungeon()?.name ?? 'Unknown';
 }
 
 export function isCurrentDungeon(dungeon: GameDungeon): boolean {
@@ -138,6 +143,13 @@ export function clearActiveDungeon() {
   const dungeon = currentDungeon();
   if (!dungeon) return;
 
+  const hasCompleted = gamestate().dungeonsCompleted[dungeon.id] > 0;
+
+  sendDesignEvent(
+    `Exploration:${currentDungeonName()}:Success:${
+      hasCompleted ? 'Repeat' : 'FirstTime'
+    }`,
+  );
   notify(`Successfully cleared ${dungeon.name ?? 'the dungeon'}!`, 'Dungeon');
 
   updateGamestate((state) => {
@@ -191,10 +203,12 @@ export function handleCurrentDungeonStep(ticks: number) {
 export function heroWinCombat(): void {}
 
 export function heroLoseCombat(): void {
+  sendDesignEvent(`Exploration:${currentDungeonName()}:Failure`);
   notifyError('The exploration party was unsuccessful...', true);
 
   heroesInExploreTask().forEach((hero) => {
     if (isHardMode()) {
+      sendDesignEvent(`Hero:PermaDeath:${currentDungeonName()}`);
       removeHero(hero);
       notify(`${hero.name} has perished...`, 'Dungeon');
       return;

@@ -12,8 +12,10 @@
       </div>
 
       <div class="card-actions">
-        <button class="btn btn-default btn-wide" [routerLink]="['/']">Main Menu</button>
-        <button class="btn btn-primary btn-wide" [routerLink]="['/game/setup']">Try Again</button>
+        <button class="btn btn-default btn-wide" [routerLink]="['/']" appAnalyticsClick="GameOver:MainMenu">Main
+          Menu</button>
+        <button class="btn btn-primary btn-wide" [routerLink]="['/game/setup']"
+          appAnalyticsClick="GameOver:TryAgain">Try Again</button>
       </div>
     </div>
 

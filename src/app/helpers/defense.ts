@@ -5,6 +5,7 @@ import {
   GameTask,
   GameUpgrade,
 } from '../interfaces';
+import { sendDesignEvent } from './analytics';
 import { getEntry, getResearchableEntriesByType } from './content';
 import { cooldown } from './cooldown';
 import { isEasyMode, isHardMode } from './difficulty';
@@ -166,6 +167,7 @@ export function destroyableUpgrades(task: GameTask): GameUpgrade[] {
 }
 
 export function doTownAttack(): void {
+  sendDesignEvent('TownDefense:NumAttacks', gamestate().defense.numAttacks + 1);
   setTownAttacks(gamestate().defense.numAttacks + 1);
 
   const tasksToLoseUpgradesFor: GameTask[] = [];
@@ -186,9 +188,12 @@ export function doTownAttack(): void {
       zeroResource(fortifications);
 
       if (!wasFullyDefended) {
+        sendDesignEvent('TownDefense:DefenseLevel:NotFullyDefended');
         tasksToLoseUpgradesFor.push(
           ...state.defense.targettedTaskIds.map((t) => getEntry<GameTask>(t)!),
         );
+      } else {
+        sendDesignEvent('TownDefense:DefenseLevel:FullyDefended');
       }
     }
 

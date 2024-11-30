@@ -1,5 +1,10 @@
 export const environment = {
   production: true,
+  platform: 'web',
+  gameanalytics: {
+    game: 'e1ed45c450518322076fc81e817fd746',
+    secret: 'b6dcc95588c672dcac4efbc0a90d5c8f5b14263c',
+  },
   rollbar: {
     accessToken: '86c34b8cc38d49ad8377b514b58874ea',
     captureUncaught: true,

@@ -6,7 +6,8 @@
   </span>
 
   <div pageactions class="flex items-center">
-    <button class="btn btn-sm btn-secondary relative" [disabled]="!canReroll()" (click)="doReroll()">
+    <button class="btn btn-sm btn-secondary relative" [disabled]="!canReroll()" (click)="doReroll()"
+      [appAnalyticsClick]="rerollCost() === 0 ? 'Recruit:Reroll:Free' : 'Recruit:Reroll:Cost'">
 
       @if(isRerollOnTimeout()) {
       <div class="absolute w-full">
@@ -50,7 +51,8 @@
 
           <div class="card-actions">
             <button class="btn btn-primary" [disabled]="!canRecruit()"
-              (click)="selectedHero.set(hero); recruitSwal.fire();">
+              (click)="selectedHero.set(hero); recruitSwal.fire();"
+              [appAnalyticsClick]="'Recruit:Buy:' + heroDamageType(hero)">
               Recruit for {{ recruitCost() | number }} Food
             </button>
 

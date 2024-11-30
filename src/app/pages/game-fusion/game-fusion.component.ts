@@ -3,6 +3,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FusionHeroDisplayTallComponent } from '../../components/fusion-hero-display-tall/fusion-hero-display-tall.component';
 import { FusionHeroDisplayComponent } from '../../components/fusion-hero-display/fusion-hero-display.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   doFusion,
   heroFusionResult,
@@ -12,15 +13,16 @@ import {
 import { GameHero } from '../../interfaces';
 
 @Component({
-    selector: 'app-game-fusion',
-    imports: [
-        PageCardComponent,
-        FusionHeroDisplayComponent,
-        FusionHeroDisplayTallComponent,
-        SweetAlert2Module,
-    ],
-    templateUrl: './game-fusion.component.html',
-    styleUrl: './game-fusion.component.scss'
+  selector: 'app-game-fusion',
+  imports: [
+    PageCardComponent,
+    FusionHeroDisplayComponent,
+    FusionHeroDisplayTallComponent,
+    SweetAlert2Module,
+    AnalyticsClickDirective,
+  ],
+  templateUrl: './game-fusion.component.html',
+  styleUrl: './game-fusion.component.scss',
 })
 export class GameFusionComponent {
   public mainHero = signal<GameHero | undefined>(undefined);

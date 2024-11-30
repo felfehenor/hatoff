@@ -13,7 +13,8 @@
     <p>{{ itemData.description }}</p>
 
     <div class="card-actions">
-      <button class="btn btn-primary" [disabled]="!canBuy()" (click)="buy.emit()">
+      <button class="btn btn-primary" [disabled]="!canBuy()" (click)="buy.emit()"
+        [appAnalyticsClick]="'Shop:Buy:' + itemData.name">
         Buy for {{ itemData.cost | number }} Gold
       </button>
     </div>
