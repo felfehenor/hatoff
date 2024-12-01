@@ -244,18 +244,22 @@ export function totalHeroForce(
   return damageApplied * getOption('heroForceMultiplier') * numTimes;
 }
 
+export function ensureHeroStatMaxes(hero: GameHero): void {
+  hero.stats.health = Math.min(hero.stats.health, 9999);
+  hero.stats.force = Math.min(hero.stats.force, 999);
+  hero.stats.resistance = Math.min(hero.stats.resistance, 999);
+  hero.stats.progress = Math.min(hero.stats.progress, 999);
+  hero.stats.piety = Math.min(hero.stats.piety, 999);
+  hero.stats.speed = Math.min(hero.stats.speed, 99);
+}
+
 export function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
   updateGamestate((state) => {
     const heroRef = state.heroes[hero.id];
 
     heroRef.stats[stat] += Math.floor(val);
 
-    heroRef.stats.health = Math.min(heroRef.stats.health, 9999);
-    heroRef.stats.force = Math.min(heroRef.stats.force, 999);
-    heroRef.stats.resistance = Math.min(heroRef.stats.resistance, 999);
-    heroRef.stats.progress = Math.min(heroRef.stats.progress, 999);
-    heroRef.stats.piety = Math.min(heroRef.stats.piety, 999);
-    heroRef.stats.speed = Math.min(heroRef.stats.speed, 99);
+    ensureHeroStatMaxes(heroRef);
 
     return state;
   });
@@ -286,12 +290,14 @@ export function levelup(hero: GameHero): void {
   const speedBoost =
     statBoost(1, 10) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
 
-  gainStat(hero, 'health', hpBoost);
-  gainStat(hero, 'force', forceBoost);
-  gainStat(hero, 'piety', pietyBoost);
-  gainStat(hero, 'progress', progressBoost);
-  gainStat(hero, 'resistance', resistanceBoost);
-  gainStat(hero, 'speed', speedBoost);
+  hero.stats.health += hpBoost;
+  hero.stats.force += forceBoost;
+  hero.stats.piety += pietyBoost;
+  hero.stats.progress += progressBoost;
+  hero.stats.resistance += resistanceBoost;
+  hero.stats.speed += speedBoost;
+
+  ensureHeroStatMaxes(hero);
 
   const stats = [
     hpBoost > 0 ? `+${hpBoost} HP` : '',
