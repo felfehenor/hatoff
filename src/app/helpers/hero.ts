@@ -27,7 +27,7 @@ import {
   allUnlockedStatBoostResearchValue,
   isResearchComplete,
 } from './research';
-import { randomChoice, randomIdentifiableChoice, seededrng } from './rng';
+import { randomChoice, seededrng } from './rng';
 import {
   getGlobalBoostForDamageType,
   getTaskDamageType,
@@ -71,8 +71,8 @@ export function createHero(): GameHero {
   const availableArchetypes = allUnlockedArchetypes();
   const availableDamageTypes = allUnlockedDamageTypes();
 
-  hero.damageTypeId = randomIdentifiableChoice(hero.id, availableDamageTypes);
-  hero.archetypeIds = [randomIdentifiableChoice(hero.id, availableArchetypes)];
+  hero.damageTypeId = sample(availableDamageTypes)!.id;
+  hero.archetypeIds = [sample(availableArchetypes)!.id];
 
   return hero;
 }
