@@ -245,7 +245,20 @@ export function totalHeroForce(
 }
 
 export function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
-  hero.stats[stat] += Math.floor(val);
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
+
+    heroRef.stats[stat] += Math.floor(val);
+
+    heroRef.stats.health = Math.min(heroRef.stats.health, 9999);
+    heroRef.stats.force = Math.min(heroRef.stats.force, 999);
+    heroRef.stats.resistance = Math.min(heroRef.stats.resistance, 999);
+    heroRef.stats.progress = Math.min(heroRef.stats.progress, 999);
+    heroRef.stats.piety = Math.min(heroRef.stats.piety, 999);
+    heroRef.stats.speed = Math.min(heroRef.stats.speed, 99);
+
+    return state;
+  });
 }
 
 export function levelup(hero: GameHero): void {
@@ -279,13 +292,6 @@ export function levelup(hero: GameHero): void {
   gainStat(hero, 'progress', progressBoost);
   gainStat(hero, 'resistance', resistanceBoost);
   gainStat(hero, 'speed', speedBoost);
-
-  hero.stats.health = Math.min(hero.stats.health, 9999);
-  hero.stats.force = Math.min(hero.stats.force, 999);
-  hero.stats.resistance = Math.min(hero.stats.resistance, 999);
-  hero.stats.progress = Math.min(hero.stats.progress, 999);
-  hero.stats.piety = Math.min(hero.stats.piety, 999);
-  hero.stats.speed = Math.min(hero.stats.speed, 99);
 
   const stats = [
     hpBoost > 0 ? `+${hpBoost} HP` : '',
@@ -377,10 +383,6 @@ export function stunHero(hero: GameHero, ticks: number): void {
   });
 }
 
-export function isStunned(hero: GameHero): boolean {
-  return hero.stunTicks > 0;
-}
-
 export function reduceStun(hero: GameHero, ticks: number): void {
   updateGamestate((state) => {
     const heroRef = state.heroes[hero.id];
@@ -388,6 +390,10 @@ export function reduceStun(hero: GameHero, ticks: number): void {
 
     return state;
   });
+}
+
+export function isStunned(hero: GameHero): boolean {
+  return hero.stunTicks > 0;
 }
 
 export function isHeroAbleToDoMostThings(hero: GameHero): boolean {
