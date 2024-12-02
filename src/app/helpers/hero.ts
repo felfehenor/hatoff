@@ -1,4 +1,5 @@
 import {
+  GameArchetype,
   GameDamageType,
   GameHero,
   GameHeroStat,
@@ -348,10 +349,23 @@ export function pickRandomArchetypes(hero: GameHero): void {
     const heroRef = state.heroes[hero.id];
     const numArchetypes = heroRef.archetypeIds.length;
 
+    const protagonistId = getEntry<GameArchetype>('Protagonist')!.id;
+    const hasProtagonist = heroRef.archetypeIds.includes(protagonistId);
+
+    const numArchetypesToGet = hasProtagonist
+      ? numArchetypes - 1
+      : numArchetypes;
+
     const unlockedArchetypes = allUnlockedArchetypes();
-    const newArchetypes = sampleSize(unlockedArchetypes, numArchetypes).map(
-      (i) => i.id,
-    );
+    const newArchetypes = sampleSize(
+      unlockedArchetypes,
+      numArchetypesToGet,
+    ).map((i) => i.id);
+
+    if (hasProtagonist) {
+      newArchetypes.unshift(protagonistId);
+    }
+
     heroRef.archetypeIds = newArchetypes;
 
     return state;
