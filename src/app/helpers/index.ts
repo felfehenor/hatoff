@@ -32,4 +32,5 @@ export * from './setup';
 export * from './shop';
 export * from './task';
 export * from './town';
+export * from './ui';
 export * from './upgrade';

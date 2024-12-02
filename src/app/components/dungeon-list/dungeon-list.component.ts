@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
+  baseCardClasses,
   gamestate,
   isDungeonInProgress,
   setActiveDungeon,
@@ -21,14 +22,7 @@ export class DungeonListComponent {
   public isAnyDungeonActive = computed(() => isDungeonInProgress());
 
   public cardClasses = computed(() => {
-    return [
-      'sm:min-w-[45%]',
-      'sm:max-w-[45%]',
-      'lg:min-w-[30%]',
-      'lg:max-w-[30%]',
-      'xl:min-w-[23%]',
-      'xl:max-w-[23%]',
-    ];
+    return baseCardClasses();
   });
 
   public selectDungeon(dungeon: GameDungeon): void {

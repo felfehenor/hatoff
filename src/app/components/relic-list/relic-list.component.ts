@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, computed } from '@angular/core';
-import { gamestate, getEntry } from '../../helpers';
+import { baseCardClasses, gamestate, getEntry } from '../../helpers';
 import { GameLoot } from '../../interfaces';
 import { RelicDisplayComponent } from '../relic-display/relic-display.component';
 
@@ -19,13 +19,6 @@ export class RelicListComponent {
   );
 
   public cardClasses = computed(() => {
-    return [
-      'sm:min-w-[45%]',
-      'sm:max-w-[45%]',
-      'lg:min-w-[30%]',
-      'lg:max-w-[30%]',
-      'xl:min-w-[23%]',
-      'xl:max-w-[23%]',
-    ];
+    return baseCardClasses();
   });
 }
