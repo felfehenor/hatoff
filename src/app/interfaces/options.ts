@@ -20,4 +20,6 @@ export interface GameOptions {
   notificationRecruitment: boolean;
   notificationError: boolean;
   notificationSuccess: boolean;
+
+  uiTheme: string;
 }

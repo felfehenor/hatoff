@@ -33,6 +33,7 @@ import { GamestateService } from './services/gamestate.service';
 import { LoggerService, RollbarErrorHandler } from './services/logger.service';
 import { MetaService } from './services/meta.service';
 import { NotifyService } from './services/notify.service';
+import { ThemeService } from './services/theme.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -97,6 +98,11 @@ export const appConfig: ApplicationConfig = {
       provide: ENVIRONMENT_INITIALIZER,
       multi: true,
       useValue: () => inject(GamestateService).init(),
+    },
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      multi: true,
+      useValue: () => inject(ThemeService).init(),
     },
   ],
 };

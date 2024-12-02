@@ -23,7 +23,7 @@ export class OptionsComponent {
     {
       name: 'UI',
       link: 'ui',
-      showIf: computed(() => false),
+      showIf: computed(() => true),
     },
     { name: 'Savefile', link: 'savefile', showIf: computed(() => true) },
     {
