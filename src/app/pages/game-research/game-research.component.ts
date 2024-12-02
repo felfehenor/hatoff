@@ -1,13 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { countBy, sortBy } from 'lodash';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { ResearchListComponent } from '../../components/research-list/research-list.component';
-import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { allAvailableIncompleteResearch } from '../../helpers';
 
 @Component({
   selector: 'app-game-research',
-  imports: [PageCardComponent, ResearchListComponent, AnalyticsClickDirective],
+  imports: [PageCardComponent, ResearchListComponent, FormsModule],
   templateUrl: './game-research.component.html',
   styleUrl: './game-research.component.scss',
 })

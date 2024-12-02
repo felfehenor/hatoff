@@ -1,7 +1,17 @@
 <app-page-card>
   <span header>Heroes {{ currentHeroCount() }}/{{ currentHeroCap() }}</span>
 
-  <div pageactions>
+  <div pageactions class="flex gap-2">
+    <label class="form-control">
+      <select class="select select-bordered select-sm" [(ngModel)]="activeType">
+        @for(category of allDamageTypes(); track category.name) {
+        <option [value]="category.name">
+          {{ category.name }} ({{ category.num }})
+        </option>
+        }
+      </select>
+    </label>
+
     @if(canFuse()) {
     <button class="btn btn-sm btn-success mr-1" [routerLink]="['/game/fuse']"
       [appDisableIfNotResearched]="'Fusion Engine'" appAnalyticsClick="Heroes:Fuse">Fuse Heroes</button>
@@ -10,5 +20,5 @@
       Recruits</button>
   </div>
 
-  <app-hero-list></app-hero-list>
+  <app-hero-list [heroList]="heroList()"></app-hero-list>
 </app-page-card>
