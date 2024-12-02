@@ -13,6 +13,12 @@ export class LoggerService {
 
   private rollbar!: Rollbar;
 
+  private readonly ignoredMessageSubstrings: string[] = [
+    'Failed to fetch dynamically imported module',
+    'is not valid JSON',
+    'Script error',
+  ];
+
   init() {
     if (environment.rollbar.accessToken) {
       const realVersion = this.metaService.versionString();
@@ -20,7 +26,15 @@ export class LoggerService {
       const rollbarConfig = cloneDeep(environment.rollbar);
       rollbarConfig.payload.client.javascript.code_version = realVersion;
 
-      this.rollbar = new Rollbar(rollbarConfig);
+      this.rollbar = new Rollbar({
+        ...rollbarConfig,
+        checkIgnore: (uncaught, args) => {
+          const argMessage = args[0]?.toString() ?? '';
+          return this.ignoredMessageSubstrings.some((msg) =>
+            argMessage.includes(msg),
+          );
+        },
+      });
     }
   }
 

@@ -112,13 +112,15 @@ self.onmessage = (event) => {
     const spriteCanvas = spriteCanvases[id];
 
     const refImageData = atlasCanvases[key]
-      .getContext('2d')
+      ?.getContext('2d')
       ?.getImageData(
         coordinates.x,
         coordinates.y,
         coordinates.width,
         coordinates.height,
       );
+
+    if (!refImageData) return;
 
     const partCtx = partCanvas.getContext('2d');
     partCtx?.putImageData(refImageData, 0, 0);
