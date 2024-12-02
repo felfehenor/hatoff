@@ -46,6 +46,9 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
 
   if (!heroDamageType || !taskDamageType) return false;
 
+  if (heroesAllocatedToTask(task).length >= maxHeroesForTask(task))
+    return false;
+
   if (heroDamageType.isAny) return true;
 
   if (isStrictDamageType(task) && taskDamageType.id !== heroDamageType.id)
@@ -57,7 +60,7 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
   if (getDamageForcePercentage(heroDamageType, taskDamageType) === 0)
     return false;
 
-  return heroesAllocatedToTask(task).length < maxHeroesForTask(task);
+  return true;
 }
 
 export function canUnallocateHeroFromTask(
