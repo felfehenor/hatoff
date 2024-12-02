@@ -1,0 +1,30 @@
+@let relicData = relic();
+
+<div class="card card-side foreground shadow-xl min-h-[300px] overflow-hidden">
+  <div class="card-body">
+
+    <div class="card-title">
+      <div class="font-semibold flex items-center gap-2">
+        {{ relicData.name }}
+
+        <span>
+          x{{ times() }}
+        </span>
+      </div>
+    </div>
+
+    <p>{{ relicData.description }}</p>
+
+    @if(unlockedResearch(); as research) {
+    <section class="flex gap-2 items-center" tp="Unlocked Research">
+      <ng-icon name="tablerFlask2"></ng-icon> {{ research }}
+    </section>
+    }
+
+    @if(unlockedDungeons(); as dungeons) {
+    <section class="flex gap-2 items-center" tp="Unlocked Dungeons">
+      <ng-icon name="tablerCompass"></ng-icon> {{ dungeons }}
+    </section>
+    }
+  </div>
+</div>

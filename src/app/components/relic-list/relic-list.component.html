@@ -1,0 +1,14 @@
+<div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+
+  @if(unlockedRelics().length === 0) {
+  <div>
+    You haven't found any relics yet.
+  </div>
+  }
+
+  @for(relic of unlockedRelics(); track $index) {
+  <div class="hero-container" [ngClass]="cardClasses()">
+    <app-relic-display [relic]="relic"></app-relic-display>
+  </div>
+  }
+</div>
