@@ -270,26 +270,50 @@ export function levelup(hero: GameHero): void {
   const rng = seededrng(hero.id + ' ' + hero.level);
 
   function statBoost(val = 1, chance = 50) {
-    const shouldGain = rng() * 100 <= chance;
-    if (!shouldGain) return 0;
+    const baseBoost = Math.floor(chance / 100);
+    const remainderChance = chance % 100;
 
-    return val * getOption('heroLevelUpStatGainMultiplier');
+    const shouldGain = rng() * 100 <= remainderChance;
+    if (!shouldGain)
+      return baseBoost * getOption('heroLevelUpStatGainMultiplier');
+
+    return (baseBoost + val) * getOption('heroLevelUpStatGainMultiplier');
   }
+
+  const potentialStatBoosts: GameHeroStat[] = [
+    'force',
+    'piety',
+    'progress',
+    'resistance',
+    'speed',
+  ];
+  const numGuaranteedStats = 1 + hero.fusionLevel;
+  const chosenStats = Array(numGuaranteedStats)
+    .fill(0)
+    .map(() => sample(potentialStatBoosts) as GameHeroStat);
+
+  const bonusRolls: Record<GameHeroStat, number> = {
+    force: getArchetypeLevelUpStatBonusForHero(hero, 'force'),
+    health: 0,
+    piety: getArchetypeLevelUpStatBonusForHero(hero, 'piety'),
+    progress: getArchetypeLevelUpStatBonusForHero(hero, 'progress'),
+    resistance: getArchetypeLevelUpStatBonusForHero(hero, 'resistance'),
+    speed: getArchetypeLevelUpStatBonusForHero(hero, 'speed'),
+  };
+
+  chosenStats.forEach((stat) => {
+    bonusRolls[stat] += 85;
+  });
 
   const hpBoost =
     statBoost(5) +
     getArchetypeLevelUpStatBonusForHero(hero, 'health') +
     allUnlockedStatBoostResearchValue('health');
-  const forceBoost =
-    statBoost(1, 35) + getArchetypeLevelUpStatBonusForHero(hero, 'force');
-  const pietyBoost =
-    statBoost(1, 25) + getArchetypeLevelUpStatBonusForHero(hero, 'piety');
-  const progressBoost =
-    statBoost(1, 50) + getArchetypeLevelUpStatBonusForHero(hero, 'progress');
-  const resistanceBoost =
-    statBoost(1, 15) + getArchetypeLevelUpStatBonusForHero(hero, 'resistance');
-  const speedBoost =
-    statBoost(1, 10) + getArchetypeLevelUpStatBonusForHero(hero, 'speed');
+  const forceBoost = statBoost(1, 35 + bonusRolls.force);
+  const pietyBoost = statBoost(1, 25 + bonusRolls.piety);
+  const progressBoost = statBoost(1, 50 + bonusRolls.progress);
+  const resistanceBoost = statBoost(1, 15 + bonusRolls.resistance);
+  const speedBoost = statBoost(1, 10 + bonusRolls.speed);
 
   hero.stats.health += hpBoost;
   hero.stats.force += forceBoost;

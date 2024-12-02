@@ -1,64 +1,64 @@
 # progress
 - id: d0fe5cc1-dfa8-40d2-85d0-0b1812b3fc22
   name: Detailed
-  description: This hero gains +1 Progress (PRG) when leveling up.
+  description: This hero gains +10% chance of getting Progress (PRG) when leveling up.
   boostLevelupStat: progress
-  boostLevelupStatValue: 1
+  boostLevelupStatValue: 10
 
 - id: 0074bae1-319e-46d4-860d-189e179dafcb
   name: Comprehensive
-  description: This hero gains +2 Progress (PRG) when leveling up.
+  description: This hero gains +25% chance of getting Progress (PRG) when leveling up.
   boostLevelupStat: progress
-  boostLevelupStatValue: 2
+  boostLevelupStatValue: 25
 
 # force
 - id: f52e73ff-1404-4c68-9dee-0df5045cb956
   name: Strong
-  description: This hero gains +1 Force (FRC) when leveling up.
+  description: This hero gains +5% chance of getting Force (FRC) when leveling up.
   boostLevelupStat: force
-  boostLevelupStatValue: 1
+  boostLevelupStatValue: 5
 
 - id: bc154553-e079-4055-8c46-878086d3ab03
   name: Powerful
-  description: This hero gains +2 Force (FRC) when leveling up.
+  description: This hero gains +10% chance of getting Force (FRC) when leveling up.
   boostLevelupStat: force
-  boostLevelupStatValue: 2
+  boostLevelupStatValue: 10
 
 # resistance
 - id: 266af96c-b9d1-41e3-b17e-b63d94758f39
   name: Adaptable
-  description: This hero gains +1 Resistance (RES) when leveling up.
+  description: This hero gains +10% chance of getting Resistance (RES) when leveling up.
   boostLevelupStat: resistance
-  boostLevelupStatValue: 1
+  boostLevelupStatValue: 10
 
 - id: d9e4ab26-4d2e-4b4d-90a1-1ba175e1ed01
   name: Versatile
-  description: This hero gains +2 Resistance (RES) when leveling up.
+  description: This hero gains +20% chance of getting Resistance (RES) when leveling up.
   boostLevelupStat: resistance
-  boostLevelupStatValue: 2
+  boostLevelupStatValue: 20
 
 # piety
 - id: 7b79c323-d927-4b8a-842a-84f230643fd0
   name: Reverent
-  description: This hero gains +1 Piety (PIE) when leveling up.
+  description: This hero gains +15% chance of getting Piety (PIE) when leveling up.
   boostLevelupStat: piety
-  boostLevelupStatValue: 1
+  boostLevelupStatValue: 15
 
 - id: 13a97d2c-bebe-4a74-847e-fe419f9d2b55
   name: Pious
-  description: This hero gains +2 Piety (PIE) when leveling up.
+  description: This hero gains +25% chance of getting Piety (PIE) when leveling up.
   boostLevelupStat: piety
-  boostLevelupStatValue: 2
+  boostLevelupStatValue: 25
 
 # speed
 - id: 119490e3-6b67-4c44-b13a-cd63b2db027e
   name: Quick
-  description: This hero gains +1 Speed (SPD) when leveling up.
+  description: This hero gains +5% chance of getting Speed (SPD) when leveling up.
   boostLevelupStat: speed
-  boostLevelupStatValue: 1
+  boostLevelupStatValue: 5
 
 - id: 826f6116-8b94-4cc6-af98-8c62412d6139
   name: Swift
-  description: This hero gains +2 Speed (SPD) when leveling up.
+  description: This hero gains +10% chance of getting Speed (SPD) when leveling up.
   boostLevelupStat: speed
-  boostLevelupStatValue: 2
+  boostLevelupStatValue: 10
