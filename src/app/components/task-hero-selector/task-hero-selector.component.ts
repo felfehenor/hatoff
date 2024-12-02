@@ -18,7 +18,9 @@ import {
   getEntry,
   getTaskDamageType,
   heroesAllocatedToTask,
+  isDungeonInProgress,
   isHeroAllocatedToTask,
+  isHeroExploring,
   isTaskThreatened,
   maxHeroesForTask,
   maxTaskLevel,
@@ -126,10 +128,15 @@ export class TaskHeroSelectorComponent {
   }
 
   public canAssignHeroToTask(hero: GameHero): boolean {
-    return (
+    const baseCanAssign =
       canAllocateHeroToTask(hero, this.task()) ||
-      isHeroAllocatedToTask(this.task(), hero)
-    );
+      isHeroAllocatedToTask(this.task(), hero);
+
+    if (baseCanAssign && isDungeonInProgress()) {
+      return !isHeroExploring(hero);
+    }
+
+    return baseCanAssign;
   }
 
   public canUnassignHeroFromTask(hero: GameHero): boolean {
