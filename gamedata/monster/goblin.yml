@@ -13,6 +13,10 @@
     piety: 5
     speed: 5
 
+  rewards:
+    - resourceId: Gold
+      resourceValue: 25
+
 - id: 44a7193d-39ce-4d45-a4cc-3651a10d7446
   name: Goblin Brute
   archetypeIds: []
@@ -27,6 +31,13 @@
     resistance: 10
     piety: 5
     speed: 3
+
+  rewards:
+    - resourceId: Gold
+      resourceValue: 5
+
+    - resourceId: Wood
+      resourceValue: 10
 
 - id: 5cd3cf00-a35a-4e94-8677-af7e90dec356
   name: Goblin Thief
@@ -43,6 +54,10 @@
     piety: 5
     speed: 20
 
+  rewards:
+    - resourceId: Gold
+      resourceValue: 75
+
 - id: fd8dccb4-19a2-43bf-bf83-5dbaaa13d1ac
   name: Goblin Priest
   archetypeIds: []
@@ -57,3 +72,7 @@
     resistance: 7
     piety: 25
     speed: 10
+
+  rewards:
+    - resourceId: Stone
+      resourceValue: 25

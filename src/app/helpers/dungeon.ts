@@ -9,6 +9,8 @@ import {
   GameHero,
   GameItem,
   GameLoot,
+  GameMonster,
+  GameResource,
   GameTask,
 } from '../interfaces';
 import { sendDesignEvent } from './analytics';
@@ -26,6 +28,7 @@ import { gainXp, isStunned, removeHero, stunHero } from './hero';
 import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
+import { gainResource } from './resource';
 import { randomChoice } from './rng';
 import { heroesAllocatedToTask } from './task';
 
@@ -200,7 +203,34 @@ export function handleCurrentDungeonStep(ticks: number) {
   }
 }
 
-export function heroWinCombat(): void {}
+export function heroWinCombat(fightStep: GameDungeonEncounterFight): void {
+  const rewards: Record<string, number> = {};
+
+  fightStep.monsters.forEach((mon) => {
+    const monData = getEntry<GameMonster>(mon.monsterId);
+    if (!monData) return;
+
+    monData.rewards?.forEach((reward) => {
+      rewards[reward.resourceId] ??= 0;
+      rewards[reward.resourceId] += reward.resourceValue;
+    });
+  });
+
+  const resources = Object.keys(rewards)
+    .map((r) => getEntry<GameResource>(r))
+    .filter((r) => rewards[r!.id] > 0);
+
+  resources.forEach((res) => {
+    if (!res) return;
+    gainResource(res, rewards[res.id]);
+  });
+
+  const notifyStr = resources
+    .map((r) => `+${rewards[r!.id]} ${r!.name}`)
+    .join(', ');
+
+  notify(`Combat rewards: ${notifyStr}`, 'Dungeon');
+}
 
 export function heroLoseCombat(): void {
   sendDesignEvent(`Exploration:${currentDungeonName()}:Failure`);
@@ -220,9 +250,9 @@ export function heroLoseCombat(): void {
   exitDungeon();
 }
 
-export function handleFightOutcome(): void {
+export function handleFightOutcome(fightStep: GameDungeonEncounterFight): void {
   if (didHeroesWin()) {
-    heroWinCombat();
+    heroWinCombat(fightStep);
     return;
   }
 
@@ -245,7 +275,7 @@ export function dungeonFightStep(fightStep: GameDungeonEncounterFight): void {
 
   // if combat is resolved, we delete it, and move to the next step
   if (isCombatResolved()) {
-    handleFightOutcome();
+    handleFightOutcome(fightStep);
 
     updateGamestate((state) => {
       state.exploration.exploringParty =
