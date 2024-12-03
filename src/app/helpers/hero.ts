@@ -1,5 +1,7 @@
 import {
   GameArchetype,
+  GameAttribute,
+  GameCombatant,
   GameDamageType,
   GameHero,
   GameHeroStat,
@@ -11,7 +13,7 @@ import { v4 as uuid } from 'uuid';
 
 import { signal, WritableSignal } from '@angular/core';
 import { species } from 'fantastical';
-import { cloneDeep, merge, sample, sampleSize, sumBy } from 'lodash';
+import { cloneDeep, merge, sample, sampleSize, sum, sumBy } from 'lodash';
 import { getArchetypeLevelUpStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
@@ -28,7 +30,7 @@ import {
   allUnlockedStatBoostResearchValue,
   isResearchComplete,
 } from './research';
-import { randomChoice, seededrng } from './rng';
+import { randomChoice, succeedsChance } from './rng';
 import {
   getGlobalBoostForDamageType,
   getTaskDamageType,
@@ -61,6 +63,8 @@ export function defaultHero(): GameHero {
       progress: 1,
       speed: 1,
     },
+    attributeIds: [],
+    attributeHealTicks: {},
   };
 }
 
@@ -205,6 +209,24 @@ export function taskSpeedAndForceBoostForHero(
   return hero.taskLevels[task.id] ?? 0;
 }
 
+export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
+  const attributes = (hero.attributeIds ?? [])
+    .map((a) => getEntry<GameAttribute>(a))
+    .filter((a) => a?.modifyStat === stat);
+  const deltaValue = sum(attributes.map((a) => a?.modifyStatValue ?? 0));
+  const deltaPercent = sum(attributes.map((a) => a?.modifyStatPercent ?? 0));
+
+  const baseHeroStat = hero.stats[stat];
+  const baseStatValue = baseHeroStat + deltaValue;
+  const statValueAfterPercentChange = baseStatValue * (deltaPercent / 100);
+
+  return statValueAfterPercentChange;
+}
+
+export function heroStatValue(hero: GameCombatant, stat: GameHeroStat): number {
+  return hero.stats[stat] + heroStatDelta(hero, stat);
+}
+
 export function totalHeroSpeed(
   hero: GameHero,
   task: GameTask,
@@ -238,7 +260,7 @@ export function totalHeroForce(
     1,
     Math.floor(
       ((percentApplied + percentBonus) / 100) *
-        (hero.stats.force + bonusDamage + taskBonusDamage),
+        (heroStatValue(hero, 'force') + bonusDamage + taskBonusDamage),
     ),
   );
 
@@ -267,13 +289,11 @@ export function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
 }
 
 export function levelup(hero: GameHero): void {
-  const rng = seededrng(hero.id + ' ' + hero.level);
-
   function statBoost(val = 1, chance = 50) {
     const baseBoost = Math.floor(chance / 100);
     const remainderChance = chance % 100;
 
-    const shouldGain = rng() * 100 <= remainderChance;
+    const shouldGain = succeedsChance(remainderChance);
     if (!shouldGain)
       return baseBoost * getOption('heroLevelUpStatGainMultiplier');
 

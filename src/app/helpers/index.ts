@@ -1,5 +1,6 @@
 export * from './analytics';
 export * from './archetype';
+export * from './attribute';
 export * from './combat';
 export * from './content';
 export * from './cooldown';

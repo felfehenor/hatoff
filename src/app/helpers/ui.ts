@@ -1,4 +1,5 @@
 import { GameDamageType, GameTask } from '../interfaces';
+import { heroInjuries } from './attribute';
 import { getEntry } from './content';
 import { gamestate } from './gamestate';
 import { isStunned } from './hero';
@@ -59,10 +60,12 @@ export function taskErrors(task: GameTask): string | undefined {
   // heal/etc
   if (task.slowlyRevivesHeroes) {
     const heroes = heroesAllocatedToTask(task)
-      .filter((f) => !isStunned(f))
+      .filter((f) => !isStunned(f) && heroInjuries(f).length === 0)
       .map((f) => f.name);
     if (heroes.length > 0)
-      return `The following heroes are not stunned: ${heroes.join(', ')}.`;
+      return `The following heroes are not stunned or injured: ${heroes.join(
+        ', ',
+      )}.`;
   }
 
   return undefined;

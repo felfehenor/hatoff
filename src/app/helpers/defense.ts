@@ -6,10 +6,12 @@ import {
   GameUpgrade,
 } from '../interfaces';
 import { sendDesignEvent } from './analytics';
+import { heroGainRandomInjury } from './attribute';
 import { getEntry, getResearchableEntriesByType } from './content';
 import { cooldown } from './cooldown';
 import { isEasyMode, isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
+import { allHeroes } from './hero';
 import { notify } from './notify';
 import {
   allUnlockedDamageTypes,
@@ -17,7 +19,7 @@ import {
   totalCompletedResearch,
 } from './research';
 import { getResourceValue, hasResource, zeroResource } from './resource';
-import { randomChoice, randomrng } from './rng';
+import { randomChoice, succeedsChance } from './rng';
 import { heroesAllocatedToTask, unassignHeroTask } from './task';
 import {
   allUpgradesForTask,
@@ -80,7 +82,7 @@ export function pickTownDamageType(): GameDamageType {
     }
 
     // 30% chance of having a locked damage type up until attack 7
-    if (numAttacks < 7 && randomrng()() > 0.7) {
+    if (numAttacks < 7 && succeedsChance(70)) {
       return allUnlockedIds.includes(t.id);
     }
 
@@ -190,6 +192,12 @@ export function doTownAttack(): void {
         tasksToLoseUpgradesFor.push(
           ...state.defense.targettedTaskIds.map((t) => getEntry<GameTask>(t)!),
         );
+
+        const heroToInjure = sample(allHeroes());
+        if (heroToInjure) {
+          heroGainRandomInjury(heroToInjure);
+          notify(`${heroToInjure.name} was injured!`, 'Defense');
+        }
       } else {
         sendDesignEvent('TownDefense:DefenseLevel:FullyDefended');
       }

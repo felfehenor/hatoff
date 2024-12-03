@@ -28,9 +28,9 @@ export class GameSetupComponent implements OnInit {
   public canSubmit = computed(() => this.heroName() && this.townName());
 
   public readonly difficultyDescriptions: Record<GameDifficulty, string> = {
-    easy: 'Easy peasy. Defend Town is disabled, leading to a more chill, idle game.',
+    easy: 'Easy peasy. Defend Town and injuries are disabled, leading to a more chill, idle game.',
     normal: 'The game as intended. No upscaling, no downscaling.',
-    hard: 'Hard mode. Defend Town costs more, and all task types are strict assignment. Heroes will die permanently.',
+    hard: 'Hard mode. Defend Town costs more, and all task types are strict assignment. Injuries are permanent. Heroes will die permanently.',
   };
 
   public readonly difficulties: GameDifficulty[] = ['easy', 'normal', 'hard'];

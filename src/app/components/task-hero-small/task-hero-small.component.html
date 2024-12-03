@@ -9,6 +9,6 @@
       [currentLevel]="heroData.level"></app-level-display></h6>
 
   <div>
-    <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+    <app-hero-damage-type [hero]="heroData"></app-hero-damage-type>
   </div>
 </ng-template>

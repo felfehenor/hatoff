@@ -11,7 +11,7 @@
           [currentLevel]="heroData.level"></app-level-display></div>
 
       <div class="text-sm">
-        <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+        <app-hero-damage-type [hero]="heroData"></app-hero-damage-type>
       </div>
 
       <app-hero-archetype-list [hero]="heroData"></app-hero-archetype-list>

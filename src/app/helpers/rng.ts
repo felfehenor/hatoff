@@ -22,6 +22,10 @@ export function randomNumber(max: number, seed = uuid()): number {
   return Math.floor(seededrng(seed)() * max);
 }
 
+export function succeedsChance(max: number, seed = uuid()): boolean {
+  return seededrng(seed)() * 100 <= max;
+}
+
 export function randomChoice<T>(choices: T[], seed = uuid()): T {
   const rng = seededrng(seed);
 

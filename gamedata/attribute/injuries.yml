@@ -1,0 +1,55 @@
+- id: d0bd2e6a-ffe7-43ac-a9d3-b56b0b07f1a7
+  name: Broken Left Leg
+  modifyStat: speed
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Speed (SPD).
+
+- id: 28998e1c-85a4-40e3-a54d-110b875f31d6
+  name: Broken Right Leg
+  modifyStat: speed
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Speed (SPD).
+
+- id: 6a0c080d-8bc5-4a55-8ce0-486fed29fa48
+  name: Broken Left Arm
+  modifyStat: force
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Force (FRC).
+
+- id: 31f85b54-4aac-4936-9d4b-b8855a66bef9
+  name: Broken Right Arm
+  modifyStat: force
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Force (FRC).
+
+- id: 66fde89c-6fac-470e-b5ea-07d721af7c73
+  name: Blinded Left Eye
+  modifyStat: progress
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Progress (PRG).
+
+- id: 77fb15b8-6793-411d-9223-652bb2c6fba6
+  name: Blinded Right Eye
+  modifyStat: progress
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Progress (PRG).
+
+- id: 334edf48-cb81-4abb-93ed-d63ca26f4b40
+  name: Ill
+  modifyStat: resistance
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Resistance (RES).
+
+- id: 872cb40f-8222-457e-bfde-e222be22f66f
+  name: Weak
+  modifyStat: health
+  modifyStatPercent: -15
+  timeToHeal: 300
+  description: -15% Health (HP).

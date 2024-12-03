@@ -1,6 +1,13 @@
 import { difference, uniq } from 'lodash';
-import { GameDamageType, GameHero, GameHeroStat } from '../interfaces';
+import {
+  GameAttribute,
+  GameDamageType,
+  GameHero,
+  GameHeroStat,
+} from '../interfaces';
+import { isInjury } from './attribute';
 import { getEntry } from './content';
+import { isHardMode } from './difficulty';
 import { gamestate } from './gamestate';
 import {
   addHero,
@@ -158,6 +165,12 @@ export function heroFusionResult(
   });
 
   newHero.taskLevels = newTaskLevels;
+
+  if (!isHardMode()) {
+    newHero.attributeIds = newHero.attributeIds.filter(
+      (a) => !isInjury(getEntry<GameAttribute>(a)!),
+    );
+  }
 
   return newHero;
 }

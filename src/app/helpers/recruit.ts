@@ -21,7 +21,7 @@ import {
   isResearchComplete,
 } from './research';
 import { hasResource, loseResource } from './resource';
-import { seededrng } from './rng';
+import { seededrng, succeedsChance } from './rng';
 
 import { v4 as uuid } from 'uuid';
 
@@ -66,7 +66,7 @@ export function generateHeroesToRecruit() {
   for (let i = 0; i < 6; i++) {
     let hero: GameHero = createHero();
 
-    if (rng() <= 0.01) {
+    if (succeedsChance(1)) {
       const specialHero = getRandomSpecialHero(recruitSeed + '-' + i);
       if (!doesHeroExist(specialHero)) {
         hero = createSpecialHero(specialHero.id) ?? createHero();

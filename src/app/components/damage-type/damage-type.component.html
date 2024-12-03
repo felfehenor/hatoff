@@ -1,7 +1,7 @@
 @if(editable()) {
 <div class="flex align-center">
   <span>
-    {{ damage() | number }}
+    {{ damage() | number:'1.0-2' }}
   </span>
 
   <app-damage-type-breakdown [damageType]="thisDamageType()"></app-damage-type-breakdown>
@@ -26,7 +26,7 @@
 
 @else {
 <div class="flex align-center">
-  <span>{{ damage() | number }}</span>
+  <span>{{ damage() | number:'1.0-2' }}</span>
 
   <app-damage-type-breakdown [damageType]="thisDamageType()"></app-damage-type-breakdown>
 

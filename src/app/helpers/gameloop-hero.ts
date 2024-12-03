@@ -11,6 +11,7 @@ import { gamestate, updateGamestate } from './gamestate';
 import {
   gainStat,
   gainXp,
+  heroStatValue,
   isStunned,
   reduceStun,
   totalHeroForce,
@@ -208,7 +209,11 @@ function rewardTaskDoers(task: GameTask): void {
       heroXpBonus +
       taskBonusForHero(hero, task);
 
-    gainTaskXp(hero, task, xpGainedTimes + archXpBonus + hero.stats.progress);
+    gainTaskXp(
+      hero,
+      task,
+      xpGainedTimes + archXpBonus + heroStatValue(hero, 'progress'),
+    );
     gainXp(hero, xpGainedTimes * totalXpForHero);
 
     if (statValueGained > 0 && task.convertResourceStat) {

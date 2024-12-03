@@ -1,0 +1,5 @@
+@let injury = isInjury();
+
+<div class="badge" [class.badge-success]="!injury" [class.badge-error]="injury" [tp]="description()">
+  <app-content-name [id]="id()"></app-content-name>
+</div>

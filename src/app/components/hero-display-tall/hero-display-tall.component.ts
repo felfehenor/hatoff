@@ -16,6 +16,7 @@ import {
   getHero,
   giveClickXp,
   hasAnyitemsToUse,
+  heroStatValue,
   notifyError,
   removeHero,
   renameHero,
@@ -27,6 +28,7 @@ import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
+import { HeroAttributeListComponent } from '../hero-attribute-list/hero-attribute-list.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
@@ -50,6 +52,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     HideResearchDirective,
     NgIconComponent,
     AnalyticsClickDirective,
+    HeroAttributeListComponent,
   ],
   providers: [
     provideIcons({
@@ -79,6 +82,8 @@ export class HeroDisplayTallComponent {
   public hasItems = computed(() => hasAnyitemsToUse());
 
   public canUseItemsOnThisHero = computed(() => canUseItemsOnHero(this.hero()));
+
+  public heroForce = computed(() => heroStatValue(this.hero(), 'force'));
 
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();

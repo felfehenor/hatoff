@@ -19,7 +19,7 @@
         @if(heroData.level < heroData.maxLevel) { [{{ heroData.xp / heroData.maxXp | percent }}] } </div>
 
           <div class="text-sm">
-            <app-damage-type [damage]="heroData.stats.force" [id]="heroData.damageTypeId"></app-damage-type>
+            <app-hero-damage-type [hero]="heroData"></app-hero-damage-type>
           </div>
       </div>
     </div>

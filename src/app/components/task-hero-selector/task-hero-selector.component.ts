@@ -39,10 +39,10 @@ import {
 import { BlurCardComponent } from '../blur-card/blur-card.component';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
-import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
+import { HeroDamageTypeComponent } from '../hero-damage-type/hero-damage-type.component';
 import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
@@ -53,7 +53,6 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
   selector: 'app-task-hero-selector',
   imports: [
     HeroArtComponent,
-    DamageTypeComponent,
     HeroAssignmentComponent,
     ButtonCloseComponent,
     HeroArchetypeListComponent,
@@ -68,6 +67,7 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     BlurCardComponent,
     HeroStatusComponent,
     AnalyticsClickDirective,
+    HeroDamageTypeComponent,
   ],
   providers: [
     provideIcons({

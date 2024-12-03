@@ -37,7 +37,7 @@
 
           <app-hero-level-tagline [hero]="hero" [showXp]="false"></app-hero-level-tagline>
 
-          <app-damage-type [damage]="hero.stats.force" [id]="hero.damageTypeId"></app-damage-type>
+          <app-damage-type [damage]="heroForce(hero)" [id]="hero.damageTypeId"></app-damage-type>
 
           <app-hero-archetype-list [hero]="hero"></app-hero-archetype-list>
 

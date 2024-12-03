@@ -14,6 +14,7 @@ import {
   GameTask,
 } from '../interfaces';
 import { sendDesignEvent } from './analytics';
+import { heroGainRandomInjury, heroInjuries } from './attribute';
 import {
   didHeroesWin,
   doCombatRound,
@@ -29,7 +30,7 @@ import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
 import { gainResource } from './resource';
-import { randomChoice } from './rng';
+import { randomChoice, succeedsChance } from './rng';
 import { heroesAllocatedToTask } from './task';
 
 export function setActiveDungeon(dungeon: GameDungeon): void {
@@ -236,15 +237,29 @@ export function heroLoseCombat(): void {
   sendDesignEvent(`Exploration:${currentDungeonName()}:Failure`);
   notifyError('The exploration party was unsuccessful...', true);
 
+  const finalizeForHero = (hero: GameHero) => {
+    stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
+    heroGainRandomInjury(hero);
+    notify(`${hero.name} has been injured...`, 'Dungeon');
+  };
+
   heroesInExploreTask().forEach((hero) => {
     if (isHardMode()) {
-      sendDesignEvent(`Hero:PermaDeath:${currentDungeonName()}`);
-      removeHero(hero);
-      notify(`${hero.name} has perished...`, 'Dungeon');
+      const injuries = heroInjuries(hero);
+      const permadeathChance = 25 + injuries.length * 10;
+
+      if (succeedsChance(permadeathChance)) {
+        sendDesignEvent(`Hero:PermaDeath:${currentDungeonName()}`);
+        removeHero(hero);
+        notify(`${hero.name} has perished...`, 'Dungeon');
+      } else {
+        finalizeForHero(hero);
+      }
+
       return;
     }
 
-    stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
+    finalizeForHero(hero);
   });
 
   exitDungeon();

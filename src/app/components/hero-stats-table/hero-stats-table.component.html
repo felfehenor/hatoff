@@ -6,7 +6,18 @@
         <ng-icon [name]="stat.icon" [color]="stat.color"></ng-icon>
         {{ stat.name | titlecase }}
       </td>
-      <td class="text-right">{{ hero().stats[stat.name] | number }}</td>
+      <td class="text-right">{{ statValue(hero(), stat.name) | number:'1.0-2' }}</td>
+      <td>
+        @let delta = statDelta(hero(), stat.name);
+
+        @if(delta > 0) {
+        <span class="text-success">+{{ delta | number:'1.0-2' }}</span>
+        }
+
+        @if(delta < 0) { <!---->
+          <span class="text-error">{{ delta | number:'1.0-2' }}</span>
+          }
+      </td>
     </tr>
     }
   </tbody>

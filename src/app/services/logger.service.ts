@@ -18,6 +18,7 @@ export class LoggerService {
     'is not valid JSON',
     'Script error',
     'jQuery',
+    'The object is in an invalid state.',
   ];
 
   init() {

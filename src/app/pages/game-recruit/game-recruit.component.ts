@@ -18,6 +18,7 @@ import {
   doRecruitReroll,
   gamestate,
   getEntry,
+  heroStatValue,
   populationCap,
   recruitCost,
   recruitHero,
@@ -67,7 +68,9 @@ export class GameRecruitComponent {
   public recruitDesc(hero: GameHero): string {
     const damageType =
       getEntry<GameDamageType>(hero.damageTypeId)?.name ?? 'Unknown';
-    return `Are you sure you want to recruit ${hero.name}? They do ${hero.stats.force} ${damageType} damage.`;
+    return `Are you sure you want to recruit ${
+      hero.name
+    }? They do ${this.heroForce(hero)} ${damageType} damage.`;
   }
 
   public recruitHero(hero: GameHero, index: number): void {
@@ -85,5 +88,9 @@ export class GameRecruitComponent {
     timer(2000).subscribe(() => {
       this.isRerollOnTimeout.set(false);
     });
+  }
+
+  public heroForce(hero: GameHero): number {
+    return heroStatValue(hero, 'force');
   }
 }

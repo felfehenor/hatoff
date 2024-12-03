@@ -8,6 +8,7 @@ import {
 import { isHardMode } from './difficulty';
 import { heroesInExploreTask, isDungeonInProgress } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
+import { heroStatValue } from './hero';
 import { allUnlockedDamageTypes, allUnlockedTasks } from './research';
 import {
   allocationBonusForTask,
@@ -155,7 +156,7 @@ export function getGlobalBoostForDamageType(type: GameDamageType): number {
       .flatMap((t) =>
         heroesAllocatedToTask(t).filter((h) => h.damageTypeId === type.id),
       )
-      .map((h) => h.stats.force),
+      .map((h) => heroStatValue(h, 'force')),
   );
 }
 
