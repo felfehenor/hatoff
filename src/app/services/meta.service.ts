@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { marked } from 'marked';
-import { timer } from 'rxjs';
+import { interval } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 interface VersionInfo {
@@ -81,7 +81,7 @@ export class MetaService {
       console.error('Could not load changelog (current) - probably on local.');
     }
 
-    timer(15 * 60 * 1000).subscribe(() => {
+    interval(15 * 60 * 1000).subscribe(() => {
       this.checkVersionAgainstLiveVersion();
     });
   }
