@@ -119,9 +119,7 @@ export function hasEnoughFortifications(): boolean {
 
 export function generateTownAttack(): void {
   const availableTasks = allUnlockedTasks().filter(
-    (t) =>
-      !getEntry<GameDamageType>(t.damageTypeId)?.isAny &&
-      destroyableUpgrades(t).length > 0,
+    (t) => destroyableUpgrades(t).length > 0,
   );
   const numTasks = sample([1, 2]);
   const chosenTasks = sampleSize(availableTasks, numTasks).map((t) => t.id);
