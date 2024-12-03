@@ -218,9 +218,10 @@ export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
 
   const baseHeroStat = hero.stats[stat];
   const baseStatValue = baseHeroStat + deltaValue;
-  const statValueAfterPercentChange = baseStatValue * (deltaPercent / 100);
+  const statValueAfterPercentChange =
+    baseStatValue * ((100 + deltaPercent) / 100);
 
-  return statValueAfterPercentChange;
+  return statValueAfterPercentChange - baseHeroStat;
 }
 
 export function heroStatValue(hero: GameCombatant, stat: GameHeroStat): number {

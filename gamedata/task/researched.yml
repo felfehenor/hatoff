@@ -12,6 +12,8 @@
   resourceRewardPerCycle: 10
   maxLevel: 2
 
+  earnedAttributeId: Pushy
+
   possibleUpgradeIds:
     - More Heroes I
     - More Heroes II

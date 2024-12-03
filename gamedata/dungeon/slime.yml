@@ -43,6 +43,8 @@
 
   stunTimeOnFailure: 150
 
+  earnedAttributeId: Slimy
+
   requiresLootIds:
     - Medicinal Slime
 

@@ -76,3 +76,22 @@
   rewards:
     - resourceId: Stone
       resourceValue: 25
+
+- id: ca30bf85-5862-47eb-9684-044cb276d622
+  name: Goblin Bishop
+  archetypeIds: []
+  level: 15
+
+  damageTypeId: Spiritual
+
+  stats:
+    health: 150
+    progress: 0
+    force: 25
+    resistance: 7
+    piety: 100
+    speed: 10
+
+  rewards:
+    - resourceId: Stone
+      resourceValue: 50

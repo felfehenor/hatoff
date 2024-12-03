@@ -26,6 +26,8 @@
   resourceRewardPerCycle: 1
   maxLevel: 1
 
+  earnedAttributeId: Resistant
+
   possibleUpgradeIds:
     - More Heroes I
     - More Heroes II
@@ -49,6 +51,8 @@
   resourceIdPerCycle: Wood
   resourceRewardPerCycle: 1
   maxLevel: 1
+
+  earnedAttributeId: Hardy
 
   possibleUpgradeIds:
     - More Heroes I
@@ -76,6 +80,8 @@
   resourceRewardPerCycle: 1
   maxLevel: 1
 
+  earnedAttributeId: Hardened
+
   possibleUpgradeIds:
     - More Heroes I
     - More Heroes II
@@ -102,6 +108,8 @@
   resourceRewardPerCycle: 1
   maxLevel: 1
 
+  earnedAttributeId: Fortuitous
+
   possibleUpgradeIds:
     - More Heroes I
     - More Heroes II
@@ -125,6 +133,8 @@
   damageRequiredPerCycle: 25
   xpRequiredPerLevel: 2500
   maxLevel: 1
+
+  earnedAttributeId: Inquisitive
 
   resourceRewardPerCycle: 1
   applyResultsToResearch: true

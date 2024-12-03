@@ -4,6 +4,8 @@
 
   stunTimeOnFailure: 150
 
+  earnedAttributeId: Goblish
+
   requiresLootIds:
     - Slimy Sword
 
@@ -59,7 +61,7 @@
       lootId: Goblish Club
 
 - id: ee7a1f28-3e50-4d9b-b0a7-4406fb332d31
-  name: 'Goblin Forest - Cave'
+  name: 'Goblin Cave'
   description: Explore a cave of Goblins in search of humanoid relics.
 
   stunTimeOnFailure: 450
@@ -120,3 +122,86 @@
       xpGained: 0
       ticksRequired: 1500
       lootId: Goblish Dagger
+
+- id: f147371a-b310-4519-b311-16b3c0e5a0c2
+  name: 'Goblish Shadow Altar'
+  description: Deep in the Goblin Cave is a crude altar attracting darkness. Explore and purify it in search of "relics".
+
+  stunTimeOnFailure: 600
+
+  earnedAttributeId: Shadowstepper
+
+  requiresLootIds:
+    - Goblish Dagger
+
+  encounters:
+    - type: fight
+      xpGained: 500
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+
+    - type: fight
+      xpGained: 300
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Bishop
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 400
+      treasureIds:
+        - EXP Potion (Large)
+
+    - type: fight
+      xpGained: 600
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Bishop
+        - monsterId: Goblin Bishop
+        - monsterId: Goblin Bishop
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 600
+      treasureIds:
+        - Smelling Salts
+        - EXP Potion (Large)
+
+    - type: fight
+      xpGained: 1500
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Bishop
+        - monsterId: Goblin Bishop
+        - monsterId: Goblin Bishop
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 350
+      treasureIds:
+        - Smelling Salts
+        - EXP Potion (Large)
+
+    - type: loot
+      xpGained: 0
+      ticksRequired: 2000
+      lootId: Goblish Staff

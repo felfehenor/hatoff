@@ -1,6 +1,7 @@
 import { sumBy } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import {
+  GameAttribute,
   GameDungeon,
   GameDungeonEncounter,
   GameDungeonEncounterFight,
@@ -14,7 +15,11 @@ import {
   GameTask,
 } from '../interfaces';
 import { sendDesignEvent } from './analytics';
-import { heroGainRandomInjury, heroInjuries } from './attribute';
+import {
+  heroGainAttribute,
+  heroGainRandomInjury,
+  heroInjuries,
+} from './attribute';
 import {
   didHeroesWin,
   doCombatRound,
@@ -162,6 +167,16 @@ export function clearActiveDungeon() {
 
     return state;
   });
+
+  const earnedAttributeId = dungeon.earnedAttributeId;
+  if (earnedAttributeId) {
+    heroesInExploreTask().forEach((hero) => {
+      const attribute = getEntry<GameAttribute>(earnedAttributeId)!;
+      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Dungeon');
+
+      heroGainAttribute(hero, attribute);
+    });
+  }
 
   exitDungeon();
 }

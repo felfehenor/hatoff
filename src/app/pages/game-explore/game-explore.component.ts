@@ -11,7 +11,7 @@ import { allUnlockedDungeons } from '../../helpers';
   styleUrl: './game-explore.component.scss',
 })
 export class GameExploreComponent {
-  public mode = signal<'Dungeons' | 'Relics'>('Relics');
+  public mode = signal<'Dungeons' | 'Relics'>('Dungeons');
 
   public dungeonList = computed(() => allUnlockedDungeons());
 }

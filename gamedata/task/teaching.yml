@@ -36,6 +36,8 @@
   maxLevel: 1
   convertResourceIdIntoXp: Knowledge
 
+  earnedAttributeId: Learned
+
   possibleUpgradeIds:
     - More Heroes I
     - More Heroes II

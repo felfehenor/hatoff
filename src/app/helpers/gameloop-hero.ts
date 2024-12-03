@@ -1,11 +1,18 @@
 import { sum } from 'lodash';
-import { GameHero, GameResearch, GameResource, GameTask } from '../interfaces';
+import {
+  GameAttribute,
+  GameHero,
+  GameResearch,
+  GameResource,
+  GameTask,
+} from '../interfaces';
 import { sendDesignEvent } from './analytics';
 import {
   getArchetypeResourceBonusForHero,
   getArchetypeTaskBonusForHero,
   getArchetypeXpBonusForHero,
 } from './archetype';
+import { heroGainAttribute } from './attribute';
 import { getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
 import {
@@ -20,6 +27,7 @@ import {
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import { getResourceValue, zeroResource } from './resource';
+import { succeedsChance } from './rng';
 import {
   heroesAllocatedToTask,
   maxLevelForTask,
@@ -218,6 +226,24 @@ function rewardTaskDoers(task: GameTask): void {
 
     if (statValueGained > 0 && task.convertResourceStat) {
       gainStat(hero, task.convertResourceStat, statValueGained);
+    }
+
+    let chanceToGetAttribute = hero.taskLevels[task.id] ?? 0;
+    if (hero.damageTypeId !== task.damageTypeId) {
+      chanceToGetAttribute -= 2;
+    }
+
+    if (
+      task.earnedAttributeId &&
+      hero.attributeIds &&
+      !hero.attributeIds.includes(task.earnedAttributeId) &&
+      hero.taskLevels[task.id] > 0 &&
+      succeedsChance(chanceToGetAttribute)
+    ) {
+      const attribute = getEntry<GameAttribute>(task.earnedAttributeId)!;
+      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Success');
+
+      heroGainAttribute(hero, attribute);
     }
   });
 }
