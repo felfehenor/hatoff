@@ -29,9 +29,12 @@ export function halfCardClasses() {
 }
 
 export function taskErrors(task: GameTask): string | undefined {
+  const myHeroes = heroesAllocatedToTask(task);
+  if (myHeroes.length === 0) return undefined;
+
   // sovereign, and anything like it
   if (task.spreadHeroDamageType) {
-    const heroes = heroesAllocatedToTask(task).filter(
+    const heroes = myHeroes.filter(
       (f) => getEntry<GameDamageType>(f.damageTypeId)?.isAny,
     );
     if (heroes.length > 0) return 'Any has no effect here.';
@@ -39,12 +42,11 @@ export function taskErrors(task: GameTask): string | undefined {
 
   // church/school
   if (task.siblingTaskIdRequiringHeroesAllocated) {
-    const myHeroes = heroesAllocatedToTask(task);
     const otherTask = getEntry<GameTask>(
       task.siblingTaskIdRequiringHeroesAllocated,
     )!;
-    const heroes = heroesAllocatedToTask(otherTask);
-    if (myHeroes.length > 0 && heroes.length === 0)
+    const otherHeroes = heroesAllocatedToTask(otherTask);
+    if (myHeroes.length > 0 && otherHeroes.length === 0)
       return `${otherTask.name} needs heroes allocated to it for this one to operate.`;
   }
 
@@ -59,7 +61,7 @@ export function taskErrors(task: GameTask): string | undefined {
 
   // heal/etc
   if (task.slowlyRevivesHeroes) {
-    const heroes = heroesAllocatedToTask(task)
+    const heroes = myHeroes
       .filter((f) => !isStunned(f) && heroInjuries(f).length === 0)
       .map((f) => f.name);
     if (heroes.length > 0)
