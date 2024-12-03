@@ -17,6 +17,7 @@ export class LoggerService {
     'Failed to fetch dynamically imported module',
     'is not valid JSON',
     'Script error',
+    'jQuery',
   ];
 
   init() {
