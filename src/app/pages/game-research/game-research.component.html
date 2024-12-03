@@ -2,14 +2,15 @@
   <span header>Research Tasks</span>
 
   <div pageactions class="flex items-center">
-    <div class="tabs tabs-boxed">
-      @for(category of allResearchCategories(); track category.name) {
-      <a class="tab" (click)="activeType.set(category.name)" [class.tab-active]="activeType() === category.name"
-        (keydown.enter)="activeType.set(category.name)" tabindex="1">
-        {{ category.name }} ({{ category.num }})
-      </a>
-      }
-    </div>
+    <label class="form-control">
+      <select class="select select-bordered select-sm" [(ngModel)]="activeType">
+        @for(category of allResearchCategories(); track category.name) {
+        <option [value]="category.name">
+          {{ category.name }} ({{ category.num }})
+        </option>
+        }
+      </select>
+    </label>
   </div>
 
   <app-research-list [displayedResearch]="researchList()"></app-research-list>

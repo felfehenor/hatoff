@@ -29,7 +29,7 @@
         <div class="ml-2 flex items-center">
           @if(canChangeModes()) {
           <button class="btn btn-secondary btn-xs mr-4" [class.btn-outline]="currentMode() !== 'heroes'"
-            (click)="currentMode.set('heroes')">
+            (click)="currentMode.set('heroes')" [appAnalyticsClick]="'Task:' + activeTask.name + ':ViewHeroes'">
             Heroes ({{ heroes().length }}/{{ maxHeroes() }})
           </button>
           } @else {
@@ -41,7 +41,8 @@
 
         @if(canChangeModes()) {
         <button class="btn btn-secondary btn-xs mr-4" [class.btn-outline]="currentMode() !== 'upgrades'"
-          (click)="currentMode.set('upgrades')">Upgrades</button>
+          (click)="currentMode.set('upgrades')"
+          [appAnalyticsClick]="'Task:' + activeTask.name + ':ViewUpgrades'">Upgrades</button>
         }
       </div>
     </div>
@@ -49,14 +50,15 @@
     @if(currentMode() === 'heroes') {
     <div class="overflow-y-auto p-1">
       @if(allHeroes().length === 0) {
-        <div class="italic">
-          You don't have any heroes that can be assigned to this task.
-        </div>
+      <div class="italic">
+        You don't have any heroes that can be assigned to this task at this time.
+      </div>
       }
 
       @for(hero of allHeroes(); track hero.id) {
       <div class="card card-side foreground-2 shadow-xl mb-4 mr-2" [appHeroSpecialGlow]="hero"
-        (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)" tabindex="1"
+        (click)="selectHero(hero)" (keydown.enter)="selectHero(hero)"
+        [appAnalyticsClick]="'Task:' + activeTask.name + ':Assign:' + heroDamageType(hero)" tabindex="1"
         [class.ring-2]="isHeroSelected(hero)">
         <figure class="max-w-[96px] pl-2 flex items-center">
           <app-hero-status [hero]="hero" class="absolute top-2 left-2"></app-hero-status>
@@ -76,7 +78,7 @@
           </div>
 
           <div>
-            <app-damage-type [id]="hero.damageTypeId" [damage]="hero.stats.force"></app-damage-type>
+            <app-hero-damage-type [hero]="hero"></app-hero-damage-type>
           </div>
 
           <app-hero-archetype-list [hero]="hero"></app-hero-archetype-list>
@@ -113,6 +115,7 @@
 
           <div class="absolute right-[32px] top-0 bottom-0 flex content-center items-center">
             <button class="btn btn-primary btn-sm" [disabled]="!canBuyUpgrade(upgrade)"
+              [appAnalyticsClick]="'Task:' + activeTask.name + ':Upgrade:' + upgrade.name"
               (click)="buyUpgrade(upgrade)">Buy</button>
           </div>
         </div>

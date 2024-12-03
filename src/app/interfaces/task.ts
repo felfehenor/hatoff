@@ -111,4 +111,14 @@ export interface GameTask extends Content {
    * The possible upgrades this task can hold.
    */
   possibleUpgradeIds?: string[];
+
+  /**
+   * Whether or not the task should slowly unstun heroes.
+   */
+  slowlyRevivesHeroes?: boolean;
+
+  /**
+   * The attribute a hero can earn by doing this task.
+   */
+  earnedAttributeId?: string;
 }

@@ -9,8 +9,8 @@ import {
 import { getArchetypeCombatStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
-import { getHero } from './hero';
-import { randomNumber, randomrng } from './rng';
+import { getHero, heroStatValue } from './hero';
+import { randomNumber, succeedsChance } from './rng';
 
 export function toCombatant(char: GameCombatant): GameCombatant {
   const newStats: Record<GameHeroStat, number> = {
@@ -42,6 +42,7 @@ export function toCombatant(char: GameCombatant): GameCombatant {
     level: char.level,
     name: char.name,
     stats: newStats,
+    attributeIds: char.attributeIds,
   };
 }
 
@@ -91,8 +92,7 @@ export function doTeamAction(
       if (!target) return;
 
       const hitChance = chanceToHit(attacker, target);
-      const hitRoll = randomrng()() * 100;
-      if (hitRoll > hitChance) return;
+      if (!succeedsChance(hitChance)) return;
 
       const damage = damageDealt(attacker, target);
       target.currentHp -= damage;
@@ -121,12 +121,16 @@ export function chanceToHit(
   defender: GameCombatant,
 ): number {
   // higher than opponent speed = higher chance to hit
-  const diff = clamp(attacker.stats.speed - defender.stats.speed, -30, 15);
+  const diff = clamp(
+    heroStatValue(attacker, 'speed') - heroStatValue(defender, 'speed'),
+    -30,
+    15,
+  );
   return 80 + diff;
 }
 
 export function baseHeroDamage(attacker: GameCombatant): number {
-  return attacker.stats.force;
+  return heroStatValue(attacker, 'force');
 }
 
 export function damageDealt(
@@ -140,14 +144,17 @@ export function damageDealt(
 }
 
 export function damageReduction(defender: GameCombatant): number {
-  return Math.max(0.1, 0.92 * 0.996 ** defender.stats.resistance + 0.07);
+  return Math.max(
+    0.1,
+    0.92 * 0.996 ** heroStatValue(defender, 'resistance') + 0.07,
+  );
 }
 
 export function attemptToDie(character: GameCombatant): void {
   const pietyRequired = 25 + randomNumber(75);
   if (character.stats.piety >= pietyRequired) {
     character.stats.piety -= pietyRequired;
-    character.currentHp = character.stats.health;
+    character.currentHp = heroStatValue(character, 'health');
 
     // write it back
     if (character.id) {
@@ -167,5 +174,5 @@ export function getCombatStat(
   character: GameCombatant,
   stat: GameHeroStat,
 ): number {
-  return character.stats[stat];
+  return heroStatValue(character, stat);
 }

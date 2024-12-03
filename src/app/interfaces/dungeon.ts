@@ -33,6 +33,7 @@ export interface GameDungeonEncounterBase {
 export interface GameDungeon extends Content {
   description: string;
   stunTimeOnFailure: number;
+  earnedAttributeId?: string;
 
   requiresLootIds?: string[];
 

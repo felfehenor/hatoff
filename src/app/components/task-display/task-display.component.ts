@@ -1,5 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { tablerInfoHexagon } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { sum } from 'lodash';
 import {
@@ -11,6 +13,7 @@ import {
   isTaskThreatened,
   maxHeroesForTask,
   maxTaskLevel,
+  taskErrors,
   taskLevel,
   totalHeroForce,
   totalHeroSpeed,
@@ -22,17 +25,23 @@ import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.compo
 import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 
 @Component({
-    selector: 'app-task-display',
-    imports: [
-        TaskHeroSmallComponent,
-        DamageTypeBreakdownComponent,
-        TaskSynergyComponent,
-        LevelDisplayComponent,
-        TippyDirective,
-        DecimalPipe,
-    ],
-    templateUrl: './task-display.component.html',
-    styleUrl: './task-display.component.scss'
+  selector: 'app-task-display',
+  imports: [
+    TaskHeroSmallComponent,
+    DamageTypeBreakdownComponent,
+    TaskSynergyComponent,
+    LevelDisplayComponent,
+    TippyDirective,
+    DecimalPipe,
+    NgIconComponent,
+  ],
+  providers: [
+    provideIcons({
+      tablerInfoHexagon,
+    }),
+  ],
+  templateUrl: './task-display.component.html',
+  styleUrl: './task-display.component.scss',
 })
 export class TaskDisplayComponent {
   public task = input.required<GameTask>();
@@ -72,4 +81,6 @@ export class TaskDisplayComponent {
   });
 
   public requiredPerTick = computed(() => this.task().damageRequiredPerCycle);
+
+  public errorString = computed(() => taskErrors(this.task()));
 }

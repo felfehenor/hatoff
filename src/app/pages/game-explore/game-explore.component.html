@@ -1,5 +1,21 @@
 <app-page-card>
   <span header>Explore the World</span>
 
+  <div pageactions>
+    <div role="tablist" class="tabs tabs-boxed">
+      <a role="tab" class="tab" [class.tab-active]="mode() === 'Dungeons'" (click)="mode.set('Dungeons')"
+        (keydown.enter)="mode.set('Dungeons')" tabindex="1">Dungeons</a>
+
+      <a role="tab" class="tab" [class.tab-active]="mode() === 'Relics'" (click)="mode.set('Relics')"
+        (keydown.enter)="mode.set('Relics')" tabindex="1">Relics</a>
+    </div>
+  </div>
+
+  @if(mode() === 'Dungeons') {
   <app-dungeon-list [displayedDungeons]="dungeonList()"></app-dungeon-list>
+  }
+
+  @if(mode() === 'Relics') {
+  <app-relic-list></app-relic-list>
+  }
 </app-page-card>

@@ -33,6 +33,7 @@
         <div class="join">
           @for(difficulty of difficulties; track $index) {
           <button class="btn join-item" (click)="gameDifficulty.set(difficulty)"
+            [appAnalyticsClick]="'Setup:Difficulty:' + (difficulty | titlecase)"
             [class.btn-secondary]="gameDifficulty() === difficulty">{{ difficulty | titlecase }}</button>
           }
         </div>
@@ -43,7 +44,8 @@
       </div>
 
       <div class="card-actions pt-3">
-        <button class="btn btn-primary btn-wide" (click)="play()" [disabled]="!canSubmit()">Play</button>
+        <button class="btn btn-primary btn-wide" (click)="play()" [disabled]="!canSubmit()"
+          appAnalyticsClick="Setup:Play">Play</button>
 
         <app-savefile-import></app-savefile-import>
       </div>

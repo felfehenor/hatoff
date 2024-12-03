@@ -10,6 +10,7 @@
   <div class="hero-container" [ngClass]="cardClasses()">
     <app-dungeon-display [dungeon]="dungeon" [class.cursor-pointer]="!isAnyDungeonActive()"
       [class.cursor-not-allowed]="isAnyDungeonActive()" (click)="selectDungeon(dungeon)"
+      [appAnalyticsClick]="'Dungeon:Select:' + dungeon.name"
       [active]="activeDungeon() === dungeon.id"></app-dungeon-display>
   </div>
   }

@@ -17,7 +17,7 @@
 
       @for(entry of usableItems(); track $index) {
       <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 p-2">
-        <figure class="max-w-[96px] pl-2 flex items-center">
+        <figure class="max-w-[96px] min-w-[96px] pl-2 flex items-center">
           <ng-icon [name]="entry.item.icon" [color]="entry.item.color" size="72px"></ng-icon>
         </figure>
 
@@ -31,7 +31,8 @@
           </div>
 
           <div class="w-[96px] flex content-center items-center">
-            <button class="btn btn-primary btn-sm" (click)="useItem(entry.item)">Use Item</button>
+            <button class="btn btn-primary btn-sm" (click)="useItem(entry.item)"
+              [appAnalyticsClick]="'Item:Use:' + entry.item.name">Use Item</button>
           </div>
         </div>
       </div>

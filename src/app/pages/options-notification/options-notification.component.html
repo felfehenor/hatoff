@@ -11,7 +11,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationResourceGain') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Notifications:ResourceGain"
               (click)="setValueForOption('notificationResourceGain', !currentValueForOption('notificationResourceGain'))" />
             <span class="label-text">Resource Gain</span>
           </label>
@@ -20,7 +20,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationItem') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Notifications:Item"
               (click)="setValueForOption('notificationItem', !currentValueForOption('notificationItem'))" />
             <span class="label-text">Item Usage</span>
           </label>
@@ -29,7 +29,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationDefense') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Notifications:Defense"
               (click)="setValueForOption('notificationDefense', !currentValueForOption('notificationDefense'))" />
             <span class="label-text">Defensive Measures</span>
           </label>
@@ -38,7 +38,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationDungeon') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Notifications:Dungeon"
               (click)="setValueForOption('notificationDungeon', !currentValueForOption('notificationDungeon'))" />
             <span class="label-text">Dungeon Updates</span>
           </label>
@@ -47,7 +47,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationRecruitment') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Notifications:Recruitment"
               (click)="setValueForOption('notificationRecruitment', !currentValueForOption('notificationRecruitment'))" />
             <span class="label-text">Special Heroes For Recruitment</span>
           </label>
@@ -56,7 +56,7 @@
         <div class="form-control">
           <label class="label cursor-pointer label-checkbox">
             <input type="checkbox" [checked]="currentValueForOption('notificationLevelUp') === true"
-              class="checkbox checkbox-secondary"
+              class="checkbox checkbox-secondary" appAnalyticsClick="Options:Notifications:LevelUp"
               (click)="setValueForOption('notificationLevelUp', !currentValueForOption('notificationLevelUp'))" />
             <span class="label-text">Level Up</span>
           </label>

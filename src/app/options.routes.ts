@@ -3,8 +3,14 @@ import { requireSetupGuard } from './guards/require-setup.guard';
 import { OptionsDebugComponent } from './pages/options-debug/options-debug.component';
 import { OptionsNotificationComponent } from './pages/options-notification/options-notification.component';
 import { OptionsSavefileComponent } from './pages/options-savefile/options-savefile.component';
+import { OptionsUIComponent } from './pages/options-ui/options-ui.component';
 
 export const optionsRoutes: Routes = [
+  {
+    component: OptionsUIComponent,
+    path: 'ui',
+    canActivate: [requireSetupGuard],
+  },
   {
     component: OptionsSavefileComponent,
     path: 'savefile',
@@ -23,6 +29,6 @@ export const optionsRoutes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'savefile',
+    redirectTo: 'ui',
   },
 ];

@@ -10,23 +10,24 @@ import {
   tablerShield,
 } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
+import { heroStatDelta, heroStatValue } from '../../helpers';
 import { GameHero, GameHeroStat } from '../../interfaces';
 
 @Component({
-    selector: 'app-hero-stats-table',
-    imports: [TitleCasePipe, DecimalPipe, TippyDirective, NgIconComponent],
-    providers: [
-        provideIcons({
-            tablerHeart,
-            tablerProgressBolt,
-            tablerBolt,
-            tablerShield,
-            tablerCloud,
-            tablerClock,
-        }),
-    ],
-    templateUrl: './hero-stats-table.component.html',
-    styleUrl: './hero-stats-table.component.scss'
+  selector: 'app-hero-stats-table',
+  imports: [TitleCasePipe, DecimalPipe, TippyDirective, NgIconComponent],
+  providers: [
+    provideIcons({
+      tablerHeart,
+      tablerProgressBolt,
+      tablerBolt,
+      tablerShield,
+      tablerCloud,
+      tablerClock,
+    }),
+  ],
+  templateUrl: './hero-stats-table.component.html',
+  styleUrl: './hero-stats-table.component.scss',
 })
 export class HeroStatsTableComponent {
   public hero = input.required<GameHero>();
@@ -76,4 +77,12 @@ export class HeroStatsTableComponent {
       color: '#e4a700',
     },
   ];
+
+  public statValue(hero: GameHero, stat: GameHeroStat) {
+    return heroStatValue(hero, stat);
+  }
+
+  public statDelta(hero: GameHero, stat: GameHeroStat) {
+    return heroStatDelta(hero, stat);
+  }
 }

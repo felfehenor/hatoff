@@ -1,12 +1,20 @@
 import { difference, uniq } from 'lodash';
-import { GameDamageType, GameHero, GameHeroStat } from '../interfaces';
+import {
+  GameAttribute,
+  GameDamageType,
+  GameHero,
+  GameHeroStat,
+} from '../interfaces';
+import { isInjury } from './attribute';
 import { getEntry } from './content';
+import { isHardMode } from './difficulty';
 import { gamestate } from './gamestate';
 import {
   addHero,
   allHeroes,
   createHero,
   createSpecialHero,
+  isHeroAbleToDoMostThings,
   isMaxLevel,
   maxXpForLevel,
   removeHero,
@@ -20,7 +28,9 @@ import {
 import { randomChoice } from './rng';
 
 export function validFusionHeroes(): GameHero[] {
-  return allHeroes().filter((f) => isMaxLevel(f));
+  return allHeroes().filter(
+    (f) => isMaxLevel(f) && isHeroAbleToDoMostThings(f),
+  );
 }
 
 export function isValidFusionHeroForHero(
@@ -38,7 +48,9 @@ export function isValidFusionHeroForHero(
 }
 
 export function validFusionHeroesForHero(hero: GameHero): GameHero[] {
-  return validFusionHeroes().filter((h) => isValidFusionHeroForHero(hero, h));
+  return validFusionHeroes().filter(
+    (h) => isValidFusionHeroForHero(hero, h) && isHeroAbleToDoMostThings(h),
+  );
 }
 
 export function canFuseHeroes(): boolean {
@@ -47,7 +59,12 @@ export function canFuseHeroes(): boolean {
 
   return heroes.some(
     (h) =>
-      isMaxLevel(h) && heroes.some((subH) => isValidFusionHeroForHero(h, subH)),
+      isMaxLevel(h) &&
+      isHeroAbleToDoMostThings(h) &&
+      heroes.some(
+        (subH) =>
+          isValidFusionHeroForHero(h, subH) && isHeroAbleToDoMostThings(subH),
+      ),
   );
 }
 
@@ -148,6 +165,18 @@ export function heroFusionResult(
   });
 
   newHero.taskLevels = newTaskLevels;
+
+  newHero.attributeIds = [
+    ...new Set([...bigHero.attributeIds, ...smallHero.attributeIds]),
+  ].filter((a) => !isInjury(getEntry<GameAttribute>(a)!));
+
+  if (isHardMode()) {
+    newHero.attributeIds.push(
+      ...bigHero.attributeIds.filter((a) =>
+        isInjury(getEntry<GameAttribute>(a)!),
+      ),
+    );
+  }
 
   return newHero;
 }

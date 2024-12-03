@@ -1,6 +1,8 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   ENVIRONMENT_INITIALIZER,
+  ErrorHandler,
   importProvidersFrom,
   inject,
   provideZoneChangeDetection,
@@ -24,11 +26,14 @@ import {
 import { provideNgIconsConfig } from '@ng-icons/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { routes } from './app.routes';
+import { AnalyticsService } from './services/analytics.service';
 import { APIService } from './services/api.service';
 import { ContentService } from './services/content.service';
 import { GamestateService } from './services/gamestate.service';
+import { LoggerService, RollbarErrorHandler } from './services/logger.service';
 import { MetaService } from './services/meta.service';
 import { NotifyService } from './services/notify.service';
+import { ThemeService } from './services/theme.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -58,9 +63,21 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     {
-      provide: ENVIRONMENT_INITIALIZER,
+      provide: ErrorHandler,
+      useClass: RollbarErrorHandler,
+    },
+    {
+      provide: APP_INITIALIZER,
       multi: true,
-      useValue: () => inject(MetaService).init(),
+      useValue: async () => {
+        const meta = inject(MetaService);
+        const logger = inject(LoggerService);
+        const analytics = inject(AnalyticsService);
+
+        await meta.init();
+        logger.init();
+        analytics.init();
+      },
     },
     {
       provide: ENVIRONMENT_INITIALIZER,
@@ -81,6 +98,11 @@ export const appConfig: ApplicationConfig = {
       provide: ENVIRONMENT_INITIALIZER,
       multi: true,
       useValue: () => inject(GamestateService).init(),
+    },
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      multi: true,
+      useValue: () => inject(ThemeService).init(),
     },
   ],
 };

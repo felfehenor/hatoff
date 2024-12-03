@@ -1,37 +1,62 @@
 import { Component, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FusionHeroDisplayTallComponent } from '../../components/fusion-hero-display-tall/fusion-hero-display-tall.component';
 import { FusionHeroDisplayComponent } from '../../components/fusion-hero-display/fusion-hero-display.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   doFusion,
+  getEntry,
   heroFusionResult,
   validFusionHeroes,
   validFusionHeroesForHero,
 } from '../../helpers';
-import { GameHero } from '../../interfaces';
+import { GameDamageType, GameHero } from '../../interfaces';
 
 @Component({
-    selector: 'app-game-fusion',
-    imports: [
-        PageCardComponent,
-        FusionHeroDisplayComponent,
-        FusionHeroDisplayTallComponent,
-        SweetAlert2Module,
-    ],
-    templateUrl: './game-fusion.component.html',
-    styleUrl: './game-fusion.component.scss'
+  selector: 'app-game-fusion',
+  imports: [
+    PageCardComponent,
+    FusionHeroDisplayComponent,
+    FusionHeroDisplayTallComponent,
+    SweetAlert2Module,
+    AnalyticsClickDirective,
+    FormsModule,
+  ],
+  templateUrl: './game-fusion.component.html',
+  styleUrl: './game-fusion.component.scss',
 })
 export class GameFusionComponent {
   public mainHero = signal<GameHero | undefined>(undefined);
   public subHero = signal<GameHero | undefined>(undefined);
+
+  public secondaryFilterType = signal<'All' | 'Matching' | 'Similar'>('All');
 
   public viableMainHeroes = computed(() => validFusionHeroes());
   public viableSubHeroes = computed(() => {
     const main = this.mainHero();
     if (!main) return [];
 
-    return validFusionHeroesForHero(main);
+    const filterType = this.secondaryFilterType();
+
+    const baseHeroes = validFusionHeroesForHero(main);
+    if (filterType === 'Matching')
+      return baseHeroes.filter((f) => f.damageTypeId === main.damageTypeId);
+
+    if (filterType === 'Similar') {
+      return baseHeroes.filter((h) => {
+        const mainType = getEntry<GameDamageType>(main.damageTypeId)!;
+        const subType = getEntry<GameDamageType>(h.damageTypeId)!;
+
+        return (
+          mainType.subTypes.some((s) => s.damageTypeId === subType.id) ||
+          subType.subTypes.some((s) => s.damageTypeId === mainType.id)
+        );
+      });
+    }
+
+    return baseHeroes;
   });
 
   public resultingHero = computed(() => {

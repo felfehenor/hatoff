@@ -2,8 +2,8 @@ import { PercentPipe } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import { GameHero } from '../../interfaces';
-import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
+import { HeroDamageTypeComponent } from '../hero-damage-type/hero-damage-type.component';
 import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
@@ -11,13 +11,13 @@ import { LevelDisplayComponent } from '../level-display/level-display.component'
 @Component({
   selector: 'app-hero-display',
   imports: [
-    DamageTypeComponent,
     PercentPipe,
     HeroArtComponent,
     LevelDisplayComponent,
     HeroSpecialGlowDirective,
     HeroFusionIndicatorComponent,
     HeroStatusComponent,
+    HeroDamageTypeComponent,
   ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',

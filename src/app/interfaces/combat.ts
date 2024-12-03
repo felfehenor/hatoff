@@ -8,6 +8,7 @@ export interface GameCombatant {
   damageTypeId: string;
   currentHp: number;
   stats: Record<GameHeroStat, number>;
+  attributeIds: string[];
 }
 
 export interface GameCombat {

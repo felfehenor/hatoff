@@ -1,28 +1,33 @@
 import { sum } from 'lodash';
 import {
+  GameAttribute,
   GameHero,
   GameResearch,
   GameResource,
-  GameState,
   GameTask,
 } from '../interfaces';
+import { sendDesignEvent } from './analytics';
 import {
   getArchetypeResourceBonusForHero,
   getArchetypeTaskBonusForHero,
   getArchetypeXpBonusForHero,
 } from './archetype';
+import { heroGainAttribute } from './attribute';
 import { getEntry } from './content';
-import { gamestate, setGameState } from './gamestate';
+import { gamestate, updateGamestate } from './gamestate';
 import {
   gainStat,
   gainXp,
+  heroStatValue,
   isStunned,
+  reduceStun,
   totalHeroForce,
   totalHeroSpeed,
 } from './hero';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
-import { getResourceValue, loseResource, zeroResource } from './resource';
+import { getResourceValue, zeroResource } from './resource';
+import { succeedsChance } from './rng';
 import {
   heroesAllocatedToTask,
   maxLevelForTask,
@@ -32,49 +37,46 @@ import {
 import { resourceBonusForTask, xpBonusForTask } from './upgrade';
 
 function applyHeroSpeed(
-  state: GameState,
   hero: GameHero,
   task: GameTask,
   numTimes: number,
 ): void {
-  state.heroCurrentTaskSpeed[hero.id] ??= 0;
-  state.heroCurrentTaskSpeed[hero.id] += totalHeroSpeed(hero, task, numTimes);
+  updateGamestate((state) => {
+    state.heroCurrentTaskSpeed[hero.id] ??= 0;
+    state.heroCurrentTaskSpeed[hero.id] += totalHeroSpeed(hero, task, numTimes);
+    return state;
+  });
 }
 
-function resetHeroSpeed(state: GameState, hero: GameHero): void {
-  state.heroCurrentTaskSpeed[hero.id] = 0;
+function resetHeroSpeed(hero: GameHero): void {
+  updateGamestate((state) => {
+    state.heroCurrentTaskSpeed[hero.id] = 0;
+    return state;
+  });
 }
 
-function canApplyDamageToTask(
-  state: GameState,
-  hero: GameHero,
-  task: GameTask,
-): boolean {
-  return state.heroCurrentTaskSpeed[hero.id] >= task.speedPerCycle;
+function canApplyDamageToTask(hero: GameHero, task: GameTask): boolean {
+  return gamestate().heroCurrentTaskSpeed[hero.id] >= task.speedPerCycle;
 }
 
-function numTimesToApplyDamageToTask(
-  state: GameState,
-  hero: GameHero,
-  task: GameTask,
-): number {
-  return Math.floor(state.heroCurrentTaskSpeed[hero.id] / task.speedPerCycle);
+function numTimesToApplyDamageToTask(hero: GameHero, task: GameTask): number {
+  return Math.floor(
+    gamestate().heroCurrentTaskSpeed[hero.id] / task.speedPerCycle,
+  );
 }
 
 function applyHeroForce(
-  state: GameState,
   hero: GameHero,
   task: GameTask,
   numTimes: number,
 ): void {
   const damage = totalHeroForce(hero, task, numTimes);
 
-  state.taskProgress[task.id] ??= 0;
-  state.taskProgress[task.id] += damage;
-}
-
-function updateHero(state: GameState, hero: GameHero): void {
-  state.heroes[hero.id] = hero;
+  updateGamestate((state) => {
+    state.taskProgress[task.id] ??= 0;
+    state.taskProgress[task.id] += damage;
+    return state;
+  });
 }
 
 function taskBonusForHero(hero: GameHero, task: GameTask): number {
@@ -92,15 +94,19 @@ function taskBonusForHero(hero: GameHero, task: GameTask): number {
   return rewardBoost;
 }
 
-function numTaskRewards(state: GameState, task: GameTask): number {
-  return Math.floor(state.taskProgress[task.id] / task.damageRequiredPerCycle);
+function numTaskRewards(task: GameTask): number {
+  return Math.floor(
+    gamestate().taskProgress[task.id] / task.damageRequiredPerCycle,
+  );
 }
 
-function isTaskFinished(state: GameState, task: GameTask): boolean {
-  return numTaskRewards(state, task) > 0;
+function isTaskFinished(task: GameTask): boolean {
+  return numTaskRewards(task) > 0;
 }
 
-function finalizeTask(state: GameState, task: GameTask): void {
+function finalizeTask(task: GameTask): void {
+  sendDesignEvent(`Task:${task.name}:Complete`);
+
   if (task.siblingTaskIdRequiringHeroesAllocated) {
     const sibling = getEntry<GameTask>(
       task.siblingTaskIdRequiringHeroesAllocated,
@@ -124,10 +130,16 @@ function finalizeTask(state: GameState, task: GameTask): void {
       (heroBonusSum +
         bonusResources +
         task.resourceRewardPerCycle * numHeroesOnTask) *
-      numTaskRewards(state, task) *
+      numTaskRewards(task) *
       getOption('rewardMultiplier');
-    state.resources[task.resourceIdPerCycle] ??= 0;
-    state.resources[task.resourceIdPerCycle] += gained;
+
+    const taskResourceId = task.resourceIdPerCycle;
+
+    updateGamestate((state) => {
+      state.resources[taskResourceId] ??= 0;
+      state.resources[taskResourceId] += gained;
+      return state;
+    });
 
     notify(`+${gained} ${res?.name ?? '???'}`, 'ResourceGain');
   }
@@ -135,34 +147,41 @@ function finalizeTask(state: GameState, task: GameTask): void {
   if (task.applyResultsToResearch) {
     const researchGained =
       (heroBonusSum + task.resourceRewardPerCycle) *
-      numTaskRewards(state, task) *
+      numTaskRewards(task) *
       getOption('rewardMultiplier');
-    const activeResearch = state.activeResearch;
+    const activeResearch = gamestate().activeResearch;
     const activeResearchEntry = getEntry<GameResearch>(activeResearch);
     if (
       !activeResearchEntry ||
-      state.researchProgress[activeResearch] >=
+      gamestate().researchProgress[activeResearch] >=
         activeResearchEntry.researchRequired
     ) {
       notifyError('Gained research, but not researching anything!');
       return;
     }
 
-    state.researchProgress[activeResearch] ??= 0;
-    state.researchProgress[activeResearch] = Math.min(
-      state.researchProgress[activeResearch] + researchGained,
-      activeResearchEntry.researchRequired,
-    );
+    updateGamestate((state) => {
+      state.researchProgress[activeResearch] ??= 0;
+      state.researchProgress[activeResearch] = Math.min(
+        state.researchProgress[activeResearch] + researchGained,
+        activeResearchEntry.researchRequired,
+      );
+      return state;
+    });
   }
 }
 
-function resetTask(state: GameState, task: GameTask): void {
-  state.taskProgress[task.id] -=
-    task.damageRequiredPerCycle * numTaskRewards(state, task);
+function resetTask(task: GameTask): void {
+  updateGamestate((state) => {
+    state.taskProgress[task.id] -=
+      task.damageRequiredPerCycle * numTaskRewards(task);
+
+    return state;
+  });
 }
 
-function rewardTaskDoers(state: GameState, task: GameTask): void {
-  const xpGained = numTaskRewards(state, task);
+function rewardTaskDoers(task: GameTask): void {
+  const xpGainedTimes = numTaskRewards(task);
   const heroXpBonus = xpBonusForTask(task);
 
   let bonusConversionXp = 0;
@@ -171,8 +190,9 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
     if (!resourceRef) return;
 
     const resourceValue = getResourceValue(resourceRef.id);
-    loseResource(resourceRef, resourceValue);
     bonusConversionXp += resourceValue;
+
+    zeroResource(resourceRef);
   }
 
   let statValueGained = 0;
@@ -190,47 +210,67 @@ function rewardTaskDoers(state: GameState, task: GameTask): void {
   heroesAllocatedToTask(task).forEach((hero) => {
     const archXpBonus = getArchetypeXpBonusForHero(hero);
 
-    gainTaskXp(state, hero, task, xpGained + archXpBonus + hero.stats.progress);
-    gainXp(
+    const totalXpForHero =
+      taskXpGained +
+      bonusConversionXp +
+      archXpBonus +
+      heroXpBonus +
+      taskBonusForHero(hero, task);
+
+    gainTaskXp(
       hero,
-      xpGained *
-        (taskXpGained +
-          bonusConversionXp +
-          archXpBonus +
-          heroXpBonus +
-          taskBonusForHero(hero, task)),
+      task,
+      xpGainedTimes + archXpBonus + heroStatValue(hero, 'progress'),
     );
+    gainXp(hero, xpGainedTimes * totalXpForHero);
 
     if (statValueGained > 0 && task.convertResourceStat) {
       gainStat(hero, task.convertResourceStat, statValueGained);
     }
 
-    updateHero(state, hero);
+    let chanceToGetAttribute = hero.taskLevels[task.id] ?? 0;
+    if (hero.damageTypeId !== task.damageTypeId) {
+      chanceToGetAttribute -= 2;
+    }
+
+    if (
+      task.earnedAttributeId &&
+      hero.attributeIds &&
+      !hero.attributeIds.includes(task.earnedAttributeId) &&
+      hero.taskLevels[task.id] > 0 &&
+      succeedsChance(chanceToGetAttribute)
+    ) {
+      const attribute = getEntry<GameAttribute>(task.earnedAttributeId)!;
+      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Success');
+
+      heroGainAttribute(hero, attribute);
+    }
   });
 }
 
-function gainTaskXp(
-  state: GameState,
-  hero: GameHero,
-  task: GameTask,
-  xp = 1,
-): void {
+function gainTaskXp(hero: GameHero, task: GameTask, xp = 1): void {
   if (hero.taskLevels[task.id] >= maxLevelForTask(task)) return;
 
-  hero.taskXp ??= {};
+  updateGamestate((state) => {
+    const heroRef = state.heroes[hero.id];
 
-  hero.taskLevels[task.id] ??= 0;
-  hero.taskXp[task.id] ??= 0;
+    heroRef.taskXp ??= {};
 
-  hero.taskXp[task.id] += xp * getOption('heroTaskXpMultiplier');
+    heroRef.taskLevels[task.id] ??= 0;
+    heroRef.taskXp[task.id] ??= 0;
 
-  if (
-    hero.taskXp[task.id] >=
-    xpRequiredForTaskLevel(task, hero.taskLevels[task.id] + 1)
-  ) {
-    hero.taskXp[task.id] = 0;
-    hero.taskLevels[task.id] += 1;
-  }
+    heroRef.taskXp[task.id] += xp * getOption('heroTaskXpMultiplier');
+
+    if (
+      heroRef.taskXp[task.id] >=
+      xpRequiredForTaskLevel(task, heroRef.taskLevels[task.id] + 1)
+    ) {
+      heroRef.taskXp[task.id] = 0;
+      heroRef.taskLevels[task.id] += 1;
+    }
+
+    return state;
+  });
 }
 
 export function canDoTask(task: GameTask): boolean {
@@ -242,7 +282,7 @@ export function doHeroGameloop(numTicks: number): void {
 
   Object.values(state.heroes).forEach((hero) => {
     if (isStunned(hero)) {
-      hero.stunTicks -= numTicks;
+      reduceStun(hero, numTicks);
       return;
     }
 
@@ -254,21 +294,19 @@ export function doHeroGameloop(numTicks: number): void {
     if (!canDoTask(task)) return;
 
     // boost speed, track action
-    applyHeroSpeed(state, hero, task, numTicks);
-    if (!canApplyDamageToTask(state, hero, task)) return;
-    const numTimesToApplyForce = numTimesToApplyDamageToTask(state, hero, task);
-    resetHeroSpeed(state, hero);
+    applyHeroSpeed(hero, task, numTicks);
+    if (!canApplyDamageToTask(hero, task)) return;
+    const numTimesToApplyForce = numTimesToApplyDamageToTask(hero, task);
+    resetHeroSpeed(hero);
 
     // if we've met the terms, we can do damage
-    applyHeroForce(state, hero, task, numTimesToApplyForce);
+    applyHeroForce(hero, task, numTimesToApplyForce);
 
-    if (!isTaskFinished(state, task)) return;
+    if (!isTaskFinished(task)) return;
 
     // finish the task, reset it, give the task doers a reward
-    finalizeTask(state, task);
-    rewardTaskDoers(state, task);
-    resetTask(state, task);
+    finalizeTask(task);
+    rewardTaskDoers(task);
+    resetTask(task);
   });
-
-  setGameState(state);
 }

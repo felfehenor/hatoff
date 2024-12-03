@@ -170,6 +170,7 @@ export class ContentService {
       loot: this.http.get('./json/loot.json'),
       monster: this.http.get('./json/monster.json'),
       dungeon: this.http.get('./json/dungeon.json'),
+      attribute: this.http.get('./json/attribute.json'),
       art: this.http.get('./json/art.json'),
       custom: this.http.get('./json/custom.json'),
     }).subscribe((assets) => {

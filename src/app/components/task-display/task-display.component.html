@@ -1,4 +1,5 @@
 @let taskData = task();
+@let error = errorString();
 
 <div
   class="card card-side foreground shadow-xl cursor-pointer min-h-[300px] flex flex-col justify-between hover:ring-2 overflow-hidden"
@@ -23,7 +24,13 @@
 
   <div class="card-body">
     <div class="card-title flex items-center">
-      <div class="font-light">Heroes ({{ heroes().length }}/{{ maxHeroes() }})</div>
+      <div class="font-light flex gap-2 items-center">
+        Heroes ({{ heroes().length }}/{{ maxHeroes() }})
+
+        @if(error) {
+        <ng-icon name="tablerInfoHexagon" color="oklch(var(--er))" [tp]="error" size="1em"></ng-icon>
+        }
+      </div>
       <app-task-synergy [task]="taskData"></app-task-synergy>
     </div>
 
@@ -35,13 +42,13 @@
   </div>
 
   @if(taskData.speedPerCycle > 0) {
-
   <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2 has-help" tp="Damage per tick">
     {{ perTick() | number:'0.2-2' }} / {{ requiredPerTick() }} DPT
   </div>
 
   <div class="absolute bottom-[-7px] left-0 right-0">
-    <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
+    <progress class="progress progress-secondary w-full" [class.progress-error]="error" [value]="completion()"
+      max="100"></progress>
   </div>
   }
 </div>

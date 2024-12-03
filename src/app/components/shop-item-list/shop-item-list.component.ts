@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, computed } from '@angular/core';
 import {
+  baseCardClasses,
   buyItem,
   canBuyItemFromShop,
   gamestate,
@@ -10,10 +11,10 @@ import { GameItem } from '../../interfaces';
 import { ShopItemDisplayComponent } from '../shop-item-display/shop-item-display.component';
 
 @Component({
-    selector: 'app-shop-item-list',
-    imports: [ShopItemDisplayComponent, NgClass],
-    templateUrl: './shop-item-list.component.html',
-    styleUrl: './shop-item-list.component.scss'
+  selector: 'app-shop-item-list',
+  imports: [ShopItemDisplayComponent, NgClass],
+  templateUrl: './shop-item-list.component.html',
+  styleUrl: './shop-item-list.component.scss',
 })
 export class ShopItemListComponent {
   public allShopItems = computed(() =>
@@ -21,14 +22,7 @@ export class ShopItemListComponent {
   );
 
   public cardClasses = computed(() => {
-    return [
-      'sm:min-w-[45%]',
-      'sm:max-w-[45%]',
-      'lg:min-w-[30%]',
-      'lg:max-w-[30%]',
-      'xl:min-w-[23%]',
-      'xl:max-w-[23%]',
-    ];
+    return baseCardClasses();
   });
 
   public canBuyItem(item: GameItem): boolean {

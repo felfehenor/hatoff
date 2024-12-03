@@ -6,7 +6,8 @@
   </span>
 
   <div pageactions class="flex items-center">
-    <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()">
+    <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()"
+      [appAnalyticsClick]="rerollCost() === 0 ? 'Shop:Reroll:Free' : 'Shop:Reroll:Cost'">
 
       @if(isRerollOnTimeout()) {
       <div class="absolute w-full">

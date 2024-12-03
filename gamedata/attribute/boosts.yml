@@ -1,0 +1,64 @@
+# force
+- id: 43b64496-78e8-4fd3-920b-59ea818c076d
+  name: Pushy
+  modifyStat: force
+  modifyStatValue: 2
+  description: +2 Force (FRC)
+
+- id: db6fb7cd-d0b2-4892-a8b7-ee5a9b8c47c1
+  name: Goblish
+  modifyStat: force
+  modifyStatValue: 3
+  description: +3 Force (FRC)
+
+# resistance
+- id: b1ae4d10-fb75-497b-ae0f-d00b564ed412
+  name: Fortuitous
+  modifyStat: resistance
+  modifyStatValue: 2
+  description: +2 Resistance (RES)
+
+- id: da9e07ab-8fbb-4658-ab3f-80c22544f433
+  name: Hardened
+  modifyStat: resistance
+  modifyStatValue: 5
+  description: +5 Resistance (RES)
+
+# health
+- id: 41d1f27d-a470-451d-b08a-278c9804a0e5
+  name: Hardy
+  modifyStat: health
+  modifyStatValue: 10
+  description: +10 Health (HP)
+
+- id: 32463f3b-78f7-4e18-83d8-a033f6e4db12
+  name: Resistant
+  modifyStat: health
+  modifyStatValue: 20
+  description: +20 Health (HP)
+
+- id: 552ccffb-4d20-45cf-b4db-420e29863dff
+  name: Slimy
+  modifyStat: health
+  modifyStatPercent: 5
+  description: +5% Health (HP)
+
+# progress
+- id: 73379461-1794-4d6b-9285-9373e0519f62
+  name: Inquisitive
+  modifyStat: progress
+  modifyStatValue: 4
+  description: +4 Progress (PRG)
+
+- id: 5337c526-8d23-4b82-a757-2130750c8944
+  name: Learned
+  modifyStat: progress
+  modifyStatValue: 3
+  description: +3 Progress (PRG)
+
+# speed
+- id: 3a58ba7b-42f9-4796-a235-3f58d67ddb04
+  name: Shadowstepper
+  modifyStat: speed
+  modifyStatValue: 3
+  description: +3 Speed (SPD)

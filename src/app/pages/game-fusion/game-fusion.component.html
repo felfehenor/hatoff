@@ -10,7 +10,8 @@
     <div class="flex-1 flex flex-col h-full">
       <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
         <div>
-          <button class="btn btn-primary btn-block" (click)="rechoosePrimary()">Re-choose Primary Hero</button>
+          <button class="btn btn-primary btn-block" (click)="rechoosePrimary()"
+            appAnalyticsClick="Fuse:Primary:Rechoose">Re-choose Primary Hero</button>
         </div>
 
         <app-fusion-hero-display-tall [hero]="primary"></app-fusion-hero-display-tall>
@@ -30,14 +31,15 @@
 
         @if(viableMains.length === 0) {
         <div class="flex-1 flex justify-center items-center text-2xl opacity-50 p-10 text-center">
-          No viable primary heroes. Come back later!
+          No viable primary heroes. They must be at their level cap.
         </div>
         }
 
         @else {
         <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
           @for(hero of viableMainHeroes(); track $index) {
-          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="mainHero.set(hero)"></app-fusion-hero-display>
+          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="mainHero.set(hero)"
+            appAnalyticsClick="Fuse:Primary:Choose"></app-fusion-hero-display>
           }
         </div>
         }
@@ -64,8 +66,16 @@
     @else if(primary && !secondary) {
     <div class="flex-1 flex flex-col h-full">
       <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
-        <div class="text-3xl text-center pt-3">
+        <div class="text-3xl text-center pt-3 flex gap-2 items-center justify-center">
           Secondary Hero
+
+          <label class="form-control">
+            <select class="select select-bordered select-sm" [(ngModel)]="secondaryFilterType">
+              <option value="All">All</option>
+              <option value="Matching">Matching</option>
+              <option value="Similar">Similar</option>
+            </select>
+          </label>
         </div>
 
         @let viableSubs = viableSubHeroes();
@@ -79,7 +89,8 @@
         @else {
         <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
           @for(hero of viableSubHeroes(); track $index) {
-          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="subHero.set(hero)"></app-fusion-hero-display>
+          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="subHero.set(hero)"
+            appAnalyticsClick="Fuse:Secondary:Choose"></app-fusion-hero-display>
           }
         </div>
         }
@@ -92,7 +103,8 @@
     <div class="flex-1 flex flex-col h-full">
       <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
         <div>
-          <button class="btn btn-primary btn-block" (click)="rechooseSecondary()">Re-choose Secondary Hero</button>
+          <button class="btn btn-primary btn-block" (click)="rechooseSecondary()"
+            appAnalyticsClick="Fuse:Secondary:Rechoose">Re-choose Secondary Hero</button>
         </div>
 
         <app-fusion-hero-display-tall [hero]="secondary"></app-fusion-hero-display-tall>
@@ -104,7 +116,7 @@
     <div class="flex-1 flex flex-col h-full">
       <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
         <div>
-          <button class="btn btn-success btn-block" [swal]="fuseSwal">Fuse!</button>
+          <button class="btn btn-success btn-block" [swal]="fuseSwal" appAnalyticsClick="Fuse:DoFusion">Fuse!</button>
         </div>
 
         <app-fusion-hero-display-tall [hero]="result"></app-fusion-hero-display-tall>

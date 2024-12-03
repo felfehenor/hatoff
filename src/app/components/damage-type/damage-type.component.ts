@@ -3,6 +3,7 @@ import { Component, computed, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   allUnlockedDamageTypes,
   getEntry,
@@ -13,16 +14,17 @@ import { ContentNameComponent } from '../content-name/content-name.component';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 
 @Component({
-    selector: 'app-damage-type',
-    imports: [
-        DecimalPipe,
-        ContentNameComponent,
-        FormsModule,
-        DamageTypeBreakdownComponent,
-    ],
-    providers: [provideIcons(usedContentIcons())],
-    templateUrl: './damage-type.component.html',
-    styleUrl: './damage-type.component.scss'
+  selector: 'app-damage-type',
+  imports: [
+    DecimalPipe,
+    ContentNameComponent,
+    FormsModule,
+    DamageTypeBreakdownComponent,
+    AnalyticsClickDirective,
+  ],
+  providers: [provideIcons(usedContentIcons())],
+  templateUrl: './damage-type.component.html',
+  styleUrl: './damage-type.component.scss',
 })
 export class DamageTypeComponent {
   public id = model.required<string>();

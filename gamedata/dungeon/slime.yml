@@ -38,10 +38,12 @@
       lootId: Medicinal Slime
 
 - id: ce3f6290-fd75-4451-aa78-18a03662dc7d
-  name: 'Slime Caverns: Depths'
+  name: 'Slime Caverns - Depths'
   description: Slash through a series of slimes to claim an slimy treasure!
 
   stunTimeOnFailure: 150
+
+  earnedAttributeId: Slimy
 
   requiresLootIds:
     - Medicinal Slime

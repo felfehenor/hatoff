@@ -12,13 +12,27 @@
     </div>
 
     <div class="card-title">
-      {{ activeHero.name }}
+      <div class="flex items-center gap-2">
+        {{ activeHero.name }}
+
+        <span [appHideIfNotResearched]="'Name Rater'">
+          @if(!activeHero.isSpecial) {
+          <button class="btn btn-xs btn-ghost btn-untextured" tp="Rename this hero" [swal]="renameSwal">
+            <ng-icon name="tablerTag"></ng-icon>
+          </button>
+
+          <swal #renameSwal title="Rename Hero" text="Enter a new name for this hero." input="text"
+            [inputValue]="activeHero.name" [focusCancel]="true" (confirm)="renameHero($event)">
+          </swal>
+          }
+        </span>
+      </div>
       <app-hero-status [hero]="activeHero"></app-hero-status>
     </div>
 
     <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
 
-    <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
+    <app-damage-type [damage]="heroForce()" [id]="activeHero.damageTypeId" [editable]="canEditHeroStats()"
       (idChange)="changeMainCharacterType($event)"></app-damage-type>
 
     <app-hero-assignment [hero]="activeHero"></app-hero-assignment>
@@ -37,13 +51,16 @@
 
     <app-hero-archetype-list [hero]="activeHero"></app-hero-archetype-list>
 
+    <app-hero-attribute-list [hero]="activeHero"></app-hero-attribute-list>
+
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
     <div class="card-actions justify-between mt-4">
       <div class="flex items-center">
         @let canClickForXP = canGiveClickXp();
         <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
-          tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown.">
+          tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown."
+          [appAnalyticsClick]="'Hero:GiveXP:' + xpOnClick()">
 
           @if(!canClickForXP) {
           <div class="absolute w-full">
@@ -57,14 +74,16 @@
         </button>
 
         @if(hasItems()) {
-        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()">
+        <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()"
+          [appAnalyticsClick]="'Hero:UseItems:' + heroDamageType(activeHero)">
           Use Items
         </button>
         }
       </div>
 
       @if(canDismissHero()) {
-      <button class="btn btn-error" [swal]="deleteSwal">Dismiss Hero</button>
+      <button class="btn btn-error" [swal]="deleteSwal"
+        [appAnalyticsClick]="'Hero:Dismiss:' + heroDamageType(activeHero)">Dismiss Hero</button>
       }
     </div>
   </div>

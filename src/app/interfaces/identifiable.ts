@@ -8,7 +8,8 @@ export type ContentType =
   | 'upgrade'
   | 'dungeon'
   | 'monster'
-  | 'loot';
+  | 'loot'
+  | 'attribute';
 
 export interface Identifiable {
   id: string;

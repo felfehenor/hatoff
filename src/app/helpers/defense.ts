@@ -5,10 +5,13 @@ import {
   GameTask,
   GameUpgrade,
 } from '../interfaces';
+import { sendDesignEvent } from './analytics';
+import { heroGainRandomInjury } from './attribute';
 import { getEntry, getResearchableEntriesByType } from './content';
 import { cooldown } from './cooldown';
 import { isEasyMode, isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
+import { allHeroes } from './hero';
 import { notify } from './notify';
 import {
   allUnlockedDamageTypes,
@@ -16,7 +19,7 @@ import {
   totalCompletedResearch,
 } from './research';
 import { getResourceValue, hasResource, zeroResource } from './resource';
-import { randomChoice, randomrng } from './rng';
+import { randomChoice, succeedsChance } from './rng';
 import { heroesAllocatedToTask, unassignHeroTask } from './task';
 import {
   allUpgradesForTask,
@@ -79,7 +82,7 @@ export function pickTownDamageType(): GameDamageType {
     }
 
     // 30% chance of having a locked damage type up until attack 7
-    if (numAttacks < 7 && randomrng()() > 0.7) {
+    if (numAttacks < 7 && succeedsChance(70)) {
       return allUnlockedIds.includes(t.id);
     }
 
@@ -118,9 +121,7 @@ export function hasEnoughFortifications(): boolean {
 
 export function generateTownAttack(): void {
   const availableTasks = allUnlockedTasks().filter(
-    (t) =>
-      !getEntry<GameDamageType>(t.damageTypeId)?.isAny &&
-      destroyableUpgrades(t).length > 0,
+    (t) => destroyableUpgrades(t).length > 0,
   );
   const numTasks = sample([1, 2]);
   const chosenTasks = sampleSize(availableTasks, numTasks).map((t) => t.id);
@@ -166,6 +167,7 @@ export function destroyableUpgrades(task: GameTask): GameUpgrade[] {
 }
 
 export function doTownAttack(): void {
+  sendDesignEvent('TownDefense:NumAttacks', gamestate().defense.numAttacks + 1);
   setTownAttacks(gamestate().defense.numAttacks + 1);
 
   const tasksToLoseUpgradesFor: GameTask[] = [];
@@ -186,9 +188,18 @@ export function doTownAttack(): void {
       zeroResource(fortifications);
 
       if (!wasFullyDefended) {
+        sendDesignEvent('TownDefense:DefenseLevel:NotFullyDefended');
         tasksToLoseUpgradesFor.push(
           ...state.defense.targettedTaskIds.map((t) => getEntry<GameTask>(t)!),
         );
+
+        const heroToInjure = sample(allHeroes());
+        if (heroToInjure) {
+          heroGainRandomInjury(heroToInjure);
+          notify(`${heroToInjure.name} was injured!`, 'Defense');
+        }
+      } else {
+        sendDesignEvent('TownDefense:DefenseLevel:FullyDefended');
       }
     }
 

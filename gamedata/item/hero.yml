@@ -13,7 +13,7 @@
 
 - id: 6f8b24f0-ba01-415f-9519-72f52dcebf2b
   name: Bottle of Forgetfulness
-  description: Change a hero's archetypes to random unlocked archetypes.
+  description: Change a hero's archetypes to random unlocked archetypes. Cannot lose Protagonist archetype.
   cost: 50000
 
   pickRandomArchetypes: true

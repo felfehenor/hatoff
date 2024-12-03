@@ -14,6 +14,7 @@ import {
   tablerUsersGroup,
 } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
   currentDungeon,
@@ -35,6 +36,7 @@ import { ResourceListComponent } from '../resource-list/resource-list.component'
     ResourceListComponent,
     HideResearchDirective,
     TippyDirective,
+    AnalyticsClickDirective,
   ],
   providers: [
     provideIcons({

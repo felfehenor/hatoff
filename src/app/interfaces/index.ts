@@ -1,5 +1,6 @@
 export * from './archetype';
 export * from './art';
+export * from './attribute';
 export * from './combat';
 export * from './damage';
 export * from './dungeon';

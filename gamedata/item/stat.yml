@@ -21,7 +21,7 @@
   giveStatValue: 1
 
   icon: gameFoldedPaper
-  color: '#a0f6a3'
+  color: '#0b780f'
 
   requiresResearchIds:
     - Work Receipts

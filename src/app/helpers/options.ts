@@ -25,6 +25,8 @@ export function defaultOptions(): GameOptions {
     notificationRecruitment: true,
     notificationResourceGain: false,
     notificationSuccess: true,
+
+    uiTheme: 'dark',
   };
 }
 

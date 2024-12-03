@@ -4,6 +4,7 @@ import { timer } from 'rxjs';
 import { CountdownComponent } from '../../components/countdown/countdown.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { ShopItemListComponent } from '../../components/shop-item-list/shop-item-list.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   canRerollShop,
   doShopReroll,
@@ -12,15 +13,16 @@ import {
 } from '../../helpers';
 
 @Component({
-    selector: 'app-game-shop',
-    imports: [
-        PageCardComponent,
-        DecimalPipe,
-        ShopItemListComponent,
-        CountdownComponent,
-    ],
-    templateUrl: './game-shop.component.html',
-    styleUrl: './game-shop.component.scss'
+  selector: 'app-game-shop',
+  imports: [
+    PageCardComponent,
+    DecimalPipe,
+    ShopItemListComponent,
+    CountdownComponent,
+    AnalyticsClickDirective,
+  ],
+  templateUrl: './game-shop.component.html',
+  styleUrl: './game-shop.component.scss',
 })
 export class GameShopComponent {
   public canReroll = computed(

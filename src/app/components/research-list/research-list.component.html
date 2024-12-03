@@ -9,6 +9,7 @@
   @for(research of displayedResearch(); track $index) {
   <div class="hero-container" [ngClass]="cardClasses()">
     <app-research-display [research]="research" (click)="selectResearch(research)"
+      [appAnalyticsClick]="'Research:Select:' + research.name"
       [active]="activeResearch() === research.id"></app-research-display>
   </div>
   }

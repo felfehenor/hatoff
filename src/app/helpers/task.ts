@@ -8,6 +8,7 @@ import {
 import { isHardMode } from './difficulty';
 import { heroesInExploreTask, isDungeonInProgress } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
+import { heroStatValue } from './hero';
 import { allUnlockedDamageTypes, allUnlockedTasks } from './research';
 import {
   allocationBonusForTask,
@@ -46,6 +47,9 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
 
   if (!heroDamageType || !taskDamageType) return false;
 
+  if (heroesAllocatedToTask(task).length >= maxHeroesForTask(task))
+    return false;
+
   if (heroDamageType.isAny) return true;
 
   if (isStrictDamageType(task) && taskDamageType.id !== heroDamageType.id)
@@ -57,7 +61,7 @@ export function canAllocateHeroToTask(hero: GameHero, task: GameTask): boolean {
   if (getDamageForcePercentage(heroDamageType, taskDamageType) === 0)
     return false;
 
-  return heroesAllocatedToTask(task).length < maxHeroesForTask(task);
+  return true;
 }
 
 export function canUnallocateHeroFromTask(
@@ -152,7 +156,7 @@ export function getGlobalBoostForDamageType(type: GameDamageType): number {
       .flatMap((t) =>
         heroesAllocatedToTask(t).filter((h) => h.damageTypeId === type.id),
       )
-      .map((h) => h.stats.force),
+      .map((h) => heroStatValue(h, 'force')),
   );
 }
 

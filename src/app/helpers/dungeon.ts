@@ -1,6 +1,7 @@
 import { sumBy } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import {
+  GameAttribute,
   GameDungeon,
   GameDungeonEncounter,
   GameDungeonEncounterFight,
@@ -9,8 +10,16 @@ import {
   GameHero,
   GameItem,
   GameLoot,
+  GameMonster,
+  GameResource,
   GameTask,
 } from '../interfaces';
+import { sendDesignEvent } from './analytics';
+import {
+  heroGainAttribute,
+  heroGainRandomInjury,
+  heroInjuries,
+} from './attribute';
 import {
   didHeroesWin,
   doCombatRound,
@@ -25,7 +34,8 @@ import { gainXp, isStunned, removeHero, stunHero } from './hero';
 import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
-import { randomChoice } from './rng';
+import { gainResource } from './resource';
+import { randomChoice, succeedsChance } from './rng';
 import { heroesAllocatedToTask } from './task';
 
 export function setActiveDungeon(dungeon: GameDungeon): void {
@@ -41,6 +51,10 @@ export function setActiveDungeon(dungeon: GameDungeon): void {
 
 export function currentDungeon(): GameDungeon | undefined {
   return getEntry<GameDungeon>(gamestate().activeDungeon);
+}
+
+export function currentDungeonName(): string {
+  return currentDungeon()?.name ?? 'Unknown';
 }
 
 export function isCurrentDungeon(dungeon: GameDungeon): boolean {
@@ -138,6 +152,13 @@ export function clearActiveDungeon() {
   const dungeon = currentDungeon();
   if (!dungeon) return;
 
+  const hasCompleted = gamestate().dungeonsCompleted[dungeon.id] > 0;
+
+  sendDesignEvent(
+    `Exploration:${currentDungeonName()}:Success:${
+      hasCompleted ? 'Repeat' : 'FirstTime'
+    }`,
+  );
   notify(`Successfully cleared ${dungeon.name ?? 'the dungeon'}!`, 'Dungeon');
 
   updateGamestate((state) => {
@@ -146,6 +167,16 @@ export function clearActiveDungeon() {
 
     return state;
   });
+
+  const earnedAttributeId = dungeon.earnedAttributeId;
+  if (earnedAttributeId) {
+    heroesInExploreTask().forEach((hero) => {
+      const attribute = getEntry<GameAttribute>(earnedAttributeId)!;
+      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Dungeon');
+
+      heroGainAttribute(hero, attribute);
+    });
+  }
 
   exitDungeon();
 }
@@ -188,27 +219,70 @@ export function handleCurrentDungeonStep(ticks: number) {
   }
 }
 
-export function heroWinCombat(): void {}
+export function heroWinCombat(fightStep: GameDungeonEncounterFight): void {
+  const rewards: Record<string, number> = {};
+
+  fightStep.monsters.forEach((mon) => {
+    const monData = getEntry<GameMonster>(mon.monsterId);
+    if (!monData) return;
+
+    monData.rewards?.forEach((reward) => {
+      rewards[reward.resourceId] ??= 0;
+      rewards[reward.resourceId] += reward.resourceValue;
+    });
+  });
+
+  const resources = Object.keys(rewards)
+    .map((r) => getEntry<GameResource>(r))
+    .filter((r) => rewards[r!.id] > 0);
+
+  resources.forEach((res) => {
+    if (!res) return;
+    gainResource(res, rewards[res.id]);
+  });
+
+  const notifyStr = resources
+    .map((r) => `+${rewards[r!.id]} ${r!.name}`)
+    .join(', ');
+
+  notify(`Combat rewards: ${notifyStr}`, 'Dungeon');
+}
 
 export function heroLoseCombat(): void {
+  sendDesignEvent(`Exploration:${currentDungeonName()}:Failure`);
   notifyError('The exploration party was unsuccessful...', true);
+
+  const finalizeForHero = (hero: GameHero) => {
+    stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
+    heroGainRandomInjury(hero);
+    notify(`${hero.name} has been injured...`, 'Dungeon');
+  };
 
   heroesInExploreTask().forEach((hero) => {
     if (isHardMode()) {
-      removeHero(hero);
-      notify(`${hero.name} has perished...`, 'Dungeon');
+      const injuries = heroInjuries(hero);
+      const permadeathChance = 25 + injuries.length * 10;
+
+      if (succeedsChance(permadeathChance)) {
+        sendDesignEvent(`Hero:PermaDeath:${currentDungeonName()}`);
+        removeHero(hero);
+        notify(`${hero.name} has perished...`, 'Dungeon');
+      } else {
+        finalizeForHero(hero);
+      }
+
       return;
     }
 
-    stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
+    finalizeForHero(hero);
   });
 
   exitDungeon();
 }
 
-export function handleFightOutcome(): void {
+export function handleFightOutcome(fightStep: GameDungeonEncounterFight): void {
   if (didHeroesWin()) {
-    heroWinCombat();
+    heroWinCombat(fightStep);
     return;
   }
 
@@ -231,7 +305,7 @@ export function dungeonFightStep(fightStep: GameDungeonEncounterFight): void {
 
   // if combat is resolved, we delete it, and move to the next step
   if (isCombatResolved()) {
-    handleFightOutcome();
+    handleFightOutcome(fightStep);
 
     updateGamestate((state) => {
       state.exploration.exploringParty =

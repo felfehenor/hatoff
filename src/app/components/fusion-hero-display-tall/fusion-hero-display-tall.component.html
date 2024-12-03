@@ -12,7 +12,7 @@
 
     <app-hero-level-tagline [hero]="activeHero"></app-hero-level-tagline>
 
-    <app-damage-type [damage]="activeHero.stats.force" [id]="activeHero.damageTypeId"></app-damage-type>
+    <app-hero-damage-type [hero]="activeHero"></app-hero-damage-type>
 
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
@@ -21,6 +21,8 @@
     </div>
 
     <app-hero-archetype-list [hero]="activeHero"></app-hero-archetype-list>
+
+    <app-hero-attribute-list [hero]="activeHero"></app-hero-attribute-list>
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
   </div>

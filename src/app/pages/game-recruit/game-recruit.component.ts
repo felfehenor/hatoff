@@ -10,6 +10,7 @@ import { HeroLevelTaglineComponent } from '../../components/hero-level-tagline/h
 import { HeroStatsTableComponent } from '../../components/hero-stats-table/hero-stats-table.component';
 import { HeroTaskLevelListComponent } from '../../components/hero-task-level-list/hero-task-level-list.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import { HeroSpecialGlowDirective } from '../../directives/hero-special-glow.directive';
 import {
   canRecruit,
@@ -17,6 +18,7 @@ import {
   doRecruitReroll,
   gamestate,
   getEntry,
+  heroStatValue,
   populationCap,
   recruitCost,
   recruitHero,
@@ -26,22 +28,23 @@ import {
 import { GameDamageType, GameHero } from '../../interfaces';
 
 @Component({
-    selector: 'app-game-recruit',
-    imports: [
-        PageCardComponent,
-        DecimalPipe,
-        HeroLevelTaglineComponent,
-        DamageTypeComponent,
-        HeroArtComponent,
-        HeroArchetypeListComponent,
-        HeroStatsTableComponent,
-        HeroTaskLevelListComponent,
-        SweetAlert2Module,
-        HeroSpecialGlowDirective,
-        CountdownComponent,
-    ],
-    templateUrl: './game-recruit.component.html',
-    styleUrl: './game-recruit.component.scss'
+  selector: 'app-game-recruit',
+  imports: [
+    PageCardComponent,
+    DecimalPipe,
+    HeroLevelTaglineComponent,
+    DamageTypeComponent,
+    HeroArtComponent,
+    HeroArchetypeListComponent,
+    HeroStatsTableComponent,
+    HeroTaskLevelListComponent,
+    SweetAlert2Module,
+    HeroSpecialGlowDirective,
+    CountdownComponent,
+    AnalyticsClickDirective,
+  ],
+  templateUrl: './game-recruit.component.html',
+  styleUrl: './game-recruit.component.scss',
 })
 export class GameRecruitComponent {
   public currentHeroCount = computed(() => totalHeroes());
@@ -65,11 +68,17 @@ export class GameRecruitComponent {
   public recruitDesc(hero: GameHero): string {
     const damageType =
       getEntry<GameDamageType>(hero.damageTypeId)?.name ?? 'Unknown';
-    return `Are you sure you want to recruit ${hero.name}? They do ${hero.stats.force} ${damageType} damage.`;
+    return `Are you sure you want to recruit ${
+      hero.name
+    }? They do ${this.heroForce(hero)} ${damageType} damage.`;
   }
 
   public recruitHero(hero: GameHero, index: number): void {
     recruitHero(hero, index);
+  }
+
+  public heroDamageType(hero: GameHero): string {
+    return getEntry<GameDamageType>(hero.damageTypeId)?.name ?? 'Unknown';
   }
 
   public doReroll(): void {
@@ -79,5 +88,9 @@ export class GameRecruitComponent {
     timer(2000).subscribe(() => {
       this.isRerollOnTimeout.set(false);
     });
+  }
+
+  public heroForce(hero: GameHero): number {
+    return heroStatValue(hero, 'force');
   }
 }
