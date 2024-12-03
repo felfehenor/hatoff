@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SavefileImportComponent } from '../../components/savefile-import/savefile-import.component';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
-import { finishSetup, isSetup } from '../../helpers';
+import { difficultyDescription, finishSetup, isSetup } from '../../helpers';
 import { GameDifficulty } from '../../interfaces';
 
 @Component({
@@ -28,9 +28,9 @@ export class GameSetupComponent implements OnInit {
   public canSubmit = computed(() => this.heroName() && this.townName());
 
   public readonly difficultyDescriptions: Record<GameDifficulty, string> = {
-    easy: 'Easy peasy. Defend Town and injuries are disabled, leading to a more chill, idle game.',
-    normal: 'The game as intended. No upscaling, no downscaling.',
-    hard: 'Hard mode. Defend Town costs more, and all task types are strict assignment. Injuries are permanent. Heroes will die permanently.',
+    easy: difficultyDescription('easy'),
+    normal: difficultyDescription('normal'),
+    hard: difficultyDescription('hard'),
   };
 
   public readonly difficulties: GameDifficulty[] = ['easy', 'normal', 'hard'];
