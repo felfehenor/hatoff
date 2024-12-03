@@ -12,9 +12,9 @@
       </select>
     </label>
 
-    @if(canFuse()) {
-    <button class="btn btn-sm btn-success mr-1" [routerLink]="['/game/fuse']"
-      [appDisableIfNotResearched]="'Fusion Engine'" appAnalyticsClick="Heroes:Fuse">Fuse Heroes</button>
+    @if(shouldShowFuseButton()) {
+    <button class="btn btn-sm btn-success mr-1" [routerLink]="['/game/fuse']" appAnalyticsClick="Heroes:Fuse">Fuse
+      Heroes</button>
     }
     <button class="btn btn-sm btn-primary" [routerLink]="['/game/recruit']" appAnalyticsClick="Heroes:Recruit">View
       Recruits</button>

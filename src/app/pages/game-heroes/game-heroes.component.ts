@@ -5,10 +5,8 @@ import { countBy, sortBy } from 'lodash';
 import { HeroListComponent } from '../../components/hero-list/hero-list.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
-import { DisableResearchDirective } from '../../directives/disableresearch.directive';
 import {
   allHeroes,
-  canFuseHeroes,
   canRecruitHero,
   getEntry,
   isResearchComplete,
@@ -29,7 +27,6 @@ interface FilterOption {
     PageCardComponent,
     HeroListComponent,
     RouterLink,
-    DisableResearchDirective,
     AnalyticsClickDirective,
     FormsModule,
   ],
@@ -43,7 +40,9 @@ export class GameHeroesComponent {
   public canRecruit = computed(
     () => isResearchComplete('Help Posters') && canRecruitHero(),
   );
-  public canFuse = computed(() => canFuseHeroes());
+  public shouldShowFuseButton = computed(() =>
+    isResearchComplete('Fusion Engine'),
+  );
 
   public allDamageTypes = computed(() => {
     const heroes = allHeroes();
