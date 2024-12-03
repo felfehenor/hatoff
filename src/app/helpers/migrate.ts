@@ -1,5 +1,10 @@
 import { merge } from 'lodash';
-import { GameArchetype, GameResearch, GameResource } from '../interfaces';
+import {
+  GameArchetype,
+  GameDamageType,
+  GameResearch,
+  GameResource,
+} from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
 import { blankGameState, gamestate, setGameState } from './gamestate';
 import {
@@ -65,6 +70,11 @@ export function ensureFirstHero() {
   const heroArchId = getEntry<GameArchetype>('Protagonist')?.id;
   if (heroArchId) {
     firstHero.archetypeIds[0] = heroArchId;
+  }
+
+  const emoId = getEntry<GameDamageType>('Emotional')?.id;
+  if (emoId) {
+    firstHero.damageTypeId = emoId;
   }
 
   firstHero.name = state.townSetup.heroName;
