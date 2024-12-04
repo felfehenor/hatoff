@@ -107,7 +107,7 @@ export function isCombatResolved(): boolean {
 export function chooseAttackerSkill(
   attacker: GameActiveCombatant,
 ): GameSkill | undefined {
-  const validSkills = attacker.skillIds.filter(
+  const validSkills = (attacker.skillIds ?? []).filter(
     (f) => attacker.skillCooldowns[f] ?? 0 <= 0,
   );
   const chosenSkill = sample(validSkills);
