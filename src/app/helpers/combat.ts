@@ -269,6 +269,8 @@ export function damageReduction(defender: GameActiveCombatant): number {
 }
 
 export function attemptToDie(character: GameActiveCombatant): void {
+  if(!character) return;
+
   const pietyRequired = 25 + randomNumber(75);
   if (character.stats.piety >= pietyRequired) {
     character.stats.piety -= pietyRequired;
