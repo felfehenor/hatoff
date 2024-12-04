@@ -167,6 +167,8 @@ export function attackTarget(
   if (chosenTargets.length === 0) return;
 
   chosenTargets.forEach((target) => {
+    if (isDeadInCombat(target)) return;
+
     const hitChance = chanceToHit(attacker, target, skill);
     if (!succeedsChance(hitChance)) {
       combatLog(
@@ -182,7 +184,7 @@ export function attackTarget(
       `${attacker.name} targetted ${target.name} with ${skill.name} for ${damage} HP!`,
     );
 
-    if (target.currentHp <= 0) {
+    if (isDeadInCombat(target)) {
       combatLog(`${target.name} was slain by ${attacker.name}!`);
       attemptToDie(target);
     }
