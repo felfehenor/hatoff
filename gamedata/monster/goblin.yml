@@ -5,6 +5,9 @@
 
   damageTypeId: Physical
 
+  skillIds:
+    - Powerful Strike
+
   stats:
     health: 45
     progress: 0
@@ -23,6 +26,10 @@
   level: 8
 
   damageTypeId: Physical
+
+  skillIds:
+    - Axe Swing
+    - Powerful Strike
 
   stats:
     health: 90
@@ -46,6 +53,9 @@
 
   damageTypeId: Physical
 
+  skillIds:
+    - Coin Toss
+
   stats:
     health: 30
     progress: 0
@@ -65,6 +75,9 @@
 
   damageTypeId: Spiritual
 
+  skillIds:
+    - Lesser Heal
+
   stats:
     health: 60
     progress: 0
@@ -83,6 +96,9 @@
   level: 15
 
   damageTypeId: Spiritual
+
+  skillIds:
+    - Greater Heal
 
   stats:
     health: 150

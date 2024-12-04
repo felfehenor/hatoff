@@ -4,11 +4,12 @@
 
   @if(activeHero) {
   <app-hero-display-tall class="flex-1 flex pl-3 p-1" [hero]="activeHero"
-    (close)="selectedHero.set(undefined); shouldShowItems.set(false)"
-    (showItemPanel)="shouldShowItems.set(true)"></app-hero-display-tall>
+    (close)="selectedHero.set(undefined); shouldShowItems.set(false); shouldShowSkills.set(false)"
+    (showItemPanel)="shouldShowItems.set(true); shouldShowSkills.set(false)"
+    (showSkillPanel)="shouldShowSkills.set(true); shouldShowItems.set(false)"></app-hero-display-tall>
   }
 
-  @if(!shouldShowItems()) {
+  @if(!shouldShowItems() && !shouldShowSkills()) {
   <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
     @for(hero of allHeroes(); track $index) {
     <div class="hero-container" [ngClass]="cardClasses()">
@@ -21,8 +22,15 @@
 
   @else {
   @if(activeHero) {
+  @if(shouldShowItems()) {
   <app-item-use-list class="flex-1 flex pl-3 p-1" [hero]="activeHero"
     (close)="shouldShowItems.set(false)"></app-item-use-list>
+  }
+
+  @if(shouldShowSkills()) {
+  <app-hero-skill-list class="flex-1 flex pl-3 p-1" [hero]="activeHero"
+    (close)="shouldShowSkills.set(false)"></app-hero-skill-list>
+  }
   }
   }
 </div>

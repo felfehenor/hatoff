@@ -37,6 +37,7 @@
   unlocksPopulation: 1
 
   unlocksTaskIds: [Explore]
+  unlocksArchetypeIds: [Fighter]
 
 - id: 3b987fc5-de98-4bc8-86d8-9231d4a8bf55
   name: Apartments I

@@ -64,4 +64,9 @@ export interface GameArchetype extends Content {
    * The amount to boost XP gained by. Applies to all sources of XP gain.
    */
   boostXpGain?: number;
+
+  /**
+   * The id of the skill given by this archetype, if applicable.
+   */
+  combatSkillId?: string;
 }

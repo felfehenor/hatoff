@@ -1,13 +1,22 @@
 import {
   gameAbbotMeeple,
+  gameArrowFlights,
+  gameAxeSwing,
   gameBeerBottle,
+  gameBubbles,
   gameClockwork,
+  gameCoinflip,
   gameCrystalBars,
   gameFoldedPaper,
+  gameHealing,
   gameHeartBottle,
   gameRoundPotion,
   gameShieldEchoes,
+  gameStoneSphere,
   gameStoneTablet,
+  gameSwordClash,
+  gameSwordWound,
+  gameWaveStrike,
 } from '@ng-icons/game-icons';
 import {
   tablerBible,
@@ -49,5 +58,14 @@ export function usedContentIcons(): Record<string, string> {
     gameHeartBottle,
     gameBeerBottle,
     gameCrystalBars,
+    gameHealing,
+    gameWaveStrike,
+    gameAxeSwing,
+    gameCoinflip,
+    gameBubbles,
+    gameStoneSphere,
+    gameArrowFlights,
+    gameSwordClash,
+    gameSwordWound,
   };
 }

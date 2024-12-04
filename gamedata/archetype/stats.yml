@@ -43,12 +43,14 @@
   description: This hero gains +15% chance of getting Piety (PIE) when leveling up.
   boostLevelupStat: piety
   boostLevelupStatValue: 15
+  combatSkillId: Lesser Heal
 
 - id: 13a97d2c-bebe-4a74-847e-fe419f9d2b55
   name: Pious
   description: This hero gains +25% chance of getting Piety (PIE) when leveling up.
   boostLevelupStat: piety
   boostLevelupStatValue: 25
+  combatSkillId: Greater Heal
 
 # speed
 - id: 119490e3-6b67-4c44-b13a-cd63b2db027e

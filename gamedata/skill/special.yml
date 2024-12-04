@@ -1,0 +1,12 @@
+- id: 6972781e-bbd6-46a5-8e52-b8d7c3627310
+  name: Hero Strike
+  description: Attack one enemy for 200% Force (FRC).
+  icon: gameSwordWound
+  cooldown: 1
+  accuracy: 999
+  targetting:
+    targets: 1
+    type: enemy
+  scalars:
+    - stat: force
+      percent: 200

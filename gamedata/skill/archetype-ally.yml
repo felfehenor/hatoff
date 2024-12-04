@@ -1,0 +1,25 @@
+- id: bc93d6c6-65ea-4ae3-a49b-02c011ce47f4
+  name: Lesser Heal
+  description: Heal 4 allies for 100% Force (FRC).
+  icon: gameHealing
+  cooldown: 2
+  accuracy: 999
+  targetting:
+    targets: 4
+    type: ally
+  scalars:
+    - stat: force
+      percent: -100
+
+- id: e1d3691e-448e-417b-bb72-69d4f3bb5c9b
+  name: Greater Heal
+  description: Heal 4 allies for 200% Force (FRC).
+  icon: gameHealing
+  cooldown: 3
+  accuracy: 999
+  targetting:
+    targets: 4
+    type: ally
+  scalars:
+    - stat: force
+      percent: -200

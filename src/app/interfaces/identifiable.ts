@@ -9,7 +9,8 @@ export type ContentType =
   | 'dungeon'
   | 'monster'
   | 'loot'
-  | 'attribute';
+  | 'attribute'
+  | 'skill';
 
 export interface Identifiable {
   id: string;

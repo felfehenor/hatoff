@@ -1,3 +1,13 @@
-<div class="badge badge-accent" [tp]="description()">
+<div class="badge badge-accent" [tp]="tooltip">
   <app-content-name [id]="id()"></app-content-name>
 </div>
+
+<ng-template #tooltip>
+  {{ description() }}
+
+  @if(unlockedSkill(); as skill) {
+  <div class="mt-1 font-bold" [appHideIfNotResearched]="'Houses III'">
+    Unlocked Skill: <app-content-name [id]="skill"></app-content-name>
+  </div>
+  }
+</ng-template>

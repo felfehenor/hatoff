@@ -11,7 +11,12 @@ export interface GameCombatant {
   attributeIds: string[];
 }
 
+export interface GameActiveCombatant extends GameCombatant {
+  skillIds: string[];
+  skillCooldowns: Record<string, number>;
+}
+
 export interface GameCombat {
-  attackers: GameCombatant[];
-  defenders: GameCombatant[];
+  attackers: GameActiveCombatant[];
+  defenders: GameActiveCombatant[];
 }

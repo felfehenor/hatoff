@@ -5,6 +5,8 @@
 
   damageTypeId: Physical
 
+  skillIds: []
+
   stats:
     health: 10
     progress: 0
@@ -23,6 +25,9 @@
   level: 5
 
   damageTypeId: Physical
+
+  skillIds:
+    - Coin Toss
 
   stats:
     health: 50
