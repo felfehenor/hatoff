@@ -156,7 +156,6 @@ function finalizeTask(task: GameTask): void {
       gamestate().researchProgress[activeResearch] >=
         activeResearchEntry.researchRequired
     ) {
-      notifyError('Gained research, but not researching anything!');
       return;
     }
 

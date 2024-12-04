@@ -1,0 +1,46 @@
+<div class="card inner-card-content foreground shadow-xl flex-1">
+  <div class="card-body overflow-hidden">
+    <div class="absolute top-2 right-2 z-50">
+      <app-button-close (click)="close.emit()"></app-button-close>
+    </div>
+
+    <div class="card-title">
+      Combat Skills
+    </div>
+
+    <div class="overflow-y-auto p-1 relative">
+      @if(allSkills().length === 0) {
+      <div>
+        There are no skills available to you at this time.
+      </div>
+      }
+
+      @for(entry of allSkills(); track $index) {
+
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 p-2 relative">
+        @if(!isSkillUsable(entry)) {
+        <app-blur-card text="Hero cannot use this skill." class="absolute"></app-blur-card>
+        }
+
+        <figure class="max-w-[96px] min-w-[96px] pl-2 flex items-center">
+          <ng-icon [name]="entry.icon" [color]="entry.color" size="72px"></ng-icon>
+        </figure>
+
+        <div class="card-body p-1 pl-3">
+          <div class="card-title flex items-center">
+            {{ entry.name }}
+
+            @if(entry.cooldown > 0) {
+            <span class="badge badge-info">Cooldown: {{ entry.cooldown }}</span>
+            }
+          </div>
+
+          <div>
+            {{ entry.description }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

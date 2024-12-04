@@ -79,6 +79,12 @@
           Use Items
         </button>
         }
+
+        <button class="btn btn-info ml-2" (click)="showSkillPanel.emit()" [appHideIfNotResearched]="'Houses III'"
+          [appAnalyticsClick]="'Hero:ShowSkills'">
+          View Skills
+        </button>
+
       </div>
 
       @if(canDismissHero()) {

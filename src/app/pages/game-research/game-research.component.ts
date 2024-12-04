@@ -3,7 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { countBy, sortBy } from 'lodash';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { ResearchListComponent } from '../../components/research-list/research-list.component';
-import { allAvailableIncompleteResearch } from '../../helpers';
+import {
+  allAvailableIncompleteResearch,
+  gamestate,
+  isResearchComplete,
+} from '../../helpers';
 
 @Component({
   selector: 'app-game-research',
@@ -42,5 +46,12 @@ export class GameResearchComponent {
         ?.value ?? [],
       (r) => r.researchRequired,
     ),
+  );
+
+  public shouldShowResearchWarning = computed(
+    () =>
+      allAvailableIncompleteResearch().length > 0 &&
+      (!gamestate().activeResearch ||
+        isResearchComplete(gamestate().activeResearch)),
   );
 }

@@ -1,4 +1,4 @@
-import { GameCombat, GameCombatant } from './combat';
+import { GameActiveCombatant, GameCombat } from './combat';
 import { GameHero } from './hero';
 
 export type GameDifficulty = 'easy' | 'normal' | 'hard';
@@ -50,7 +50,7 @@ export interface GameStateExplore {
   currentStepTicks: number;
   hasFinishedCurrentStep: boolean;
   currentCombat?: GameCombat;
-  exploringParty: GameCombatant[];
+  exploringParty: GameActiveCombatant[];
 }
 
 export interface GameState {

@@ -1,18 +1,35 @@
-import { clamp, sample } from 'lodash';
+import { clamp, sample, sampleSize, sumBy } from 'lodash';
 import {
+  GameActiveCombatant,
   GameCombat,
   GameCombatant,
   GameDungeonEncounterFight,
+  GameHero,
   GameHeroStat,
   GameMonster,
+  GameSkill,
 } from '../interfaces';
 import { getArchetypeCombatStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
 import { getHero, heroStatValue } from './hero';
 import { randomNumber, succeedsChance } from './rng';
+import { usableSkillsForHero } from './skill';
 
-export function toCombatant(char: GameCombatant): GameCombatant {
+export function heroToCombatant(char: GameHero): GameActiveCombatant {
+  return toCombatant(char, {
+    skillIds: usableSkillsForHero(char).map((s) => s.id),
+  });
+}
+
+export function monsterToCombatant(monster: GameMonster): GameActiveCombatant {
+  return toCombatant(monster, { skillIds: monster.skillIds });
+}
+
+export function toCombatant(
+  char: GameCombatant,
+  extra: Partial<GameActiveCombatant>,
+): GameActiveCombatant {
   const newStats: Record<GameHeroStat, number> = {
     force:
       getCombatStat(char, 'force') +
@@ -43,11 +60,18 @@ export function toCombatant(char: GameCombatant): GameCombatant {
     name: char.name,
     stats: newStats,
     attributeIds: char.attributeIds,
+    skillIds: [],
+    skillCooldowns: {},
+    ...extra,
   };
 }
 
-export function isDeadInCombat(char: GameCombatant): boolean {
+export function isDeadInCombat(char: GameActiveCombatant): boolean {
   return char.currentHp <= 0;
+}
+
+export function combatLog(message: string): void {
+  console.log(message);
 }
 
 export function generateCombat(
@@ -58,7 +82,7 @@ export function generateCombat(
     defenders: fightData.monsters
       .map((m) => getEntry<GameMonster>(m.monsterId)!)
       .filter(Boolean)
-      .map((m) => toCombatant(m)),
+      .map((m) => monsterToCombatant(m)),
   };
 }
 
@@ -80,32 +104,117 @@ export function isCombatResolved(): boolean {
   );
 }
 
+export function chooseAttackerSkill(
+  attacker: GameActiveCombatant,
+): GameSkill | undefined {
+  const validSkills = attacker.skillIds.filter(
+    (f) => attacker.skillCooldowns[f] ?? 0 <= 0,
+  );
+  const chosenSkill = sample(validSkills);
+
+  return getEntry<GameSkill>(chosenSkill!);
+}
+
+export function setSkillCooldown(
+  fighter: GameActiveCombatant,
+  skill: GameSkill,
+): void {
+  if (skill.cooldown <= 0) return;
+
+  fighter.skillCooldowns[skill.id] = skill.cooldown;
+}
+
+export function validSkillTargets(
+  potentialTargets: GameActiveCombatant[],
+): GameActiveCombatant[] {
+  return potentialTargets.filter((t) => !isDeadInCombat(t));
+}
+
+export function chooseSkillTargets(
+  targetList: GameActiveCombatant[],
+  skill: GameSkill,
+): GameActiveCombatant[] {
+  const { targets, replace } = skill.targetting;
+
+  const chosenTargets: GameActiveCombatant[] = [];
+  if (replace) {
+    for (let i = 0; i < targets; i++) {
+      chosenTargets.push(sample(targetList)!);
+    }
+  } else {
+    chosenTargets.push(...sampleSize(targetList, targets));
+  }
+
+  return chosenTargets;
+}
+
+export function attackTarget(
+  attacker: GameActiveCombatant,
+  allies: GameActiveCombatant[],
+  enemies: GameActiveCombatant[],
+): void {
+  const skill = chooseAttackerSkill(attacker);
+  if (!skill) return;
+
+  setSkillCooldown(attacker, skill);
+
+  const { type } = skill.targetting;
+  const targetList = type === 'ally' ? allies : enemies;
+
+  const validTargets = validSkillTargets(targetList);
+  const chosenTargets = chooseSkillTargets(validTargets, skill);
+
+  if (chosenTargets.length === 0) return;
+
+  chosenTargets.forEach((target) => {
+    const hitChance = chanceToHit(attacker, target, skill);
+    if (!succeedsChance(hitChance)) {
+      combatLog(
+        `${attacker.name} targetted ${target.name} with ${skill.name} but missed!`,
+      );
+      return;
+    }
+
+    const damage = damageDealt(attacker, target, skill);
+    target.currentHp -= damage;
+
+    combatLog(
+      `${attacker.name} targetted ${target.name} with ${skill.name} for ${damage} HP!`,
+    );
+
+    if (target.currentHp <= 0) {
+      combatLog(`${target.name} was slain by ${attacker.name}!`);
+      attemptToDie(target);
+    }
+  });
+}
+
+export function lowerAllCooldowns(fight: GameCombat): void {
+  [...fight.attackers, ...fight.defenders].forEach((combatant) => {
+    Object.keys(combatant.skillCooldowns ?? {}).forEach((skillKey) => {
+      combatant.skillCooldowns[skillKey] -= 1;
+    });
+  });
+}
+
 export function doTeamAction(
-  attackers: GameCombatant[],
-  defenders: GameCombatant[],
+  attackers: GameActiveCombatant[],
+  defenders: GameActiveCombatant[],
 ): void {
   attackers
     .filter((d) => !isDeadInCombat(d))
     .forEach((attacker) => {
-      const validTargets = defenders.filter((d) => !isDeadInCombat(d));
-      const target = sample(validTargets);
-      if (!target) return;
-
-      const hitChance = chanceToHit(attacker, target);
-      if (!succeedsChance(hitChance)) return;
-
-      const damage = damageDealt(attacker, target);
-      target.currentHp -= damage;
-
-      if (target.currentHp <= 0) {
-        attemptToDie(target);
-      }
+      attackTarget(attacker, attackers, defenders);
     });
 }
 
 export function doCombatRound() {
   const fight = gamestate().exploration.currentCombat;
   if (!fight) return;
+
+  combatLog('New Combat Round');
+
+  lowerAllCooldowns(fight);
 
   if (!isCombatResolved()) {
     doTeamAction(fight.attackers, fight.defenders);
@@ -117,8 +226,9 @@ export function doCombatRound() {
 }
 
 export function chanceToHit(
-  attacker: GameCombatant,
-  defender: GameCombatant,
+  attacker: GameActiveCombatant,
+  defender: GameActiveCombatant,
+  skill: GameSkill,
 ): number {
   // higher than opponent speed = higher chance to hit
   const diff = clamp(
@@ -126,35 +236,47 @@ export function chanceToHit(
     -30,
     15,
   );
-  return 80 + diff;
+  return skill.accuracy + diff;
 }
 
-export function baseHeroDamage(attacker: GameCombatant): number {
-  return heroStatValue(attacker, 'force');
-}
-
-export function damageDealt(
-  attacker: GameCombatant,
-  defender: GameCombatant,
+export function baseHeroDamage(
+  attacker: GameActiveCombatant,
+  skill: GameSkill,
 ): number {
-  return Math.max(
-    1,
-    Math.floor(baseHeroDamage(attacker) * damageReduction(defender)),
+  return sumBy(
+    skill.scalars.map(
+      (s) => heroStatValue(attacker, s.stat) * (s.percent / 100),
+    ),
   );
 }
 
-export function damageReduction(defender: GameCombatant): number {
+export function damageDealt(
+  attacker: GameActiveCombatant,
+  defender: GameActiveCombatant,
+  skill: GameSkill,
+): number {
+  return Math.max(
+    1,
+    Math.floor(baseHeroDamage(attacker, skill) * damageReduction(defender)),
+  );
+}
+
+export function damageReduction(defender: GameActiveCombatant): number {
   return Math.max(
     0.1,
     0.92 * 0.996 ** heroStatValue(defender, 'resistance') + 0.07,
   );
 }
 
-export function attemptToDie(character: GameCombatant): void {
+export function attemptToDie(character: GameActiveCombatant): void {
   const pietyRequired = 25 + randomNumber(75);
   if (character.stats.piety >= pietyRequired) {
     character.stats.piety -= pietyRequired;
     character.currentHp = heroStatValue(character, 'health');
+
+    combatLog(
+      `${character.name} received a heavenly blessing and came back to life!`,
+    );
 
     // write it back
     if (character.id) {

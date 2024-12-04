@@ -1,5 +1,11 @@
 <app-page-card>
-  <span header>Research Tasks</span>
+  <span header>
+    Research Tasks
+
+    @if(shouldShowResearchWarning()) {
+    <span class="ml-2 badge badge-warning">You aren't researching anything!</span>
+    }
+  </span>
 
   <div pageactions class="flex items-center">
     <label class="form-control">

@@ -1,0 +1,12 @@
+- id: d094d472-4c43-4dcb-8b52-e5f4953d00b0
+  name: Attack
+  description: Attack a single enemy for 100% Force (FRC).
+  icon: gameSwordClash
+  cooldown: 0
+  accuracy: 85
+  targetting:
+    targets: 1
+    type: enemy
+  scalars:
+    - stat: force
+      percent: 100

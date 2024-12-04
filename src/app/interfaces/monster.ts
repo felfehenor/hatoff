@@ -8,4 +8,5 @@ export interface GameMonsterReward {
 
 export interface GameMonster extends Content, GameCombatant {
   rewards: GameMonsterReward[];
+  skillIds: string[];
 }

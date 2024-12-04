@@ -167,12 +167,15 @@ export function heroFusionResult(
   newHero.taskLevels = newTaskLevels;
 
   newHero.attributeIds = [
-    ...new Set([...(bigHero.attributeIds ?? []), ...(smallHero.attributeIds ?? [])]),
+    ...new Set([
+      ...(bigHero.attributeIds ?? []),
+      ...(smallHero.attributeIds ?? []),
+    ]),
   ].filter((a) => !isInjury(getEntry<GameAttribute>(a)!));
 
   if (isHardMode()) {
     newHero.attributeIds.push(
-      ...bigHero.attributeIds.filter((a) =>
+      ...(bigHero.attributeIds ?? []).filter((a) =>
         isInjury(getEntry<GameAttribute>(a)!),
       ),
     );

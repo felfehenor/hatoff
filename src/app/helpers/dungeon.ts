@@ -24,8 +24,8 @@ import {
   didHeroesWin,
   doCombatRound,
   generateCombat,
+  heroToCombatant,
   isCombatResolved,
-  toCombatant,
 } from './combat';
 import { getEntriesByType, getEntry } from './content';
 import { isHardMode } from './difficulty';
@@ -379,7 +379,7 @@ export function enterDungeon(): void {
     state.exploration.isExploring = true;
     state.exploration.hasFinishedCurrentStep = true;
     state.exploration.exploringParty = heroesInExploreTask().map((h) =>
-      toCombatant(h),
+      heroToCombatant(h),
     );
     return state;
   });

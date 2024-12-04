@@ -66,6 +66,7 @@ export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();
   public close = output<void>();
   public showItemPanel = output<void>();
+  public showSkillPanel = output<void>();
 
   public liveHeroData = computed(() => getHero(this.hero().id));
 

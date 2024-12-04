@@ -2,6 +2,7 @@
   name: Lumberjack
   boostGainResourceId: Wood
   boostGainResourceAmount: 1
+  combatSkillId: Axe Swing
   description: This will boost your Wood income for this hero.
 
 - id: f1fb57b2-376e-41b5-9da7-c390731b1c8c
@@ -9,31 +10,40 @@
   boostGainResourceId: Gold
   boostGainResourceAmount: 1
   description: This will boost your Gold income for this hero.
+  combatSkillId: Coin Toss
 
-#- id: 350496e9-9a0a-4e09-9e4f-51b7ff3043d6
-#  name: Fighter
-#  description: This will boost your offensive power for this hero.
+- id: 67a11565-65ba-409d-ae6e-6b5c609558c8
+  name: Fighter
+  description: This will boost your combat Force (FRC) by +10.
+  boostCombatStat: force
+  boostCombatStatValue: 10
+  combatSkillId: Powerful Strike
 
 - id: 5f45c692-edbe-4e6b-a9a3-5329813a2b5e
   name: Thinker
   description: This will boost your research progress for this hero.
   boostGainTaskId: Research
   boostGainTaskAmount: 1
+  combatSkillId: Progressive Thoughts
 
 - id: f4fb305c-d817-4a57-9f89-f60cf3ebda2e
   name: Quarrier
   boostGainResourceId: Stone
   boostGainResourceAmount: 1
   description: This will boost your Stone income for this hero.
+  combatSkillId: Boulder Toss
 
 - id: ce83d445-373f-4ec0-9183-ae1c1f973ee6
   name: Hunter
   boostGainResourceId: Food
   boostGainResourceAmount: 1
+  combatSkillId: Wild Shot
   description: This will boost your Food income for this hero.
 
 - id: 49e83d8b-2e62-4087-8568-6c149e925a16
   name: Defender
-  description: This will boost your defensive power for this hero.
+  description: This will boost your Fortifications generation as well as your combat Resistance (RES) by +10.
   boostGainTaskId: Defend Town
   boostGainTaskAmount: 1
+  boostCombatStat: resistance
+  boostCombatStatValue: 10

@@ -1,0 +1,84 @@
+- id: 68f6c8d6-2df8-4cd2-aefe-840c4da9dd93
+  name: Powerful Strike
+  description: Attack one enemy for 200% Force (FRC).
+  icon: gameWaveStrike
+  cooldown: 2
+  accuracy: 90
+  targetting:
+    targets: 1
+    type: enemy
+    replace: false
+  scalars:
+    - stat: force
+      percent: 200
+
+- id: 033637e9-b449-4634-b460-1e7c202104f3
+  name: Axe Swing
+  description: Attack two enemies each for 100% Force (FRC).
+  icon: gameAxeSwing
+  cooldown: 3
+  accuracy: 90
+  targetting:
+    targets: 2
+    type: enemy
+    replace: false
+  scalars:
+    - stat: force
+      percent: 100
+
+- id: 0db6b6d5-8870-49ec-9049-87916ff750b3
+  name: Coin Toss
+  description: Toss coins at 10 enemies for 30% Force (FRC).
+  icon: gameCoinflip
+  cooldown: 5
+  accuracy: 80
+  targetting:
+    targets: 10
+    type: enemy
+    replace: true
+  scalars:
+    - stat: force
+      percent: 30
+
+- id: 0fee1447-c177-40df-8c89-0c1138b864f4
+  name: Progressive Thoughts
+  description: Attack three enemies each for 100% Progress (PRG).
+  requireDamageTypeId: Theoretical
+  icon: gameBubbles
+  cooldown: 3
+  accuracy: 120
+  targetting:
+    targets: 3
+    type: enemy
+    replace: true
+  scalars:
+    - stat: progress
+      percent: 100
+
+- id: ea51fbdc-a849-4ef3-b369-0388cb89c1b4
+  name: Boulder Toss
+  description: Attack one enemy for 500% Force (FRC).
+  icon: gameStoneSphere
+  cooldown: 10
+  accuracy: 65
+  targetting:
+    targets: 1
+    type: enemy
+    replace: true
+  scalars:
+    - stat: progress
+      percent: 500
+
+- id: 26537f29-98e5-4fa7-9292-14c91631bbb6
+  name: Wild Shot
+  description: Attack 5 enemies each for 30% Force (FRC).
+  icon: gameArrowFlights
+  cooldown: 2
+  accuracy: 70
+  targetting:
+    targets: 5
+    type: enemy
+    replace: true
+  scalars:
+    - stat: force
+      percent: 30

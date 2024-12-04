@@ -13,5 +13,6 @@ export * from './monster';
 export * from './options';
 export * from './research';
 export * from './resource';
+export * from './skill';
 export * from './task';
 export * from './upgrade';
