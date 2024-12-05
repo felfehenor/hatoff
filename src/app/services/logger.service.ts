@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ErrorHandler, inject, Injectable } from '@angular/core';
+import { ErrorHandler, inject, Injectable, signal } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import Rollbar from 'rollbar';
 import { environment } from '../../environments/environment';
@@ -21,6 +21,10 @@ export class LoggerService {
     'The object is in an invalid state.',
     '$0',
   ];
+
+  private lastId = signal<string>('');
+
+  constructor() {}
 
   init() {
     if (environment.rollbar.accessToken) {
@@ -51,6 +55,21 @@ export class LoggerService {
 
   public rollbarError(error: any) {
     this.rollbar?.error(error.originalError || error);
+  }
+
+  public setUserInformation(id: string, username: string): void {
+    if (id === this.lastId()) return;
+
+    this.rollbar?.configure({
+      payload: {
+        person: {
+          id,
+          username,
+        },
+      },
+    });
+
+    this.lastId.set(id);
   }
 }
 
