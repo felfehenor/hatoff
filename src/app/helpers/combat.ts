@@ -76,7 +76,7 @@ export function isDeadInCombat(char: GameActiveCombatant): boolean {
 }
 
 export function combatLog(fight: GameCombat, message: string): void {
-  fight.combatMessages.unshift(message);
+  fight.combatMessages?.unshift(message);
 }
 
 export function generateCombat(
