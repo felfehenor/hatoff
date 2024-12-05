@@ -54,6 +54,9 @@
       ticksRequired: 120
       treasureIds:
         - Smelling Salts
+        - Abbot Likeness
+        - Clock Hand
+        - Whetstone
 
     - type: loot
       xpGained: 0
@@ -117,6 +120,8 @@
       ticksRequired: 300
       treasureIds:
         - Smelling Salts
+        - Abbot Likeness
+        - Clock Hand
 
     - type: loot
       xpGained: 0
@@ -162,6 +167,8 @@
       ticksRequired: 400
       treasureIds:
         - EXP Potion (Large)
+        - Abbot Likeness
+        - Whetstone
 
     - type: fight
       xpGained: 600
@@ -177,6 +184,8 @@
       treasureIds:
         - Smelling Salts
         - EXP Potion (Large)
+        - Abbot Likeness
+        - Shield Coating
 
     - type: fight
       xpGained: 1500
@@ -198,8 +207,9 @@
       xpGained: 0
       ticksRequired: 350
       treasureIds:
-        - Smelling Salts
-        - EXP Potion (Large)
+        - EXP Potion (Ginormous)
+        - Bottle of Passions Unabated
+        - Bottle of Forgetfulness
 
     - type: loot
       xpGained: 0
