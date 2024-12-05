@@ -43,23 +43,23 @@
   requiresResearchIds:
     - Bigger Shop II
 
-- id: 93c3c5d3-7b00-4cd3-9933-a11bb156a039
-  name: Forgetful Fountain
-  type: Shop
-  description: Unlock Bottles of Forgetfulness in the Shop. Change a hero's archetypes randomly.
-  researchRequired: 15000
-
-  requiresResearchIds:
-    - Bigger Shop III
-
-- id: 00a4ee1a-43b6-4b47-a12f-6badce758b8f
-  name: Passionate Alchemy
-  type: Shop
-  description: Unlock Bottles of Passion Unabated in the Shop. Change a hero's damage type randomly.
-  researchRequired: 15000
-
-  requiresResearchIds:
-    - Bigger Shop III
+#- id: 93c3c5d3-7b00-4cd3-9933-a11bb156a039
+#  name: Forgetful Fountain
+#  type: Shop
+#  description: Unlock Bottles of Forgetfulness in the Shop. Change a hero's archetypes randomly.
+#  researchRequired: 15000
+#
+#  requiresResearchIds:
+#    - Bigger Shop III
+#
+#- id: 00a4ee1a-43b6-4b47-a12f-6badce758b8f
+#  name: Passionate Alchemy
+#  type: Shop
+#  description: Unlock Bottles of Passion Unabated in the Shop. Change a hero's damage type randomly.
+#  researchRequired: 15000
+#
+#  requiresResearchIds:
+#    - Bigger Shop III
 
 - id: a85af169-663d-4942-9201-9074bb826c0b
   name: Weapon Enhancements

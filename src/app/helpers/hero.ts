@@ -19,7 +19,7 @@ import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { getDamageForcePercentage } from './damagetype';
 import { isDungeonInProgress, isHeroExploring } from './dungeon';
-import { gamestate, setGameState, updateGamestate } from './gamestate';
+import { gamestate, updateGamestate } from './gamestate';
 import { notify } from './notify';
 import { getOption } from './options';
 import {
@@ -179,9 +179,10 @@ export function removeHero(hero: GameHero): void {
 }
 
 export function setHeroDamageType(hero: GameHero, damageTypeId: string): void {
-  const state = gamestate();
-  state.heroes[hero.id].damageTypeId = damageTypeId;
-  setGameState(state);
+  updateGamestate((state) => {
+    state.heroes[hero.id].damageTypeId = damageTypeId;
+    return state;
+  });
 }
 
 export function clickXpBoost(): number {
@@ -225,6 +226,7 @@ export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
 }
 
 export function heroStatValue(hero: GameCombatant, stat: GameHeroStat): number {
+  if (!hero) return 0;
   return hero.stats[stat] + heroStatDelta(hero, stat);
 }
 

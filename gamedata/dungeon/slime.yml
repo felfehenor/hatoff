@@ -79,7 +79,8 @@
       xpGained: 0
       ticksRequired: 120
       treasureIds:
-        - EXP Potion (Small)
+        - EXP Potion (Large)
+        - Smelling Salts
 
     - type: fight
       xpGained: 100

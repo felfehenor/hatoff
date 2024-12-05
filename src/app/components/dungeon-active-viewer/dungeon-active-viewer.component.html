@@ -1,0 +1,65 @@
+@let exploration = state();
+
+@if(exploration) {
+<div class="flex-1 flex flex-col gap-2 overflow-hidden">
+  <div class="text-center text-xl font-bold">
+    {{ currentDungeonName() }}
+  </div>
+
+  <div class="flex justify-between gap-2 my-4">
+    @for(step of currentStepDisplay(); track $index) {
+    <div class="flex-1 flex items-center justify-center gap-2">
+      @if(step?.rawStep) {
+      <progress class="progress progress-primary flex-1" [class.invisible]="!step.hasBarBefore"
+        [value]="step.barBefore ? 1 : 0" [max]="1"></progress>
+
+      <ng-icon [name]="stepIcon(step.rawStep)"></ng-icon>
+
+      <progress class="progress progress-primary flex-1" [value]="step.barAfterValue"
+        [class.invisible]="!step.hasBarAfter" [max]="step.barAfterMax"></progress>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="flex-1 overflow-hidden">
+    <div class="flex overflow-hidden h-full">
+      <div class="flex flex-col gap-2">
+        <app-dungeon-active-viewer-exploringparty></app-dungeon-active-viewer-exploringparty>
+      </div>
+
+      <div class="flex-1 px-4">
+        @switch(currentStepType()) {
+        @case('fight') {
+        <app-dungeon-active-viewer-combat></app-dungeon-active-viewer-combat>
+        }
+
+        @case('loot') {
+        <app-dungeon-active-viewer-loot></app-dungeon-active-viewer-loot>
+        }
+
+        @case('treasure') {
+        <app-dungeon-active-viewer-treasure></app-dungeon-active-viewer-treasure>
+        }
+
+        @case('prepare') {
+        <app-blank-slate>
+          Your explorers are preparing to enter the dungeon...
+        </app-blank-slate>
+        }
+
+        @case('finalize') {
+        <app-blank-slate>
+          Your explorers are finalizing their expedition...
+        </app-blank-slate>
+        }
+
+        @default {
+        uncertain dungeon state
+        }
+        }
+      </div>
+    </div>
+  </div>
+</div>
+}

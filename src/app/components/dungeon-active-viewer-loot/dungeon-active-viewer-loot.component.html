@@ -1,0 +1,13 @@
+<app-blank-slate>
+  <div class="radial-progress bg-primary text-primary-content border-primary border-4" [style.--value]="lootProgress()">
+
+    <div class="text-lg">
+      Looting <app-content-name [id]="relicId()"></app-content-name>...
+    </div>
+
+    <div class="mt-3 flex gap-2 items-center text-sm justify-center">
+      <ng-icon name="tablerClock"></ng-icon>
+      {{ currentProgress() }} / {{ maxProgress() }}
+    </div>
+  </div>
+</app-blank-slate>

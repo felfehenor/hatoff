@@ -22,6 +22,7 @@ import {
 } from '../helpers';
 import { GameOptions, GameState } from '../interfaces';
 import { ContentService } from './content.service';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,7 @@ import { ContentService } from './content.service';
 export class GamestateService {
   private router = inject(Router);
   private localStorage = inject(LocalStorageService);
+  private logger = inject(LoggerService);
   private contentService = inject(ContentService);
 
   public hasLoaded = signal<boolean>(false);
@@ -50,6 +52,7 @@ export class GamestateService {
       if (!this.hasLoaded()) return;
 
       const state = gamestate();
+      this.setUserInformation(state);
 
       if (getOption('debugConsoleLogStateUpdates')) {
         console.info('[State Update]', state);
@@ -71,6 +74,13 @@ export class GamestateService {
   async init() {
     this.load();
     this.runGameloop();
+  }
+
+  setUserInformation(state: GameState) {
+    this.logger.setUserInformation(
+      state.townSetup.heroId,
+      `${state.townSetup.townName}:${state.townSetup.heroName}`,
+    );
   }
 
   load() {

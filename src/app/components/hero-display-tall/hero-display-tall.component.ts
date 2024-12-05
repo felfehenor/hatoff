@@ -21,6 +21,7 @@ import {
   removeHero,
   renameHero,
   setHeroDamageType,
+  unassignHeroTask,
 } from '../../helpers';
 import { GameDamageType, GameHero } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
@@ -91,6 +92,7 @@ export class HeroDisplayTallComponent {
     if (!hero) return;
 
     setHeroDamageType(hero, newType);
+    unassignHeroTask(hero);
   }
 
   public dismissHero() {

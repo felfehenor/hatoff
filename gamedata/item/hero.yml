@@ -8,9 +8,6 @@
   icon: gameHeartBottle
   color: '#ffb6c1'
 
-  requiresResearchIds:
-    - Passionate Alchemy
-
 - id: 6f8b24f0-ba01-415f-9519-72f52dcebf2b
   name: Bottle of Forgetfulness
   description: Change a hero's archetypes to random unlocked archetypes. Cannot lose Protagonist archetype.
@@ -20,6 +17,3 @@
 
   icon: gameBeerBottle
   color: '#ff7f50'
-
-  requiresResearchIds:
-    - Forgetful Fountain

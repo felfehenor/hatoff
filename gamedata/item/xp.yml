@@ -36,3 +36,13 @@
 
   requiresResearchIds:
     - Massive EXP Potions
+
+- id: d9368ae5-6472-4354-9de8-9ecd9408573c
+  name: EXP Potion (Ginormous)
+  description: Grant a hero +25000 XP.
+  cost: 200000
+
+  giveXp: 25000
+
+  icon: gameRoundPotion
+  color: '#a0a'

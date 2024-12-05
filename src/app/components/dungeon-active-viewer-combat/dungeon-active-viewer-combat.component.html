@@ -1,0 +1,51 @@
+@let monsters = defenders();
+
+@if(monsters.length > 0) {
+<div class="flex-1 flex flex-col">
+  <div class="flex-1">
+    <div class="flex flex-wrap gap-2">
+      @for(monster of monsters; track $index) {
+      <div class="w-[24%] card card-side foreground shadow-xl">
+        <div class="card-body p-3">
+          <div class="flex-1 flex flex-col">
+            <div class="font-semibold">{{ monster.name }}</div>
+            <div class="italic">
+              <progress class="progress progress-success w-56" [value]="monster.currentHp"
+                [max]="monster.stats.health"></progress>
+
+              <div class="text-sm">
+                <app-hero-damage-type [hero]="monster"></app-hero-damage-type>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+  </div>
+
+  <div class="h-[450px]">
+    <div class="card foreground shadow-xl">
+      <div class="card-body p-4">
+        <div class="overflow-hidden overflow-y-auto max-h-[400px]">
+          @if(messages().length === 0) {
+          <div>No combat messages yet...</div>
+          }
+
+          @for(message of messages(); track $index) {
+          <div>
+            {{ message }}
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
+@else {
+<app-blank-slate>
+  Loading combat...
+</app-blank-slate>
+}
