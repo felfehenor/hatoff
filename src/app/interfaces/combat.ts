@@ -19,4 +19,6 @@ export interface GameActiveCombatant extends GameCombatant {
 export interface GameCombat {
   attackers: GameActiveCombatant[];
   defenders: GameActiveCombatant[];
+  combatMessages: string[];
+  rounds: number;
 }

@@ -248,8 +248,12 @@ export function heroWinCombat(fightStep: GameDungeonEncounterFight): void {
   notify(`Combat rewards: ${notifyStr}`, 'Dungeon');
 }
 
-export function heroLoseCombat(): void {
-  sendDesignEvent(`Exploration:${currentDungeonName()}:Failure`);
+export function heroLoseCombat(isForced = false): void {
+  sendDesignEvent(
+    `Exploration:${currentDungeonName()}:Failure:${
+      isForced ? 'Natural' : 'Forced'
+    }`,
+  );
   notifyError('The exploration party was unsuccessful...', true);
 
   const finalizeForHero = (hero: GameHero) => {
@@ -378,6 +382,7 @@ export function enterDungeon(): void {
     state.exploration.currentStepTicks = 0;
     state.exploration.isExploring = true;
     state.exploration.hasFinishedCurrentStep = true;
+    state.exploration.currentCombat = undefined;
     state.exploration.exploringParty = heroesInExploreTask().map((h) =>
       heroToCombatant(h),
     );
@@ -392,6 +397,7 @@ export function exitDungeon(): void {
     state.exploration.currentStep = -1;
     state.exploration.currentStepTicks = 0;
     state.exploration.hasFinishedCurrentStep = false;
+    state.exploration.currentCombat = undefined;
     state.exploration.exploringParty = [];
     return state;
   });

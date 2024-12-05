@@ -56,6 +56,7 @@ export class GameHeroesComponent {
 
     Object.keys(counts).forEach((damageTypeId) => {
       const damageType = getEntry<GameDamageType>(damageTypeId)!;
+      if (!damageType) return;
 
       extra.push({
         name: damageType.name,

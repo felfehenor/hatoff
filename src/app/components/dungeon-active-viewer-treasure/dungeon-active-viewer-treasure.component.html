@@ -1,0 +1,44 @@
+<div class="flex p-4">
+  <div class="flex-1 flex items-center">
+    <app-blank-slate>
+      <div class="radial-progress bg-primary text-primary-content border-primary border-4"
+        [style.--value]="lootProgress()">
+
+        <div class="text-lg">
+          Seeking treasure...
+        </div>
+
+        <div class="mt-3 flex gap-2 items-center text-sm justify-center">
+          <ng-icon name="tablerClock"></ng-icon>
+          {{ currentProgress() }} / {{ maxProgress() }}
+        </div>
+      </div>
+    </app-blank-slate>
+  </div>
+
+  <div class="flex-1">
+    <div class="text-center text-lg font-bold mb-3">
+      Potential Treasures
+    </div>
+
+    <div class="item-list flex-1 flex flex-col">
+      @for(item of treasureList(); track $index) {
+      <div class="card card-side foreground-2 shadow-xl mb-4 mr-2 p-2">
+        <figure class="max-w-[96px] min-w-[96px] pl-2 flex items-center">
+          <ng-icon [name]="item.icon" [color]="item.color" size="72px"></ng-icon>
+        </figure>
+
+        <div class="card-body p-1 pl-3">
+          <div class="card-title flex items-center">
+            {{ item.name }}
+          </div>
+
+          <div>
+            {{ item.description }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

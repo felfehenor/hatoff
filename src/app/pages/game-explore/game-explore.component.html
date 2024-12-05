@@ -3,13 +3,24 @@
 
   <div pageactions>
     <div role="tablist" class="tabs tabs-boxed">
+      @if(canShowExploration()) {
+      <a role="tab" class="tab" [class.tab-active]="mode() === 'Exploration'" (click)="mode.set('Exploration')"
+        [appAnalyticsClick]="'Explore:Navigate:Exploration'" (keydown.enter)="mode.set('Exploration')"
+        tabindex="1">Exploration</a>
+      }
+
       <a role="tab" class="tab" [class.tab-active]="mode() === 'Dungeons'" (click)="mode.set('Dungeons')"
-        (keydown.enter)="mode.set('Dungeons')" tabindex="1">Dungeons</a>
+        [appAnalyticsClick]="'Explore:Navigate:Dungeons'" (keydown.enter)="mode.set('Dungeons')"
+        tabindex="1">Dungeons</a>
 
       <a role="tab" class="tab" [class.tab-active]="mode() === 'Relics'" (click)="mode.set('Relics')"
-        (keydown.enter)="mode.set('Relics')" tabindex="1">Relics</a>
+        [appAnalyticsClick]="'Explore:Navigate:Relics'" (keydown.enter)="mode.set('Relics')" tabindex="1">Relics</a>
     </div>
   </div>
+
+  @if(mode() === 'Exploration') {
+  <app-dungeon-active-viewer (close)="mode.set('Dungeons')"></app-dungeon-active-viewer>
+  }
 
   @if(mode() === 'Dungeons') {
   <app-dungeon-list [displayedDungeons]="dungeonList()"></app-dungeon-list>

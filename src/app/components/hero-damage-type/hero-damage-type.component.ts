@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { heroStatValue } from '../../helpers';
-import { GameHero } from '../../interfaces';
+import { GameCombatant } from '../../interfaces';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 
 @Component({
@@ -10,6 +10,6 @@ import { DamageTypeComponent } from '../damage-type/damage-type.component';
   styleUrl: './hero-damage-type.component.scss',
 })
 export class HeroDamageTypeComponent {
-  public hero = input.required<GameHero>();
+  public hero = input.required<GameCombatant>();
   public heroForce = computed(() => heroStatValue(this.hero(), 'force'));
 }

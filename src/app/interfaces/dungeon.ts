@@ -4,6 +4,8 @@ export interface GameDungeonEncounterFightMonster {
   monsterId: string;
 }
 
+export type GameDungeonEncounterType = 'fight' | 'treasure' | 'loot';
+
 export type GameDungeonEncounter =
   | GameDungeonEncounterFight
   | GameDungeonEncounterLoot
@@ -25,7 +27,7 @@ export interface GameDungeonEncounterLoot extends GameDungeonEncounterBase {
 }
 
 export interface GameDungeonEncounterBase {
-  type: 'fight' | 'treasure' | 'loot';
+  type: GameDungeonEncounterType;
   xpGained: number;
   ticksRequired: number;
 }
