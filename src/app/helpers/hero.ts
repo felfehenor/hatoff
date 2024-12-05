@@ -225,6 +225,7 @@ export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
 }
 
 export function heroStatValue(hero: GameCombatant, stat: GameHeroStat): number {
+  if(!hero) return 0;
   return hero.stats[stat] + heroStatDelta(hero, stat);
 }
 

@@ -145,7 +145,7 @@ export function chooseSkillTargets(
     chosenTargets.push(...sampleSize(targetList, targets));
   }
 
-  return chosenTargets;
+  return chosenTargets.filter(Boolean);
 }
 
 export function attackTarget(
