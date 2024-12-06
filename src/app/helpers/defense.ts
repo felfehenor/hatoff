@@ -112,6 +112,13 @@ export function hasReinforcedWalls(): boolean {
   return !!defenseTask && !!upgrade && hasUpgrade(defenseTask, upgrade);
 }
 
+export function hasMedic(): boolean {
+  const defenseTask = getEntry<GameTask>('Defend Town');
+  const upgrade = getEntry<GameUpgrade>('Medic On Demand');
+
+  return !!defenseTask && !!upgrade && hasUpgrade(defenseTask, upgrade);
+}
+
 export function isTaskThreatened(task: GameTask): boolean {
   const defenseTask = getEntry<GameTask>('Defend Town');
 
@@ -206,10 +213,14 @@ export function doTownAttack(): void {
           ...state.defense.targettedTaskIds.map((t) => getEntry<GameTask>(t)!),
         );
 
-        const heroToInjure = sample(allHeroes());
-        if (heroToInjure) {
-          heroGainRandomInjury(heroToInjure);
-          notify(`${heroToInjure.name} was injured!`, 'Defense');
+        const injuryChance = 100 - (hasMedic() ? 50 : 0);
+        if (succeedsChance(injuryChance)) {
+          sendDesignEvent('Hero:Injure:TownDefense');
+          const heroToInjure = sample(allHeroes());
+          if (heroToInjure) {
+            heroGainRandomInjury(heroToInjure);
+            notify(`${heroToInjure.name} was injured!`, 'Defense');
+          }
         }
       } else {
         sendDesignEvent('TownDefense:DefenseLevel:FullyDefended');

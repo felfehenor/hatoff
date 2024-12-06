@@ -257,6 +257,7 @@ export function heroLoseCombat(isForced = false): void {
   notifyError('The exploration party was unsuccessful...', true);
 
   const finalizeForHero = (hero: GameHero) => {
+    sendDesignEvent('Hero:Injure:Explore');
     stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
     heroGainRandomInjury(hero);
     notify(`${hero.name} has been injured...`, 'Dungeon');

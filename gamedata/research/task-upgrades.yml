@@ -96,3 +96,15 @@
 
   requiresResearchIds:
     - Task Heroes I
+
+- id: cd323bc8-02d7-4628-90e9-15f733340b67
+  name: Stat Medic
+  type: Task
+  description: Reduce the chance of getting injured from Town Defense attacks by 50%.
+  researchRequired: 50000
+
+  requiresLootIds:
+    - Medicinal Slime
+
+  requiresResearchIds:
+    - Reinforcements

@@ -11,3 +11,17 @@
 
   requiresResearchIds:
     - Reinforcements
+
+- id: 4c415d8c-9c3c-4680-b175-58741074a2d1
+  name: Medic On Demand
+  description: Reduce the chance of getting a hero injury from Town Defense events by 50%.
+
+  costs:
+    - resourceId: Food
+      value: 50000
+
+    - resourceId: Gold
+      value: 25000
+
+  requiresResearchIds:
+    - Stat Medic
