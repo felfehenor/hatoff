@@ -1,0 +1,13 @@
+- id: e4a69da1-3a91-4431-80d1-4842aceec882
+  name: Reinforced Walls
+  description: Stop an incoming attack once, losing this upgrade instead of another one.
+
+  costs:
+    - resourceId: Wood
+      value: 5000
+
+    - resourceId: Stone
+      value: 5000
+
+  requiresResearchIds:
+    - Reinforcements

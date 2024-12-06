@@ -87,3 +87,12 @@
 
   requiresResearchIds:
     - Task Synergy I
+
+- id: 45309e76-91d7-42b5-925e-18d35a83369d
+  name: Reinforcements
+  type: Task
+  description: Unlock a task upgrade that allows Defend Town to absorb an incoming town attack.
+  researchRequired: 15000
+
+  requiresResearchIds:
+    - Task Heroes I
