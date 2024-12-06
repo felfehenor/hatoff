@@ -116,6 +116,9 @@ export function heroFusionResult(
     baseHero = createSpecialHero(bigHero.id) ?? createHero();
   }
 
+  newHero.buffIds = [];
+  newHero.buffTicks = {};
+
   newHero.fusionLevel += 1;
   newHero.level = 1;
   newHero.maxLevel += 10;

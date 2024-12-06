@@ -9,6 +9,7 @@ export interface GameCombatant {
   currentHp: number;
   stats: Record<GameHeroStat, number>;
   attributeIds: string[];
+  buffIds: string[];
 }
 
 export interface GameActiveCombatant extends GameCombatant {

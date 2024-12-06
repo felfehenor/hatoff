@@ -47,7 +47,7 @@
         - monsterId: Goblin Brute
         - monsterId: Goblin Thief
         - monsterId: Goblin Priest
-        - monsterId: Goblin Goblin
+        - monsterId: Goblin
 
     - type: treasure
       xpGained: 0
@@ -57,6 +57,7 @@
         - Abbot Likeness
         - Clock Hand
         - Whetstone
+        - Bottle of Tiny Giants
 
     - type: loot
       xpGained: 0
@@ -122,6 +123,7 @@
         - Smelling Salts
         - Abbot Likeness
         - Clock Hand
+        - Bottle of Barking Skin
 
     - type: loot
       xpGained: 0
@@ -169,6 +171,7 @@
         - EXP Potion (Large)
         - Abbot Likeness
         - Whetstone
+        - Bottle of Dissipant Speed
 
     - type: fight
       xpGained: 600

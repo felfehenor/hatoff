@@ -8,17 +8,21 @@ import {
   gameCoinflip,
   gameCrystalBars,
   gameFireflake,
+  gameFizzingFlask,
   gameFoldedPaper,
   gameHealing,
   gameHeartBottle,
   gameMoonClaws,
+  gameRoundBottomFlask,
   gameRoundPotion,
   gameShieldEchoes,
+  gameSpiralBottle,
   gameStoneSphere,
   gameStoneTablet,
   gameSwordClash,
   gameSwordWound,
   gameWaveStrike,
+  gameWineBottle,
 } from '@ng-icons/game-icons';
 import {
   tablerBible,
@@ -75,5 +79,9 @@ export function usedContentIcons(): Record<string, string> {
     gameSwordWound,
     gameMoonClaws,
     gameFireflake,
+    gameRoundBottomFlask,
+    gameFizzingFlask,
+    gameWineBottle,
+    gameSpiralBottle,
   };
 }

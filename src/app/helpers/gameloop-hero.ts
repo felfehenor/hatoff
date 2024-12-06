@@ -13,6 +13,7 @@ import {
   getArchetypeXpBonusForHero,
 } from './archetype';
 import { heroGainAttribute } from './attribute';
+import { tickBuffs } from './buff';
 import { getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
 import {
@@ -280,6 +281,8 @@ export function doHeroGameloop(numTicks: number): void {
   const state = gamestate();
 
   Object.values(state.heroes).forEach((hero) => {
+    tickBuffs(hero);
+
     if (isStunned(hero)) {
       reduceStun(hero, numTicks);
       return;

@@ -17,4 +17,6 @@ export interface GameItem extends Content {
   pickRandomArchetypes?: boolean;
 
   requiresResearchIds?: string[];
+
+  applyBuffId?: string;
 }

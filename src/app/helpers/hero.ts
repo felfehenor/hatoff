@@ -15,6 +15,7 @@ import { signal, WritableSignal } from '@angular/core';
 import { species } from 'fantastical';
 import { cloneDeep, merge, sample, sampleSize, sum, sumBy } from 'lodash';
 import { getArchetypeLevelUpStatBonusForHero } from './archetype';
+import { totalStatBuff } from './buff';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { getDamageForcePercentage } from './damagetype';
@@ -63,6 +64,8 @@ export function defaultHero(): GameHero {
       progress: 1,
       speed: 1,
     },
+    buffTicks: {},
+    buffIds: [],
     attributeIds: [],
     attributeHealTicks: {},
   };
@@ -218,7 +221,7 @@ export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
   const deltaPercent = sum(attributes.map((a) => a?.modifyStatPercent ?? 0));
 
   const baseHeroStat = hero.stats[stat];
-  const baseStatValue = baseHeroStat + deltaValue;
+  const baseStatValue = baseHeroStat + deltaValue + totalStatBuff(hero, stat);
   const statValueAfterPercentChange =
     baseStatValue * ((100 + deltaPercent) / 100);
 

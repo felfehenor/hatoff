@@ -81,6 +81,7 @@
       treasureIds:
         - EXP Potion (Large)
         - Smelling Salts
+        - Bottle of Progressive Inspiration
 
     - type: fight
       xpGained: 100

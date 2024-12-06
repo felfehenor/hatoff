@@ -1,5 +1,6 @@
 import { sample, sum } from 'lodash';
-import { GameHero, GameItem, GameResource } from '../interfaces';
+import { GameBuff, GameHero, GameItem, GameResource } from '../interfaces';
+import { addHeroBuff } from './buff';
 import { getEntry } from './content';
 import { cooldown } from './cooldown';
 import { gamestate, setGameState, updateGamestate } from './gamestate';
@@ -148,6 +149,14 @@ export function useItemOnHero(hero: GameHero, item: GameItem): void {
   if (item.pickRandomDamageType) {
     pickRandomDamageType(hero);
     notify(`Shuffled damage type for ${hero.name}!`, 'Item');
+  }
+
+  if (item.applyBuffId) {
+    const buff = getEntry<GameBuff>(item.applyBuffId);
+    if (buff) {
+      addHeroBuff(hero, buff);
+      notify(`Gave ${buff.name} to ${hero.name}!`, 'Item');
+    }
   }
 
   updateGamestate((state) => {

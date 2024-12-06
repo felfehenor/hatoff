@@ -66,6 +66,7 @@ export function toCombatant(
     stats: newStats,
     attributeIds: char.attributeIds,
     skillIds: [],
+    buffIds: char.buffIds,
     skillCooldowns: {},
     ...extra,
   };
