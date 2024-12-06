@@ -251,14 +251,7 @@ export function heroWinCombat(fightStep: GameDungeonEncounterFight): void {
   notify(`Combat rewards: ${notifyStr}`, 'Dungeon');
 }
 
-export function heroLoseCombat(isForced = false): void {
-  sendDesignEvent(
-    `Exploration:${currentDungeonName()}:Failure:${
-      isForced ? 'Natural' : 'Forced'
-    }`,
-  );
-  notifyError('The exploration party was unsuccessful...', true);
-
+export function failureInjureHeroes(): void {
   const finalizeForHero = (hero: GameHero) => {
     sendDesignEvent('Hero:Injure:Explore');
     stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
@@ -284,6 +277,17 @@ export function heroLoseCombat(isForced = false): void {
 
     finalizeForHero(hero);
   });
+}
+
+export function heroLoseCombat(isForced = false): void {
+  sendDesignEvent(
+    `Exploration:${currentDungeonName()}:Failure:${
+      isForced ? 'Natural' : 'Forced'
+    }`,
+  );
+  notifyError('The exploration party was unsuccessful...', true);
+
+  failureInjureHeroes();
 
   exitDungeon();
 }
@@ -409,4 +413,10 @@ export function exitDungeon(): void {
 
 export function isHeroExploring(hero: GameHero): boolean {
   return !!heroesInExploreTask().find((h) => h.id === hero.id);
+}
+
+export function fleeDungeon() {
+  notify(`Your exploration party fled...`, 'Dungeon');
+  failureInjureHeroes();
+  exitDungeon();
 }

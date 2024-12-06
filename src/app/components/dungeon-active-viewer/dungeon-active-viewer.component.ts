@@ -6,8 +6,9 @@ import {
   tablerPackage,
   tablerSword,
 } from '@ng-icons/tabler-icons';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { clamp } from 'lodash';
-import { currentDungeon, gamestate } from '../../helpers';
+import { currentDungeon, fleeDungeon, gamestate } from '../../helpers';
 import {
   GameDungeonEncounter,
   GameDungeonEncounterType,
@@ -27,6 +28,7 @@ import { DungeonActiveViewerTreasureComponent } from '../dungeon-active-viewer-t
     DungeonActiveViewerExploringpartyComponent,
     BlankSlateComponent,
     NgIconComponent,
+    SweetAlert2Module,
   ],
   providers: [
     provideIcons({
@@ -135,5 +137,9 @@ export class DungeonActiveViewerComponent {
     };
 
     return typeIcons[step.type];
+  }
+
+  public flee() {
+    fleeDungeon();
   }
 }
