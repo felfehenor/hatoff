@@ -62,6 +62,13 @@ export function heroGainRandomInjury(hero: GameHero): void {
   heroGainAttribute(hero, injury);
 }
 
+export function heroRemoveRandomInjury(hero: GameHero): void {
+  const injury = sample(heroInjuries(hero));
+  if (!injury) return;
+
+  heroRemoveAttribute(hero, injury);
+}
+
 export function heroHealFirstInjury(hero: GameHero, ticks = 1): void {
   if (isHardMode()) return;
 

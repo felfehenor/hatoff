@@ -19,4 +19,6 @@ export interface GameItem extends Content {
   requiresResearchIds?: string[];
 
   applyBuffId?: string;
+
+  canClearRandomInjury?: boolean;
 }

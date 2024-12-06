@@ -21,6 +21,7 @@ import {
   gameStoneTablet,
   gameSwordClash,
   gameSwordWound,
+  gameTransparentSlime,
   gameWaveStrike,
   gameWineBottle,
 } from '@ng-icons/game-icons';
@@ -83,5 +84,6 @@ export function usedContentIcons(): Record<string, string> {
     gameFizzingFlask,
     gameWineBottle,
     gameSpiralBottle,
+    gameTransparentSlime,
   };
 }

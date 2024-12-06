@@ -7,3 +7,13 @@
 
   icon: gameCrystalBars
   color: '#9542f5'
+
+- id: b45b1ebf-d046-48cc-9fee-f9eeab2e5353
+  name: Panaceatic Slime
+  description: Cure a random injury on a character.
+  cost: 50000
+
+  canClearRandomInjury: true
+
+  icon: gameTransparentSlime
+  color: '#9542f5'
