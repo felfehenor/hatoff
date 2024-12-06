@@ -20,6 +20,7 @@ export class LoggerService {
     'jQuery',
     'The object is in an invalid state.',
     '$0',
+    'NG0950',
   ];
 
   private lastId = signal<string>('');
