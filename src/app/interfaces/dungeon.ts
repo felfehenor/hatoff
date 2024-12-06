@@ -18,7 +18,7 @@ export interface GameDungeonEncounterFight extends GameDungeonEncounterBase {
 
 export interface GameDungeonEncounterTreasure extends GameDungeonEncounterBase {
   type: 'treasure';
-  treasureIds: string[];
+  itemIds: string[];
 }
 
 export interface GameDungeonEncounterLoot extends GameDungeonEncounterBase {

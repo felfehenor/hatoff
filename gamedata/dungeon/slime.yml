@@ -21,7 +21,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 30
-      treasureIds:
+      itemIds:
         - EXP Potion (Small)
 
     - type: fight
@@ -62,7 +62,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 120
-      treasureIds:
+      itemIds:
         - EXP Potion (Small)
 
     - type: fight
@@ -78,7 +78,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 120
-      treasureIds:
+      itemIds:
         - EXP Potion (Large)
         - Smelling Salts
         - Bottle of Progressive Inspiration

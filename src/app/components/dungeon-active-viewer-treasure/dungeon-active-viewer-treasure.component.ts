@@ -25,7 +25,7 @@ import { BlankSlateComponent } from '../blank-slate/blank-slate.component';
 export class DungeonActiveViewerTreasureComponent {
   public treasureList = computed(
     () =>
-      (currentDungeonStep() as GameDungeonEncounterTreasure)?.treasureIds
+      (currentDungeonStep() as GameDungeonEncounterTreasure)?.itemIds
         .map((t) => getEntry<GameItem>(t))
         .filter(Boolean) as GameItem[],
   );

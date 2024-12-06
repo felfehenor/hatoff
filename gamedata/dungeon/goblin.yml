@@ -28,7 +28,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 120
-      treasureIds:
+      itemIds:
         - EXP Potion (Small)
         - EXP Potion (Large)
 
@@ -52,7 +52,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 120
-      treasureIds:
+      itemIds:
         - Smelling Salts
         - Abbot Likeness
         - Clock Hand
@@ -93,7 +93,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 300
-      treasureIds:
+      itemIds:
         - EXP Potion (Small)
         - EXP Potion (Large)
 
@@ -119,7 +119,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 300
-      treasureIds:
+      itemIds:
         - Smelling Salts
         - Abbot Likeness
         - Clock Hand
@@ -162,12 +162,12 @@
         - monsterId: Goblin Priest
         - monsterId: Goblin Priest
         - monsterId: Goblin Priest
-        - monsterId: Goblin Bishop
+        - monsterId: Goblin
 
     - type: treasure
       xpGained: 0
       ticksRequired: 400
-      treasureIds:
+      itemIds:
         - EXP Potion (Large)
         - Abbot Likeness
         - Whetstone
@@ -184,7 +184,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 600
-      treasureIds:
+      itemIds:
         - Smelling Salts
         - EXP Potion (Large)
         - Abbot Likeness
@@ -209,7 +209,7 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 350
-      treasureIds:
+      itemIds:
         - EXP Potion (Ginormous)
         - Bottle of Passions Unabated
         - Bottle of Forgetfulness
