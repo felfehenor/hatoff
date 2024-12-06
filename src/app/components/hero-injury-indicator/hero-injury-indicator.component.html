@@ -1,0 +1,8 @@
+@let injuryCount = numInjuries();
+
+@if(injuryCount > 0) {
+<span class="inline-flex items-center" [tp]="'This hero has ' + injuryCount + ' injurie(s).'">
+  <ng-icon name="gameBrokenBone" color="#a00" size="24px"></ng-icon>
+  <span class="ml-1">{{ injuryCount }} </span>
+</span>
+}
