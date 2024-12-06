@@ -5,6 +5,7 @@ import { GameHero } from '../../interfaces';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroDamageTypeComponent } from '../hero-damage-type/hero-damage-type.component';
 import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
+import { HeroInjuryIndicatorComponent } from '../hero-injury-indicator/hero-injury-indicator.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 
@@ -18,6 +19,7 @@ import { LevelDisplayComponent } from '../level-display/level-display.component'
     HeroFusionIndicatorComponent,
     HeroStatusComponent,
     HeroDamageTypeComponent,
+    HeroInjuryIndicatorComponent,
   ],
   templateUrl: './hero-display.component.html',
   styleUrl: './hero-display.component.scss',

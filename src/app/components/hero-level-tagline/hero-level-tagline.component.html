@@ -6,8 +6,9 @@
 
   <app-hero-fusion-indicator [hero]="activeHero"></app-hero-fusion-indicator>
 
-  @if(showXp() && activeHero.level < activeHero.maxLevel) { <span class="ml-2">
-    [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
+  @if(showXp() && activeHero.level < activeHero.maxLevel) { <!---->
+    <span class="ml-2">
+      [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
     </span>
     }
 </div>

@@ -1,8 +1,8 @@
 @let activeHero = hero();
 @if(activeHero.fusionLevel > 0) {
-<span class="ml-2 inline-flex items-center"
+<span class="inline-flex items-center"
   [tp]="'This hero has been through the fusion process ' + activeHero.fusionLevel + ' time(s).'">
-  <ng-icon name="gameOvermind" color="#a0a"></ng-icon>
+  <ng-icon name="gameOvermind" color="#a0a" size="24px"></ng-icon>
   <span class="ml-1">{{ activeHero.fusionLevel }} </span>
 </span>
 }
