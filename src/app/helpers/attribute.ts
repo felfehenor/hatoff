@@ -31,6 +31,13 @@ export function heroRemoveAttribute(
   });
 }
 
+export function heroHasAttribute(
+  hero: GameHero,
+  attribute: GameAttribute,
+): boolean {
+  return hero.attributeIds.includes(attribute.id);
+}
+
 export function isInjury(attribute: GameAttribute): boolean {
   return (
     (attribute.modifyStatPercent ?? 0) < 0 ||

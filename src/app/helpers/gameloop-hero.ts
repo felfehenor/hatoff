@@ -12,7 +12,7 @@ import {
   getArchetypeTaskBonusForHero,
   getArchetypeXpBonusForHero,
 } from './archetype';
-import { heroGainAttribute } from './attribute';
+import { heroGainAttribute, heroHasAttribute } from './attribute';
 import { tickBuffs } from './buff';
 import { getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
@@ -241,9 +241,11 @@ function rewardTaskDoers(task: GameTask): void {
       succeedsChance(chanceToGetAttribute)
     ) {
       const attribute = getEntry<GameAttribute>(task.earnedAttributeId)!;
-      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Success');
 
-      heroGainAttribute(hero, attribute);
+      if (!heroHasAttribute(hero, attribute)) {
+        notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Success');
+        heroGainAttribute(hero, attribute);
+      }
     }
   });
 }

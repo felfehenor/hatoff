@@ -18,6 +18,7 @@ import { sendDesignEvent } from './analytics';
 import {
   heroGainAttribute,
   heroGainRandomInjury,
+  heroHasAttribute,
   heroInjuries,
 } from './attribute';
 import {
@@ -172,9 +173,11 @@ export function clearActiveDungeon() {
   if (earnedAttributeId) {
     heroesInExploreTask().forEach((hero) => {
       const attribute = getEntry<GameAttribute>(earnedAttributeId)!;
-      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Dungeon');
 
-      heroGainAttribute(hero, attribute);
+      if (!heroHasAttribute(hero, attribute)) {
+        notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Dungeon');
+        heroGainAttribute(hero, attribute);
+      }
     });
   }
 
