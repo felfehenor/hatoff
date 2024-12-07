@@ -9,3 +9,15 @@
       percent: 50
     - damageTypeId: Physical
       percent: 40
+
+- id: 81d51089-d57b-46de-8e1c-a1c6b9355efc
+  name: Lyrical
+  icon: tablerMusic
+  color: '#008080'
+  subTypes:
+    - damageTypeId: Intellectual
+      percent: 60
+    - damageTypeId: Emotional
+      percent: 60
+    - damageTypeId: Spiritual
+      percent: 60

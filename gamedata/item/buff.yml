@@ -1,6 +1,6 @@
 - id: e115afca-795b-4bb4-9b47-02f019a085c4
   name: Bottle of Tiny Giants
-  description: Give a hero +20 Force (FRC) for 1 hour.
+  description: Give a hero Minor Force Boost for 1 hour.
   cost: 50000
 
   applyBuffId: Force Boost (Minor)
@@ -10,7 +10,7 @@
 
 - id: 11fe722f-2362-4e36-9c7b-63fe154982c5
   name: Bottle of Barking Skin
-  description: Give a hero +30 Resistance (RES) for 1 hour.
+  description: Give a hero Minor Resistance Boost for 1 hour.
   cost: 50000
 
   applyBuffId: Resistance Boost (Minor)
@@ -20,7 +20,7 @@
 
 - id: 5a7ce16e-ce40-4846-8c98-08d225fb09ba
   name: Bottle of Progressive Inspiration
-  description: Give a hero +20 Progress (PRG) for 1 hour.
+  description: Give a hero Minor Progress Boost for 1 hour.
   cost: 50000
 
   applyBuffId: Progress Boost (Minor)
@@ -30,7 +30,7 @@
 
 - id: e50b416e1-6081-4619-9807-84432f6d96df
   name: Bottle of Dissipant Speed
-  description: Give a hero +10 Speed (SPD) for 1 hour.
+  description: Give a hero Minor Speed Boost for 1 hour.
   cost: 50000
 
   applyBuffId: Speed Boost (Minor)

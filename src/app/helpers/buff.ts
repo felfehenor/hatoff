@@ -4,7 +4,7 @@ import { getEntry } from './content';
 import { updateGamestate } from './gamestate';
 
 export function addHeroBuff(hero: GameCombatant, buff: GameBuff): void {
-  if (hasBuffInCategory(hero, buff)) {
+  if (hasBuffInCategory(hero, buff) && !buff.canStack) {
     buffsInCategory(hero, buff).forEach((delBuff) => {
       removeHeroBuff(hero, delBuff);
     });
@@ -63,6 +63,7 @@ export function tickBuffs(hero: GameCombatant): void {
         buffsToRemove.push(buffId);
       }
     });
+
     return state;
   });
 

@@ -24,4 +24,5 @@ export interface GameSkill extends Content {
   accuracy: number;
   targetting: GameSkillTargetting;
   scalars: GameSkillScalar[];
+  applyBuffIds?: string[];
 }

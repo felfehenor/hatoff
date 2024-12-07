@@ -22,6 +22,7 @@ import {
   gameSwordClash,
   gameSwordWound,
   gameTransparentSlime,
+  gameTunePitch,
   gameWaveStrike,
   gameWineBottle,
 } from '@ng-icons/game-icons';
@@ -36,6 +37,7 @@ import {
   tablerHeartBroken,
   tablerHelpHexagon,
   tablerMoon,
+  tablerMusic,
   tablerShield,
   tablerSword,
   tablerSwords,
@@ -60,6 +62,7 @@ export function usedContentIcons(): Record<string, string> {
     tablerSwords,
     tablerCross,
     tablerMoon,
+    tablerMusic,
     gameRoundPotion,
     gameStoneTablet,
     gameFoldedPaper,
@@ -85,5 +88,6 @@ export function usedContentIcons(): Record<string, string> {
     gameWineBottle,
     gameSpiralBottle,
     gameTransparentSlime,
+    gameTunePitch,
   };
 }

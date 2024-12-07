@@ -218,3 +218,111 @@
       xpGained: 0
       ticksRequired: 2000
       lootId: Goblish Staff
+
+- id: e3563f11-8970-49d3-8c79-f652d70e8624
+  name: 'Goblish Town'
+  description: Beyond the goblish church is a town. Ransack it for relics!
+
+  stunTimeOnFailure: 750
+
+  requiresLootIds:
+    - Goblish Staff
+
+  encounters:
+    - type: fight
+      xpGained: 500
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Bard
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 500
+      itemIds:
+        - Panaceatic Slime
+        - Bottle of Progressive Inspiration
+
+    - type: fight
+      xpGained: 600
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Bard
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 400
+      itemIds:
+        - EXP Potion (Large)
+        - Panaceatic Slime
+        - Shield Coating
+        - Whetstone
+        - Bottle of Dissipant Speed
+
+    - type: fight
+      xpGained: 600
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin
+        - monsterId: Goblin Bard
+        - monsterId: Goblin Bard
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 600
+      itemIds:
+        - Smelling Salts
+        - EXP Potion (Large)
+        - Abbot Likeness
+        - Shield Coating
+        - Panaceatic Slime
+
+    - type: fight
+      xpGained: 1500
+      ticksRequired: 0
+      monsters:
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Priest
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Brute
+        - monsterId: Goblin Thief
+        - monsterId: Goblin Bishop
+        - monsterId: Goblin Bard
+        - monsterId: Goblin Bard
+        - monsterId: Goblin Bard
+        - monsterId: Goblin Bard
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 350
+      itemIds:
+        - EXP Potion (Ginormous)
+        - Bottle of Passions Unabated
+        - Bottle of Dissipant Speed
+        - Panaceatic Slime
+
+    - type: treasure
+      xpGained: 0
+      ticksRequired: 350
+      itemIds:
+        - EXP Potion (Large)
+        - Bottle of Forgetfulness
+        - Panaceatic Slime
+
+    - type: loot
+      xpGained: 0
+      ticksRequired: 3000
+      lootId: Goblish Harp

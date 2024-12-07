@@ -111,3 +111,25 @@
   rewards:
     - resourceId: Stone
       resourceValue: 50
+
+- id: 6c9608a0-f21c-4604-afed-1a39990df844
+  name: Goblin Bard
+  archetypeIds: []
+  level: 20
+
+  damageTypeId: Lyrical
+
+  skillIds:
+    - Our Hearts Ignite!
+
+  stats:
+    health: 350
+    progress: 0
+    force: 45
+    resistance: 10
+    piety: 25
+    speed: 25
+
+  rewards:
+    - resourceId: Gold
+      resourceValue: 69

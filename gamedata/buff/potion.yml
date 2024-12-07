@@ -3,7 +3,7 @@
   category: Minor Boost
   duration: 3600
 
-  description: Gain Minor Force Boost for 1 hour.
+  description: Gain +20 Force (FRC) for 1 hour.
 
   statBoosts:
     - stat: force
@@ -14,7 +14,7 @@
   category: Minor Boost
   duration: 3600
 
-  description: Gain Minor Resistance Boost for 1 hour.
+  description: Gain +30 Resistance (RES) for 1 hour.
 
   statBoosts:
     - stat: resistance
@@ -25,7 +25,7 @@
   category: Minor Boost
   duration: 3600
 
-  description: Gain Minor Progress Boost for 1 hour.
+  description: Gain +20 Progress (PRG) for 1 hour.
 
   statBoosts:
     - stat: progress
@@ -36,7 +36,7 @@
   category: Minor Boost
   duration: 3600
 
-  description: Gain Minor Speed Boost for 1 hour.
+  description: Gain +10 Speed (SPD) for 1 hour.
 
   statBoosts:
     - stat: speed

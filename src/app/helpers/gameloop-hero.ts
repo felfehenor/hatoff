@@ -1,10 +1,11 @@
-import { sum } from 'lodash';
+import { sample, sum } from 'lodash';
 import {
   GameAttribute,
   GameHero,
   GameResearch,
   GameResource,
   GameTask,
+  GameTimerType,
 } from '../interfaces';
 import { sendDesignEvent } from './analytics';
 import {
@@ -15,8 +16,17 @@ import {
 import { heroGainAttribute, heroHasAttribute } from './attribute';
 import { tickBuffs } from './buff';
 import { getEntry } from './content';
+import { currentDungeonStep, isDungeonInProgress } from './dungeon';
+import {
+  modifyDefenseTimer,
+  modifyExploreTimer,
+  modifyHeroBuffTimer,
+  modifyHeroRerollTimer,
+  modifyShopRerollTimer,
+} from './entertain';
 import { gamestate, updateGamestate } from './gamestate';
 import {
+  allHeroes,
   gainStat,
   gainXp,
   heroStatValue,
@@ -122,53 +132,105 @@ function finalizeTask(task: GameTask): void {
     heroesAllocatedToTask(task).map((h) => taskBonusForHero(h, task)),
   );
 
-  if (task.resourceIdPerCycle && task.resourceRewardPerCycle) {
-    const res = getEntry<GameResource>(task.resourceIdPerCycle);
-    const bonusResources = resourceBonusForTask(task);
-    const numHeroesOnTask = numHeroesAllocatedToTask(task);
+  applyTaskFinalizedResultsToResources(task, heroBonusSum);
+  applyTaskFinalizedResultsToResearch(task, heroBonusSum);
+  applyTaskFinalizedResultsToTimers(task, heroBonusSum);
+}
 
-    const gained =
-      (heroBonusSum +
-        bonusResources +
-        task.resourceRewardPerCycle * numHeroesOnTask) *
-      numTaskRewards(task) *
-      getOption('rewardMultiplier');
+function applyTaskFinalizedResultsToResources(
+  task: GameTask,
+  heroBonusSum: number,
+): void {
+  if (!task.applyDamageToRandomTimers || !task.resourceIdPerCycle) return;
 
-    const taskResourceId = task.resourceIdPerCycle;
+  const res = getEntry<GameResource>(task.resourceIdPerCycle);
+  const bonusResources = resourceBonusForTask(task);
+  const numHeroesOnTask = numHeroesAllocatedToTask(task);
 
-    updateGamestate((state) => {
-      state.resources[taskResourceId] ??= 0;
-      state.resources[taskResourceId] += gained;
-      return state;
-    });
+  const gained =
+    (heroBonusSum +
+      bonusResources +
+      task.resourceRewardPerCycle * numHeroesOnTask) *
+    numTaskRewards(task) *
+    getOption('rewardMultiplier');
 
-    notify(`+${gained} ${res?.name ?? '???'}`, 'ResourceGain');
+  const taskResourceId = task.resourceIdPerCycle;
+
+  updateGamestate((state) => {
+    state.resources[taskResourceId] ??= 0;
+    state.resources[taskResourceId] += gained;
+    return state;
+  });
+
+  notify(`+${gained} ${res?.name ?? '???'}`, 'ResourceGain');
+}
+
+function applyTaskFinalizedResultsToResearch(
+  task: GameTask,
+  heroBonusSum: number,
+): void {
+  if (!task.applyResultsToResearch) return;
+
+  const researchGained =
+    (heroBonusSum + task.resourceRewardPerCycle) *
+    numTaskRewards(task) *
+    getOption('rewardMultiplier');
+  const activeResearch = gamestate().activeResearch;
+  const activeResearchEntry = getEntry<GameResearch>(activeResearch);
+  if (
+    !activeResearchEntry ||
+    gamestate().researchProgress[activeResearch] >=
+      activeResearchEntry.researchRequired
+  ) {
+    return;
   }
 
-  if (task.applyResultsToResearch) {
-    const researchGained =
-      (heroBonusSum + task.resourceRewardPerCycle) *
-      numTaskRewards(task) *
-      getOption('rewardMultiplier');
-    const activeResearch = gamestate().activeResearch;
-    const activeResearchEntry = getEntry<GameResearch>(activeResearch);
-    if (
-      !activeResearchEntry ||
-      gamestate().researchProgress[activeResearch] >=
-        activeResearchEntry.researchRequired
-    ) {
-      return;
-    }
+  updateGamestate((state) => {
+    state.researchProgress[activeResearch] ??= 0;
+    state.researchProgress[activeResearch] = Math.min(
+      state.researchProgress[activeResearch] + researchGained,
+      activeResearchEntry.researchRequired,
+    );
+    return state;
+  });
+}
 
-    updateGamestate((state) => {
-      state.researchProgress[activeResearch] ??= 0;
-      state.researchProgress[activeResearch] = Math.min(
-        state.researchProgress[activeResearch] + researchGained,
-        activeResearchEntry.researchRequired,
-      );
-      return state;
-    });
+function applyTaskFinalizedResultsToTimers(
+  task: GameTask,
+  heroBonusSum: number,
+): void {
+  if (!task.applyDamageToRandomTimers) return;
+
+  const bonus = resourceBonusForTask(task);
+
+  const timerDamageTicksDone =
+    (heroBonusSum + task.resourceRewardPerCycle + bonus) *
+    numTaskRewards(task) *
+    getOption('rewardMultiplier');
+
+  const baseTimers: GameTimerType[] = ['defense', 'shopreroll', 'heroreroll'];
+  if (
+    isDungeonInProgress() &&
+    ['loot', 'treasure'].includes(currentDungeonStep()?.type ?? '')
+  ) {
+    baseTimers.push('dungeon');
   }
+
+  if (allHeroes().some((h) => Object.keys(h.buffTicks ?? {}).length > 0)) {
+    baseTimers.push('herobuff');
+  }
+
+  const timerType = sample(baseTimers) as GameTimerType;
+
+  const timerCalls: Record<GameTimerType, (ticks: number) => void> = {
+    defense: modifyDefenseTimer,
+    dungeon: modifyExploreTimer,
+    herobuff: modifyHeroBuffTimer,
+    heroreroll: modifyHeroRerollTimer,
+    shopreroll: modifyShopRerollTimer,
+  };
+
+  timerCalls[timerType](timerDamageTicksDone);
 }
 
 function resetTask(task: GameTask): void {

@@ -38,3 +38,27 @@
   xpRequiredPerLevel: 0
   maxLevel: 0
   spreadHeroDamageType: true
+
+- id: e57ab094-9ddc-41e8-af2d-acd6da7d436c
+  name: Entertain
+  description: Entertain your town, raising and lowering various timers across the game.
+  damageTypeId: Lyrical
+  requireExactType: true
+  maxHeroesAllocable: 1
+
+  xpPerCycle: 1
+  speedPerCycle: 5
+  damageRequiredPerCycle: 50
+  xpRequiredPerLevel: 5000
+  maxLevel: 1
+  resourceRewardPerCycle: 1
+  applyDamageToRandomTimers: true
+
+  possibleUpgradeIds:
+    - More XP I
+    - More XP II
+    - Powerful Voice I
+    - Powerful Voice II
+    - Powerful Voice III
+    - Higher Level Cap I
+    - Higher Level Cap II

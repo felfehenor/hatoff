@@ -1,0 +1,44 @@
+- id: 7712fa7c-409c-4722-935e-12d93bf22b66
+  name: Powerful Voice I
+  description: Gain an additional +5 Song Power when entertaining the town.
+
+  costs:
+    - resourceId: Gold
+      value: 100000
+
+    - resourceId: Food
+      value: 5000
+
+  boostResourceGain: 5
+
+- id: d1142e5b-16c1-40d0-b49f-51669ad5c0f5
+  name: Powerful Voice II
+  description: Gain an additional +5 Song Power when entertaining the town.
+
+  costs:
+    - resourceId: Gold
+      value: 300000
+
+    - resourceId: Food
+      value: 15000
+
+  boostResourceGain: 5
+
+  requiresUpgradeIds:
+    - Powerful Voice I
+
+- id: f51d5f70-7900-4bad-80e3-e08f4e4f8af2
+  name: Powerful Voice III
+  description: Gain an additional +5 Song Power when entertaining the town.
+
+  costs:
+    - resourceId: Gold
+      value: 900000
+
+    - resourceId: Food
+      value: 45000
+
+  boostResourceGain: 5
+
+  requiresUpgradeIds:
+    - Powerful Voice II
