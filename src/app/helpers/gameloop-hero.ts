@@ -141,7 +141,7 @@ function applyTaskFinalizedResultsToResources(
   task: GameTask,
   heroBonusSum: number,
 ): void {
-  if (!task.applyDamageToRandomTimers || !task.resourceIdPerCycle) return;
+  if (!task.resourceIdPerCycle) return;
 
   const res = getEntry<GameResource>(task.resourceIdPerCycle);
   const bonusResources = resourceBonusForTask(task);
