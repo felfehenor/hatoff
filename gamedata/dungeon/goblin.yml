@@ -47,7 +47,7 @@
         - monsterId: Goblin Brute
         - monsterId: Goblin Thief
         - monsterId: Goblin Priest
-        - monsterId: Goblin
+        - monsterId: Goblin Bishop
 
     - type: treasure
       xpGained: 0
