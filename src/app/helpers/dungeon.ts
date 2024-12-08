@@ -338,7 +338,7 @@ export function dungeonTreasureStep(
   treasureStep: GameDungeonEncounterTreasure,
 ): void {
   const pickedTreasure = randomChoice(
-    treasureStep.itemIds,
+    treasureStep.itemIds ?? [],
     gamestate().exploration.id,
   );
   updateGamestate((state) => {
