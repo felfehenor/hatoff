@@ -76,9 +76,5 @@ export function getEntry<T extends Content>(
     ret = entriesHash[idHash[entryIdOrName]] as T;
   }
 
-  if (!ret) {
-    throw new Error(`Tried to access ${entryIdOrName} but got no data.`);
-  }
-
   return ret;
 }
