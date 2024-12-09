@@ -35,7 +35,7 @@ export function heroHasAttribute(
   hero: GameHero,
   attribute: GameAttribute,
 ): boolean {
-  return hero.attributeIds.includes(attribute.id);
+  return (hero.attributeIds ?? []).includes(attribute.id);
 }
 
 export function isInjury(attribute: GameAttribute): boolean {
