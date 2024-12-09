@@ -31,6 +31,13 @@ export function heroRemoveAttribute(
   });
 }
 
+export function heroHasAttribute(
+  hero: GameHero,
+  attribute: GameAttribute,
+): boolean {
+  return hero.attributeIds.includes(attribute.id);
+}
+
 export function isInjury(attribute: GameAttribute): boolean {
   return (
     (attribute.modifyStatPercent ?? 0) < 0 ||
@@ -53,6 +60,13 @@ export function heroGainRandomInjury(hero: GameHero): void {
   if (!injury) return;
 
   heroGainAttribute(hero, injury);
+}
+
+export function heroRemoveRandomInjury(hero: GameHero): void {
+  const injury = sample(heroInjuries(hero));
+  if (!injury) return;
+
+  heroRemoveAttribute(hero, injury);
 }
 
 export function heroHealFirstInjury(hero: GameHero, ticks = 1): void {

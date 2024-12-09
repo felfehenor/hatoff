@@ -172,6 +172,7 @@ export class ContentService {
       dungeon: this.http.get('./json/dungeon.json'),
       attribute: this.http.get('./json/attribute.json'),
       skill: this.http.get('./json/skill.json'),
+      buff: this.http.get('./json/buff.json'),
       art: this.http.get('./json/art.json'),
       custom: this.http.get('./json/custom.json'),
     }).subscribe((assets) => {

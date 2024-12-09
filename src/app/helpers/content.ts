@@ -70,9 +70,15 @@ export function getEntry<T extends Content>(
   const idHash = allIdsByName();
   const entriesHash = allContentById();
 
+  let ret: T = entriesHash[entryIdOrName] as T;
+
   if (idHash[entryIdOrName]) {
-    return entriesHash[idHash[entryIdOrName]] as T;
+    ret = entriesHash[idHash[entryIdOrName]] as T;
   }
 
-  return entriesHash[entryIdOrName] as T;
+  if (!ret) {
+    throw new Error(`Tried to access ${entryIdOrName} but got no data.`);
+  }
+
+  return ret;
 }

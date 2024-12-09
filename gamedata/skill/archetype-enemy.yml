@@ -82,3 +82,33 @@
   scalars:
     - stat: force
       percent: 30
+
+- id: 6fc39b66-bef5-4d4b-88a3-392d2dd81913
+  name: Demonic Moon
+  description: Attack 5 enemies each for 300% Force (FRC).
+  icon: gameMoonClaws
+  requireDamageTypeId: Heretical
+  cooldown: 10
+  accuracy: 50
+  targetting:
+    targets: 5
+    type: enemy
+    replace: true
+  scalars:
+    - stat: force
+      percent: 300
+
+- id: 8c65d82b-4224-432e-be2e-457a28668130
+  name: Baptismal Flame
+  description: Attack an enemy for 1000% Force (FRC).
+  icon: gameFireflake
+  requireDamageTypeId: Baptismal
+  cooldown: 7
+  accuracy: 100
+  targetting:
+    targets: 1
+    type: enemy
+    replace: true
+  scalars:
+    - stat: force
+      percent: 1000

@@ -1,0 +1,4 @@
+- id: 99d5c49b-61e7-439d-8f20-2ea48359bb1c
+  name: Bard
+  description: This hero gains the ability to buff allies in combat.
+  combatSkillId: Our Hearts Ignite!

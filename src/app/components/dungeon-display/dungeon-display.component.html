@@ -7,13 +7,13 @@
     <ng-icon name="tablerSwords" class="absolute top-5 right-5 text-primary"></ng-icon>
     }
 
+    @if(isDone() && !active()) {
+    <ng-icon name="tablerCircleCheck" color="green" class="absolute top-5 right-5"></ng-icon>
+    }
+
     <div class="card-title">
       <div class="font-semibold flex items-center gap-2">
         {{ dungeonData.name }}
-
-        @if(isDone()) {
-        <ng-icon name="tablerCircleCheck" color="green"></ng-icon>
-        }
       </div>
     </div>
 

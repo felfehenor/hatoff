@@ -38,7 +38,7 @@
         @else {
         <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
           @for(hero of viableMainHeroes(); track $index) {
-          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="mainHero.set(hero)"
+          <app-fusion-hero-display class="flex-1 min-w-full" [hero]="hero" (click)="mainHero.set(hero)"
             appAnalyticsClick="Fuse:Primary:Choose"></app-fusion-hero-display>
           }
         </div>
@@ -89,7 +89,7 @@
         @else {
         <div class="flex-1 overflow-y-auto gap-2 flex flex-wrap p-4 content-baseline">
           @for(hero of viableSubHeroes(); track $index) {
-          <app-fusion-hero-display class="flex-1" [hero]="hero" (click)="subHero.set(hero)"
+          <app-fusion-hero-display class="flex-1 min-w-full" [hero]="hero" (click)="subHero.set(hero)"
             appAnalyticsClick="Fuse:Secondary:Choose"></app-fusion-hero-display>
           }
         </div>

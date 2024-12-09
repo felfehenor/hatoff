@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const { isArray } = require('lodash');
+const { isArray, isString } = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs-extra');
 const path = require('path');
@@ -74,6 +74,7 @@ const processFiles = () => {
 
 const rewriteDataIds = () => {
   const allIds = Object.keys(allData);
+  console.log(`Valid identifiers: ${allIds.join(', ')}`);
 
   const getIdForName = (name: string, type: string) => {
     const res = idToName[type][name];
@@ -101,19 +102,34 @@ const rewriteDataIds = () => {
         return;
       }
 
-      if (!entryKey.toLowerCase().includes('id')) return;
+      // if the property name has id in it, we rewrite it
+      if (entryKey.toLowerCase().includes('id')) {
+        // match
+        // our match key is an array of strings, so we rewrite them all to be ids
+        if (isArray(entry[entryKey])) {
+          entry[entryKey] = entry[entryKey].map((i: string) =>
+            getIdForName(i, keyMatch),
+          );
+        }
 
-      // match
-      // our match key is an array of strings, so we rewrite them all to be ids
-      if (isArray(entry[entryKey])) {
-        entry[entryKey] = entry[entryKey].map((i: string) =>
-          getIdForName(i, keyMatch),
-        );
-      }
+        // our match key is a simple string, so we rewrite it to be an id
+        else if (entry[entryKey] !== 'Any') {
+          entry[entryKey] = getIdForName(entry[entryKey], keyMatch);
+        }
 
-      // our match key is a simple string, so we rewrite it to be an id
-      else if (entry[entryKey] !== 'Any') {
-        entry[entryKey] = getIdForName(entry[entryKey], keyMatch);
+        // otherwise, if it's an array, we go deeper, again
+      } else {
+        if (isArray(entry[entryKey])) {
+          if (isString(entry[entryKey][0])) {
+            entry[entryKey] = entry[entryKey].map((i: string) =>
+              getIdForName(i, keyMatch),
+            );
+          } else {
+            entry[entryKey].forEach((subObj: any) => {
+              iterateObject(subObj);
+            });
+          }
+        }
       }
     });
   };

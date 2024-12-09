@@ -1,0 +1,43 @@
+- id: a957ed89-c13d-4dba-bfc1-286ff38d1b08
+  name: Force Boost (Minor)
+  category: Minor Boost
+  duration: 3600
+
+  description: Gain +20 Force (FRC) for 1 hour.
+
+  statBoosts:
+    - stat: force
+      value: 20
+
+- id: 48b57846-63ee-4f0a-a0e2-5e7b86749f70
+  name: Resistance Boost (Minor)
+  category: Minor Boost
+  duration: 3600
+
+  description: Gain +30 Resistance (RES) for 1 hour.
+
+  statBoosts:
+    - stat: resistance
+      value: 30
+
+- id: c00afbcf-1a85-4bed-8bd7-ff4109452b1b
+  name: Progress Boost (Minor)
+  category: Minor Boost
+  duration: 3600
+
+  description: Gain +20 Progress (PRG) for 1 hour.
+
+  statBoosts:
+    - stat: progress
+      value: 20
+
+- id: d4ba4393-39fb-4c2b-87e3-714bd60a6234
+  name: Speed Boost (Minor)
+  category: Minor Boost
+  duration: 3600
+
+  description: Gain +10 Speed (SPD) for 1 hour.
+
+  statBoosts:
+    - stat: speed
+      value: 10

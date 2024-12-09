@@ -1,0 +1,5 @@
+<div>
+  @for(buff of hero().buffIds; track $index) {
+  <app-hero-buff-display class="mr-1" [id]="buff" [duration]="hero().buffTicks[buff]"></app-hero-buff-display>
+  }
+</div>

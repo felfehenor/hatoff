@@ -1,0 +1,27 @@
+- id: e4a69da1-3a91-4431-80d1-4842aceec882
+  name: Reinforced Walls
+  description: Stop an incoming attack once, losing this upgrade instead of another one.
+
+  costs:
+    - resourceId: Wood
+      value: 5000
+
+    - resourceId: Stone
+      value: 5000
+
+  requiresResearchIds:
+    - Reinforcements
+
+- id: 4c415d8c-9c3c-4680-b175-58741074a2d1
+  name: Medic On Demand
+  description: Reduce the chance of getting a hero injury from Town Defense events by 50%.
+
+  costs:
+    - resourceId: Food
+      value: 50000
+
+    - resourceId: Gold
+      value: 25000
+
+  requiresResearchIds:
+    - Stat Medic

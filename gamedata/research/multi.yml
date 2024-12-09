@@ -29,3 +29,51 @@
   unlocksTaskIds:
     - 'Church - Priest'
     - 'Church - Confessor'
+
+- id: 054641b7-ad32-4601-9afb-0eddae27578e
+  name: Heresy
+  type: Archetype
+  description: 'Unlocks the damage type "Heretical". Unlocks the archetype "Heretic".'
+  researchRequired: 100000
+
+  requiresLootIds:
+    - Goblish Staff
+
+  unlocksDamageTypeIds:
+    - Heretical
+
+  unlocksArchetypeIds:
+    - Heretic
+
+- id: 4de6e215-4539-4866-9b08-affa1d1a616e
+  name: Baptism
+  type: Archetype
+  description: 'Unlocks the damage type "Baptismal". Unlocks the archetype "Witness".'
+  researchRequired: 100000
+
+  requiresLootIds:
+    - Goblish Staff
+
+  unlocksDamageTypeIds:
+    - Baptismal
+
+  unlocksArchetypeIds:
+    - Witness
+
+- id: f3c30ac1-27e5-4dd9-8eaf-6c7f92f5a99f
+  name: Music
+  type: Archetype
+  description: 'Unlocks the damage type "Lyrical". Unlocks the archetype "Bard". Unlocks the task "Entertain".'
+  researchRequired: 100000
+
+  requiresLootIds:
+    - Goblish Harp
+
+  unlocksDamageTypeIds:
+    - Lyrical
+
+  unlocksArchetypeIds:
+    - Bard
+
+  unlocksTaskIds:
+    - Entertain

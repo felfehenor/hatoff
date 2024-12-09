@@ -9,3 +9,7 @@
 - id: 2fd7c28f-550c-4889-a38a-a700363d78d9
   name: Goblish Staff
   description: A staff stolen from a goblin priest. It seems to be a broken tree branch.
+
+- id: c364d42e-1d87-407b-9482-f6f400717dda
+  name: Goblish Harp
+  description: A harp found in the goblish town. It's actually a bow, but it's best if they don't know that.

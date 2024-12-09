@@ -1,0 +1,11 @@
+- id: b077bc04-11a7-4a8c-8b83-4bf6cfaf3507
+  name: Heartrage
+  category: Song Boost
+  canStack: true
+  duration: 3600
+
+  description: Gain +5 Force (FRC) for exploration.
+
+  statBoosts:
+    - stat: force
+      value: 5

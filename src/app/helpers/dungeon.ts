@@ -18,6 +18,7 @@ import { sendDesignEvent } from './analytics';
 import {
   heroGainAttribute,
   heroGainRandomInjury,
+  heroHasAttribute,
   heroInjuries,
 } from './attribute';
 import {
@@ -172,9 +173,11 @@ export function clearActiveDungeon() {
   if (earnedAttributeId) {
     heroesInExploreTask().forEach((hero) => {
       const attribute = getEntry<GameAttribute>(earnedAttributeId)!;
-      notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Dungeon');
 
-      heroGainAttribute(hero, attribute);
+      if (!heroHasAttribute(hero, attribute)) {
+        notify(`${hero.name} has unlocked "${attribute.name}"!`, 'Dungeon');
+        heroGainAttribute(hero, attribute);
+      }
     });
   }
 
@@ -248,15 +251,9 @@ export function heroWinCombat(fightStep: GameDungeonEncounterFight): void {
   notify(`Combat rewards: ${notifyStr}`, 'Dungeon');
 }
 
-export function heroLoseCombat(isForced = false): void {
-  sendDesignEvent(
-    `Exploration:${currentDungeonName()}:Failure:${
-      isForced ? 'Natural' : 'Forced'
-    }`,
-  );
-  notifyError('The exploration party was unsuccessful...', true);
-
+export function failureInjureHeroes(): void {
   const finalizeForHero = (hero: GameHero) => {
+    sendDesignEvent('Hero:Injure:Explore');
     stunHero(hero, currentDungeon()?.stunTimeOnFailure ?? 900);
     heroGainRandomInjury(hero);
     notify(`${hero.name} has been injured...`, 'Dungeon');
@@ -280,6 +277,17 @@ export function heroLoseCombat(isForced = false): void {
 
     finalizeForHero(hero);
   });
+}
+
+export function heroLoseCombat(isForced = false): void {
+  sendDesignEvent(
+    `Exploration:${currentDungeonName()}:Failure:${
+      isForced ? 'Natural' : 'Forced'
+    }`,
+  );
+  notifyError('The exploration party was unsuccessful...', true);
+
+  failureInjureHeroes();
 
   exitDungeon();
 }
@@ -330,7 +338,7 @@ export function dungeonTreasureStep(
   treasureStep: GameDungeonEncounterTreasure,
 ): void {
   const pickedTreasure = randomChoice(
-    treasureStep.treasureIds,
+    treasureStep.itemIds ?? [],
     gamestate().exploration.id,
   );
   updateGamestate((state) => {
@@ -405,4 +413,10 @@ export function exitDungeon(): void {
 
 export function isHeroExploring(hero: GameHero): boolean {
   return !!heroesInExploreTask().find((h) => h.id === hero.id);
+}
+
+export function fleeDungeon() {
+  notify(`Your exploration party fled...`, 'Dungeon');
+  failureInjureHeroes();
+  exitDungeon();
 }

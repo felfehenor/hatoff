@@ -21,8 +21,9 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 30
-      treasureIds:
+      itemIds:
         - EXP Potion (Small)
+        - Panaceatic Slime
 
     - type: fight
       xpGained: 50
@@ -62,8 +63,9 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 120
-      treasureIds:
+      itemIds:
         - EXP Potion (Small)
+        - Panaceatic Slime
 
     - type: fight
       xpGained: 100
@@ -78,9 +80,11 @@
     - type: treasure
       xpGained: 0
       ticksRequired: 120
-      treasureIds:
+      itemIds:
         - EXP Potion (Large)
         - Smelling Salts
+        - Bottle of Progressive Inspiration
+        - Panaceatic Slime
 
     - type: fight
       xpGained: 100

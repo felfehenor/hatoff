@@ -20,7 +20,6 @@ import {
 } from './research';
 import { getResourceValue, hasResource, zeroResource } from './resource';
 import { randomChoice, succeedsChance } from './rng';
-import { heroesAllocatedToTask, unassignHeroTask } from './task';
 import {
   allUpgradesForTask,
   hasUpgrade,
@@ -106,7 +105,27 @@ export function calculateDamageForTown(): number {
   return Math.floor(result);
 }
 
+export function hasReinforcedWalls(): boolean {
+  const defenseTask = getEntry<GameTask>('Defend Town');
+  const upgrade = getEntry<GameUpgrade>('Reinforced Walls');
+
+  return !!defenseTask && !!upgrade && hasUpgrade(defenseTask, upgrade);
+}
+
+export function hasMedic(): boolean {
+  const defenseTask = getEntry<GameTask>('Defend Town');
+  const upgrade = getEntry<GameUpgrade>('Medic On Demand');
+
+  return !!defenseTask && !!upgrade && hasUpgrade(defenseTask, upgrade);
+}
+
 export function isTaskThreatened(task: GameTask): boolean {
+  const defenseTask = getEntry<GameTask>('Defend Town');
+
+  if (hasReinforcedWalls()) {
+    return task.id === defenseTask?.id;
+  }
+
   return (
     !hasEnoughFortifications() &&
     gamestate().defense.targettedTaskIds.includes(task.id)
@@ -170,13 +189,14 @@ export function doTownAttack(): void {
   sendDesignEvent('TownDefense:NumAttacks', gamestate().defense.numAttacks + 1);
   setTownAttacks(gamestate().defense.numAttacks + 1);
 
+  let shouldLoseWalls = false;
   const tasksToLoseUpgradesFor: GameTask[] = [];
 
   updateGamestate((state) => {
-    const defenseTask = getEntry<GameTask>('Defend Town');
-    if (defenseTask) {
-      const allocated = heroesAllocatedToTask(defenseTask);
-      allocated.forEach((hero) => unassignHeroTask(hero));
+    if (hasReinforcedWalls()) {
+      sendDesignEvent('TownDefense:DefenseLevel:DefendedWithWalls');
+      shouldLoseWalls = true;
+      return state;
     }
 
     const fortifications = getEntry<GameResource>('Fortifications');
@@ -193,10 +213,14 @@ export function doTownAttack(): void {
           ...state.defense.targettedTaskIds.map((t) => getEntry<GameTask>(t)!),
         );
 
-        const heroToInjure = sample(allHeroes());
-        if (heroToInjure) {
-          heroGainRandomInjury(heroToInjure);
-          notify(`${heroToInjure.name} was injured!`, 'Defense');
+        const injuryChance = 100 - (hasMedic() ? 50 : 0);
+        if (succeedsChance(injuryChance)) {
+          sendDesignEvent('Hero:Injure:TownDefense');
+          const heroToInjure = sample(allHeroes());
+          if (heroToInjure) {
+            heroGainRandomInjury(heroToInjure);
+            notify(`${heroToInjure.name} was injured!`, 'Defense');
+          }
         }
       } else {
         sendDesignEvent('TownDefense:DefenseLevel:FullyDefended');
@@ -214,6 +238,12 @@ export function doTownAttack(): void {
 
     loseUpgrade(task, lost);
   });
+
+  if (shouldLoseWalls) {
+    const defenseTask = getEntry<GameTask>('Defend Town');
+    const upgrade = getEntry<GameUpgrade>('Reinforced Walls');
+    loseUpgrade(defenseTask!, upgrade!);
+  }
 
   generateTownAttack();
   setDefenseResetTime();

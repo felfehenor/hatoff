@@ -23,3 +23,16 @@
   scalars:
     - stat: force
       percent: -200
+
+- id: bf7d8afe-5a62-4039-bce3-be14cd793c42
+  name: 'Our Hearts Ignite!'
+  description: Grant an ally +5 Force (FRC).
+  icon: gameTunePitch
+  cooldown: 1
+  accuracy: 999
+  targetting:
+    targets: 1
+    type: ally
+  scalars: []
+  applyBuffIds:
+    - Heartrage

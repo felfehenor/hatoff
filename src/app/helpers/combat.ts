@@ -66,6 +66,7 @@ export function toCombatant(
     stats: newStats,
     attributeIds: char.attributeIds,
     skillIds: [],
+    buffIds: char.buffIds ?? [],
     skillCooldowns: {},
     ...extra,
   };
@@ -167,6 +168,18 @@ export function chooseSkillTargets(
   return chosenTargets.filter(Boolean);
 }
 
+export function applySkillBuffs(
+  fight: GameCombat,
+  skill: GameSkill,
+  target: GameActiveCombatant,
+): void {
+  const buffIds = skill.applyBuffIds ?? [];
+  buffIds.forEach((buff) => {
+    target.buffIds ??= [];
+    target.buffIds.push(buff);
+  });
+}
+
 export function attackTarget(
   fight: GameCombat,
   attacker: GameActiveCombatant,
@@ -202,14 +215,23 @@ export function attackTarget(
     }
 
     const damage = damageDealt(attacker, target, skill);
-    target.currentHp -= damage;
+    if (damage > 0) {
+      target.currentHp -= damage;
 
-    combatLog(
-      fight,
-      `${attacker.name} targetted ${target.name} with ${
-        skill.name
-      } for ${Math.abs(damage)} HP!`,
-    );
+      combatLog(
+        fight,
+        `${attacker.name} targetted ${target.name} with ${
+          skill.name
+        } for ${Math.abs(damage)} HP!`,
+      );
+    } else {
+      combatLog(
+        fight,
+        `${attacker.name} targetted ${target.name} with ${skill.name}!`,
+      );
+    }
+
+    applySkillBuffs(fight, skill, target);
 
     if (isDeadInCombat(target)) {
       combatLog(fight, `${target.name} was slain by ${attacker.name}!`);

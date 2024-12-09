@@ -23,7 +23,7 @@
 - id: 1fae2e6e-c3c5-4afb-81e8-d27f24baf01c
   name: Restoration
   type: Task
-  description: Unlock the task "Heal". Allows you to more quickly bring heroes back to consciousness.
+  description: Unlock the task "Heal". Allows you to more quickly bring heroes back to consciousness and heal their injuries.
   researchRequired: 5000
 
   unlocksTaskIds: [Heal]

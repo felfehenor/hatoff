@@ -1,0 +1,19 @@
+- id: 853089f6-c6ea-44a2-b6f0-1ddd42f6e071
+  name: Baptismal
+  icon: tablerCross
+  color: '#45b3e0'
+  subTypes:
+    - damageTypeId: Spiritual
+      percent: 120
+    - damageTypeId: Physical
+      percent: 120
+
+- id: d369bc0d-15aa-4fb4-ae01-ad8ddb038b2b
+  name: Heretical
+  icon: tablerMoon
+  color: '#ba1f40'
+  subTypes:
+    - damageTypeId: Spiritual
+      percent: 120
+    - damageTypeId: Emotional
+      percent: 120

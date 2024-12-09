@@ -1,6 +1,7 @@
 export * from './analytics';
 export * from './archetype';
 export * from './attribute';
+export * from './buff';
 export * from './combat';
 export * from './content';
 export * from './cooldown';
@@ -8,6 +9,7 @@ export * from './damagetype';
 export * from './defense';
 export * from './difficulty';
 export * from './dungeon';
+export * from './entertain';
 export * from './fusion';
 export * from './gameloop';
 export * from './gameloop-defense';

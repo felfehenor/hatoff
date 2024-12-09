@@ -44,6 +44,7 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroDamageTypeComponent } from '../hero-damage-type/hero-damage-type.component';
 import { HeroFusionIndicatorComponent } from '../hero-fusion-indicator/hero-fusion-indicator.component';
+import { HeroInjuryIndicatorComponent } from '../hero-injury-indicator/hero-injury-indicator.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 import { ResourceDisplayComponent } from '../resource-display/resource-display.component';
@@ -68,6 +69,7 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
     HeroStatusComponent,
     AnalyticsClickDirective,
     HeroDamageTypeComponent,
+    HeroInjuryIndicatorComponent,
   ],
   providers: [
     provideIcons({

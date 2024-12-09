@@ -3,6 +3,13 @@ import { Content } from './identifiable';
 
 export type GameTaskTypeAutoChange = 'defense';
 
+export type GameTimerType =
+  | 'defense'
+  | 'shopreroll'
+  | 'heroreroll'
+  | 'herobuff'
+  | 'dungeon';
+
 export interface GameTask extends Content {
   description: string;
 
@@ -121,4 +128,9 @@ export interface GameTask extends Content {
    * The attribute a hero can earn by doing this task.
    */
   earnedAttributeId?: string;
+
+  /**
+   * Whether or not the task should apply the output to various timers in the game.
+   */
+  applyDamageToRandomTimers?: boolean;
 }

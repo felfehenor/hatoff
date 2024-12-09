@@ -1,6 +1,6 @@
 - id: b2d9bdf5-c1c7-4faa-9481-068b3c8021c5
   name: Heal
-  description: Bring heroes back to consciousness.
+  description: Bring heroes back to consciousness and heal their injuries.
   damageTypeId: Any
   maxHeroesAllocable: 2
 

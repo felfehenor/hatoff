@@ -20,3 +20,14 @@
 
   requiresResearchIds:
     - Garrison II
+
+- id: 6475a98c-2be8-490d-978f-16b3f3f92b36
+  name: Shopping Trip
+  type: Shop
+  description: Unlock the Shop. Allows you to spend your hard-earned Gold on your heroes.
+  researchRequired: 500
+
+  unlockShopSlots: 4
+
+  requiresResearchIds:
+    - Taxes
