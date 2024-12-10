@@ -23,7 +23,8 @@
 
           <swal #renameSwal title="Rename Hero" text="Enter a new name for this hero." input="text"
             [showCancelButton]="true" [focusCancel]="true" [confirmButtonText]="'Rename Hero'"
-            [inputValue]="activeHero.name" [focusCancel]="true" (confirm)="renameHero($event)">
+            [inputAttributes]="{ maxlength: '25' }" [inputValue]="activeHero.name" [focusCancel]="true"
+            (confirm)="renameHero($event)">
           </swal>
           }
         </span>
