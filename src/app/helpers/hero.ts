@@ -85,6 +85,10 @@ export function createHero(): GameHero {
   return hero;
 }
 
+export function isMainHero(hero: GameHero): boolean {
+  return gamestate().townSetup.heroId === hero.id;
+}
+
 export function hasMainHero(): boolean {
   const state = gamestate();
   return !!getHero(state.townSetup.heroId);
@@ -472,4 +476,12 @@ export function isHeroAbleToDoMostThings(hero: GameHero): boolean {
 
 export function canUseItemsOnHero(hero: GameHero): boolean {
   return isHeroAbleToDoMostThings(hero);
+}
+
+export function getTotalHeroLevel(hero: GameHero): number {
+  return sum(
+    Array(1 + hero.fusionLevel)
+      .fill(0)
+      .map((_, i) => (i === hero.fusionLevel ? hero.level : 20 + i * 10)),
+  );
 }

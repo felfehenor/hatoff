@@ -5,6 +5,7 @@ export const maxCooldowns: Record<keyof GameStateCooldowns, number> = {
   nextDefenseAttackTime: 3600,
   nextRecruitResetTime: 3600,
   nextShopResetTime: 3600,
+  nextPetPetTime: 900,
 };
 
 export function cooldown(key: keyof GameStateCooldowns): number {

@@ -1,0 +1,31 @@
+<div class="flex flex-col gap-2">
+  @for(hero of viableFoodCandidates(); track $index) {
+  <div class="card card-side foreground-2 shadow-xl flex-1 w-full" [appHeroSpecialGlow]="hero">
+    <figure class="max-w-[96px] pl-2">
+      <app-hero-art [id]="hero.id" [size]="96" [mood]="'sad'"></app-hero-art>
+    </figure>
+
+    <div class="card-body">
+      <div class="card-title">
+        {{ hero.name }}
+      </div>
+
+      <div>
+        <app-hero-level-tagline [hero]="hero" [showXp]="false"></app-hero-level-tagline>
+      </div>
+
+      <div class="card-actions justify-end">
+        <button class="btn btn-secondary" [swal]="feedSwal">
+          Feed for +{{ xpForHero(hero) }} XP
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <swal #feedSwal title="Feed Hero To Pet?"
+    text="This cannot be undone. Are you sure you want to feed this hero to your pet? You will not be able to get this hero back, ever! But your pet will be happier."
+    icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="feedHeroToPet(hero)"
+    [confirmButtonText]="'Feed Hero'">
+  </swal>
+  }
+</div>

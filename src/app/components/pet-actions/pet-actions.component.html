@@ -1,0 +1,37 @@
+<div class="card inner-card-content foreground shadow-xl">
+  <div class="card-body overflow-hidden">
+    <div class="card-title">
+      <div role="tablist" class="tabs tabs-bordered w-full">
+        <a role="tab" class="tab" [class.tab-active]="petActionMode() === 'feedpet'"
+          (click)="petActionMode.set('feedpet')" [appAnalyticsClick]="'Pet:ChooseAction:FeedPet'"
+          (keydown.enter)="petActionMode.set('feedpet')" tabindex="1">Feed Resources</a>
+
+        <a role="tab" class="tab" [class.tab-active]="petActionMode() === 'feedhero'"
+          (click)="petActionMode.set('feedhero')" [appAnalyticsClick]="'Pet:ChooseAction:FeedHero'"
+          (keydown.enter)="petActionMode.set('feedhero')" tabindex="1">Feed Heroes</a>
+
+        <a role="tab" class="tab" [class.tab-active]="petActionMode() === 'equiprelics'"
+          (click)="petActionMode.set('equiprelics')" [appAnalyticsClick]="'Pet:ChooseAction:EquipRelics'"
+          (keydown.enter)="petActionMode.set('equiprelics')" tabindex="1">
+          Equip Relics ({{ petEquippedRelics() }} / {{ petMaxRelics() }})
+        </a>
+      </div>
+    </div>
+
+    <div class="pt-2 overflow-hidden overflow-y-auto pr-2">
+      @switch(petActionMode()) {
+      @case('feedpet') {
+      <app-pet-actions-feed-resources></app-pet-actions-feed-resources>
+      }
+
+      @case('feedhero') {
+      <app-pet-actions-feed-hero></app-pet-actions-feed-hero>
+      }
+
+      @case('equiprelics') {
+      <app-pet-actions-relics></app-pet-actions-relics>
+      }
+      }
+    </div>
+  </div>
+</div>

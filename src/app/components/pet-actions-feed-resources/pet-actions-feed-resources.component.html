@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-2">
+  @for(stat of petStats; track $index) {
+  <div class="card card-side foreground-2 shadow-xl flex-1 w-full">
+    <div class="card-body">
+      <div class="card-title">
+        {{ stat.stat | titlecase }} ({{ numStatBought(stat.stat) }} / {{ petStatMax() }})
+      </div>
+
+      <div>
+        {{ stat.desc }}
+      </div>
+
+      <div class="card-actions justify-end">
+        <button class="btn btn-secondary" [class.btn-disabled]="!canBuyStat(stat.stat)" (click)="buyStat(stat.stat)">
+          Buy +1 for {{ costForStat(stat.stat) | number }}
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</div>

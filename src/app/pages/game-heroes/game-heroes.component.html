@@ -12,10 +12,14 @@
       </select>
     </label>
 
+    <button class="btn btn-sm btn-primary" [routerLink]="['/game/pet']" appAnalyticsClick="Heroes:Pet"
+      [appHideIfNotResearched]="'Town Pet'">Town Pet</button>
+
     @if(shouldShowFuseButton()) {
-    <button class="btn btn-sm btn-success mr-1" [routerLink]="['/game/fuse']" appAnalyticsClick="Heroes:Fuse">Fuse
+    <button class="btn btn-sm btn-primary" [routerLink]="['/game/fuse']" appAnalyticsClick="Heroes:Fuse">Fuse
       Heroes</button>
     }
+
     <button class="btn btn-sm btn-primary" [routerLink]="['/game/recruit']" appAnalyticsClick="Heroes:Recruit">View
       Recruits</button>
   </div>

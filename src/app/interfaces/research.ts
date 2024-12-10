@@ -92,4 +92,9 @@ export interface GameResearch extends Content {
    * The number of new shop slots to unlock.
    */
   unlockShopSlots?: number;
+
+  /**
+   * The number of pet relic slots to unlock.
+   */
+  unlockPetSlots?: number;
 }

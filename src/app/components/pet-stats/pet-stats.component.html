@@ -1,0 +1,41 @@
+<div class="card inner-card-content foreground shadow-xl">
+  <div class="card-body overflow-hidden">
+    <div class="card-title">
+      {{ petName() }} Lv. {{ petLevel() }}
+    </div>
+
+    <div [tp]="petXP() + ' / 100 XP'">
+      <progress class="progress progress-primary w-full" [value]="petXP()" max="100"></progress>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+      @for(stat of petStats; track $index) {
+      @let boost = statBoost(stat.stat);
+
+      <div class="card card-side foreground-2 shadow-xl flex-1 w-full h-32">
+        <div class="stats shadow w-full">
+          <div class="stat w-full">
+            <div class="stat-figure">
+              <ng-icon [name]="stat.icon" [color]="stat.color"></ng-icon>
+            </div>
+
+            <div class="stat-title">
+              {{ stat.stat | titlecase }}
+            </div>
+
+            <div class="stat-value">
+              {{ getStat(stat.stat) | number }}
+            </div>
+
+            @if(boost !== 0) {
+            <div class="stat-desc" [class.text-success]="boost > 0" [class.text-error]="boost < 0">
+              {{ boost > 0 ? '+' : '' }} {{ boost | number}}
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

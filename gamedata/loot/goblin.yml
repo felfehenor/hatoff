@@ -2,14 +2,26 @@
   name: Goblish Club
   description: A club stolen from a goblin brute. It might have some value at the market, why else would you acquire it?
 
+  statBoosts:
+    force: 3
+
 - id: 72c00382-7274-4705-918f-46e361916b49
   name: Goblish Dagger
   description: A dagger stolen from a goblin thief. It, uh, is a broken bobby pin.
+
+  statBoosts:
+    speed: 2
 
 - id: 2fd7c28f-550c-4889-a38a-a700363d78d9
   name: Goblish Staff
   description: A staff stolen from a goblin priest. It seems to be a broken tree branch.
 
+  statBoosts:
+    progress: 3
+
 - id: c364d42e-1d87-407b-9482-f6f400717dda
   name: Goblish Harp
   description: A harp found in the goblish town. It's actually a bow, but it's best if they don't know that.
+
+  statBoosts:
+    resistance: 2

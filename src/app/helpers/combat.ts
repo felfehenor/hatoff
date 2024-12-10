@@ -8,12 +8,14 @@ import {
   GameHeroStat,
   GameMonster,
   GameSkill,
+  PetStat,
 } from '../interfaces';
 import { getArchetypeCombatStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { heroLoseCombat } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
 import { getHero, heroStatValue } from './hero';
+import { getPetExplorerStatBonus } from './pet';
 import { randomNumber, succeedsChance } from './rng';
 import { usableSkillsForHero } from './skill';
 
@@ -313,10 +315,17 @@ export function baseHeroDamage(
   attacker: GameActiveCombatant,
   skill: GameSkill,
 ): number {
+  function getHeroBaseDamage(stat: GameHeroStat): number {
+    const baseDamageValue = heroStatValue(attacker, stat);
+    if (stat === 'piety' || stat === 'health' || !isCombatantAHero(attacker)) {
+      return baseDamageValue;
+    }
+
+    return baseDamageValue + getPetExplorerStatBonus(stat as PetStat);
+  }
+
   return sumBy(
-    skill.scalars.map(
-      (s) => heroStatValue(attacker, s.stat) * (s.percent / 100),
-    ),
+    skill.scalars.map((s) => getHeroBaseDamage(s.stat) * (s.percent / 100)),
   );
 }
 
@@ -354,7 +363,7 @@ export function attemptToDie(
     );
 
     // write it back
-    if (character.id) {
+    if (isCombatantAHero(character)) {
       updateGamestate((state) => {
         const ref = getHero(character.id);
         if (!ref) return state;
@@ -365,6 +374,10 @@ export function attemptToDie(
       });
     }
   }
+}
+
+export function isCombatantAHero(character: GameCombatant): boolean {
+  return character.archetypeIds.length > 0;
 }
 
 export function getCombatStat(

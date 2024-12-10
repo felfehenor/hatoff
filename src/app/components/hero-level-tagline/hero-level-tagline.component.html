@@ -1,5 +1,5 @@
 @let activeHero = hero();
-<div class="flex items-center">
+<div class="flex items-center gap-2">
   <span>
     <app-level-display [currentLevel]="activeHero.level" [maxLevel]="activeHero.maxLevel"></app-level-display>
   </span>
@@ -7,7 +7,7 @@
   <app-hero-fusion-indicator [hero]="activeHero"></app-hero-fusion-indicator>
 
   @if(showXp() && activeHero.level < activeHero.maxLevel) { <!---->
-    <span class="ml-2">
+    <span>
       [{{ activeHero.xp | number }} / {{ activeHero.maxXp | number }} XP]
     </span>
     }

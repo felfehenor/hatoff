@@ -5,6 +5,7 @@ import { countBy, sortBy } from 'lodash';
 import { HeroListComponent } from '../../components/hero-list/hero-list.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
+import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
   allHeroes,
   canRecruitHero,
@@ -29,6 +30,7 @@ interface FilterOption {
     RouterLink,
     AnalyticsClickDirective,
     FormsModule,
+    HideResearchDirective,
   ],
   templateUrl: './game-heroes.component.html',
   styleUrl: './game-heroes.component.scss',

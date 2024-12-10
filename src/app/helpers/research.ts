@@ -154,6 +154,12 @@ export function allUnlockedShopSlotBoosts(): number {
   return sum(validResearch.map((r) => r.unlockShopSlots ?? 0));
 }
 
+export function allUnlockedPetSlotBoosts(): number {
+  const validResearch = allCompletedResearch().filter((r) => r.unlockPetSlots);
+
+  return sum(validResearch.map((r) => r.unlockPetSlots ?? 0));
+}
+
 export function allUnlockedShopItems(): GameItem[] {
   return getEntriesByType<GameItem>('item').filter((r) =>
     r.requiresResearchIds?.every((r) => isResearchComplete(r)),

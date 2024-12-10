@@ -12,6 +12,7 @@ export * from './item';
 export * from './loot';
 export * from './monster';
 export * from './options';
+export * from './pet';
 export * from './research';
 export * from './resource';
 export * from './skill';
