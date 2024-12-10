@@ -21,6 +21,7 @@ export class LoggerService {
     'The object is in an invalid state.',
     '$0',
     'NG0950',
+    'hotToastComponentList',
   ];
 
   private lastId = signal<string>('');
