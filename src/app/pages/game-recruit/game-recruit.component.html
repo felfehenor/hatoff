@@ -57,7 +57,7 @@
             </button>
 
             <swal #recruitSwal [title]="'Recruit ' + hero.name" [text]="recruitDesc(hero)" icon="question"
-              [showCancelButton]="true" [focusCancel]="true" (confirm)="recruitHero(hero, $index)">
+              (confirm)="recruitHero(hero, $index)">
             </swal>
           </div>
         </div>

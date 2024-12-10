@@ -24,8 +24,7 @@
 
   <swal #feedSwal title="Feed Hero To Pet?"
     text="This cannot be undone. Are you sure you want to feed this hero to your pet? You will not be able to get this hero back, ever! But your pet will be happier."
-    icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="feedHeroToPet(hero)"
-    [confirmButtonText]="'Feed Hero'">
+    icon="warning" (confirm)="feedHeroToPet(hero)" [confirmButtonText]="'Feed Hero'">
   </swal>
   }
 </div>

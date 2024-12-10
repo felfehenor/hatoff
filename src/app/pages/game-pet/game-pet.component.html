@@ -34,8 +34,7 @@
     </div>
 
     <swal #renameSwal title="Rename Pet" text="Enter a new name for this pet." input="text" [inputValue]="petName()"
-      [showCancelButton]="true" [focusCancel]="true" [confirmButtonText]="'Rename Pet'" [focusCancel]="true"
-      [inputAttributes]="{ maxlength: '25' }" (confirm)="renamePet($event)">
+      [confirmButtonText]="'Rename!'" [inputAttributes]="{ maxlength: '25' }" (confirm)="renamePet($event)">
     </swal>
   </div>
 

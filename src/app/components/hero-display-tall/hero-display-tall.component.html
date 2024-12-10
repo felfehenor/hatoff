@@ -22,8 +22,7 @@
           </button>
 
           <swal #renameSwal title="Rename Hero" text="Enter a new name for this hero." input="text"
-            [showCancelButton]="true" [focusCancel]="true" [confirmButtonText]="'Rename Hero'"
-            [inputAttributes]="{ maxlength: '25' }" [inputValue]="activeHero.name" [focusCancel]="true"
+            [confirmButtonText]="'Rename!'" [inputAttributes]="{ maxlength: '25' }" [inputValue]="activeHero.name"
             (confirm)="renameHero($event)">
           </swal>
           }
@@ -102,6 +101,5 @@
 
 <swal #deleteSwal title="Dismiss Hero?"
   text="This cannot be undone. Are you sure you want to dismiss this hero? You will not be able to get this hero back, ever! Probably."
-  icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="dismissHero()"
-  [confirmButtonText]="'Dismiss Hero'">
+  icon="warning" (confirm)="dismissHero()" [confirmButtonText]="'Dismiss Hero'">
 </swal>
