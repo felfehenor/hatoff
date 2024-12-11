@@ -6,6 +6,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
+import { sortBy } from 'lodash';
 import { forkJoin } from 'rxjs';
 import {
   allContentById,
@@ -235,7 +236,7 @@ export class ContentService {
     const wilds = allDamageTypes.filter((f) => f.isAny);
 
     wilds.forEach((wild) => {
-      wild.subTypes = allDamageTypes
+      wild.subTypes = sortBy(allDamageTypes, (dt) => dt.name)
         .filter((f) => !f.isAny)
         .map((dt) => ({ damageTypeId: dt.id, percent: 100 }));
     });

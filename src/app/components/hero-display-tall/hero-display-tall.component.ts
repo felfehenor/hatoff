@@ -32,6 +32,7 @@ import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.comp
 import { HeroAttributeListComponent } from '../hero-attribute-list/hero-attribute-list.component';
 import { HeroBuffListComponent } from '../hero-buff-list/hero-buff-list.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
+import { HeroStatInfusionTableComponent } from '../hero-stat-infusion-table/hero-stat-infusion-table.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
@@ -56,6 +57,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     AnalyticsClickDirective,
     HeroAttributeListComponent,
     HeroBuffListComponent,
+    HeroStatInfusionTableComponent,
   ],
   providers: [
     provideIcons({

@@ -1,0 +1,58 @@
+- id: c2e76330-c291-4dba-9703-6103bee221fa
+  name: Bloodlet
+  description: Convert Piety (PIE) into Mana.
+  damageTypeId: Magical
+  maxHeroesAllocable: 2
+
+  consumeStatPerCycle: piety
+  consumeAmount: 1
+
+  xpPerCycle: 1
+  speedPerCycle: 15
+  damageRequiredPerCycle: 200
+  xpRequiredPerLevel: 5000
+  maxLevel: 1
+  resourceIdPerCycle: Mana
+  resourceRewardPerCycle: 1
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More Resources I
+    - More Resources II
+    - More XP I
+    - More XP II
+    - Higher Level Cap I
+    - Higher Level Cap II
+    - Stronger Synergy I
+    - Stronger Synergy II
+
+- id: 1d8f6ed8-195d-4554-a4ac-aa24322090ea
+  name: Alchemy
+  description: Convert Wood, Stone, Gold, or Food into Mana.
+  damageTypeId: Magical
+  maxHeroesAllocable: 2
+
+  xpPerCycle: 1
+  speedPerCycle: 35
+  damageRequiredPerCycle: 500
+  xpRequiredPerLevel: 5000
+  maxLevel: 1
+  resourceIdPerCycle: Mana
+  resourceRewardPerCycle: 1
+
+  consumeResourceIdPerCycle: [Wood, Stone, Food, Gold]
+  consumeResourceCount: 1
+  consumeAmount: 1000
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More Resources I
+    - More Resources II
+    - More XP I
+    - More XP II
+    - Higher Level Cap I
+    - Higher Level Cap II
+    - Stronger Synergy I
+    - Stronger Synergy II

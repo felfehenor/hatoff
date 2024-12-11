@@ -32,6 +32,7 @@ import {
   tablerBrain,
   tablerBubble,
   tablerCarrot,
+  tablerCell,
   tablerCoins,
   tablerCross,
   tablerHeartBroken,
@@ -42,6 +43,7 @@ import {
   tablerSword,
   tablerSwords,
   tablerWall,
+  tablerWand,
   tablerWood,
 } from '@ng-icons/tabler-icons';
 
@@ -63,6 +65,8 @@ export function usedContentIcons(): Record<string, string> {
     tablerCross,
     tablerMoon,
     tablerMusic,
+    tablerWand,
+    tablerCell,
     gameRoundPotion,
     gameStoneTablet,
     gameFoldedPaper,

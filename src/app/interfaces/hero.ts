@@ -33,6 +33,8 @@ export interface GameHero extends Identifiable, GameCombatant {
   taskLevels: Record<string, number>;
   attributeHealTicks: Record<string, number>;
   buffTicks: Record<string, number>;
+
+  infusedStats: Record<GameHeroStat, number>;
 }
 
 export interface SpecialGameHero {

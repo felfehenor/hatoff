@@ -3,6 +3,7 @@ import { GameResource } from '../interfaces';
 import { getEntry } from './content';
 import { gamestate } from './gamestate';
 import { getPetStat } from './pet';
+import { isResearchComplete } from './research';
 import { gainResource } from './resource';
 
 function doGatherer(ticks: number) {
@@ -28,6 +29,7 @@ function doDefender(ticks: number) {
 }
 
 export function doPetGameloop(ticks: number) {
+  if (!gamestate().pet || !isResearchComplete('Town Pet')) return;
   if (gamestate().pet.role === 'gatherer') doGatherer(ticks);
   if (gamestate().pet.role === 'defender') doDefender(ticks);
 }

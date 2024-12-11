@@ -12,3 +12,8 @@
   name: Fortifications
   icon: tablerWall
   description: Used to defend the town.
+
+- id: 43287e9e-fe4f-4079-9167-81a83d72928b
+  name: Mana
+  icon: tablerCell
+  description: Used to conduct and improve fusions.

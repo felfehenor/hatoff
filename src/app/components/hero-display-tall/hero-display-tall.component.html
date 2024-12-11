@@ -7,8 +7,8 @@
       <app-button-close (click)="close.emit()"></app-button-close>
     </div>
 
-    <div class="absolute top-5 right-5">
-      <app-hero-art [id]="activeHero.id" [size]="240"></app-hero-art>
+    <div class="absolute portrait">
+      <app-hero-art [id]="activeHero.id" [size]="192"></app-hero-art>
     </div>
 
     <div class="card-title">
@@ -46,8 +46,7 @@
 
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
-
-      <div class="flex-1"></div>
+      <app-hero-stat-infusion-table class="flex-1" [hero]="activeHero"></app-hero-stat-infusion-table>
     </div>
 
     <app-hero-buff-list [hero]="activeHero"></app-hero-buff-list>

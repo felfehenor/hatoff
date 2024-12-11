@@ -1,7 +1,7 @@
 <table class="table flex-1">
   <tbody>
     @for(stat of stats; track $index) {
-    <tr>
+    <tr class="h-14">
       <td class="pl-0 has-help flex items-center gap-2" [tp]="stat.tooltip">
         <ng-icon [name]="stat.icon" [color]="stat.color"></ng-icon>
         {{ stat.name | titlecase }}

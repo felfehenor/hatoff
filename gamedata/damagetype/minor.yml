@@ -17,3 +17,9 @@
       percent: 50
     - damageTypeId: Intellectual
       percent: 25
+
+- id: 1ce9deee-bac4-4136-b3ae-54bfd3ee0e04
+  name: Magical
+  icon: tablerWand
+  color: '#7e53ac'
+  subTypes: []

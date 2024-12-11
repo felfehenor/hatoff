@@ -21,6 +21,7 @@ import { cooldown } from './cooldown';
 import { getDamageForcePercentage } from './damagetype';
 import { isDungeonInProgress, isHeroExploring } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
+import { getInfusedStat } from './hero-infusion';
 import { notify } from './notify';
 import { getOption } from './options';
 import {
@@ -63,6 +64,14 @@ export function defaultHero(): GameHero {
       piety: 1,
       progress: 1,
       speed: 1,
+    },
+    infusedStats: {
+      health: 0,
+      force: 0,
+      resistance: 0,
+      piety: 0,
+      progress: 0,
+      speed: 0,
     },
     buffTicks: {},
     buffIds: [],
@@ -232,9 +241,11 @@ export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
   return statValueAfterPercentChange - baseHeroStat;
 }
 
-export function heroStatValue(hero: GameCombatant, stat: GameHeroStat): number {
+export function heroStatValue(hero: GameHero, stat: GameHeroStat): number {
   if (!hero) return 0;
-  return hero.stats[stat] + heroStatDelta(hero, stat);
+  return (
+    hero.stats[stat] + heroStatDelta(hero, stat) + getInfusedStat(hero, stat)
+  );
 }
 
 export function totalHeroSpeed(
@@ -296,6 +307,10 @@ export function gainStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
 
     return state;
   });
+}
+
+export function loseStat(hero: GameHero, stat: GameHeroStat, val = 1): void {
+  gainStat(hero, stat, -val);
 }
 
 export function levelup(hero: GameHero): void {

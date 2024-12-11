@@ -14,7 +14,7 @@ import { getArchetypeCombatStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { heroLoseCombat } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
-import { getHero, heroStatValue } from './hero';
+import { getHero, heroStatDelta } from './hero';
 import { getPetExplorerStatBonus } from './pet';
 import { randomNumber, succeedsChance } from './rng';
 import { usableSkillsForHero } from './skill';
@@ -45,22 +45,22 @@ export function toCombatant(
 ): GameActiveCombatant {
   const newStats: Record<GameHeroStat, number> = {
     force:
-      getCombatStat(char, 'force') +
+      combatStatValue(char, 'force') +
       getArchetypeCombatStatBonusForHero(char, 'force'),
     health:
-      getCombatStat(char, 'health') +
+      combatStatValue(char, 'health') +
       getArchetypeCombatStatBonusForHero(char, 'health'),
     piety:
-      getCombatStat(char, 'piety') +
+      combatStatValue(char, 'piety') +
       getArchetypeCombatStatBonusForHero(char, 'piety'),
     progress:
-      getCombatStat(char, 'progress') +
+      combatStatValue(char, 'progress') +
       getArchetypeCombatStatBonusForHero(char, 'progress'),
     resistance:
-      getCombatStat(char, 'resistance') +
+      combatStatValue(char, 'resistance') +
       getArchetypeCombatStatBonusForHero(char, 'resistance'),
     speed:
-      getCombatStat(char, 'speed') +
+      combatStatValue(char, 'speed') +
       getArchetypeCombatStatBonusForHero(char, 'speed'),
   };
 
@@ -315,7 +315,7 @@ export function chanceToHit(
 ): number {
   // higher than opponent speed = higher chance to hit
   const diff = clamp(
-    heroStatValue(attacker, 'speed') - heroStatValue(defender, 'speed'),
+    combatStatValue(attacker, 'speed') - combatStatValue(defender, 'speed'),
     -30,
     15,
   );
@@ -327,7 +327,7 @@ export function baseHeroDamage(
   skill: GameSkill,
 ): number {
   function getHeroBaseDamage(stat: GameHeroStat): number {
-    const baseDamageValue = heroStatValue(attacker, stat);
+    const baseDamageValue = combatStatValue(attacker, stat);
     if (stat === 'piety' || stat === 'health' || !isCombatantAHero(attacker)) {
       return baseDamageValue;
     }
@@ -353,7 +353,7 @@ export function damageDealt(
 export function damageReduction(defender: GameActiveCombatant): number {
   return Math.max(
     0.1,
-    0.92 * 0.996 ** heroStatValue(defender, 'resistance') + 0.07,
+    0.92 * 0.996 ** combatStatValue(defender, 'resistance') + 0.07,
   );
 }
 
@@ -366,7 +366,7 @@ export function attemptToDie(
   const pietyRequired = 25 + randomNumber(75);
   if (character.stats.piety >= pietyRequired) {
     character.stats.piety -= pietyRequired;
-    character.currentHp = heroStatValue(character, 'health');
+    character.currentHp = combatStatValue(character, 'health');
 
     combatLog(
       fight,
@@ -391,9 +391,10 @@ export function isCombatantAHero(character: GameCombatant): boolean {
   return character.archetypeIds.length > 0;
 }
 
-export function getCombatStat(
-  character: GameCombatant,
+export function combatStatValue(
+  hero: GameCombatant,
   stat: GameHeroStat,
 ): number {
-  return heroStatValue(character, stat);
+  if (!hero) return 0;
+  return hero.stats[stat] + heroStatDelta(hero, stat);
 }
