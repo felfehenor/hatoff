@@ -99,7 +99,7 @@ export function dungeonCompletionPercent(): number {
   const totalTicks = totalTicksForDungeon(dungeon);
   const currentTicks = currentTicksForDungeon(dungeon);
 
-  const tickPercent = currentTicks / totalTicks;
+  const tickPercent = currentTicks / Math.max(1, totalTicks);
 
   return 100 * tickPercent;
 }
