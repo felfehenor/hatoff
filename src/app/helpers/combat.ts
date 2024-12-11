@@ -1,4 +1,4 @@
-import { clamp, sample, sampleSize, sumBy } from 'lodash';
+import { clamp, sample, sampleSize, sortBy, sumBy } from 'lodash';
 import {
   GameActiveCombatant,
   GameCombat,
@@ -18,6 +18,12 @@ import { getHero, heroStatValue } from './hero';
 import { getPetExplorerStatBonus } from './pet';
 import { randomNumber, succeedsChance } from './rng';
 import { usableSkillsForHero } from './skill';
+
+interface TurnTaker {
+  turnTaker: GameActiveCombatant;
+  team: GameActiveCombatant[];
+  enemies: GameActiveCombatant[];
+}
 
 export function heroToCombatant(char: GameHero): GameActiveCombatant {
   return toCombatant(char, {
@@ -250,16 +256,22 @@ export function lowerAllCooldowns(fight: GameCombat): void {
   });
 }
 
-export function doTeamAction(
-  fight: GameCombat,
-  attackers: GameActiveCombatant[],
-  defenders: GameActiveCombatant[],
-): void {
-  attackers
-    .filter((d) => !isDeadInCombat(d))
-    .forEach((attacker) => {
-      attackTarget(fight, attacker, attackers, defenders);
-    });
+export function getCombatOrder(fight: GameCombat): TurnTaker[] {
+  return sortBy(
+    [
+      ...fight.attackers.map((a) => ({
+        turnTaker: a,
+        team: fight.attackers,
+        enemies: fight.defenders,
+      })),
+      ...fight.defenders.map((a) => ({
+        turnTaker: a,
+        team: fight.defenders,
+        enemies: fight.attackers,
+      })),
+    ],
+    (turn) => -turn.turnTaker.stats.speed,
+  );
 }
 
 export function doCombatRound() {
@@ -281,13 +293,12 @@ export function doCombatRound() {
 
     lowerAllCooldowns(fight);
 
-    if (!isCombatResolved()) {
-      doTeamAction(fight, fight.attackers, fight.defenders);
-    }
-
-    if (!isCombatResolved()) {
-      doTeamAction(fight, fight.defenders, fight.attackers);
-    }
+    const turns = getCombatOrder(fight);
+    turns.forEach((turn) => {
+      if (isCombatResolved()) return;
+      if (isDeadInCombat(turn.turnTaker)) return;
+      attackTarget(fight, turn.turnTaker, turn.team, turn.enemies);
+    });
 
     return state;
   });
