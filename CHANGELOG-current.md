@@ -1,28 +1,29 @@
-## [0.3.1](https://github.com/felfhenor/hatoff/compare/v0.3.0...v0.3.1) (2024-12-05)
+# [0.4.0](https://github.com/felfhenor/hatoff/compare/v0.3.1...v0.4.0) (2024-12-11)
 
 
 ### Bug Fixes
 
-* **balance:** remove randomizer potions from research/shop, add to dungeon rewards instead. add more dungeon rewards ([a27e214](https://github.com/felfhenor/hatoff/commit/a27e214a9f56d247c89c961f8cd6cf5633927603))
-* **core:** update notifier should work now ([4510059](https://github.com/felfhenor/hatoff/commit/4510059985a48a36efb4220e95c81c70bf37fea9))
-* **defense:** town defense will now correctly target tasks with upgrades ([3a501c9](https://github.com/felfhenor/hatoff/commit/3a501c986a66eb7b146497d2c31e1603284dd17e))
-* **hero:** changing main hero damage type will now unassign it from its current task ([f0ada70](https://github.com/felfhenor/hatoff/commit/f0ada70238ea1cd4278490be5ec8ac7af659d19a))
-* **rollbar:** ignore cheater errors - I see you! 👀 ([8bf4b4e](https://github.com/felfhenor/hatoff/commit/8bf4b4eade64fc49419302e555e17f22511b33af))
-* **task:** tasks should not show errors if no one is assigned to them ([98af4de](https://github.com/felfhenor/hatoff/commit/98af4de68984aec9f86be729095b26273d12486c))
+* **attribute:** heroes will not say they unlock an attribute multiple times ([e76c5df](https://github.com/felfhenor/hatoff/commit/e76c5df9c90e3b434398be91f32032dc623b728c))
+* **build:** game data should actually dig out ids properly now, rather than compiling some things with words ([d9dcf4d](https://github.com/felfhenor/hatoff/commit/d9dcf4df55d08b9c92c80b6ba30a4010010df62f))
+* **content:** fix research descriptions for stat-archetypes ([0775662](https://github.com/felfhenor/hatoff/commit/07756622912f6a070d1dea85fa98caacdcbe3997))
+* **explore:** explore ui should have the checkmark in the corner to be consistent with rest of ux. ([8456a7a](https://github.com/felfhenor/hatoff/commit/8456a7a83ea6384188312f95adaadfa7b77aebe5))
+* **fusion:** fix hero width at very large resolutions ([749c542](https://github.com/felfhenor/hatoff/commit/749c542756e7f0606e1300f7355195c85026f1bb))
+* **task:** fix description of heal to include new injury mechanic ([3a57cd0](https://github.com/felfhenor/hatoff/commit/3a57cd0430092e81bffabdf2fb945c1edee9385f))
+* **task:** tasks should produce resources again ([2c4fa34](https://github.com/felfhenor/hatoff/commit/2c4fa34b736ee6c38f3f20031e2fc39e239c69fd))
+* **ui:** ensure all text inputs have max lengths for sanity reasons ([98858f1](https://github.com/felfhenor/hatoff/commit/98858f1b94567745292461308476e38a6e64a7cd))
 
 
 ### Features
 
-* **difficulty:** unite difficulty text, and display information in savefile settings ([2642ff5](https://github.com/felfhenor/hatoff/commit/2642ff5cbd16b5687fe7bfa0da69514a82382596))
-* **explore:** add exploration visibility section to explore. closes [#172](https://github.com/felfhenor/hatoff/issues/172) ([ada5bfc](https://github.com/felfhenor/hatoff/commit/ada5bfc7d15eedaa107099aa33fe3cbdf5b8ab62))
-* **hero:** add positive attributes that can be earned from dungeons or by doing tasks. closes [#168](https://github.com/felfhenor/hatoff/issues/168) ([743aac2](https://github.com/felfhenor/hatoff/commit/743aac2fec8fe6be84b0da82ff9b471f15de397e))
-* **heroes:** always show the fusion button and allow navigation if unlocked. ([e28698e](https://github.com/felfhenor/hatoff/commit/e28698e493b0c169eae38791fdbe3db8f79b317d))
-* **hero:** heroes can now be injured. closes [#139](https://github.com/felfhenor/hatoff/issues/139) ([78fa4ea](https://github.com/felfhenor/hatoff/commit/78fa4eaa191c0c102474df5426ea5ae360c08c30))
-* **hero:** heroes now get skills based on archetypes. closes [#142](https://github.com/felfhenor/hatoff/issues/142) ([6ca1a4c](https://github.com/felfhenor/hatoff/commit/6ca1a4cd83bced20697488eabb967b8b6a492073))
-* **hero:** starting hero will now be emotional damage. ([d681d56](https://github.com/felfhenor/hatoff/commit/d681d563d9d0572273b0ada81113979797b7f402))
-* **research:** remove toast, add warning on research page instead ([b09509c](https://github.com/felfhenor/hatoff/commit/b09509ce41778ca1eb925666dd613301507401ee))
-* **rollbar:** attempt to track users in a non-invasive way to be able to still intelligently ask questions where possible ([3331ce2](https://github.com/felfhenor/hatoff/commit/3331ce2b69726a3977940c972a0d55c510994db5))
-* **town:** show errors on tasks. closes [#167](https://github.com/felfhenor/hatoff/issues/167) ([677ae46](https://github.com/felfhenor/hatoff/commit/677ae469e3906ce3280dc3c718105d84248715ae))
+* **explore:** can now flee dungeons at a cost. closes [#179](https://github.com/felfhenor/hatoff/issues/179) ([d0a08b4](https://github.com/felfhenor/hatoff/commit/d0a08b4c1a5bbdb1499b314917e7e4da683abee8))
+* **hero:** add Baptismal and Heretical damage types, associated archetypes, research, etc. closes [#176](https://github.com/felfhenor/hatoff/issues/176) ([9f4861a](https://github.com/felfhenor/hatoff/commit/9f4861acaf48414b96f2704377f399c975beb817))
+* **hero:** add buffs for heroes. add items to existing dungeons. closes [#175](https://github.com/felfhenor/hatoff/issues/175) ([0029bcd](https://github.com/felfhenor/hatoff/commit/0029bcdd6958c9b16b04ffa4dc4e78dd45de2f77))
+* **hero:** add hero injury indicator ([5cdfb98](https://github.com/felfhenor/hatoff/commit/5cdfb981f66913719b8e5434947ebb3521b4041a))
+* **hero:** add lyrical damage, and all that goes with it. closes [#180](https://github.com/felfhenor/hatoff/issues/180) ([42281e9](https://github.com/felfhenor/hatoff/commit/42281e9ba5526bf57a1b54b91008415041a413d3))
+* **item:** add panaceatic slime to cure a random injury. closes [#178](https://github.com/felfhenor/hatoff/issues/178) ([51369a9](https://github.com/felfhenor/hatoff/commit/51369a901b3b4c31992f90f79ef4238063a28713))
+* **pet:** add pets, closes [#170](https://github.com/felfhenor/hatoff/issues/170) ([2049228](https://github.com/felfhenor/hatoff/commit/2049228c1760320f13def94a305c8227736e0188))
+* **task:** town defense now has an upgrade to completely soak an attack. closes [#174](https://github.com/felfhenor/hatoff/issues/174) ([1b20efc](https://github.com/felfhenor/hatoff/commit/1b20efc6f73dc0aadb0dd750fc5527fa35d60367))
+* **task:** town defense now has an upgrade to reduce chance of hero injury by 50% ([abb1186](https://github.com/felfhenor/hatoff/commit/abb11867b8c541cd3452be64b25c6d80264404e5))
 
 
 
