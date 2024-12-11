@@ -130,7 +130,7 @@ export class GamestateService {
     runLoop(1);
 
     interval(1000).subscribe(() => {
-      if (lastRunTime <= 0) return;
+      if (lastRunTime <= 0 || !this.hasLoaded() || !isGameStateReady()) return;
 
       const secondsElapsed = Math.round((Date.now() - lastRunTime) / 1000);
 
