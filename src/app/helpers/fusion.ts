@@ -16,10 +16,9 @@ import {
   createHero,
   createSpecialHero,
   isHeroAbleToDoMostThings,
-  isMaxLevel,
-  maxXpForLevel,
   removeHero,
 } from './hero';
+import { isMaxLevel, maxXpForLevel } from './hero-xp';
 import { notifySuccess } from './notify';
 import {
   allUnlockedDamageTypes,

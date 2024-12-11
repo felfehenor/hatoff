@@ -4,13 +4,9 @@ import { heroInjuries, heroRemoveRandomInjury } from './attribute';
 import { addHeroBuff } from './buff';
 import { getEntry } from './content';
 import { gamestate, updateGamestate } from './gamestate';
-import {
-  gainXp,
-  isMaxLevel,
-  pickRandomArchetypes,
-  pickRandomDamageType,
-  reviveHero,
-} from './hero';
+import { reviveHero } from './hero';
+import { pickRandomArchetypes, pickRandomDamageType } from './hero-randomizers';
+import { gainXp, isMaxLevel } from './hero-xp';
 import { notify, notifyError } from './notify';
 
 export function gainItemById(itemId: string, quantity = 1): void {

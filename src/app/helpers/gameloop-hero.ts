@@ -25,17 +25,15 @@ import {
   modifyShopRerollTimer,
 } from './entertain';
 import { gamestate, updateGamestate } from './gamestate';
+import { allHeroes, isStunned, reduceStun } from './hero';
 import {
-  allHeroes,
   gainStat,
-  gainXp,
   heroStatValue,
-  isStunned,
   loseStat,
-  reduceStun,
   totalHeroForce,
   totalHeroSpeed,
-} from './hero';
+} from './hero-stats';
+import { gainXp } from './hero-xp';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
 import {

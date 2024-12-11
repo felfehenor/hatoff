@@ -31,7 +31,8 @@ import {
 import { getEntriesByType, getEntry } from './content';
 import { isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
-import { gainXp, isStunned, removeHero, stunHero } from './hero';
+import { isStunned, removeHero, stunHero } from './hero';
+import { gainXp } from './hero-xp';
 import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';

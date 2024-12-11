@@ -8,7 +8,7 @@ import {
 import { isHardMode } from './difficulty';
 import { heroesInExploreTask, isDungeonInProgress } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
-import { heroStatValue } from './hero';
+import { heroStatValue } from './hero-stats';
 import { allUnlockedDamageTypes, allUnlockedTasks } from './research';
 import {
   allocationBonusForTask,
