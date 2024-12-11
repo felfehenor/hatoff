@@ -2,8 +2,8 @@
 
 <div class="card foreground-2 shadow-xl flex-1">
   <div class="card-body">
-    <div class="absolute top-0 right-5">
-      <app-hero-art [id]="activeHero.id" [size]="240"></app-hero-art>
+    <div class="absolute portrait">
+      <app-hero-art [id]="activeHero.id" [size]="256"></app-hero-art>
     </div>
 
     <div class="card-title">
@@ -15,7 +15,7 @@
     <app-hero-damage-type [hero]="activeHero"></app-hero-damage-type>
 
     <div class="flex">
-      <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
+      <app-hero-stats-table class="flex-1" [hero]="activeHero" [showDeltas]="false"></app-hero-stats-table>
 
       <div class="flex-1"></div>
     </div>

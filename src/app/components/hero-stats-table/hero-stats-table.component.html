@@ -1,12 +1,15 @@
 <table class="table flex-1">
   <tbody>
     @for(stat of stats; track $index) {
-    <tr class="h-14">
-      <td class="pl-0 has-help flex items-center gap-2" [tp]="stat.tooltip">
+    <tr class="h-14 overflow-hidden">
+      <td class="pl-0 has-help flex items-center gap-2" [tp]="stat.tooltip" [class.h-14]="!showDeltas()">
         <ng-icon [name]="stat.icon" [color]="stat.color"></ng-icon>
         {{ stat.name | titlecase }}
       </td>
+
       <td class="text-right">{{ statValue(hero(), stat.name) | number:'1.0-2' }}</td>
+
+      @if(showDeltas()) {
       <td>
         @let delta = statDelta(hero(), stat.name);
 
@@ -18,6 +21,7 @@
           <span class="text-error">{{ delta | number:'1.0-2' }}</span>
           }
       </td>
+      }
     </tr>
     }
   </tbody>

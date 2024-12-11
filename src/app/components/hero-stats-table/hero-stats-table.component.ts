@@ -31,6 +31,7 @@ import { GameHero, GameHeroStat } from '../../interfaces';
 })
 export class HeroStatsTableComponent {
   public hero = input.required<GameHero>();
+  public showDeltas = input<boolean>(true);
 
   public readonly stats: Array<{
     name: GameHeroStat;
