@@ -31,7 +31,9 @@
     <ng-icon name="tablerFlask2"></ng-icon> {{ currentResearch() }} / {{ researchData.researchRequired }}
   </div>
 
-  <div class="absolute bottom-[-7px] left-0 right-0">
-    <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
-  </div>
+  @if(completion() < 100) { <!---->
+    <div class="absolute bottom-[-7px] left-0 right-0">
+      <progress class="progress progress-secondary w-full" [value]="completion()" max="100"></progress>
+    </div>
+    }
 </div>

@@ -3,23 +3,34 @@ import { FormsModule } from '@angular/forms';
 import { countBy, sortBy } from 'lodash';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { ResearchListComponent } from '../../components/research-list/research-list.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   allAvailableIncompleteResearch,
+  allCompletedResearch,
   gamestate,
   isResearchComplete,
 } from '../../helpers';
 
 @Component({
   selector: 'app-game-research',
-  imports: [PageCardComponent, ResearchListComponent, FormsModule],
+  imports: [
+    PageCardComponent,
+    ResearchListComponent,
+    FormsModule,
+    AnalyticsClickDirective,
+  ],
   templateUrl: './game-research.component.html',
   styleUrl: './game-research.component.scss',
 })
 export class GameResearchComponent {
   public activeType = signal<string>('All');
+  public mode = signal<'Current' | 'Previous'>('Current');
 
   public allResearchCategories = computed(() => {
-    const allResearch = allAvailableIncompleteResearch();
+    const allResearch =
+      this.mode() === 'Current'
+        ? allAvailableIncompleteResearch()
+        : allCompletedResearch();
 
     const base = [{ name: 'All', num: allResearch.length, value: allResearch }];
 
