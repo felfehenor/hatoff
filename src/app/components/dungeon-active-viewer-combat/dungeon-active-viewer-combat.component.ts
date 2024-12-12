@@ -2,11 +2,10 @@ import { Component, computed } from '@angular/core';
 import { gamestate } from '../../helpers';
 import { BlankSlateComponent } from '../blank-slate/blank-slate.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
-import { HeroDamageTypeComponent } from '../hero-damage-type/hero-damage-type.component';
 
 @Component({
   selector: 'app-dungeon-active-viewer-combat',
-  imports: [HeroDamageTypeComponent, BlankSlateComponent, DamageTypeComponent],
+  imports: [BlankSlateComponent, DamageTypeComponent],
   templateUrl: './dungeon-active-viewer-combat.component.html',
   styleUrl: './dungeon-active-viewer-combat.component.scss',
 })
