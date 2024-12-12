@@ -1,12 +1,13 @@
 import { Component, computed } from '@angular/core';
 import { gamestate } from '../../helpers';
 import { GameActiveCombatant } from '../../interfaces';
+import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroDamageTypeComponent } from '../hero-damage-type/hero-damage-type.component';
 
 @Component({
   selector: 'app-dungeon-active-viewer-exploringparty',
-  imports: [HeroArtComponent, HeroDamageTypeComponent],
+  imports: [HeroArtComponent, HeroDamageTypeComponent, DamageTypeComponent],
   templateUrl: './dungeon-active-viewer-exploringparty.component.html',
   styleUrl: './dungeon-active-viewer-exploringparty.component.scss',
 })

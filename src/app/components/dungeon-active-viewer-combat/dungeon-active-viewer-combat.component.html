@@ -14,7 +14,7 @@
                 [max]="monster.stats.health"></progress>
 
               <div class="text-sm">
-                <app-hero-damage-type [hero]="monster"></app-hero-damage-type>
+                <app-damage-type [damage]="monster.stats.force" [id]="monster.damageTypeId"></app-damage-type>
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@
         <progress class="progress progress-success w-56" [value]="hero.currentHp" [max]="hero.stats.health"></progress>
 
         <div class="text-sm">
-          <app-hero-damage-type [hero]="hero"></app-hero-damage-type>
+          <app-damage-type [damage]="hero.stats.force" [id]="hero.damageTypeId"></app-damage-type>
         </div>
       </div>
     </div>
