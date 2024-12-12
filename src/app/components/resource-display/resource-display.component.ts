@@ -30,6 +30,6 @@ export class ResourceDisplayComponent {
 
   @HostBinding('class.hidden')
   public get shouldHide() {
-    return this.value() === 0;
+    return this.displayValue() === 0;
   }
 }
