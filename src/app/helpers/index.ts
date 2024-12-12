@@ -8,6 +8,7 @@ export * from './cooldown';
 export * from './damagetype';
 export * from './defense';
 export * from './difficulty';
+export * from './discord';
 export * from './dungeon';
 export * from './entertain';
 export * from './fusion';

@@ -3,8 +3,7 @@ body {
   overflow: hidden;
   height: 100vh;
 
-  background: url(../../public/asset/splash-dark.png) no-repeat center
-    center/cover;
+  background: url(/asset/splash-dark.png) no-repeat center center/cover;
 }
 
 .title {
@@ -13,13 +12,12 @@ body {
 }
 
 .card:not(.card-untextured) {
-  background: url('../../public/asset/texture-bg.png'),
+  background: url(/asset/texture-bg.png),
     linear-gradient(
       to bottom,
       oklch(var(--n) / var(--tw-bg-opacity)),
       oklch(var(--n) / var(--tw-bg-opacity))
-    ) !important;
-
+    );
   color: oklch(var(--nc) / var(--tw-bg-opacity));
 
   &.foreground {
@@ -39,7 +37,7 @@ body {
 }
 
 .btn:not(.btn-untextured):not(.btn-outline) {
-  background: url('../../public/asset/texture-button.png'),
+  background: url(/asset/texture-button.png),
     linear-gradient(
       to bottom,
       oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)),
@@ -47,7 +45,7 @@ body {
     ) !important;
 
   &:hover {
-    background: url('../../public/asset/texture-button.png'),
+    background: url(/asset/texture-button.png),
       linear-gradient(
         to bottom,
         color-mix(

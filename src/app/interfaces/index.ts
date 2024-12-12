@@ -4,6 +4,7 @@ export * from './attribute';
 export * from './buff';
 export * from './combat';
 export * from './damage';
+export * from './discord';
 export * from './dungeon';
 export * from './gamestate';
 export * from './hero';

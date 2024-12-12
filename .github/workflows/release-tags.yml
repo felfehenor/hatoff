@@ -76,59 +76,60 @@ jobs:
           user_name: 'seiyria'
           commit_message: 'Add version notes'
           destination_branch: master
-#  publish-windows:
-#    needs: [build]
-#    name: Create Windows Binary
-#
-#    runs-on: ${{ matrix.os }}
-#
-#    strategy:
-#      matrix:
-#        os: [windows-latest]
-#        node-version: [18.15.x]
-#
-#    steps:
-#      - name: Load Release URL File from release job
-#        uses: actions/download-artifact@v1
-#        with:
-#          name: release_url
-#
-#      - uses: pCYSl5EDgo/cat@master
-#        id: loadReleaseUrl
-#        with:
-#          path: release_url/release_url.txt
-#
-#      - uses: actions/checkout@v2
-#
-#      - name: Use Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#
-#      - run: npm install
-#
-#      - run: cd electron && npm install
-#
-#      - run: npm run lint
-#
-#      - run: npm run build:electron
-#
-#      - name: Upload Binary
-#        id: uploadReleaseAsset
-#        uses: actions/upload-release-asset@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.loadReleaseUrl.outputs.text }}
-#          asset_path: ./electron/out/make/squirrel.windows/x64/Spellwriters.exe
-#          asset_name: Spellwriters.exe
-#          asset_content_type: application/vnd.microsoft.portable-executable
-#
-#      - name: Upload Artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: Spellwriters.exe
-#          path: ./electron/out/make/squirrel.windows/x64/Spellwriters.exe
+
+  publish-windows:
+    needs: [build]
+    name: Create Windows Binary
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest]
+        node-version: [20]
+
+    steps:
+      - name: Load Release URL File from release job
+        uses: actions/download-artifact@v1
+        with:
+          name: release_url
+
+      - uses: pCYSl5EDgo/cat@master
+        id: loadReleaseUrl
+        with:
+          path: release_url/release_url.txt
+
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+
+      - run: cd electron && npm install
+
+      - run: npm run lint
+
+      - run: npm run build:electron
+
+      - name: Upload Binary
+        id: uploadReleaseAsset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.loadReleaseUrl.outputs.text }}
+          asset_path: ./electron/out/make/squirrel.windows/x64/HATOFF.exe
+          asset_name: HATOFF.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: HATOFF.exe
+          path: ./electron/out/make/squirrel.windows/x64/HATOFF.exe
 #
 #  publish-linux:
 #    needs: [build]

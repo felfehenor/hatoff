@@ -4,7 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SavefileImportComponent } from '../../components/savefile-import/savefile-import.component';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
-import { difficultyDescription, finishSetup, isSetup } from '../../helpers';
+import {
+  difficultyDescription,
+  finishSetup,
+  isSetup,
+  setDiscordStatus,
+} from '../../helpers';
 import { GameDifficulty } from '../../interfaces';
 
 @Component({
@@ -39,6 +44,10 @@ export class GameSetupComponent implements OnInit {
     if (isSetup()) {
       this.router.navigate(['/game/town']);
     }
+
+    setDiscordStatus({
+      state: 'Creating a new town...',
+    });
   }
 
   public play() {
