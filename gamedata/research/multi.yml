@@ -77,3 +77,21 @@
 
   unlocksTaskIds:
     - Entertain
+
+- id: b14e511a-5073-4134-b8b5-ffd9f5f16d8e
+  name: Forging Fires
+  type: Archetype
+  description: 'Unlocks the damage type "Metal". Unlocks the task "Smith". Unlocks the Blacksmith.'
+  researchRequired: 100000
+
+  requiresLootIds:
+    - Goblish Club
+
+  requiresResearchIds:
+    - Shopping Trip
+
+  unlocksDamageTypeIds:
+    - Metal
+
+  unlocksTaskIds:
+    - Smith

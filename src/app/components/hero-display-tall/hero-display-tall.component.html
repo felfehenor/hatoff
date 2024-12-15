@@ -46,7 +46,9 @@
 
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
-      <app-hero-stat-infusion-table class="flex-1" [hero]="activeHero"></app-hero-stat-infusion-table>
+
+      <app-hero-stat-infusion-table class="flex-1" [hero]="activeHero"
+        [class.invisible]="!allowBuyingManaStats()"></app-hero-stat-infusion-table>
     </div>
 
     <app-hero-buff-list [hero]="activeHero"></app-hero-buff-list>
@@ -57,9 +59,15 @@
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
+    @if(activeHero.equipment.primary) {
+    <app-equipment-display class="my-3" [item]="activeHero.equipment.primary"></app-equipment-display>
+    }
+
     <div class="card-actions justify-between mt-4">
       <div class="flex items-center">
         @let canClickForXP = canGiveClickXp();
+
+        @if(allowXPButton()) {
         <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
           tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown."
           [appAnalyticsClick]="'Hero:GiveXP:' + xpOnClick()">
@@ -74,22 +82,25 @@
             Give +{{ xpOnClick() }} XP
           </div>
         </button>
+        }
 
-        @if(hasItems()) {
+        @if(allowItemButton() && hasItems()) {
         <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()"
           [appAnalyticsClick]="'Hero:UseItems:' + heroDamageType(activeHero)">
           Use Items
         </button>
         }
 
+        @if(allowSkillsButton()) {
         <button class="btn btn-info ml-2" (click)="showSkillPanel.emit()" [appHideIfNotResearched]="'Houses III'"
           [appAnalyticsClick]="'Hero:ShowSkills'">
           View Skills
         </button>
+        }
 
       </div>
 
-      @if(canDismissHero()) {
+      @if(allowDismissButton() && canDismissHero()) {
       <button class="btn btn-error" [swal]="deleteSwal"
         [appAnalyticsClick]="'Hero:Dismiss:' + heroDamageType(activeHero)">Dismiss Hero</button>
       }

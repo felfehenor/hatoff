@@ -1,0 +1,58 @@
+<div class="card inner-card-content foreground shadow-xl flex-1">
+  <div class="card-body overflow-hidden">
+    <div class="absolute top-2 right-2 z-50">
+      <app-button-close (click)="close.emit()"></app-button-close>
+    </div>
+
+    <div class="card-title">
+      Item Creation
+    </div>
+
+    <div class="overflow-y-auto p-1 h-full">
+      @if(createdItem(); as item) {
+
+      <div class="flex flex-col h-full justify-around gap-2">
+        <button class="btn btn-xl btn-info mb-4" [disabled]="!canPayCost()" (click)="rollItem()">
+          Reroll Item For {{ toolCost() }} Metal Tools
+        </button>
+
+        <div class="flex-1">
+
+          <div class="flex flex-col gap-2">
+            <app-equipment-display [item]="item"></app-equipment-display>
+
+            <div class="flex items-center">
+              <div class="text-xl">
+                Cost
+              </div>
+
+              <div class="flex-1 flex gap-2 items-center justify-center">
+                @for(cost of allItemCosts(); track $index) {
+                @if(cost.cost > 0) {
+                <app-resource-display [id]="cost.resource" [value]="cost.cost"></app-resource-display>
+                }
+                }
+              </div>
+
+              <div>
+                <button class="btn btn-primary" [disabled]="!canBuyItem()" (click)="buyItem()">Buy & Equip</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex-1"></div>
+        <div class="flex-1"></div>
+        <div class="flex-1"></div>
+      </div>
+      }
+
+      @else {
+      <button class="btn btn-xl btn-info btn-block" [disabled]="!canPayCost()" (click)="rollItem()">
+        Roll Item For {{ toolCost() }} Metal Tools
+      </button>
+      }
+    </div>
+  </div>
+</div>

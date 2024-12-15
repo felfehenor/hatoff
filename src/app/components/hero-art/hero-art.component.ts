@@ -11,9 +11,8 @@ import {
 } from '@angular/core';
 import { sortBy } from 'lodash';
 import { PRNG } from 'seedrandom';
-import { v4 as uuid } from 'uuid';
 
-import { allArt, getHero, isStunned, seededrng } from '../../helpers';
+import { allArt, getHero, isStunned, seededrng, uniqueId } from '../../helpers';
 import { HeroArtPieceContainer, HeroMood } from '../../interfaces';
 import { ContentService } from '../../services/content.service';
 import { GamestateService } from '../../services/gamestate.service';
@@ -177,7 +176,7 @@ export class HeroArtComponent implements OnDestroy {
     if (!this.offscreen) {
       canvas.nativeElement.height = this.size();
       canvas.nativeElement.width = this.size();
-      this.canvasId = uuid();
+      this.canvasId = uniqueId();
       this.offscreen =
         canvas.nativeElement.transferControlToOffscreen() as OffscreenCanvas;
 

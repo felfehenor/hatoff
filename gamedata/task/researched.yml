@@ -62,3 +62,28 @@
     - Powerful Voice III
     - Higher Level Cap I
     - Higher Level Cap II
+
+- id: 19ab9062-8f91-493c-82f6-2b0935aeca12
+  name: Smith
+  description: Create Metal Tools, used for Blacksmithing.
+  damageTypeId: Metal
+  requireExactType: true
+  maxHeroesAllocable: 2
+
+  xpPerCycle: 1
+  speedPerCycle: 100
+  damageRequiredPerCycle: 500
+  xpRequiredPerLevel: 5000
+  maxLevel: 1
+  resourceIdPerCycle: Metal Tools
+  resourceRewardPerCycle: 3
+
+  possibleUpgradeIds:
+    - More Heroes I
+    - More Heroes II
+    - More XP I
+    - More XP II
+    - More Resources I
+    - More Resources II
+    - Higher Level Cap I
+    - Higher Level Cap II

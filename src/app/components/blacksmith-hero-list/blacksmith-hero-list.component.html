@@ -1,0 +1,31 @@
+<div class="flex flex-row">
+
+  @let activeHero = selectedHero();
+
+  @if(activeHero) {
+  <app-hero-display-tall class="flex-1 flex pl-3 p-1" [hero]="activeHero"
+    (close)="selectedHero.set(undefined); shouldShowItemPanel.set(false);" [allowBuyingManaStats]="false"
+    [allowXPButton]="false" [allowItemButton]="false" [allowSkillsButton]="false"
+    [allowDismissButton]="false"></app-hero-display-tall>
+  }
+
+  @if(!shouldShowItemPanel()) {
+  <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
+    @for(hero of allHeroes(); track $index) {
+    <div class="hero-container" [ngClass]="cardClasses()">
+      <app-hero-display [hero]="hero" (click)="selectedHero.set(hero); shouldShowItemPanel.set(true)" [clickable]="true"
+        [active]="selectedHero()?.id === hero.id"></app-hero-display>
+    </div>
+    }
+  </div>
+  }
+
+  @else {
+  @if(activeHero) {
+  @if(shouldShowItemPanel()) {
+  <app-blacksmith-item-panel class="flex-1 flex pl-3 p-1" [hero]="activeHero"
+    (close)="selectedHero.set(undefined); shouldShowItemPanel.set(false)"></app-blacksmith-item-panel>
+  }
+  }
+  }
+</div>

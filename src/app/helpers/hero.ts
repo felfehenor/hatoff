@@ -1,7 +1,5 @@
 import { GameHero, GameHeroStat, SpecialGameHero } from '../interfaces';
 
-import { v4 as uuid } from 'uuid';
-
 import { signal, WritableSignal } from '@angular/core';
 import { species } from 'fantastical';
 import { cloneDeep, merge, sample, sum, sumBy } from 'lodash';
@@ -13,13 +11,13 @@ import {
   allUnlockedDamageTypes,
   allUnlockedPopulationResearch,
 } from './research';
-import { randomChoice } from './rng';
+import { randomChoice, uniqueId } from './rng';
 
 const _specialHeroes: WritableSignal<SpecialGameHero[]> = signal([]);
 
 export function defaultHero(): GameHero {
   return {
-    id: uuid(),
+    id: uniqueId(),
     name: '',
 
     archetypeIds: [],
@@ -42,17 +40,15 @@ export function defaultHero(): GameHero {
       speed: 1,
     },
     infusedStats: {
-      health: 0,
-      force: 0,
-      resistance: 0,
-      piety: 0,
-      progress: 0,
-      speed: 0,
+      ...blankHeroStats(),
     },
     buffTicks: {},
     buffIds: [],
     attributeIds: [],
     attributeHealTicks: {},
+    equipment: {
+      primary: undefined,
+    },
   };
 }
 
@@ -68,6 +64,17 @@ export function createHero(): GameHero {
   hero.archetypeIds = [sample(availableArchetypes)!.id];
 
   return hero;
+}
+
+export function blankHeroStats(): Record<GameHeroStat, number> {
+  return {
+    force: 0,
+    health: 0,
+    piety: 0,
+    progress: 0,
+    resistance: 0,
+    speed: 0,
+  };
 }
 
 export function isMainHero(hero: GameHero): boolean {
@@ -140,6 +147,10 @@ export function canRecruitHero(): boolean {
 
 export function allHeroes(): GameHero[] {
   return Object.values(gamestate().heroes ?? {});
+}
+
+export function allAvailableHeroes(): GameHero[] {
+  return allHeroes().filter((h) => isHeroAbleToDoMostThings(h));
 }
 
 export function getHero(id: string): GameHero | undefined {

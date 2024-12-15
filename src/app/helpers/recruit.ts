@@ -21,9 +21,7 @@ import {
   isResearchComplete,
 } from './research';
 import { hasResource, loseResource } from './resource';
-import { seededrng, succeedsChance } from './rng';
-
-import { v4 as uuid } from 'uuid';
+import { seededrng, succeedsChance, uniqueId } from './rng';
 
 export function setRecruitResetTime(): void {
   updateGamestate((state) => {
@@ -42,7 +40,7 @@ export function resetRecruitRerolls(): void {
 export function generateHeroesToRecruit() {
   const state = gamestate();
 
-  const recruitSeed = uuid();
+  const recruitSeed = uniqueId();
   const rng = seededrng(recruitSeed);
 
   function statBonusForRecruit(stat: GameHeroStat): number {

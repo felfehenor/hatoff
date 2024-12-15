@@ -1,6 +1,7 @@
 import { GameHero, GameHeroStat, GameResource } from '../interfaces';
 import { getEntry } from './content';
 import { updateGamestate } from './gamestate';
+import { blankHeroStats } from './hero';
 import { hasResource, loseResource } from './resource';
 
 export function getInfusedStat(hero: GameHero, stat: GameHeroStat): number {
@@ -58,12 +59,7 @@ export function doInfusion(hero: GameHero, stat: GameHeroStat): void {
     if (!heroRef) return state;
 
     heroRef.infusedStats ??= {
-      force: 0,
-      health: 0,
-      piety: 0,
-      progress: 0,
-      resistance: 0,
-      speed: 0,
+      ...blankHeroStats(),
     };
 
     heroRef.infusedStats[stat] += 1;
@@ -78,12 +74,7 @@ export function resetInfusions(hero: GameHero): void {
     if (!heroRef) return state;
 
     heroRef.infusedStats = {
-      force: 0,
-      health: 0,
-      piety: 0,
-      progress: 0,
-      resistance: 0,
-      speed: 0,
+      ...blankHeroStats(),
     };
 
     return state;

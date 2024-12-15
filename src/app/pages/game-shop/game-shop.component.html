@@ -5,7 +5,7 @@
     <app-countdown class="ml-1" [secondsLeft]="secondsUntilReset()" label="Reset in"></app-countdown>
   </span>
 
-  <div pageactions class="flex items-center">
+  <div pageactions class="flex items-center gap-2">
     <button class="btn btn-sm btn-secondary" [disabled]="!canReroll()" (click)="doReroll()"
       [appAnalyticsClick]="rerollCost() === 0 ? 'Shop:Reroll:Free' : 'Shop:Reroll:Cost'">
 
@@ -19,6 +19,9 @@
         Reroll for {{ rerollCost() | number }} Gold
       </div>
     </button>
+
+    <button class="btn btn-sm btn-primary" [routerLink]="['/game/blacksmith']" appAnalyticsClick="Shop:Blacksmith"
+      [appHideIfNotResearched]="'Forging Fires'">Blacksmith</button>
   </div>
 
   <app-shop-item-list></app-shop-item-list>

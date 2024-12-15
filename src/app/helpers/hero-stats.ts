@@ -11,6 +11,7 @@ import { totalStatBuff } from './buff';
 import { getEntry } from './content';
 import { getDamageForcePercentage } from './damagetype';
 import { updateGamestate } from './gamestate';
+import { getEquipmentStat } from './hero-equipment';
 import { getInfusedStat } from './hero-infusion';
 import { getOption } from './options';
 import {
@@ -44,7 +45,10 @@ export function heroStatDelta(hero: GameCombatant, stat: GameHeroStat): number {
 export function heroStatValue(hero: GameHero, stat: GameHeroStat): number {
   if (!hero) return 0;
   return (
-    hero.stats[stat] + heroStatDelta(hero, stat) + getInfusedStat(hero, stat)
+    hero.stats[stat] +
+    heroStatDelta(hero, stat) +
+    getInfusedStat(hero, stat) +
+    getEquipmentStat(hero, stat)
   );
 }
 

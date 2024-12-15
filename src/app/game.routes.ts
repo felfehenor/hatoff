@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { requireResearchGuard } from './guards/require-research.guard';
 import { requireSetupGuard } from './guards/require-setup.guard';
+import { GameBlacksmithComponent } from './pages/game-blacksmith/game-blacksmith.component';
 import { GameExploreComponent } from './pages/game-explore/game-explore.component';
 import { GameFusionComponent } from './pages/game-fusion/game-fusion.component';
 import { GameHeroesComponent } from './pages/game-heroes/game-heroes.component';
@@ -57,6 +58,11 @@ export const gameRoutes: Routes = [
     component: GamePetComponent,
     path: 'pet',
     canActivate: [requireSetupGuard, requireResearchGuard('Town Pet')],
+  },
+  {
+    component: GameBlacksmithComponent,
+    path: 'blacksmith',
+    canActivate: [requireSetupGuard, requireResearchGuard('Forging Fires')],
   },
   {
     component: GameOverComponent,

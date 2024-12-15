@@ -17,3 +17,8 @@
   name: Mana
   icon: tablerCell
   description: Used to conduct and improve fusions.
+
+- id: ae08a07b-5f15-4246-babf-61d6cb262083
+  name: Metal Tools
+  icon: tablerProng
+  description: Used to create items at the Blacksmith.

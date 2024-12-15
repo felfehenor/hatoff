@@ -6,6 +6,7 @@ export * from './combat';
 export * from './damage';
 export * from './discord';
 export * from './dungeon';
+export * from './equipment';
 export * from './gamestate';
 export * from './hero';
 export * from './identifiable';

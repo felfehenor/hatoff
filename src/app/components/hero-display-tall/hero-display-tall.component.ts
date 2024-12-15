@@ -26,6 +26,7 @@ import {
 import { GameDamageType, GameHero } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
+import { EquipmentDisplayComponent } from '../equipment-display/equipment-display.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
@@ -58,6 +59,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     HeroAttributeListComponent,
     HeroBuffListComponent,
     HeroStatInfusionTableComponent,
+    EquipmentDisplayComponent,
   ],
   providers: [
     provideIcons({
@@ -69,9 +71,16 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
 })
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();
+  public allowBuyingManaStats = input<boolean>(true);
+  public allowXPButton = input<boolean>(true);
+  public allowItemButton = input<boolean>(true);
+  public allowSkillsButton = input<boolean>(true);
+  public allowDismissButton = input<boolean>(true);
+
   public close = output<void>();
   public showItemPanel = output<void>();
   public showSkillPanel = output<void>();
+  public showBlacksmithItemPanel = output<void>();
 
   public liveHeroData = computed(() => getHero(this.hero().id));
 

@@ -1,0 +1,23 @@
+<div class="card card-side foreground-2 shadow-xl">
+  <figure class="max-w-[96px] pl-2 flex items-center">
+    <ng-icon [name]="item().icon" size="96"></ng-icon>
+  </figure>
+
+  <div class="card-body">
+    <div class="card-title">
+      <app-rarity-text [rarity]="item().rarity">
+        {{ item().name }}
+      </app-rarity-text>
+    </div>
+
+    <div class="flex gap-2">
+      @for(stat of stats; track $index) {
+      @if(item().statBoosts[stat.name] > 0) {
+      <div class="badge badge-success">
+        <ng-icon [name]="stat.icon"></ng-icon> +{{ item().statBoosts[stat.name] }} {{ stat.name | titlecase }}
+      </div>
+      }
+      }
+    </div>
+  </div>
+</div>

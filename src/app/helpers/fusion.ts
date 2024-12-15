@@ -119,6 +119,7 @@ export function heroFusionResult(
 
   newHero.buffIds = [];
   newHero.buffTicks = {};
+  newHero.equipment = { primary: undefined };
 
   newHero.fusionLevel += 1;
   newHero.level = 1;

@@ -1,5 +1,4 @@
 import { sumBy } from 'lodash';
-import { v4 as uuid } from 'uuid';
 import {
   GameAttribute,
   GameDungeon,
@@ -37,7 +36,7 @@ import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
 import { gainResource } from './resource';
-import { randomChoice, succeedsChance } from './rng';
+import { randomChoice, succeedsChance, uniqueId } from './rng';
 import { heroesAllocatedToTask } from './task';
 
 export function setActiveDungeon(dungeon: GameDungeon): void {
@@ -386,7 +385,7 @@ export function canEnterDungeon(): boolean {
 
 export function enterDungeon(): void {
   updateGamestate((state) => {
-    state.exploration.id = uuid();
+    state.exploration.id = uniqueId();
     state.exploration.currentStep = -1;
     state.exploration.currentStepTicks = 0;
     state.exploration.isExploring = true;

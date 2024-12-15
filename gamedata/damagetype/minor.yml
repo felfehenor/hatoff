@@ -23,3 +23,15 @@
   icon: tablerWand
   color: '#7e53ac'
   subTypes: []
+
+- id: 4e098623-f411-45cc-a1ed-51c51f95d432
+  name: Metal
+  icon: tablerHorseshoe
+  color: '#a9a9a9'
+  subTypes:
+    - damageTypeId: Physical
+      percent: 100
+    - damageTypeId: Theoretical
+      percent: 25
+    - damageTypeId: Intellectual
+      percent: 25

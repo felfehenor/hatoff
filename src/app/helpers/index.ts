@@ -1,6 +1,7 @@
 export * from './analytics';
 export * from './archetype';
 export * from './attribute';
+export * from './blacksmith';
 export * from './buff';
 export * from './combat';
 export * from './content';
@@ -23,6 +24,7 @@ export * from './gameloop-task';
 export * from './gamestate';
 export * from './hero';
 export * from './hero-clickxp';
+export * from './hero-equipment';
 export * from './hero-infusion';
 export * from './hero-randomizers';
 export * from './hero-stats';

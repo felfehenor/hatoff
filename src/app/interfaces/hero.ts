@@ -1,4 +1,5 @@
 import { GameCombatant } from './combat';
+import { EquipmentSlot, GameEquipment } from './equipment';
 import { Identifiable } from './identifiable';
 
 export type GameHeroStat =
@@ -35,6 +36,8 @@ export interface GameHero extends Identifiable, GameCombatant {
   buffTicks: Record<string, number>;
 
   infusedStats: Record<GameHeroStat, number>;
+
+  equipment: Record<EquipmentSlot, GameEquipment | undefined>;
 }
 
 export interface SpecialGameHero {
