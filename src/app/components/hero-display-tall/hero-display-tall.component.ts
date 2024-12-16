@@ -14,7 +14,6 @@ import {
   gamestate,
   getEntry,
   getHero,
-  getHeroEquipmentList,
   giveClickXp,
   hasAnyitemsToUse,
   heroStatValue,
@@ -27,12 +26,12 @@ import {
 import { GameDamageType, GameHero } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
-import { EquipmentDisplayComponent } from '../equipment-display/equipment-display.component';
 import { HeroArchetypeListComponent } from '../hero-archetype-list/hero-archetype-list.component';
 import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroAttributeListComponent } from '../hero-attribute-list/hero-attribute-list.component';
 import { HeroBuffListComponent } from '../hero-buff-list/hero-buff-list.component';
+import { HeroEquipmentListComponent } from '../hero-equipment-list/hero-equipment-list.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
 import { HeroStatInfusionTableComponent } from '../hero-stat-infusion-table/hero-stat-infusion-table.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
@@ -60,7 +59,7 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     HeroAttributeListComponent,
     HeroBuffListComponent,
     HeroStatInfusionTableComponent,
-    EquipmentDisplayComponent,
+    HeroEquipmentListComponent,
   ],
   providers: [
     provideIcons({
@@ -100,8 +99,6 @@ export class HeroDisplayTallComponent {
   public canUseItemsOnThisHero = computed(() => canUseItemsOnHero(this.hero()));
 
   public heroForce = computed(() => heroStatValue(this.hero(), 'force'));
-
-  public heroEquipment = computed(() => getHeroEquipmentList(this.hero()));
 
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();
