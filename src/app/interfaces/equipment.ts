@@ -16,4 +16,5 @@ export interface GameEquipment extends Identifiable {
   totalLevel: number;
   fusionLevel: number;
   statBoosts: Record<GameHeroStat, number>;
+  combatSkillId?: string;
 }

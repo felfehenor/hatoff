@@ -59,7 +59,7 @@
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
-    @for(item of heroEquipment(); track $index) {
+    @for(item of heroEquipment(); track item) {
     <app-equipment-display class="my-3" [item]="item"></app-equipment-display>
     }
 

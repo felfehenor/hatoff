@@ -10,11 +10,17 @@ import {
 } from '@ng-icons/tabler-icons';
 import { usedContentIcons } from '../../helpers';
 import { GameEquipment, GameHeroStat } from '../../interfaces';
+import { ContentNameComponent } from '../content-name/content-name.component';
 import { RarityTextComponent } from '../rarity-text/rarity-text.component';
 
 @Component({
   selector: 'app-equipment-display',
-  imports: [NgIconComponent, TitleCasePipe, RarityTextComponent],
+  imports: [
+    NgIconComponent,
+    TitleCasePipe,
+    RarityTextComponent,
+    ContentNameComponent,
+  ],
   providers: [
     provideIcons({
       ...usedContentIcons(),

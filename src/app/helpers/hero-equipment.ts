@@ -15,6 +15,22 @@ export function getEquipmentStat(hero: GameHero, stat: GameHeroStat): number {
   );
 }
 
+export function getHeroEquipment(
+  hero: GameHero,
+): Record<EquipmentSlot, GameEquipment | undefined> {
+  return (
+    hero.equipment ?? {
+      primary: undefined,
+    }
+  );
+}
+
+export function getHeroEquipmentList(hero: GameHero): GameEquipment[] {
+  return Object.values(getHeroEquipment(hero)).filter(
+    Boolean,
+  ) as GameEquipment[];
+}
+
 export function equipItemToHero(
   hero: GameHero,
   item: GameEquipment,

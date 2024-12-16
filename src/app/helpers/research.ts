@@ -5,6 +5,7 @@ import {
   GameHeroStat,
   GameItem,
   GameResearch,
+  GameSkill,
   GameTask,
 } from '../interfaces';
 import { getEntriesByType, getEntry } from './content';
@@ -164,4 +165,11 @@ export function allUnlockedShopItems(): GameItem[] {
   return getEntriesByType<GameItem>('item').filter((r) =>
     r.requiresResearchIds?.every((r) => isResearchComplete(r)),
   );
+}
+
+export function allUnlockedArchetypeSkills(): GameSkill[] {
+  return allUnlockedArchetypes()
+    .filter((a) => a.combatSkillId)
+    .map((a) => getEntry<GameSkill>(a.combatSkillId!))
+    .filter(Boolean) as GameSkill[];
 }

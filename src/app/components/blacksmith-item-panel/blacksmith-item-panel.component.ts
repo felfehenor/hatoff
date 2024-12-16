@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  input,
-  OnInit,
-  output,
-  signal,
-} from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import {
   blacksmithRollCostFor,
   canBuyItem,
@@ -31,7 +24,7 @@ import { ResourceDisplayComponent } from '../resource-display/resource-display.c
   templateUrl: './blacksmith-item-panel.component.html',
   styleUrl: './blacksmith-item-panel.component.scss',
 })
-export class BlacksmithItemPanelComponent implements OnInit {
+export class BlacksmithItemPanelComponent {
   public hero = input.required<GameHero>();
   public close = output<void>();
 
@@ -55,10 +48,6 @@ export class BlacksmithItemPanelComponent implements OnInit {
       })
       .filter(Boolean);
   });
-
-  ngOnInit() {
-    this.createdItem.set(createBlacksmithItemFor(this.hero()));
-  }
 
   public rollItem() {
     loseResource(getEntry<GameResource>('Metal Tools')!, this.toolCost());

@@ -19,5 +19,11 @@
       }
       }
     </div>
+
+    <div>
+      @if(item().combatSkillId; as skillId) {
+      <span class="font-bold">Usable Skill</span>: <app-content-name [id]="skillId"></app-content-name>
+      }
+    </div>
   </div>
 </div>

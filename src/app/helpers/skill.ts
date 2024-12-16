@@ -31,5 +31,11 @@ export function allSkillsForHero(hero: GameHero): GameSkill[] {
 
       return getEntry<GameSkill>(skillId)!;
     }),
+    ...Object.values(hero.equipment ?? {}).map((f) => {
+      const skillId = f?.combatSkillId;
+      if (!skillId) return undefined;
+
+      return getEntry<GameSkill>(skillId)!;
+    }),
   ].filter(Boolean) as GameSkill[];
 }

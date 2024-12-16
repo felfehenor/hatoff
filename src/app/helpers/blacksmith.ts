@@ -8,8 +8,9 @@ import {
 } from '../interfaces';
 import { getEntry } from './content';
 import { blankHeroStats, getTotalHeroLevel } from './hero';
+import { allUnlockedArchetypeSkills } from './research';
 import { hasResource } from './resource';
-import { randomNumber, uniqueId } from './rng';
+import { randomChoice, randomNumber, succeedsChance, uniqueId } from './rng';
 
 export function blacksmithRollCostFor(hero: GameHero): number {
   return hero.fusionLevel + 1;
@@ -146,7 +147,7 @@ export function createBlacksmithItemFor(hero: GameHero): GameEquipment {
   const rarity = chooseItemRarity();
   const totalLevel = getTotalHeroLevel(hero);
 
-  const item = {
+  const item: GameEquipment = {
     id: uniqueId(),
     name: '',
     rarity,
@@ -159,6 +160,10 @@ export function createBlacksmithItemFor(hero: GameHero): GameEquipment {
 
   item.name = chooseItemName(item);
   item.icon = chooseItemIcon(item);
+
+  if (succeedsChance(25)) {
+    item.combatSkillId = randomChoice(allUnlockedArchetypeSkills())?.id;
+  }
 
   return item;
 }
