@@ -1,29 +1,22 @@
-# [0.4.0](https://github.com/felfhenor/hatoff/compare/v0.3.1...v0.4.0) (2024-12-11)
+# [0.5.0](https://github.com/felfhenor/hatoff/compare/v0.4.0...v0.5.0) (2024-12-16)
 
 
 ### Bug Fixes
 
-* **attribute:** heroes will not say they unlock an attribute multiple times ([e76c5df](https://github.com/felfhenor/hatoff/commit/e76c5df9c90e3b434398be91f32032dc623b728c))
-* **build:** game data should actually dig out ids properly now, rather than compiling some things with words ([d9dcf4d](https://github.com/felfhenor/hatoff/commit/d9dcf4df55d08b9c92c80b6ba30a4010010df62f))
-* **content:** fix research descriptions for stat-archetypes ([0775662](https://github.com/felfhenor/hatoff/commit/07756622912f6a070d1dea85fa98caacdcbe3997))
-* **explore:** explore ui should have the checkmark in the corner to be consistent with rest of ux. ([8456a7a](https://github.com/felfhenor/hatoff/commit/8456a7a83ea6384188312f95adaadfa7b77aebe5))
-* **fusion:** fix hero width at very large resolutions ([749c542](https://github.com/felfhenor/hatoff/commit/749c542756e7f0606e1300f7355195c85026f1bb))
-* **task:** fix description of heal to include new injury mechanic ([3a57cd0](https://github.com/felfhenor/hatoff/commit/3a57cd0430092e81bffabdf2fb945c1edee9385f))
-* **task:** tasks should produce resources again ([2c4fa34](https://github.com/felfhenor/hatoff/commit/2c4fa34b736ee6c38f3f20031e2fc39e239c69fd))
-* **ui:** ensure all text inputs have max lengths for sanity reasons ([98858f1](https://github.com/felfhenor/hatoff/commit/98858f1b94567745292461308476e38a6e64a7cd))
+* **fusion:** hide stat deltas in fusion since they are not useful there ([25572e0](https://github.com/felfhenor/hatoff/commit/25572e0a5e64d013f0a70d65bf109be6b85dbe0a))
+* **hero:** hero item should refresh in blacksmith view ([3b08fe7](https://github.com/felfhenor/hatoff/commit/3b08fe7b8448d4c1bd8ec562c3fdb365752114fd))
+* **setup:** dont show empty resources on setup, or ever ([300aa0e](https://github.com/felfhenor/hatoff/commit/300aa0e3e6e2a86fb3c92189950d8df2a1c00293))
 
 
 ### Features
 
-* **explore:** can now flee dungeons at a cost. closes [#179](https://github.com/felfhenor/hatoff/issues/179) ([d0a08b4](https://github.com/felfhenor/hatoff/commit/d0a08b4c1a5bbdb1499b314917e7e4da683abee8))
-* **hero:** add Baptismal and Heretical damage types, associated archetypes, research, etc. closes [#176](https://github.com/felfhenor/hatoff/issues/176) ([9f4861a](https://github.com/felfhenor/hatoff/commit/9f4861acaf48414b96f2704377f399c975beb817))
-* **hero:** add buffs for heroes. add items to existing dungeons. closes [#175](https://github.com/felfhenor/hatoff/issues/175) ([0029bcd](https://github.com/felfhenor/hatoff/commit/0029bcdd6958c9b16b04ffa4dc4e78dd45de2f77))
-* **hero:** add hero injury indicator ([5cdfb98](https://github.com/felfhenor/hatoff/commit/5cdfb981f66913719b8e5434947ebb3521b4041a))
-* **hero:** add lyrical damage, and all that goes with it. closes [#180](https://github.com/felfhenor/hatoff/issues/180) ([42281e9](https://github.com/felfhenor/hatoff/commit/42281e9ba5526bf57a1b54b91008415041a413d3))
-* **item:** add panaceatic slime to cure a random injury. closes [#178](https://github.com/felfhenor/hatoff/issues/178) ([51369a9](https://github.com/felfhenor/hatoff/commit/51369a901b3b4c31992f90f79ef4238063a28713))
-* **pet:** add pets, closes [#170](https://github.com/felfhenor/hatoff/issues/170) ([2049228](https://github.com/felfhenor/hatoff/commit/2049228c1760320f13def94a305c8227736e0188))
-* **task:** town defense now has an upgrade to completely soak an attack. closes [#174](https://github.com/felfhenor/hatoff/issues/174) ([1b20efc](https://github.com/felfhenor/hatoff/commit/1b20efc6f73dc0aadb0dd750fc5527fa35d60367))
-* **task:** town defense now has an upgrade to reduce chance of hero injury by 50% ([abb1186](https://github.com/felfhenor/hatoff/commit/abb11867b8c541cd3452be64b25c6d80264404e5))
+* **combat:** sort combatants by speed, which makes more sense than team-turns. closes [#186](https://github.com/felfhenor/hatoff/issues/186) ([b4516e8](https://github.com/felfhenor/hatoff/commit/b4516e8ddd9b112ba24d20ce0567ad64d9a68e81))
+* **content:** support cache busting specific things ([99e8568](https://github.com/felfhenor/hatoff/commit/99e856852b235cbf7e4729ebe587c7d007cb4a6d))
+* **core:** add electron support. add discord support. closes [#121](https://github.com/felfhenor/hatoff/issues/121) ([1b024b4](https://github.com/felfhenor/hatoff/commit/1b024b450086727c4cf0b843315426332b49f5ab))
+* **hero:** add mana infusion, damage type, features, and tasks. closes [#185](https://github.com/felfhenor/hatoff/issues/185) ([4168c90](https://github.com/felfhenor/hatoff/commit/4168c90c22af2c74c225266e44a7bc8c23007a95))
+* **item:** add item crafting. closes [#171](https://github.com/felfhenor/hatoff/issues/171) ([14fa813](https://github.com/felfhenor/hatoff/commit/14fa813d620995a4a2fc4935600bfc125429b678))
+* **item:** items can now generate with abilities ([4742f95](https://github.com/felfhenor/hatoff/commit/4742f95829854e60330e0af011a42c4f5420a2ae))
+* **research:** add way to view previously-researched items. closes [#182](https://github.com/felfhenor/hatoff/issues/182) ([fe739f7](https://github.com/felfhenor/hatoff/commit/fe739f74cbc9eebd1492f95ae76e89a330faaf29))
 
 
 
