@@ -23,7 +23,7 @@ import {
   setHeroDamageType,
   unassignHeroTask,
 } from '../../helpers';
-import { GameDamageType, GameHero } from '../../interfaces';
+import { GameDamageType, GameEquipment, GameHero } from '../../interfaces';
 import { ButtonCloseComponent } from '../button-close/button-close.component';
 import { DamageTypeComponent } from '../damage-type/damage-type.component';
 import { EquipmentDisplayComponent } from '../equipment-display/equipment-display.component';
@@ -99,6 +99,13 @@ export class HeroDisplayTallComponent {
   public canUseItemsOnThisHero = computed(() => canUseItemsOnHero(this.hero()));
 
   public heroForce = computed(() => heroStatValue(this.hero(), 'force'));
+
+  public heroEquipment = computed(
+    () =>
+      Object.values(this.hero().equipment ?? []).filter(
+        Boolean,
+      ) as GameEquipment[],
+  );
 
   public changeMainCharacterType(newType: string) {
     const hero = this.hero();

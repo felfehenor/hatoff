@@ -59,8 +59,8 @@
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
-    @if(activeHero.equipment?.primary; as primary) {
-    <app-equipment-display class="my-3" [item]="primary"></app-equipment-display>
+    @for(item of heroEquipment(); track $index) {
+    <app-equipment-display class="my-3" [item]="item"></app-equipment-display>
     }
 
     <div class="card-actions justify-between mt-4">
