@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TippyDirective } from '@ngneat/helipopper';
 import { sortBy } from 'lodash';
@@ -10,6 +10,7 @@ import {
   gamestate,
   getEntry,
   hasQueuedAttack,
+  localStorageSignal,
   numHeroesAllocatedToTask,
   numIdleHeroes,
 } from '../../helpers';
@@ -28,9 +29,9 @@ import { GameDamageType } from '../../interfaces';
   styleUrl: './game-town.component.scss',
 })
 export class GameTownComponent {
-  public activeSort = signal<'numallocated' | 'alphabetical' | 'damagetype'>(
-    'alphabetical',
-  );
+  public activeSort = localStorageSignal<
+    'numallocated' | 'alphabetical' | 'damagetype'
+  >('alphabetical', 'sort-gametown');
 
   public taskOrder = computed(() => {
     const baseTasks = allUnlockedTasks().filter(

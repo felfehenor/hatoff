@@ -43,6 +43,7 @@ export * from './resource';
 export * from './rng';
 export * from './setup';
 export * from './shop';
+export * from './signal';
 export * from './skill';
 export * from './task';
 export * from './town';

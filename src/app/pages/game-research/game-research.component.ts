@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { countBy, sortBy } from 'lodash';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
@@ -9,6 +9,7 @@ import {
   allCompletedResearch,
   gamestate,
   isResearchComplete,
+  localStorageSignal,
 } from '../../helpers';
 
 @Component({
@@ -23,8 +24,11 @@ import {
   styleUrl: './game-research.component.scss',
 })
 export class GameResearchComponent {
-  public activeType = signal<string>('All');
-  public mode = signal<'Current' | 'Previous'>('Current');
+  public activeType = localStorageSignal<string>('All', 'sort-gameresearch');
+  public mode = localStorageSignal<'Current' | 'Previous'>(
+    'Current',
+    'filter-gameresearchtype',
+  );
 
   public allResearchCategories = computed(() => {
     const allResearch =
