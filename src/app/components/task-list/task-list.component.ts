@@ -1,8 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
-  allUnlockedTasks,
   baseCardClasses,
   halfCardClasses,
   hasEnoughFortifications,
@@ -23,11 +22,8 @@ import { TaskHeroSelectorComponent } from '../task-hero-selector/task-hero-selec
   styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent {
+  public tasks = input.required<GameTask[]>();
   public selectedTask = signal<GameTask | undefined>(undefined);
-
-  public allTasks = computed(() =>
-    allUnlockedTasks().filter((t) => t.maxHeroesAllocable > 0),
-  );
 
   public meetsRequiredDefense = computed(() => hasEnoughFortifications());
 
