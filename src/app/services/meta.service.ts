@@ -87,12 +87,6 @@ export class MetaService {
   }
 
   private async checkVersionAgainstLiveVersion() {
-    /*
-    if (!isInElectron()) {
-      return;
-    }
-    */
-
     try {
       const liveVersionFile = await fetch(
         'https://heroes.felfhenor.com/version.json',
@@ -122,12 +116,4 @@ export class MetaService {
   public update() {
     window.location.reload();
   }
-
-  /*
-  public showChangelogs() {
-    if (!this.hasChangelogs) {
-      return;
-    }
-  }
-  */
 }

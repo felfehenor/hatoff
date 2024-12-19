@@ -9,8 +9,20 @@
 - id: a3132cf4-2baf-4e56-b0df-0ac00eb25f7c
   name: Fusion Engine
   type: Fusion
-  description: Unlock the ability to fuse heroes together.
+  description: Unlock the ability to fuse heroes together. Unlocks the damage type "Magical". Unlocks the tasks "Bloodlet" and "Alchemy".
   researchRequired: 250
+
+  unlocksDamageTypeIds: [Magical]
+  unlocksTaskIds: [Bloodlet, Alchemy]
+
+- id: 4a8e3927-e08e-47f3-8f38-0f0538ad9bbf
+  name: Mana Infusion
+  type: Fusion
+  description: Unlock the ability to infuse heroes with mana.
+  researchRequired: 25000
+
+  requiresResearchIds:
+    - Fusion Engine
 
 - id: 1ead30e5-ee95-4529-aca6-47f7e668ef90
   name: Name Rater

@@ -1,7 +1,10 @@
 import { GameActiveCombatant, GameCombat } from './combat';
 import { GameHero } from './hero';
+import { PetStat } from './pet';
 
 export type GameDifficulty = 'easy' | 'normal' | 'hard';
+
+export type PetRole = 'companion' | 'defender' | 'gatherer';
 
 export interface GameStateMeta {
   version: number;
@@ -28,6 +31,7 @@ export interface GameStateCooldowns {
   nextShopResetTime: number;
   nextRecruitResetTime: number;
   nextClickResetTime: number;
+  nextPetPetTime: number;
 }
 
 export interface GameStateShop {
@@ -51,6 +55,16 @@ export interface GameStateExplore {
   hasFinishedCurrentStep: boolean;
   currentCombat?: GameCombat;
   exploringParty: GameActiveCombatant[];
+}
+
+export interface GameStatePet {
+  name: string;
+  fedResources: Record<string, number>;
+  fedFusionLevels: number;
+  fedLevels: number;
+  role: PetRole;
+  equippedRelics: string[];
+  statsGained: Record<PetStat, number>;
 }
 
 export interface GameState {
@@ -138,6 +152,11 @@ export interface GameState {
    * Exploration data
    */
   exploration: GameStateExplore;
+
+  /**
+   * Pet data
+   */
+  pet: GameStatePet;
 
   /**
    * Meta data

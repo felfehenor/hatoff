@@ -1,0 +1,45 @@
+<app-page-card>
+  <span header>
+    Town Pet
+
+    @if(shouldShowCountdown()) {
+    <app-countdown class="ml-1" [secondsLeft]="secondsOfPetBuff()" label="Buff expires in"
+      [tp]="'Seconds left of Pet buff.'"></app-countdown>
+    }
+  </span>
+
+  <div pageactions class="flex gap-2 items-center">
+    <button class="btn btn-sm btn-info" [appAnalyticsClick]="'Pet:Action:Pet'" (click)="petPet()"
+      [class.btn-disabled]="!canPetPet()" [tp]="'Pet your pet, granting it increased output to everything it does.'">
+      Pet
+    </button>
+
+    <button class="btn btn-sm btn-info" [appAnalyticsClick]="'Pet:Action:Rename'" [swal]="renameSwal">
+      Rename
+    </button>
+
+    <div role="tablist" class="tabs tabs-boxed">
+      <a role="tab" class="tab" [class.tab-active]="petRole() === 'companion'" (click)="setPetRole('companion')"
+        [appAnalyticsClick]="'Pet:SetRole:Companion'" (keydown.enter)="setPetRole('companion')" tabindex="1"
+        tp="Boosts exploring heroes stats by this pets stats.">Companion</a>
+
+      <a role="tab" class="tab" [class.tab-active]="petRole() === 'gatherer'" (click)="setPetRole('gatherer')"
+        [appAnalyticsClick]="'Pet:SetRole:Gatherer'" (keydown.enter)="setPetRole('gatherer')" tabindex="1"
+        tp="Gain Gold, Wood, Stone, or Food every tick, based on Force.">Gatherer</a>
+
+      <a role="tab" class="tab" [class.tab-active]="petRole() === 'defender'" (click)="setPetRole('defender')"
+        [class.hidden]="!canPetDefend()" [appAnalyticsClick]="'Pet:SetRole:Defender'"
+        (keydown.enter)="setPetRole('defender')" tabindex="1"
+        tp="Gain Fortifications every tick, based on Resistance.">Defender</a>
+    </div>
+
+    <swal #renameSwal title="Rename Pet" text="Enter a new name for this pet." input="text" [inputValue]="petName()"
+      [confirmButtonText]="'Rename!'" [inputAttributes]="{ maxlength: '25' }" (confirm)="renamePet($event)">
+    </swal>
+  </div>
+
+  <div class="flex flex-row gap-2">
+    <app-pet-stats class="flex-1"></app-pet-stats>
+    <app-pet-actions class="flex-1"></app-pet-actions>
+  </div>
+</app-page-card>

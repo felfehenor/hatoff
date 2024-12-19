@@ -4,6 +4,7 @@ import {
   GameDamageType,
   GameHero,
   GameHeroStat,
+  GameResource,
 } from '../interfaces';
 import { isInjury } from './attribute';
 import { getEntry } from './content';
@@ -15,16 +16,16 @@ import {
   createHero,
   createSpecialHero,
   isHeroAbleToDoMostThings,
-  isMaxLevel,
-  maxXpForLevel,
   removeHero,
 } from './hero';
+import { isMaxLevel, maxXpForLevel } from './hero-xp';
 import { notifySuccess } from './notify';
 import {
   allUnlockedDamageTypes,
   allUnlockedFusionMaxTaskLevelResearchValue,
   allUnlockedFusionStatBoostResearchValue,
 } from './research';
+import { loseResource } from './resource';
 import { randomChoice } from './rng';
 
 export function validFusionHeroes(): GameHero[] {
@@ -118,6 +119,7 @@ export function heroFusionResult(
 
   newHero.buffIds = [];
   newHero.buffTicks = {};
+  newHero.equipment = { primary: undefined };
 
   newHero.fusionLevel += 1;
   newHero.level = 1;
@@ -192,5 +194,15 @@ export function doFusion(mainHero: GameHero, subHero: GameHero): void {
   removeHero(subHero);
   addHero(result);
 
+  const mana = getEntry<GameResource>('Mana');
+  if (mana) {
+    loseResource(mana, fusionManaCost(result.fusionLevel));
+  }
+
   notifySuccess(`Successfully fused ${mainHero.name} and ${subHero.name}!`);
+}
+
+export function fusionManaCost(fusionLevel: number): number {
+  if (fusionLevel <= 1) return 0;
+  return 10 ** fusionLevel;
 }

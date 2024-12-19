@@ -1,9 +1,10 @@
-import { GameDamageType, GameTask } from '../interfaces';
+import { GameDamageType, GameResource, GameTask } from '../interfaces';
 import { heroInjuries } from './attribute';
 import { getEntry } from './content';
 import { gamestate } from './gamestate';
 import { isStunned } from './hero';
 import { isResearchComplete } from './research';
+import { hasResource } from './resource';
 import { heroesAllocatedToTask } from './task';
 
 export function baseCardClasses() {
@@ -68,6 +69,24 @@ export function taskErrors(task: GameTask): string | undefined {
       return `The following heroes are not stunned or injured: ${heroes.join(
         ', ',
       )}.`;
+  }
+
+  if (task.consumeStatPerCycle) {
+    const invalidHeroes = myHeroes
+      .filter((f) => f.stats[task.consumeStatPerCycle!] <= 0)
+      .map((f) => f.name);
+    if (invalidHeroes.length > 0)
+      return `The following heroes have no ${
+        task.consumeStatPerCycle
+      } to give: ${invalidHeroes.join(', ')}.`;
+  }
+
+  if (task.consumeResourceIdPerCycle) {
+    const invalidResources = (task.consumeResourceIdPerCycle ?? [])
+      .map((f) => getEntry<GameResource>(f)!)
+      .filter((f) => !hasResource(f, task.consumeAmount ?? 0));
+    if (invalidResources.length > 0)
+      return `You do not have enough of any resource to produce on this task.`;
   }
 
   return undefined;

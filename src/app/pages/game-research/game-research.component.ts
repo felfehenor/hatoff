@@ -1,25 +1,40 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { countBy, sortBy } from 'lodash';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { ResearchListComponent } from '../../components/research-list/research-list.component';
+import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   allAvailableIncompleteResearch,
+  allCompletedResearch,
   gamestate,
   isResearchComplete,
+  localStorageSignal,
 } from '../../helpers';
 
 @Component({
   selector: 'app-game-research',
-  imports: [PageCardComponent, ResearchListComponent, FormsModule],
+  imports: [
+    PageCardComponent,
+    ResearchListComponent,
+    FormsModule,
+    AnalyticsClickDirective,
+  ],
   templateUrl: './game-research.component.html',
   styleUrl: './game-research.component.scss',
 })
 export class GameResearchComponent {
-  public activeType = signal<string>('All');
+  public activeType = localStorageSignal<string>('All', 'sort-gameresearch');
+  public mode = localStorageSignal<'Current' | 'Previous'>(
+    'Current',
+    'filter-gameresearchtype',
+  );
 
   public allResearchCategories = computed(() => {
-    const allResearch = allAvailableIncompleteResearch();
+    const allResearch =
+      this.mode() === 'Current'
+        ? allAvailableIncompleteResearch()
+        : allCompletedResearch();
 
     const base = [{ name: 'All', num: allResearch.length, value: allResearch }];
 

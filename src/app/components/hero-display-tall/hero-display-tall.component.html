@@ -7,8 +7,8 @@
       <app-button-close (click)="close.emit()"></app-button-close>
     </div>
 
-    <div class="absolute top-5 right-5">
-      <app-hero-art [id]="activeHero.id" [size]="240"></app-hero-art>
+    <div class="absolute portrait">
+      <app-hero-art [id]="activeHero.id" [size]="192"></app-hero-art>
     </div>
 
     <div class="card-title">
@@ -22,7 +22,8 @@
           </button>
 
           <swal #renameSwal title="Rename Hero" text="Enter a new name for this hero." input="text"
-            [inputValue]="activeHero.name" [focusCancel]="true" (confirm)="renameHero($event)">
+            [confirmButtonText]="'Rename!'" [inputAttributes]="{ maxlength: '25' }" [inputValue]="activeHero.name"
+            (confirm)="renameHero($event)">
           </swal>
           }
         </span>
@@ -46,7 +47,8 @@
     <div class="flex">
       <app-hero-stats-table class="flex-1" [hero]="activeHero"></app-hero-stats-table>
 
-      <div class="flex-1"></div>
+      <app-hero-stat-infusion-table class="flex-1" [hero]="activeHero"
+        [class.invisible]="!allowBuyingManaStats()"></app-hero-stat-infusion-table>
     </div>
 
     <app-hero-buff-list [hero]="activeHero"></app-hero-buff-list>
@@ -57,9 +59,13 @@
 
     <app-hero-task-level-list [hero]="activeHero"></app-hero-task-level-list>
 
+    <app-hero-equipment-list [hero]="activeHero"></app-hero-equipment-list>
+
     <div class="card-actions justify-between mt-4">
       <div class="flex items-center">
         @let canClickForXP = canGiveClickXp();
+
+        @if(allowXPButton()) {
         <button class="btn btn-primary" [disabled]="!canClickForXP" (click)="giveXp()"
           tp="This action magically infuses the hero with experience, as a gift from above. This action has a 5 second cooldown."
           [appAnalyticsClick]="'Hero:GiveXP:' + xpOnClick()">
@@ -74,22 +80,25 @@
             Give +{{ xpOnClick() }} XP
           </div>
         </button>
+        }
 
-        @if(hasItems()) {
+        @if(allowItemButton() && hasItems()) {
         <button class="btn btn-info ml-2" (click)="showItemPanel.emit()" [disabled]="!canUseItemsOnThisHero()"
           [appAnalyticsClick]="'Hero:UseItems:' + heroDamageType(activeHero)">
           Use Items
         </button>
         }
 
+        @if(allowSkillsButton()) {
         <button class="btn btn-info ml-2" (click)="showSkillPanel.emit()" [appHideIfNotResearched]="'Houses III'"
           [appAnalyticsClick]="'Hero:ShowSkills'">
           View Skills
         </button>
+        }
 
       </div>
 
-      @if(canDismissHero()) {
+      @if(allowDismissButton() && canDismissHero()) {
       <button class="btn btn-error" [swal]="deleteSwal"
         [appAnalyticsClick]="'Hero:Dismiss:' + heroDamageType(activeHero)">Dismiss Hero</button>
       }
@@ -100,5 +109,5 @@
 
 <swal #deleteSwal title="Dismiss Hero?"
   text="This cannot be undone. Are you sure you want to dismiss this hero? You will not be able to get this hero back, ever! Probably."
-  icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="dismissHero()">
+  icon="warning" (confirm)="dismissHero()" [confirmButtonText]="'Dismiss Hero'">
 </swal>

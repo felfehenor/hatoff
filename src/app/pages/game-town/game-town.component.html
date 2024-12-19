@@ -8,11 +8,25 @@
     }
   </span>
 
-  <div pageactions>
+  <div pageactions class="flex items-center gap-2">
     @if(numIdle() > 0) {
     <span class="ml-2 badge badge-warning">You have {{ numIdle() }} idle heroe(s)!</span>
     }
+
+    <label class="form-control">
+      <select class="select select-bordered select-sm" [(ngModel)]="activeSort">
+        <option [value]="'alphabetical'">
+          Alphabetical
+        </option>
+        <option [value]="'numallocated'">
+          # Allocated
+        </option>
+        <option [value]="'damagetype'">
+          Damage Type
+        </option>
+      </select>
+    </label>
   </div>
 
-  <app-task-list></app-task-list>
+  <app-task-list [tasks]="taskOrder()"></app-task-list>
 </app-page-card>

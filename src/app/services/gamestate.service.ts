@@ -7,6 +7,7 @@ import {
   doGameloop,
   doGameOver,
   gamestate,
+  getHero,
   getOption,
   hasMainHero,
   isGameOver,
@@ -17,6 +18,7 @@ import {
   migrateOptionsState,
   notifyError,
   options,
+  setDiscordStatus,
   setGameState,
   setOptions,
 } from '../helpers';
@@ -130,7 +132,7 @@ export class GamestateService {
     runLoop(1);
 
     interval(1000).subscribe(() => {
-      if (lastRunTime <= 0) return;
+      if (lastRunTime <= 0 || !this.hasLoaded() || !isGameStateReady()) return;
 
       const secondsElapsed = Math.round((Date.now() - lastRunTime) / 1000);
 
@@ -141,6 +143,20 @@ export class GamestateService {
       runLoop(secondsElapsed);
 
       canSendNotifications.set(true);
+
+      this.updateDiscordStatus();
+    });
+  }
+
+  private updateDiscordStatus() {
+    const state = gamestate();
+
+    const mainHero = getHero(state.townSetup.heroId);
+    if (!mainHero) return;
+
+    setDiscordStatus({
+      details: `${mainHero.name} Lv. ${mainHero.level}/${mainHero.maxLevel}`,
+      state: `Running ${state.townSetup.townName} on ${state.meta.difficulty} mode...`,
     });
   }
 }

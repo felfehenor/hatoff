@@ -46,7 +46,14 @@ export const appConfig: ApplicationConfig = {
     }),
     importProvidersFrom(
       SweetAlert2Module.forRoot({
-        provideSwal: () => import('sweetalert2/dist/sweetalert2.js'),
+        provideSwal: () =>
+          import('sweetalert2/dist/sweetalert2.js').then(({ default: swal }) =>
+            swal.mixin({
+              reverseButtons: true,
+              showCancelButton: true,
+              focusCancel: true,
+            }),
+          ),
       }),
     ),
     provideHotToastConfig({

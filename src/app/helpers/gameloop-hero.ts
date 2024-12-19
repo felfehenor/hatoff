@@ -1,4 +1,4 @@
-import { sample, sum } from 'lodash';
+import { sample, sampleSize, sum } from 'lodash';
 import {
   GameAttribute,
   GameHero,
@@ -25,19 +25,23 @@ import {
   modifyShopRerollTimer,
 } from './entertain';
 import { gamestate, updateGamestate } from './gamestate';
+import { allHeroes, isStunned, reduceStun } from './hero';
 import {
-  allHeroes,
   gainStat,
-  gainXp,
   heroStatValue,
-  isStunned,
-  reduceStun,
+  loseStat,
   totalHeroForce,
   totalHeroSpeed,
-} from './hero';
+} from './hero-stats';
+import { gainXp } from './hero-xp';
 import { notify, notifyError } from './notify';
 import { getOption } from './options';
-import { getResourceValue, zeroResource } from './resource';
+import {
+  getResourceValue,
+  hasResource,
+  loseResource,
+  zeroResource,
+} from './resource';
 import { succeedsChance } from './rng';
 import {
   heroesAllocatedToTask,
@@ -128,13 +132,73 @@ function finalizeTask(task: GameTask): void {
     }
   }
 
+  if (!canConsumeFinalizedTaskResources(task)) return;
+  if (!canConsumeFinalizedTaskStats(task)) return;
+
   const heroBonusSum = sum(
     heroesAllocatedToTask(task).map((h) => taskBonusForHero(h, task)),
   );
 
+  consumeFinalizedTaskStats(task);
+  consumeFinalizedTaskResources(task);
   applyTaskFinalizedResultsToResources(task, heroBonusSum);
   applyTaskFinalizedResultsToResearch(task, heroBonusSum);
   applyTaskFinalizedResultsToTimers(task, heroBonusSum);
+}
+
+function canConsumeFinalizedTaskStats(task: GameTask): boolean {
+  const consumedStat = task.consumeStatPerCycle;
+  if (!consumedStat) return true;
+
+  return heroesAllocatedToTask(task).every((h) => h.stats[consumedStat] > 0);
+}
+
+function consumeFinalizedTaskStats(task: GameTask): void {
+  const statTaken = task.consumeStatPerCycle;
+  if (!statTaken) return;
+
+  heroesAllocatedToTask(task).forEach((h) => {
+    loseStat(h, statTaken, task.consumeAmount ?? 1);
+  });
+}
+
+function canConsumeFinalizedTaskResources(task: GameTask): boolean {
+  // if we consume nothing, we can do that.
+  if (
+    !task.consumeAmount ||
+    !task.consumeResourceIdPerCycle ||
+    !task.consumeResourceCount
+  )
+    return true;
+
+  const possibleResources = (task.consumeResourceIdPerCycle ?? [])
+    .map((rid) => getEntry<GameResource>(rid))
+    .filter(Boolean) as GameResource[];
+  const requiredAmount = task.consumeAmount ?? 0;
+  const requiredNum = task.consumeResourceCount ?? 1;
+
+  return (
+    possibleResources.filter((r) => hasResource(r, requiredAmount)).length >=
+    requiredNum
+  );
+}
+
+function consumeFinalizedTaskResources(task: GameTask): void {
+  const possibleResources = (task.consumeResourceIdPerCycle ?? [])
+    .map((rid) => getEntry<GameResource>(rid))
+    .filter(Boolean) as GameResource[];
+  const requiredAmount = task.consumeAmount ?? 0;
+  const requiredNum = task.consumeResourceCount ?? 1;
+
+  if (possibleResources.length === 0 || requiredAmount === 0) return;
+
+  const consumableResources = possibleResources.filter((r) =>
+    hasResource(r, requiredAmount),
+  );
+
+  sampleSize(consumableResources, requiredNum).forEach((res) => {
+    loseResource(res, requiredAmount);
+  });
 }
 
 function applyTaskFinalizedResultsToResources(

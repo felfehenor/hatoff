@@ -133,4 +133,24 @@ export interface GameTask extends Content {
    * Whether or not the task should apply the output to various timers in the game.
    */
   applyDamageToRandomTimers?: boolean;
+
+  /**
+   * What resources should be consumed upon completion of this task.
+   */
+  consumeResourceIdPerCycle?: string[];
+
+  /**
+   * The number of resources from the list to consume.
+   */
+  consumeResourceCount?: number;
+
+  /**
+   * The stat to consume upon completion of a cycle.
+   */
+  consumeStatPerCycle?: GameHeroStat;
+
+  /**
+   * The amount of the consumed stat or resource to take.
+   */
+  consumeAmount?: number;
 }

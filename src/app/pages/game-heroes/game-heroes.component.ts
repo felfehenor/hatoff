@@ -1,15 +1,17 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { countBy, sortBy } from 'lodash';
 import { HeroListComponent } from '../../components/hero-list/hero-list.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
+import { HideResearchDirective } from '../../directives/hideresearch.directive';
 import {
   allHeroes,
   canRecruitHero,
   getEntry,
   isResearchComplete,
+  localStorageSignal,
   populationCap,
   totalHeroes,
 } from '../../helpers';
@@ -29,12 +31,13 @@ interface FilterOption {
     RouterLink,
     AnalyticsClickDirective,
     FormsModule,
+    HideResearchDirective,
   ],
   templateUrl: './game-heroes.component.html',
   styleUrl: './game-heroes.component.scss',
 })
 export class GameHeroesComponent {
-  public activeType = signal<string>('All');
+  public activeType = localStorageSignal<string>('All', 'sort-gameheroes');
   public currentHeroCount = computed(() => totalHeroes());
   public currentHeroCap = computed(() => populationCap());
   public canRecruit = computed(

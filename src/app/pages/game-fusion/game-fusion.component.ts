@@ -4,15 +4,18 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FusionHeroDisplayTallComponent } from '../../components/fusion-hero-display-tall/fusion-hero-display-tall.component';
 import { FusionHeroDisplayComponent } from '../../components/fusion-hero-display/fusion-hero-display.component';
 import { PageCardComponent } from '../../components/page-card/page-card.component';
+import { ResourceDisplayComponent } from '../../components/resource-display/resource-display.component';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
 import {
   doFusion,
+  fusionManaCost,
   getEntry,
+  hasResource,
   heroFusionResult,
   validFusionHeroes,
   validFusionHeroesForHero,
 } from '../../helpers';
-import { GameDamageType, GameHero } from '../../interfaces';
+import { GameDamageType, GameHero, GameResource } from '../../interfaces';
 
 @Component({
   selector: 'app-game-fusion',
@@ -23,6 +26,7 @@ import { GameDamageType, GameHero } from '../../interfaces';
     SweetAlert2Module,
     AnalyticsClickDirective,
     FormsModule,
+    ResourceDisplayComponent,
   ],
   templateUrl: './game-fusion.component.html',
   styleUrl: './game-fusion.component.scss',
@@ -67,6 +71,14 @@ export class GameFusionComponent {
 
     return heroFusionResult(main, sub);
   });
+
+  public fusionCost = computed(() =>
+    fusionManaCost(this.resultingHero()?.fusionLevel ?? 1),
+  );
+
+  public canFuse = computed(() =>
+    hasResource(getEntry<GameResource>('Mana')!, this.fusionCost()),
+  );
 
   public rechoosePrimary() {
     this.mainHero.set(undefined);

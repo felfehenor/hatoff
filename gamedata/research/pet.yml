@@ -1,0 +1,32 @@
+- id: a8b31505-000f-4a55-b512-95c5bbaddff2
+  name: Town Pet
+  type: Pet
+  description: Unlock the town pet.
+  researchRequired: 10
+  unlockPetSlots: 1
+  requiresResearchIds:
+    - Houses III
+
+- id: 913d8ce8-0a36-4005-b826-7d7a8fe40aae
+  name: Pet Trinketry I
+  type: Pet
+  description: Unlock +1 relic slot for your pet.
+  researchRequired: 50000
+  unlockPetSlots: 1
+  requiresResearchIds:
+    - Town Pet
+
+  requiresLootIds:
+    - Medicinal Slime
+
+- id: f3fcf0f7-9541-4d5d-831b-57b83efcdaac
+  name: Pet Trinketry II
+  type: Pet
+  description: Unlock +1 relic slot for your pet.
+  researchRequired: 150000
+  unlockPetSlots: 1
+  requiresResearchIds:
+    - Pet Trinketry I
+
+  requiresLootIds:
+    - Goblish Dagger

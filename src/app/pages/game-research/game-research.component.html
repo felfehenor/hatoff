@@ -7,7 +7,7 @@
     }
   </span>
 
-  <div pageactions class="flex items-center">
+  <div pageactions class="flex items-center gap-2">
     <label class="form-control">
       <select class="select select-bordered select-sm" [(ngModel)]="activeType">
         @for(category of allResearchCategories(); track category.name) {
@@ -17,6 +17,15 @@
         }
       </select>
     </label>
+
+    <div role="tablist" class="tabs tabs-boxed">
+      <a role="tab" class="tab" [class.tab-active]="mode() === 'Current'" (click)="mode.set('Current')"
+        [appAnalyticsClick]="'Research:Navigate:Current'" (keydown.enter)="mode.set('Current')" tabindex="1">New</a>
+
+      <a role="tab" class="tab" [class.tab-active]="mode() === 'Previous'" (click)="mode.set('Previous')"
+        [appAnalyticsClick]="'Research:Navigate:Previous'" (keydown.enter)="mode.set('Previous')"
+        tabindex="1">Researched</a>
+    </div>
   </div>
 
   <app-research-list [displayedResearch]="researchList()"></app-research-list>

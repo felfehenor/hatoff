@@ -12,3 +12,13 @@
   name: Fortifications
   icon: tablerWall
   description: Used to defend the town.
+
+- id: 43287e9e-fe4f-4079-9167-81a83d72928b
+  name: Mana
+  icon: tablerCell
+  description: Used to conduct and improve fusions.
+
+- id: ae08a07b-5f15-4246-babf-61d6cb262083
+  name: Metal Tools
+  icon: tablerProng
+  description: Used to create items at the Blacksmith.

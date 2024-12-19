@@ -31,7 +31,9 @@ import { HeroArtComponent } from '../hero-art/hero-art.component';
 import { HeroAssignmentComponent } from '../hero-assignment/hero-assignment.component';
 import { HeroAttributeListComponent } from '../hero-attribute-list/hero-attribute-list.component';
 import { HeroBuffListComponent } from '../hero-buff-list/hero-buff-list.component';
+import { HeroEquipmentListComponent } from '../hero-equipment-list/hero-equipment-list.component';
 import { HeroLevelTaglineComponent } from '../hero-level-tagline/hero-level-tagline.component';
+import { HeroStatInfusionTableComponent } from '../hero-stat-infusion-table/hero-stat-infusion-table.component';
 import { HeroStatsTableComponent } from '../hero-stats-table/hero-stats-table.component';
 import { HeroStatusComponent } from '../hero-status/hero-status.component';
 import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-level-list.component';
@@ -56,6 +58,8 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
     AnalyticsClickDirective,
     HeroAttributeListComponent,
     HeroBuffListComponent,
+    HeroStatInfusionTableComponent,
+    HeroEquipmentListComponent,
   ],
   providers: [
     provideIcons({
@@ -67,9 +71,16 @@ import { HeroTaskLevelListComponent } from '../hero-task-level-list/hero-task-le
 })
 export class HeroDisplayTallComponent {
   public hero = input.required<GameHero>();
+  public allowBuyingManaStats = input<boolean>(true);
+  public allowXPButton = input<boolean>(true);
+  public allowItemButton = input<boolean>(true);
+  public allowSkillsButton = input<boolean>(true);
+  public allowDismissButton = input<boolean>(true);
+
   public close = output<void>();
   public showItemPanel = output<void>();
   public showSkillPanel = output<void>();
+  public showBlacksmithItemPanel = output<void>();
 
   public liveHeroData = computed(() => getHero(this.hero().id));
 

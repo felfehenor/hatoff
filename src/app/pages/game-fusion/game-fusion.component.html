@@ -4,6 +4,14 @@
 <app-page-card>
   <span header>Hero Fusion</span>
 
+  <div pageactions class="flex gap-2 items-center font-normal">
+    @if(primary && secondary && fusionCost() > 0) {
+    This fusion will cost
+
+    <app-resource-display [id]="'Mana'" [value]="fusionCost()"></app-resource-display>
+    }
+  </div>
+
   <div class="flex gap-2 h-full">
 
     @if(primary) {
@@ -116,7 +124,8 @@
     <div class="flex-1 flex flex-col h-full">
       <div class="flex-1 card card-side foreground shadow-xl min-h-[250px] overflow-hidden flex flex-col">
         <div>
-          <button class="btn btn-success btn-block" [swal]="fuseSwal" appAnalyticsClick="Fuse:DoFusion">Fuse!</button>
+          <button class="btn btn-success btn-block" [swal]="fuseSwal" appAnalyticsClick="Fuse:DoFusion"
+            [class.btn-disabled]="!canFuse()">Fuse!</button>
         </div>
 
         <app-fusion-hero-display-tall [hero]="result"></app-fusion-hero-display-tall>
@@ -144,5 +153,5 @@
 
 <swal #fuseSwal title="Fuse Heroes?"
   text="This cannot be undone. Are you sure you want to fuse these heroes together? You will permanently LOSE your chosen secondary hero."
-  icon="warning" [showCancelButton]="true" [focusCancel]="true" (confirm)="fuse()">
+  icon="warning" (confirm)="fuse()">
 </swal>

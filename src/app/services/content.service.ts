@@ -6,6 +6,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
+import { sortBy } from 'lodash';
 import { forkJoin } from 'rxjs';
 import {
   allContentById,
@@ -23,6 +24,7 @@ import {
   HeroArt,
   SpecialGameHero,
 } from '../interfaces';
+import { MetaService } from './meta.service';
 
 interface SharedCanvas {
   canvas: HTMLCanvasElement;
@@ -33,6 +35,7 @@ interface SharedCanvas {
   providedIn: 'root',
 })
 export class ContentService {
+  private metaService = inject(MetaService);
   private http = inject(HttpClient);
 
   public hasLoaded = computed(
@@ -158,23 +161,27 @@ export class ContentService {
     });
   }
 
+  private toJSONURL(key: string): string {
+    return `./json/${key}.json?v=${this.metaService.versionString()}`;
+  }
+
   private loadJSON() {
     forkJoin({
-      damagetype: this.http.get('./json/damagetype.json'),
-      archetype: this.http.get('./json/archetype.json'),
-      resource: this.http.get('./json/resource.json'),
-      task: this.http.get('./json/task.json'),
-      research: this.http.get('./json/research.json'),
-      upgrade: this.http.get('./json/upgrade.json'),
-      item: this.http.get('./json/item.json'),
-      loot: this.http.get('./json/loot.json'),
-      monster: this.http.get('./json/monster.json'),
-      dungeon: this.http.get('./json/dungeon.json'),
-      attribute: this.http.get('./json/attribute.json'),
-      skill: this.http.get('./json/skill.json'),
-      buff: this.http.get('./json/buff.json'),
-      art: this.http.get('./json/art.json'),
-      custom: this.http.get('./json/custom.json'),
+      damagetype: this.http.get(this.toJSONURL('damagetype')),
+      archetype: this.http.get(this.toJSONURL('archetype')),
+      resource: this.http.get(this.toJSONURL('resource')),
+      task: this.http.get(this.toJSONURL('task')),
+      research: this.http.get(this.toJSONURL('research')),
+      upgrade: this.http.get(this.toJSONURL('upgrade')),
+      item: this.http.get(this.toJSONURL('item')),
+      loot: this.http.get(this.toJSONURL('loot')),
+      monster: this.http.get(this.toJSONURL('monster')),
+      dungeon: this.http.get(this.toJSONURL('dungeon')),
+      attribute: this.http.get(this.toJSONURL('attribute')),
+      skill: this.http.get(this.toJSONURL('skill')),
+      buff: this.http.get(this.toJSONURL('buff')),
+      art: this.http.get(this.toJSONURL('art')),
+      custom: this.http.get(this.toJSONURL('custom')),
     }).subscribe((assets) => {
       const { art, custom: customHeroes, ...contentAssets } = assets;
       setArt(art as unknown as HeroArt);
@@ -235,7 +242,7 @@ export class ContentService {
     const wilds = allDamageTypes.filter((f) => f.isAny);
 
     wilds.forEach((wild) => {
-      wild.subTypes = allDamageTypes
+      wild.subTypes = sortBy(allDamageTypes, (dt) => dt.name)
         .filter((f) => !f.isAny)
         .map((dt) => ({ damageTypeId: dt.id, percent: 100 }));
     });

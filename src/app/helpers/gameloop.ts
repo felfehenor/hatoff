@@ -3,6 +3,7 @@ import { maxCooldowns } from './cooldown';
 import { doDefenseGameloop } from './gameloop-defense';
 import { doDungeonGameloop } from './gameloop-dungeon';
 import { doHeroGameloop } from './gameloop-hero';
+import { doPetGameloop } from './gameloop-pet';
 import { doRecruitGameloop } from './gameloop-recruit';
 import { doShopGameloop } from './gameloop-shop';
 import { doTaskGameloop } from './gameloop-task';
@@ -43,6 +44,7 @@ export function doGameloop(numTicks: number): void {
   doShopGameloop();
   doDefenseGameloop();
   doTaskGameloop(totalTicks);
+  doPetGameloop(totalTicks);
 
   updateGamestate((state) => {
     state.meta.numTicks += totalTicks;

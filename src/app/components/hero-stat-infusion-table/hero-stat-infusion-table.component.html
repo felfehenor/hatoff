@@ -1,0 +1,26 @@
+@if(canInfuse()) {
+<table class="table flex-1">
+  <tbody>
+    @for(stat of stats; track $index) {
+    <tr class="h-14">
+      @if(stat.name !== 'piety') {
+      <td>
+        <div class="flex items-center gap-2">
+          <button class="btn btn-xs btn-info" [class.btn-disabled]="!canBuyInfusion(stat.name)"
+            (click)="buyInfusion(stat.name)">Buy +1</button>
+          <app-resource-display id="Mana" [value]="infusionCost(stat.name)"></app-resource-display>
+        </div>
+      </td>
+
+      <td class="text-right">
+        ({{ currentInfusions(stat.name) }} / {{ maxBuyable() }})
+      </td>
+
+      } @else {
+      <td></td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>
+}

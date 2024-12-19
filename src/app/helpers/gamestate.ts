@@ -24,6 +24,7 @@ export function blankGameState(): GameState {
       nextClickResetTime: 0,
       nextShopResetTime: 0,
       nextRecruitResetTime: 0,
+      nextPetPetTime: 0,
     },
     defense: {
       numAttacks: -1,
@@ -50,6 +51,20 @@ export function blankGameState(): GameState {
       hasFinishedCurrentStep: false,
       currentCombat: undefined,
       exploringParty: [],
+    },
+    pet: {
+      equippedRelics: [],
+      fedFusionLevels: 0,
+      fedLevels: 0,
+      fedResources: {},
+      statsGained: {
+        force: 0,
+        progress: 0,
+        resistance: 0,
+        speed: 0,
+      },
+      name: '',
+      role: 'companion',
     },
     meta: {
       version: 1,

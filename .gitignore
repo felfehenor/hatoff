@@ -46,3 +46,8 @@ public/spritesheets
 
 public/version.json
 public/*.md
+
+electron/browser
+electron/icons
+electron/node_modules
+electron/out

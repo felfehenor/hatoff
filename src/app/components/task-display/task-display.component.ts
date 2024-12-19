@@ -50,7 +50,9 @@ export class TaskDisplayComponent {
 
   public completion = computed(
     () =>
-      (getTaskProgress(this.task()) / this.task().damageRequiredPerCycle) * 100,
+      (getTaskProgress(this.task()) /
+        Math.max(1, this.task().damageRequiredPerCycle)) *
+      100,
   );
 
   public maxHeroes = computed(() => maxHeroesForTask(this.task()));

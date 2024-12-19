@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { requireResearchGuard } from './guards/require-research.guard';
 import { requireSetupGuard } from './guards/require-setup.guard';
+import { GameBlacksmithComponent } from './pages/game-blacksmith/game-blacksmith.component';
 import { GameExploreComponent } from './pages/game-explore/game-explore.component';
 import { GameFusionComponent } from './pages/game-fusion/game-fusion.component';
 import { GameHeroesComponent } from './pages/game-heroes/game-heroes.component';
 import { GameOverComponent } from './pages/game-over/game-over.component';
+import { GamePetComponent } from './pages/game-pet/game-pet.component';
 import { GameRecruitComponent } from './pages/game-recruit/game-recruit.component';
 import { GameResearchComponent } from './pages/game-research/game-research.component';
 import { GameSetupComponent } from './pages/game-setup/game-setup.component';
@@ -51,6 +53,16 @@ export const gameRoutes: Routes = [
     component: GameExploreComponent,
     path: 'explore',
     canActivate: [requireSetupGuard, requireResearchGuard('Houses III')],
+  },
+  {
+    component: GamePetComponent,
+    path: 'pet',
+    canActivate: [requireSetupGuard, requireResearchGuard('Town Pet')],
+  },
+  {
+    component: GameBlacksmithComponent,
+    path: 'blacksmith',
+    canActivate: [requireSetupGuard, requireResearchGuard('Forging Fires')],
   },
   {
     component: GameOverComponent,

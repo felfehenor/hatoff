@@ -17,7 +17,7 @@ export function hasResource(resource: GameResource, value = 1): boolean {
 export function gainResource(resource: GameResource, value = 1): void {
   updateGamestate((state) => {
     state.resources[resource.id] ??= 0;
-    state.resources[resource.id] += value;
+    state.resources[resource.id] += Math.floor(value);
 
     return state;
   });

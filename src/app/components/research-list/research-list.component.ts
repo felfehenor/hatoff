@@ -1,7 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { AnalyticsClickDirective } from '../../directives/analytics-click.directive';
-import { baseCardClasses, gamestate, setActiveResearch } from '../../helpers';
+import {
+  baseCardClasses,
+  gamestate,
+  isResearchComplete,
+  setActiveResearch,
+} from '../../helpers';
 import { GameResearch } from '../../interfaces';
 import { ResearchDisplayComponent } from '../research-display/research-display.component';
 
@@ -20,6 +25,7 @@ export class ResearchListComponent {
   });
 
   public selectResearch(research: GameResearch): void {
+    if (isResearchComplete(research.id)) return;
     setActiveResearch(research);
   }
 }

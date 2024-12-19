@@ -17,3 +17,6 @@
 
     - damageTypeId: Spiritual
       percent: 100
+
+    - damageTypeId: Magical
+      percent: 100

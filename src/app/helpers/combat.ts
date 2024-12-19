@@ -1,4 +1,4 @@
-import { clamp, sample, sampleSize, sumBy } from 'lodash';
+import { clamp, sample, sampleSize, sortBy, sumBy } from 'lodash';
 import {
   GameActiveCombatant,
   GameCombat,
@@ -8,14 +8,23 @@ import {
   GameHeroStat,
   GameMonster,
   GameSkill,
+  PetStat,
 } from '../interfaces';
 import { getArchetypeCombatStatBonusForHero } from './archetype';
 import { getEntry } from './content';
 import { heroLoseCombat } from './dungeon';
 import { gamestate, updateGamestate } from './gamestate';
-import { getHero, heroStatValue } from './hero';
+import { getHero } from './hero';
+import { heroStatDelta } from './hero-stats';
+import { getPetExplorerStatBonus } from './pet';
 import { randomNumber, succeedsChance } from './rng';
 import { usableSkillsForHero } from './skill';
+
+interface TurnTaker {
+  turnTaker: GameActiveCombatant;
+  team: GameActiveCombatant[];
+  enemies: GameActiveCombatant[];
+}
 
 export function heroToCombatant(char: GameHero): GameActiveCombatant {
   return toCombatant(char, {
@@ -37,22 +46,22 @@ export function toCombatant(
 ): GameActiveCombatant {
   const newStats: Record<GameHeroStat, number> = {
     force:
-      getCombatStat(char, 'force') +
+      combatStatValue(char, 'force') +
       getArchetypeCombatStatBonusForHero(char, 'force'),
     health:
-      getCombatStat(char, 'health') +
+      combatStatValue(char, 'health') +
       getArchetypeCombatStatBonusForHero(char, 'health'),
     piety:
-      getCombatStat(char, 'piety') +
+      combatStatValue(char, 'piety') +
       getArchetypeCombatStatBonusForHero(char, 'piety'),
     progress:
-      getCombatStat(char, 'progress') +
+      combatStatValue(char, 'progress') +
       getArchetypeCombatStatBonusForHero(char, 'progress'),
     resistance:
-      getCombatStat(char, 'resistance') +
+      combatStatValue(char, 'resistance') +
       getArchetypeCombatStatBonusForHero(char, 'resistance'),
     speed:
-      getCombatStat(char, 'speed') +
+      combatStatValue(char, 'speed') +
       getArchetypeCombatStatBonusForHero(char, 'speed'),
   };
 
@@ -248,16 +257,22 @@ export function lowerAllCooldowns(fight: GameCombat): void {
   });
 }
 
-export function doTeamAction(
-  fight: GameCombat,
-  attackers: GameActiveCombatant[],
-  defenders: GameActiveCombatant[],
-): void {
-  attackers
-    .filter((d) => !isDeadInCombat(d))
-    .forEach((attacker) => {
-      attackTarget(fight, attacker, attackers, defenders);
-    });
+export function getCombatOrder(fight: GameCombat): TurnTaker[] {
+  return sortBy(
+    [
+      ...fight.attackers.map((a) => ({
+        turnTaker: a,
+        team: fight.attackers,
+        enemies: fight.defenders,
+      })),
+      ...fight.defenders.map((a) => ({
+        turnTaker: a,
+        team: fight.defenders,
+        enemies: fight.attackers,
+      })),
+    ],
+    (turn) => -turn.turnTaker.stats.speed,
+  );
 }
 
 export function doCombatRound() {
@@ -279,13 +294,12 @@ export function doCombatRound() {
 
     lowerAllCooldowns(fight);
 
-    if (!isCombatResolved()) {
-      doTeamAction(fight, fight.attackers, fight.defenders);
-    }
-
-    if (!isCombatResolved()) {
-      doTeamAction(fight, fight.defenders, fight.attackers);
-    }
+    const turns = getCombatOrder(fight);
+    turns.forEach((turn) => {
+      if (isCombatResolved()) return;
+      if (isDeadInCombat(turn.turnTaker)) return;
+      attackTarget(fight, turn.turnTaker, turn.team, turn.enemies);
+    });
 
     return state;
   });
@@ -302,7 +316,7 @@ export function chanceToHit(
 ): number {
   // higher than opponent speed = higher chance to hit
   const diff = clamp(
-    heroStatValue(attacker, 'speed') - heroStatValue(defender, 'speed'),
+    combatStatValue(attacker, 'speed') - combatStatValue(defender, 'speed'),
     -30,
     15,
   );
@@ -313,10 +327,17 @@ export function baseHeroDamage(
   attacker: GameActiveCombatant,
   skill: GameSkill,
 ): number {
+  function getHeroBaseDamage(stat: GameHeroStat): number {
+    const baseDamageValue = combatStatValue(attacker, stat);
+    if (stat === 'piety' || stat === 'health' || !isCombatantAHero(attacker)) {
+      return baseDamageValue;
+    }
+
+    return baseDamageValue + getPetExplorerStatBonus(stat as PetStat);
+  }
+
   return sumBy(
-    skill.scalars.map(
-      (s) => heroStatValue(attacker, s.stat) * (s.percent / 100),
-    ),
+    skill.scalars.map((s) => getHeroBaseDamage(s.stat) * (s.percent / 100)),
   );
 }
 
@@ -333,7 +354,7 @@ export function damageDealt(
 export function damageReduction(defender: GameActiveCombatant): number {
   return Math.max(
     0.1,
-    0.92 * 0.996 ** heroStatValue(defender, 'resistance') + 0.07,
+    0.92 * 0.996 ** combatStatValue(defender, 'resistance') + 0.07,
   );
 }
 
@@ -346,7 +367,7 @@ export function attemptToDie(
   const pietyRequired = 25 + randomNumber(75);
   if (character.stats.piety >= pietyRequired) {
     character.stats.piety -= pietyRequired;
-    character.currentHp = heroStatValue(character, 'health');
+    character.currentHp = combatStatValue(character, 'health');
 
     combatLog(
       fight,
@@ -354,7 +375,7 @@ export function attemptToDie(
     );
 
     // write it back
-    if (character.id) {
+    if (isCombatantAHero(character)) {
       updateGamestate((state) => {
         const ref = getHero(character.id);
         if (!ref) return state;
@@ -367,9 +388,14 @@ export function attemptToDie(
   }
 }
 
-export function getCombatStat(
-  character: GameCombatant,
+export function isCombatantAHero(character: GameCombatant): boolean {
+  return character.archetypeIds.length > 0;
+}
+
+export function combatStatValue(
+  hero: GameCombatant,
   stat: GameHeroStat,
 ): number {
-  return heroStatValue(character, stat);
+  if (!hero) return 0;
+  return hero.stats[stat] + heroStatDelta(hero, stat);
 }

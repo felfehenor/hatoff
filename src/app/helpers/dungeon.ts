@@ -1,5 +1,4 @@
 import { sumBy } from 'lodash';
-import { v4 as uuid } from 'uuid';
 import {
   GameAttribute,
   GameDungeon,
@@ -31,12 +30,13 @@ import {
 import { getEntriesByType, getEntry } from './content';
 import { isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
-import { gainXp, isStunned, removeHero, stunHero } from './hero';
+import { isStunned, removeHero, stunHero } from './hero';
+import { gainXp } from './hero-xp';
 import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
 import { notify, notifyError } from './notify';
 import { gainResource } from './resource';
-import { randomChoice, succeedsChance } from './rng';
+import { randomChoice, succeedsChance, uniqueId } from './rng';
 import { heroesAllocatedToTask } from './task';
 
 export function setActiveDungeon(dungeon: GameDungeon): void {
@@ -99,7 +99,7 @@ export function dungeonCompletionPercent(): number {
   const totalTicks = totalTicksForDungeon(dungeon);
   const currentTicks = currentTicksForDungeon(dungeon);
 
-  const tickPercent = currentTicks / totalTicks;
+  const tickPercent = currentTicks / Math.max(1, totalTicks);
 
   return 100 * tickPercent;
 }
@@ -385,7 +385,7 @@ export function canEnterDungeon(): boolean {
 
 export function enterDungeon(): void {
   updateGamestate((state) => {
-    state.exploration.id = uuid();
+    state.exploration.id = uniqueId();
     state.exploration.currentStep = -1;
     state.exploration.currentStepTicks = 0;
     state.exploration.isExploring = true;
