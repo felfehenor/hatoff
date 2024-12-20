@@ -24,6 +24,7 @@ import { TaskHeroSelectorComponent } from '../task-hero-selector/task-hero-selec
 export class TaskListComponent {
   public tasks = input.required<GameTask[]>();
   public selectedTask = signal<GameTask | undefined>(undefined);
+  public selectedTaskWithPairs = signal<GameTask | undefined>(undefined);
 
   public meetsRequiredDefense = computed(() => hasEnoughFortifications());
 
@@ -34,4 +35,19 @@ export class TaskListComponent {
 
     return baseCardClasses();
   });
+
+  public selectTask(task: GameTask) {
+    if (task.pairsTaskIds) {
+      this.selectedTaskWithPairs.set(task);
+      return;
+    }
+
+    this.selectedTask.set(task);
+  }
+
+  public isTaskSelected(task: GameTask): boolean {
+    return (
+      this.selectedTask() === task || this.selectedTaskWithPairs() === task
+    );
+  }
 }

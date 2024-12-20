@@ -1,10 +1,11 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { tablerInfoHexagon } from '@ng-icons/tabler-icons';
 import { TippyDirective } from '@ngneat/helipopper';
 import { sum } from 'lodash';
 import {
+  getEntry,
   getOption,
   getTaskDamageType,
   getTaskProgress,
@@ -18,7 +19,7 @@ import {
   totalHeroForce,
   totalHeroSpeed,
 } from '../../helpers';
-import { GameTask } from '../../interfaces';
+import { GameDamageType, GameTask } from '../../interfaces';
 import { DamageTypeBreakdownComponent } from '../damage-type-breakdown/damage-type-breakdown.component';
 import { LevelDisplayComponent } from '../level-display/level-display.component';
 import { TaskHeroSmallComponent } from '../task-hero-small/task-hero-small.component';
@@ -45,8 +46,27 @@ import { TaskSynergyComponent } from '../task-synergy/task-synergy.component';
 })
 export class TaskDisplayComponent {
   public task = input.required<GameTask>();
+  public showSubtasks = input<boolean>(false);
   public active = input<boolean>(false);
-  public heroes = computed(() => heroesAllocatedToTask(this.task()));
+
+  public selectSubtask = output<GameTask>();
+
+  public heroes = computed(() => {
+    if (this.isPaired()) {
+      return (
+        this.task().pairsTaskIds?.flatMap((id) =>
+          heroesAllocatedToTask(getEntry<GameTask>(id)!),
+        ) ?? []
+      );
+    }
+
+    return heroesAllocatedToTask(this.task());
+  });
+
+  public isPaired = computed(() => this.task().pairsTaskIds?.length);
+  public subTasks = computed(() =>
+    (this.task().pairsTaskIds ?? []).map((t) => getEntry<GameTask>(t)!),
+  );
 
   public completion = computed(
     () =>
@@ -58,10 +78,15 @@ export class TaskDisplayComponent {
   public maxHeroes = computed(() => maxHeroesForTask(this.task()));
   public taskLevel = computed(() => taskLevel(this.task()));
   public maxTasklevel = computed(() => maxTaskLevel(this.task()));
-  public isStrict = computed(() => isStrictDamageType(this.task()));
+  public mainTaskStrict = computed(() => this.isTaskStrict(this.task()));
+  public mainTaskDamageType = computed(() => this.taskDamageType(this.task()));
+  public threatened = computed(() => {
+    if (this.isPaired()) {
+      return this.subTasks().some((t) => this.isTaskThreatened(t));
+    }
 
-  public taskDamageType = computed(() => getTaskDamageType(this.task()));
-  public threatened = computed(() => isTaskThreatened(this.task()));
+    return this.isTaskThreatened(this.task());
+  });
 
   public perTick = computed(() => {
     const task = this.task();
@@ -83,6 +108,25 @@ export class TaskDisplayComponent {
   });
 
   public requiredPerTick = computed(() => this.task().damageRequiredPerCycle);
+  public errorString = computed(() => {
+    if (this.isPaired()) {
+      return this.subTasks()
+        .map((t) => taskErrors(t))
+        .filter(Boolean)[0];
+    }
 
-  public errorString = computed(() => taskErrors(this.task()));
+    return taskErrors(this.task());
+  });
+
+  public taskDamageType(task: GameTask): GameDamageType {
+    return getTaskDamageType(task);
+  }
+
+  public isTaskStrict(task: GameTask): boolean {
+    return isStrictDamageType(task);
+  }
+
+  public isTaskThreatened(task: GameTask): boolean {
+    return isTaskThreatened(task);
+  }
 }

@@ -1,9 +1,19 @@
+- id: 695254d3-d0c9-40c0-a58a-5eafdbb30e04
+  name: 'Church'
+  description: Acquire Holiness as a Priest and dispense it to Confessors to gain Piety (PIE).
+  damageTypeId: Spiritual
+  pairsTaskIds:
+    - Church - Priest
+    - Church - Confessor
+
 - id: 5f453edf-7aca-420b-be6f-b311ce5e57c9
   name: 'Church - Priest'
   description: Acquire Holiness to dispense to confessors.
   damageTypeId: Spiritual
   requireExactType: true
   maxHeroesAllocable: 1
+
+  pairedTaskId: Church
 
   xpPerCycle: 1
   speedPerCycle: 20
@@ -27,6 +37,8 @@
   description: Utilizes Holiness to gain Piety.
   damageTypeId: Any
   maxHeroesAllocable: 1
+
+  pairedTaskId: Church
 
   xpPerCycle: 1
   speedPerCycle: 100

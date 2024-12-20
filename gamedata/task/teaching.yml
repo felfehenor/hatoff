@@ -1,9 +1,19 @@
+- id: 06868498-5045-42a8-93df-b283cfcfaf93
+  name: 'School'
+  description: Acquire Knowledge as a Professor and dispense it to Students as XP.
+  damageTypeId: Theoretical
+  pairsTaskIds:
+    - School - Professor
+    - School - Student
+
 - id: 6cbf0b71-f445-4bd4-b1ba-e29c3e69f4d4
   name: 'School - Professor'
   description: Acquire Knowledge to dispense to students. Has bonus XP for task completion.
   damageTypeId: Theoretical
   requireExactType: true
   maxHeroesAllocable: 1
+
+  pairedTaskId: School
 
   xpPerCycle: 5
   speedPerCycle: 5
@@ -28,6 +38,8 @@
   description: Utilizes Knowledge to gain XP. Has bonus XP for task completion.
   damageTypeId: Any
   maxHeroesAllocable: 1
+
+  pairedTaskId: School
 
   xpPerCycle: 10
   speedPerCycle: 5

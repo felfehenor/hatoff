@@ -4,14 +4,15 @@
   <div class="flex flex-1 flex-row flex-wrap gap-2 p-1 card-content content-baseline">
     @for(task of tasks(); track $index) {
     <div class="hero-container" [ngClass]="cardClasses()">
-      <app-task-display [task]="task" (click)="selectedTask.set(task)" [appAnalyticsClick]="'Task:Select:' + task.name"
-        [active]="selectedTask() === task"></app-task-display>
+      <app-task-display [task]="task" (click)="selectTask(task)" [appAnalyticsClick]="'Task:Select:' + task.name"
+        [active]="isTaskSelected(task)" [showSubtasks]="selectedTaskWithPairs() === task"
+        (selectSubtask)="selectTask($event)"></app-task-display>
     </div>
     }
   </div>
 
   @if(activeTask) {
   <app-task-hero-selector class="card-content pl-3 flex-1 flex" [task]="activeTask"
-    (close)="selectedTask.set(undefined)"></app-task-hero-selector>
+    (close)="selectedTask.set(undefined); selectedTaskWithPairs.set(undefined)"></app-task-hero-selector>
   }
 </div>

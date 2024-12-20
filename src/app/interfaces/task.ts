@@ -153,4 +153,14 @@ export interface GameTask extends Content {
    * The amount of the consumed stat or resource to take.
    */
   consumeAmount?: number;
+
+  /**
+   * The task ids this task pairs together and displays together.
+   */
+  pairsTaskIds?: string[];
+
+  /**
+   * Set to the task that pairs these paired tasks together.
+   */
+  pairedTaskId?: string;
 }

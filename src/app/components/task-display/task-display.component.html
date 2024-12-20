@@ -12,8 +12,8 @@
     }
 
     <div class="card-title flex items-center">
-      <app-damage-type-breakdown [damageType]="taskDamageType()"
-        [showSubtypes]="!isStrict()"></app-damage-type-breakdown>
+      <app-damage-type-breakdown [damageType]="mainTaskDamageType()"
+        [showSubtypes]="!mainTaskStrict()"></app-damage-type-breakdown>
       <div class="font-semibold">
         {{ taskData.name }}
       </div>
@@ -22,10 +22,29 @@
     <p class="min-h-20">{{ taskData.description }}</p>
   </div>
 
+  @if(showSubtasks()) {
+  <div class="card-body">
+    @for(task of subTasks(); track $index) {
+    <button class="btn btn-secondary btn-sm btn-block btn-outline" [class.btn-error]="isTaskThreatened(task)"
+      (click)="selectSubtask.emit(task)">
+      <app-damage-type-breakdown [damageType]="taskDamageType(task)"
+        [showSubtypes]="!isTaskStrict(task)"></app-damage-type-breakdown>
+
+      {{ task.name }}
+    </button>
+    }
+  </div>
+  }
+
+  @else {
   <div class="card-body">
     <div class="card-title flex items-center">
       <div class="font-light flex gap-2 items-center">
-        Heroes ({{ heroes().length }}/{{ maxHeroes() }})
+        Heroes
+
+        @if(!isPaired()) {
+        ({{ heroes().length }}/{{ maxHeroes() }})
+        }
 
         @if(error) {
         <ng-icon name="tablerInfoHexagon" color="oklch(var(--er))" [tp]="error" size="1em"></ng-icon>
@@ -40,6 +59,7 @@
       }
     </div>
   </div>
+  }
 
   @if(taskData.speedPerCycle > 0) {
   <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2 has-help" tp="Damage per tick">

@@ -11,6 +11,7 @@
     - Theoretical
 
   unlocksTaskIds:
+    - School
     - 'School - Professor'
     - 'School - Student'
 
@@ -27,6 +28,7 @@
     - Spiritual
 
   unlocksTaskIds:
+    - Church
     - 'Church - Priest'
     - 'Church - Confessor'
 

@@ -35,7 +35,9 @@ export class GameTownComponent {
 
   public taskOrder = computed(() => {
     const baseTasks = allUnlockedTasks().filter(
-      (t) => t.maxHeroesAllocable > 0,
+      (t) =>
+        (t.maxHeroesAllocable > 0 && !t.pairedTaskId) ||
+        (t.pairsTaskIds?.length ?? 0) > 0,
     );
 
     switch (this.activeSort()) {
