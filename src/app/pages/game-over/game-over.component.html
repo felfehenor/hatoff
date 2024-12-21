@@ -8,7 +8,11 @@
       </div>
 
       <div class="w-3/4 text-center mt-5">
-        Your main hero has perished. Your town is unable to continue without a leader. Want to try again?
+        {{ gameOverReason() }}
+      </div>
+
+      <div class="w-3/4 text-center mt-5 mb-3">
+        Your town is unable to continue without a leader. Want to try again?
       </div>
 
       <div class="card-actions">

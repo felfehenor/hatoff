@@ -30,7 +30,7 @@ import {
 import { getEntriesByType, getEntry } from './content';
 import { isHardMode } from './difficulty';
 import { gamestate, updateGamestate } from './gamestate';
-import { isStunned, removeHero, stunHero } from './hero';
+import { isMainHero, isStunned, removeHero, stunHero } from './hero';
 import { gainXp } from './hero-xp';
 import { gainItemById } from './item';
 import { gainLootItemById, hasUnlockedLootItem } from './loot';
@@ -38,6 +38,7 @@ import { notify, notifyError } from './notify';
 import { gainResource } from './resource';
 import { randomChoice, succeedsChance, uniqueId } from './rng';
 import { heroesAllocatedToTask } from './task';
+import { setGameOverReason } from './town';
 
 export function setActiveDungeon(dungeon: GameDungeon): void {
   if (isDungeonInProgress()) {
@@ -268,6 +269,10 @@ export function failureInjureHeroes(): void {
         sendDesignEvent(`Hero:PermaDeath:${currentDungeonName()}`);
         removeHero(hero);
         notify(`${hero.name} has perished...`, 'Dungeon');
+
+        if(isMainHero(hero)) {
+          setGameOverReason(`${hero.name} perished during dungeon exploration.`);
+        }
       } else {
         finalizeForHero(hero);
       }
