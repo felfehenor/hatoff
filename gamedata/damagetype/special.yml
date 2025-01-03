@@ -18,5 +18,8 @@
     - damageTypeId: Spiritual
       percent: 100
 
-    - damageTypeId: Magical
-      percent: 100
+    - damageTypeId: Baptismal
+      percent: 120
+
+    - damageTypeId: Heretical
+      percent: 120
